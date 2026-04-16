@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LINE 美髮預約管理系統 — 橙築國際</title>
+  <meta name="description" content="專為髮型設計師打造的 LINE 預約管理系統。客戶管理、自動提醒、營收報表，一鍵搞定。">
+  <style>
+    :root {
+      --primary: #e91e63;
+      --primary-dark: #c2185b;
+      --primary-light: #fce4ec;
+      --bg: #ffffff;
+      --bg-alt: #fdf2f8;
+      --text: #1a1a2e;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --shadow: 0 4px 24px rgba(0,0,0,0.06);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.10);
+      --radius: 16px;
+      --phone-w: 375px;
+      --phone-h: 680px;
+      --line-green: #06c755;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      background: var(--bg);
+    }
+
+    /* === NAV === */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand { font-size: 18px; font-weight: 800; color: var(--text); text-decoration: none; }
+    .nav-brand span { color: var(--primary); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 15px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* === HERO === */
+    .hero {
+      padding: 140px 24px 80px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--primary-light) 0%, var(--bg) 100%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+    .hero h1 span { color: var(--primary); }
+    .hero p { font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 36px; }
+    .hero-cta {
+      display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 12px; font-size: 16px; font-weight: 600;
+      text-decoration: none; transition: all .2s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(233,30,99,0.3); }
+    .btn-outline { background: #fff; color: var(--text); border: 2px solid var(--border); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-line { background: var(--line-green); color: #fff; }
+    .btn-line:hover { background: #05a648; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(6,199,85,0.3); }
+
+    /* === SECTION === */
+    .section { padding: 80px 24px; }
+    .section-alt { background: var(--bg-alt); }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-header h2 { font-size: 32px; font-weight: 800; margin-bottom: 12px; }
+    .section-header p { color: var(--text-muted); font-size: 16px; max-width: 500px; margin: 0 auto; }
+
+    /* === FEATURES === */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: all .2s;
+    }
+    .feature-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      width: 48px; height: 48px;
+      background: var(--primary-light);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { color: var(--text-muted); font-size: 14px; line-height: 1.7; }
+
+    /* === FLOW === */
+    .flow-steps {
+      display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+    }
+    .flow-step {
+      text-align: center; flex: 1; min-width: 200px; max-width: 260px;
+      position: relative;
+    }
+    .flow-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 800; margin-bottom: 12px;
+    }
+    .flow-step h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .flow-step p { color: var(--text-muted); font-size: 14px; }
+
+    /* === DEMO === */
+    .demo-wrapper { text-align: center; }
+    .demo-role-switch {
+      display: inline-flex; background: #f1f5f9; border-radius: 12px; padding: 4px; margin-bottom: 32px;
+    }
+    .demo-role-btn {
+      padding: 10px 28px; border: none; background: transparent; border-radius: 10px;
+      font-size: 15px; font-weight: 600; cursor: pointer; color: var(--text-muted); transition: all .2s;
+    }
+    .demo-role-btn.active { background: #fff; color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .phone-frame {
+      width: var(--phone-w); max-width: 100%;
+      height: var(--phone-h);
+      border: 3px solid #222;
+      border-radius: 36px;
+      overflow: hidden;
+      margin: 0 auto;
+      background: #f5f5f5;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    .phone-notch {
+      width: 120px; height: 28px;
+      background: #222; border-radius: 0 0 16px 16px;
+      margin: 0 auto; position: relative; z-index: 2;
+    }
+    .phone-screen {
+      height: calc(100% - 28px);
+      overflow-y: auto;
+      padding: 16px;
+      font-family: -apple-system, sans-serif;
+      -webkit-overflow-scrolling: touch;
+    }
+    .phone-screen::-webkit-scrollbar { width: 0; }
+
+    /* Demo inner styles */
+    .demo-tabs { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+    .demo-tab {
+      padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;
+      cursor: pointer; background: #e8e8e8; color: #555; border: none; transition: all .15s;
+    }
+    .demo-tab.active { background: var(--primary); color: #fff; }
+    .demo-card {
+      background: #fff; border-radius: 12px; padding: 14px; margin-bottom: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .demo-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+    .demo-input {
+      width: 100%; padding: 9px 12px; border: 1px solid #ddd; border-radius: 10px;
+      margin-bottom: 8px; font-size: 14px; background: #fff; color: #333;
+    }
+    .demo-btn {
+      width: 100%; padding: 10px; border: none; border-radius: 8px;
+      background: var(--primary); color: #fff; font-weight: 600; font-size: 14px;
+      cursor: pointer; transition: background .15s;
+    }
+    .demo-btn:hover { background: var(--primary-dark); }
+    .demo-pkg {
+      background: #f9f9f9; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;
+    }
+    .demo-pkg-title { font-weight: 700; font-size: 14px; color: #333; }
+    .demo-pkg-meta { font-size: 12px; color: #888; margin-top: 2px; }
+    .demo-total { font-size: 18px; font-weight: 800; color: var(--primary); margin-top: 8px; }
+    .demo-booking {
+      background: #f9f9f9; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;
+    }
+    .demo-booking strong { font-size: 14px; }
+    .demo-booking .meta { font-size: 12px; color: #666; margin-top: 4px; }
+    .demo-status {
+      display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600;
+    }
+    .demo-status.confirmed { background: #e8f5e9; color: #2e7d32; }
+    .demo-status.pending { background: #fff3e0; color: #e65100; }
+    .demo-client-card {
+      background: #fafafa; border: 1px solid #ececec; border-radius: 12px;
+      padding: 10px 12px; margin-bottom: 8px;
+    }
+    .demo-client-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    .demo-client-name { font-weight: 700; font-size: 14px; }
+    .demo-client-credits { font-weight: 700; font-size: 13px; color: var(--primary); }
+    .demo-btn-group { display: flex; gap: 6px; margin-top: 8px; justify-content: flex-end; }
+    .demo-btn-sm {
+      padding: 5px 10px; border: none; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer;
+    }
+    .demo-btn-pink { background: var(--primary); color: #fff; }
+    .demo-btn-blue { background: #1976d2; color: #fff; }
+    .demo-btn-gray { background: #fff; color: #333; border: 1px solid #ddd; }
+    .demo-revenue-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 14px;
+    }
+    .demo-rev-box { border-radius: 10px; padding: 10px; text-align: center; }
+    .demo-rev-box .label { font-size: 11px; color: #666; }
+    .demo-rev-box .value { font-size: 17px; font-weight: 800; margin-top: 2px; }
+    .demo-hidden { display: none; }
+
+    /* Service tag */
+    .demo-service-tag {
+      display: inline-block; padding: 2px 8px; border-radius: 999px;
+      font-size: 11px; font-weight: 600; margin-right: 4px; margin-bottom: 4px;
+    }
+    .tag-cut { background: #fce4ec; color: #c2185b; }
+    .tag-color { background: #e8eaf6; color: #3949ab; }
+    .tag-perm { background: #e0f2f1; color: #00796b; }
+    .tag-treatment { background: #fff8e1; color: #f57f17; }
+    .tag-scalp { background: #f3e5f5; color: #7b1fa2; }
+
+    /* Line chat bubble */
+    .demo-chat { display: flex; flex-direction: column; gap: 8px; }
+    .demo-chat-bubble {
+      max-width: 85%; padding: 10px 14px; border-radius: 16px; font-size: 13px; line-height: 1.5;
+      animation: bubbleIn .3s ease;
+    }
+    @keyframes bubbleIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .demo-chat-bot { background: #fff; align-self: flex-start; border: 1px solid #eee; }
+    .demo-chat-user { background: var(--line-green); color: #fff; align-self: flex-end; }
+    .demo-chat-input-row { display: flex; gap: 6px; margin-top: 8px; }
+    .demo-chat-input-row input { flex: 1; }
+    .demo-chat-input-row button { width: auto; padding: 10px 16px; white-space: nowrap; background: var(--line-green); }
+    .demo-chat-input-row button:hover { background: #05a648; }
+
+    /* === CTA === */
+    .cta-section {
+      text-align: center; padding: 80px 24px;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--primary-light) 100%);
+    }
+    .cta-section h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+    .cta-section p { color: var(--text-muted); margin-bottom: 28px; font-size: 16px; }
+
+    /* === FOOTER === */
+    footer {
+      text-align: center; padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted); font-size: 14px;
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .phone-frame { height: 600px; }
+      .demo-revenue-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#">橙築國際<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#features">功能</a></li>
+      <li><a href="#flow">流程</a></li>
+      <li><a href="#demo">體驗</a></li>
+      <li><a href="#contact">聯繫</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">LINE Bot + LIFF 一站整合</div>
+  <h1>為你的美髮事業打造<br><span>專屬預約系統</span></h1>
+  <p>不需要 App、不需要官網。客人在 LINE 上就能預約，設計師一鍵管理預約、客戶、營收。</p>
+  <div class="hero-cta">
+    <a href="#demo" class="btn btn-primary">立即體驗 Demo</a>
+    <a href="#contact" class="btn btn-outline">聯繫我們</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section section-alt" id="features">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>六大核心功能</h2>
+      <p>從預約到營收報表，一套系統搞定所有沙龍管理需求</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>線上預約</h3>
+        <p>客人直接在 LINE 裡選設計師、服務項目、日期時間。設計師收到通知後一鍵確認或調整。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💇</div>
+        <h3>服務紀錄</h3>
+        <p>完整記錄每位客人的服務歷史：染劑色號、燙髮藥水、頭皮狀態。下次服務一目了然。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔔</div>
+        <h3>自動通知</h3>
+        <p>預約提醒、回訪提醒、生日祝福。系統自動推播 LINE 訊息，不漏接任何客人。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>營收報表</h3>
+        <p>即時查看日營收、月營收、客單價。自動產生營收趨勢報告，掌握經營狀況。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎫</div>
+        <h3>儲值方案</h3>
+        <p>建立剪髮券、護髮套組等儲值方案。自動扣次、到期追蹤，鎖住回流客。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h3>客戶管理</h3>
+        <p>完整的客戶清單、消費記錄、偏好備註。支援搜尋、標籤篩選、VIP 分級。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="section" id="flow">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>簡單三步，完成預約</h2>
+      <p>客人零學習成本，在 LINE 上就能完成所有操作</p>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <h3>客人預約</h3>
+        <p>在 LINE 裡打開預約頁面，選好設計師、服務項目、日期時間，一鍵送出。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <h3>設計師確認</h3>
+        <p>設計師收到 LINE 推播通知，查看當日行程，直接點擊「確認」或「調整時段」。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <h3>自動提醒</h3>
+        <p>確認後客人即時收到通知，服務前一天自動提醒，減少爽約率。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="section section-alt" id="demo">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>互動體驗</h2>
+      <p>切換設計師 / 客人視角，實際操作看看</p>
+    </div>
+    <div class="demo-wrapper">
+      <div class="demo-role-switch">
+        <button class="demo-role-btn active" onclick="switchRole('stylist')">設計師後台</button>
+        <button class="demo-role-btn" onclick="switchRole('client')">客人介面</button>
+        <button class="demo-role-btn" onclick="switchRole('chat')">LINE 對話</button>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+
+        <!-- ====== STYLIST DEMO ====== -->
+        <div class="phone-screen" id="demoStylist">
+          <div class="demo-tabs" id="stylistTabs">
+            <button class="demo-tab active" onclick="showStylistTab('today')">今日預約</button>
+            <button class="demo-tab" onclick="showStylistTab('clients')">客戶名單</button>
+            <button class="demo-tab" onclick="showStylistTab('record')">服務紀錄</button>
+            <button class="demo-tab" onclick="showStylistTab('revenue')">營收統計</button>
+          </div>
+
+          <!-- 今日預約 -->
+          <div id="stylistToday" class="demo-card">
+            <h3>今日預約 — 4/16（三）</h3>
+            <div class="demo-booking">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>10:00｜陳小姐</strong>
+                <span class="demo-status confirmed">已確認</span>
+              </div>
+              <div class="meta">
+                <span class="demo-service-tag tag-cut">剪髮</span>
+                <span class="demo-service-tag tag-color">染髮</span>
+                <br>預估 2.5 hr · 備註：要蓋白髮，偏棕色調
+              </div>
+            </div>
+            <div class="demo-booking">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>13:30｜林小姐</strong>
+                <span class="demo-status confirmed">已確認</span>
+              </div>
+              <div class="meta">
+                <span class="demo-service-tag tag-perm">燙髮</span>
+                <span class="demo-service-tag tag-treatment">護髮</span>
+                <br>預估 3 hr · 備註：想燙韓式氣墊燙
+              </div>
+            </div>
+            <div class="demo-booking">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>17:00｜王先生</strong>
+                <span class="demo-status pending">待確認</span>
+              </div>
+              <div class="meta">
+                <span class="demo-service-tag tag-cut">剪髮</span>
+                <br>預估 1 hr
+              </div>
+            </div>
+            <div style="font-size:13px;font-weight:700;color:#555;margin:14px 0 6px 0;">明日 4/17（四）2 筆</div>
+            <div class="demo-booking">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>10:00｜張小姐</strong>
+                <span class="demo-status confirmed">已確認</span>
+              </div>
+              <div class="meta">
+                <span class="demo-service-tag tag-color">染髮</span>
+                <span class="demo-service-tag tag-treatment">護髮</span>
+                <br>預估 3 hr · 備註：上次色號 8/73
+              </div>
+            </div>
+            <div class="demo-booking">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>14:00｜李太太</strong>
+                <span class="demo-status pending">待確認</span>
+              </div>
+              <div class="meta">
+                <span class="demo-service-tag tag-scalp">頭皮護理</span>
+                <br>預估 1.5 hr
+              </div>
+            </div>
+          </div>
+
+          <!-- 客戶名單 -->
+          <div id="stylistClients" class="demo-card demo-hidden">
+            <h3>客戶名單</h3>
+            <input class="demo-input" placeholder="搜尋客戶（姓名 / 電話）" style="margin-bottom:12px;">
+            <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;">
+              <button class="demo-tab active" style="font-size:11px;padding:4px 10px;">全部</button>
+              <button class="demo-tab" style="font-size:11px;padding:4px 10px;">VIP</button>
+              <button class="demo-tab" style="font-size:11px;padding:4px 10px;">新客</button>
+              <button class="demo-tab" style="font-size:11px;padding:4px 10px;">超過60天未回訪</button>
+            </div>
+            <div class="demo-client-card">
+              <div class="demo-client-head">
+                <div>
+                  <div class="demo-client-name">陳小姐</div>
+                  <div style="font-size:11px;color:#999;">VIP · 來店 12 次</div>
+                </div>
+                <div class="demo-client-credits">儲值餘 3 次</div>
+              </div>
+              <div style="font-size:12px;color:#888;margin:4px 0;">上次：3/20 剪+染 · 色號 7/43 · Wella</div>
+              <div class="demo-pkg"><div class="demo-pkg-title">護髮套組 5次</div><div class="demo-pkg-meta">剩餘 3 / 5 次 · 到期：2026-09-30</div></div>
+              <div class="demo-btn-group">
+                <button class="demo-btn-sm demo-btn-pink" onclick="showDemoToast('已發送回訪提醒')">發提醒</button>
+                <button class="demo-btn-sm demo-btn-blue" onclick="showDemoToast('已開啟服務紀錄')">紀錄</button>
+                <button class="demo-btn-sm demo-btn-gray">詳情</button>
+              </div>
+            </div>
+            <div class="demo-client-card">
+              <div class="demo-client-head">
+                <div>
+                  <div class="demo-client-name">林小姐</div>
+                  <div style="font-size:11px;color:#999;">VIP · 來店 8 次</div>
+                </div>
+                <div class="demo-client-credits">儲值餘 1 次</div>
+              </div>
+              <div style="font-size:12px;color:#888;margin:4px 0;">上次：3/5 燙+護 · 溫塑燙 · 哥德式護髮</div>
+              <div class="demo-pkg"><div class="demo-pkg-title">剪髮券 3次</div><div class="demo-pkg-meta">剩餘 1 / 3 次 · 到期：2026-07-31</div></div>
+              <div class="demo-btn-group">
+                <button class="demo-btn-sm demo-btn-pink" onclick="showDemoToast('已發送回訪提醒')">發提醒</button>
+                <button class="demo-btn-sm demo-btn-blue" onclick="showDemoToast('已開啟服務紀錄')">紀錄</button>
+                <button class="demo-btn-sm demo-btn-gray">詳情</button>
+              </div>
+            </div>
+            <div class="demo-client-card">
+              <div class="demo-client-head">
+                <div>
+                  <div class="demo-client-name">王先生</div>
+                  <div style="font-size:11px;color:#999;">一般 · 來店 2 次</div>
+                </div>
+                <div style="font-size:12px;color:#e65100;font-weight:600;">45 天未回訪</div>
+              </div>
+              <div style="font-size:12px;color:#888;margin:4px 0;">上次：3/2 剪髮 · 兩側推高漸層</div>
+              <div class="demo-btn-group">
+                <button class="demo-btn-sm demo-btn-pink" onclick="showDemoToast('已發送回訪提醒')">發提醒</button>
+                <button class="demo-btn-sm demo-btn-blue" onclick="showDemoToast('已開啟服務紀錄')">紀錄</button>
+                <button class="demo-btn-sm demo-btn-gray">詳情</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 服務紀錄 -->
+          <div id="stylistRecord" class="demo-card demo-hidden">
+            <h3>新增服務紀錄</h3>
+            <select class="demo-input"><option>陳小姐</option><option>林小姐</option><option>王先生</option><option>張小姐</option><option>李太太</option></select>
+            <div style="margin-bottom:8px;">
+              <div style="font-size:12px;color:#888;margin-bottom:4px;">服務項目</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox" checked> 剪髮</label>
+                <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox" checked> 染髮</label>
+                <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox"> 燙髮</label>
+                <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox"> 護髮</label>
+                <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox"> 頭皮護理</label>
+              </div>
+            </div>
+            <input class="demo-input" placeholder="染劑品牌 / 色號（例如：Wella 7/43）">
+            <input class="demo-input" placeholder="燙髮藥水（例如：哥德式 柔漾燙）">
+            <textarea class="demo-input" rows="2" style="resize:none;" placeholder="備註（頭皮狀況、客人偏好等）">蓋白髮，偏棕色調，髮質偏細軟</textarea>
+            <input class="demo-input" type="number" placeholder="收費金額" value="3200">
+            <button class="demo-btn" onclick="showDemoToast('服務紀錄已儲存！')">儲存紀錄</button>
+          </div>
+
+          <!-- 營收統計 -->
+          <div id="stylistRevenue" class="demo-card demo-hidden">
+            <h3>營收統計</h3>
+            <div class="demo-revenue-grid">
+              <div class="demo-rev-box" style="background:#fce4ec;"><div class="label">本月營收</div><div class="value" style="color:#c2185b;">NT$ 86,400</div></div>
+              <div class="demo-rev-box" style="background:#e3f2fd;"><div class="label">本月客數</div><div class="value" style="color:#1976d2;">32 人</div></div>
+              <div class="demo-rev-box" style="background:#fff3e0;"><div class="label">平均客單價</div><div class="value" style="color:#e65100;">NT$ 2,700</div></div>
+            </div>
+            <div style="font-size:13px;font-weight:700;color:#555;margin-bottom:8px;">服務項目分佈</div>
+            <div class="demo-client-card">
+              <div class="demo-client-head">
+                <div class="demo-client-name">剪髮</div>
+                <div style="color:#c2185b;font-weight:700;font-size:13px;">18 次 · NT$ 16,200</div>
+              </div>
+              <div style="background:#fce4ec;border-radius:4px;height:6px;margin-top:4px;"><div style="background:#e91e63;height:100%;border-radius:4px;width:56%;"></div></div>
+            </div>
+            <div class="demo-client-card">
+              <div class="demo-client-head">
+                <div class="demo-client-name">染髮</div>
+                <div style="color:#c2185b;font-weight:700;font-size:13px;">10 次 · NT$ 35,000</div>
+              </div>
+              <div style="background:#fce4ec;border-radius:4px;height:6px;margin-top:4px;"><div style="background:#e91e63;height:100%;border-radius:4px;width:40%;"></div></div>
+            </div>
+            <div class="demo-client-card">
+              <div class="demo-client-head">
+                <div class="demo-client-name">燙髮</div>
+                <div style="color:#c2185b;font-weight:700;font-size:13px;">6 次 · NT$ 24,000</div>
+              </div>
+              <div style="background:#fce4ec;border-radius:4px;height:6px;margin-top:4px;"><div style="background:#e91e63;height:100%;border-radius:4px;width:25%;"></div></div>
+            </div>
+            <div class="demo-client-card">
+              <div class="demo-client-head">
+                <div class="demo-client-name">護髮</div>
+                <div style="color:#c2185b;font-weight:700;font-size:13px;">8 次 · NT$ 11,200</div>
+              </div>
+              <div style="background:#fce4ec;border-radius:4px;height:6px;margin-top:4px;"><div style="background:#e91e63;height:100%;border-radius:4px;width:15%;"></div></div>
+            </div>
+            <div style="font-size:13px;font-weight:700;color:#555;margin:14px 0 8px 0;">儲值餘額</div>
+            <div class="demo-client-card">
+              <div class="demo-client-head">
+                <div class="demo-client-name">預收總額</div>
+                <div style="color:#333;font-weight:700;font-size:13px;">NT$ 42,000</div>
+              </div>
+              <div class="demo-pkg-meta">未消化：NT$ 18,600 · 4 位客人持有儲值</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== CLIENT DEMO ====== -->
+        <div class="phone-screen demo-hidden" id="demoClient">
+          <div class="demo-tabs" id="clientTabs">
+            <button class="demo-tab active" onclick="showClientTab('mybooking')">我的預約</button>
+            <button class="demo-tab" onclick="showClientTab('myrecord')">服務紀錄</button>
+            <button class="demo-tab" onclick="showClientTab('book')">線上預約</button>
+          </div>
+
+          <!-- 我的預約 -->
+          <div id="clientMybooking" class="demo-card">
+            <h3>我的預約</h3>
+            <div class="demo-booking">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>2026-04-16 10:00</strong>
+                <span class="demo-status confirmed">已確認</span>
+              </div>
+              <div class="meta">
+                <span class="demo-service-tag tag-cut">剪髮</span>
+                <span class="demo-service-tag tag-color">染髮</span>
+                <br>設計師：花花 · 預估 2.5 hr
+              </div>
+            </div>
+            <div class="demo-booking">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong>2026-05-01 14:00</strong>
+                <span class="demo-status pending">待確認</span>
+              </div>
+              <div class="meta">
+                <span class="demo-service-tag tag-treatment">護髮</span>
+                <br>設計師：花花 · 預估 1.5 hr
+              </div>
+            </div>
+            <div style="margin-top:12px;">
+              <div class="demo-pkg">
+                <div class="demo-pkg-title">我的儲值</div>
+                <div class="demo-pkg-meta">護髮套組 5次 · 剩餘 3 次 · 到期：2026-09-30</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 服務紀錄 -->
+          <div id="clientMyrecord" class="demo-card demo-hidden">
+            <h3>我的服務紀錄</h3>
+            <div class="demo-booking">
+              <strong>2026-03-20</strong>
+              <div class="meta">
+                <span class="demo-service-tag tag-cut">剪髮</span>
+                <span class="demo-service-tag tag-color">染髮</span>
+                <br>設計師：花花<br>色號：Wella 7/43<br>備註：蓋白髮，偏棕色調
+              </div>
+            </div>
+            <div class="demo-booking">
+              <strong>2026-02-15</strong>
+              <div class="meta">
+                <span class="demo-service-tag tag-treatment">護髮</span>
+                <br>設計師：花花<br>護髮品：哥德式柔漾<br>備註：髮尾毛躁處理
+              </div>
+            </div>
+            <div class="demo-booking">
+              <strong>2026-01-08</strong>
+              <div class="meta">
+                <span class="demo-service-tag tag-cut">剪髮</span>
+                <span class="demo-service-tag tag-perm">燙髮</span>
+                <br>設計師：花花<br>燙髮藥水：哥德式 蒂聖絲<br>備註：韓式髮根燙
+              </div>
+            </div>
+          </div>
+
+          <!-- 線上預約 -->
+          <div id="clientBook" class="demo-card demo-hidden">
+            <h3>線上預約</h3>
+            <select class="demo-input"><option value="">請選擇設計師</option><option>花花 Hair Designer</option><option>Mia 造型師</option></select>
+            <div style="margin-bottom:8px;">
+              <div style="font-size:12px;color:#888;margin-bottom:4px;">選擇服務</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox"> 剪髮 NT$900</label>
+                <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox"> 染髮 NT$2,500+</label>
+                <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox"> 燙髮 NT$3,000+</label>
+                <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox"> 護髮 NT$1,200+</label>
+                <label style="font-size:13px;display:flex;align-items:center;gap:4px;"><input type="checkbox"> 頭皮護理 NT$1,500</label>
+              </div>
+            </div>
+            <input class="demo-input" type="date" value="2026-04-20">
+            <select class="demo-input"><option value="">選擇時段</option><option>10:00</option><option>11:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option></select>
+            <textarea class="demo-input" rows="2" style="resize:none;" placeholder="備註（想要的造型、特殊需求等）"></textarea>
+            <button class="demo-btn" onclick="showDemoToast('預約已送出，待設計師確認！')">送出預約</button>
+          </div>
+        </div>
+
+        <!-- ====== CHAT DEMO ====== -->
+        <div class="phone-screen demo-hidden" id="demoChat">
+          <div style="text-align:center;font-size:13px;color:#999;margin-bottom:12px;">LINE 對話模擬</div>
+          <div class="demo-chat" id="chatMessages">
+            <div class="demo-chat-bubble demo-chat-user">查詢預約</div>
+            <div class="demo-chat-bubble demo-chat-bot">
+              💇 您的預約（共 2 筆）<br><br>
+              ✅ 2026-04-16 10:00<br>
+              &nbsp;&nbsp;&nbsp;剪髮 + 染髮 · 花花<br>
+              &nbsp;&nbsp;&nbsp;📌 已確認<br><br>
+              ⏳ 2026-05-01 14:00<br>
+              &nbsp;&nbsp;&nbsp;護髮 · 花花<br>
+              &nbsp;&nbsp;&nbsp;📌 待確認
+            </div>
+          </div>
+          <div class="demo-chat-input-row" style="margin-top:16px;">
+            <input class="demo-input" id="chatInput" placeholder="試試輸入指令..." style="margin:0;" onkeydown="if(event.key==='Enter')sendDemoChat()">
+            <button class="demo-btn" style="width:auto;" onclick="sendDemoChat()">送出</button>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+            <button class="demo-tab" style="font-size:11px;padding:4px 10px;" onclick="quickChat('查詢預約')">查詢預約</button>
+            <button class="demo-tab" style="font-size:11px;padding:4px 10px;" onclick="quickChat('我的儲值')">我的儲值</button>
+            <button class="demo-tab" style="font-size:11px;padding:4px 10px;" onclick="quickChat('查詢今日')">查詢今日</button>
+            <button class="demo-tab" style="font-size:11px;padding:4px 10px;" onclick="quickChat('使用教學')">使用教學</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>讓客人預約變得簡單</h2>
+  <p>不論你是獨立設計師、工作室、還是連鎖沙龍，我們都能為你量身打造。</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+    <a href="https://line.me/" class="btn btn-line" target="_blank">LINE 聯繫橙築國際</a>
+    <a href="mailto:contact@chengzhu.com" class="btn btn-outline">Email 洽詢</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 橙築國際. All rights reserved.</p>
+</footer>
+
+<!-- DEMO TOAST -->
+<div id="demoToast" style="position:fixed;left:50%;bottom:80px;transform:translateX(-50%) translateY(20px);background:rgba(194,24,91,0.95);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .25s;z-index:999;white-space:nowrap;"></div>
+
+<script>
+  // === Role switch ===
+  function switchRole(role) {
+    document.querySelectorAll('.demo-role-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('demoStylist').classList.toggle('demo-hidden', role !== 'stylist');
+    document.getElementById('demoClient').classList.toggle('demo-hidden', role !== 'client');
+    document.getElementById('demoChat').classList.toggle('demo-hidden', role !== 'chat');
+  }
+
+  // === Stylist tabs ===
+  function showStylistTab(tab) {
+    const map = { today: 'stylistToday', clients: 'stylistClients', record: 'stylistRecord', revenue: 'stylistRevenue' };
+    document.querySelectorAll('#stylistTabs .demo-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    Object.values(map).forEach(id => document.getElementById(id).classList.add('demo-hidden'));
+    document.getElementById(map[tab]).classList.remove('demo-hidden');
+  }
+
+  // === Client tabs ===
+  function showClientTab(tab) {
+    const map = { mybooking: 'clientMybooking', myrecord: 'clientMyrecord', book: 'clientBook' };
+    document.querySelectorAll('#clientTabs .demo-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    Object.values(map).forEach(id => document.getElementById(id).classList.add('demo-hidden'));
+    document.getElementById(map[tab]).classList.remove('demo-hidden');
+  }
+
+  // === Toast ===
+  function showDemoToast(msg) {
+    const t = document.getElementById('demoToast');
+    t.textContent = msg;
+    t.style.opacity = '1';
+    t.style.transform = 'translateX(-50%) translateY(0)';
+    setTimeout(() => {
+      t.style.opacity = '0';
+      t.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 2000);
+  }
+
+  // === Chat demo ===
+  const chatResponses = {
+    '查詢預約': '💇 您的預約（共 2 筆）\n\n✅ 2026-04-16 10:00\n   剪髮 + 染髮 · 花花\n   📌 已確認\n\n⏳ 2026-05-01 14:00\n   護髮 · 花花\n   📌 待確認',
+    '我的預約': '💇 您的預約（共 2 筆）\n\n✅ 2026-04-16 10:00\n   剪髮 + 染髮 · 花花\n   📌 已確認\n\n⏳ 2026-05-01 14:00\n   護髮 · 花花\n   📌 待確認',
+    '我的儲值': '💳 您的儲值方案：\n\n💆 護髮套組 5次\n   剩餘：3 / 5 次\n   到期：2026-09-30\n\n🎯 總剩餘：3 次',
+    '查詢堂數': '💳 您的儲值方案：\n\n💆 護髮套組 5次\n   剩餘：3 / 5 次\n   到期：2026-09-30\n\n🎯 總剩餘：3 次',
+    '查詢今日': '💇 今日行程（2026-04-16）\n\n⏰ 10:00  陳小姐\n   ✂️ 剪髮 + 🎨 染髮\n   📌 已確認\n\n⏰ 13:30  林小姐\n   🌀 燙髮 + 💆 護髮\n   📌 已確認\n\n⏰ 17:00  王先生\n   ✂️ 剪髮\n   📌 待確認',
+    '查詢明日': '💇 明日行程（2026-04-17）\n\n⏰ 10:00  張小姐\n   🎨 染髮 + 💆 護髮\n   📌 已確認\n\n⏰ 14:00  李太太\n   🧴 頭皮護理\n   📌 待確認',
+    '使用教學': '📖 使用教學\n\n━━━ 客人 ━━━\n\n預約  點連結選設計師、服務、日期時間\n查詢  「查詢預約」或「我的預約」\n儲值  「我的儲值」或「查詢堂數」\n\n━━━ 設計師 ━━━\n\n今日  「查詢今日」\n明日  「查詢明日」\n\n💡 輸入「使用教學」可隨時查看',
+    'help': '📖 使用教學\n\n━━━ 客人 ━━━\n\n預約  點連結選設計師、服務、日期時間\n查詢  「查詢預約」或「我的預約」\n儲值  「我的儲值」或「查詢堂數」\n\n━━━ 設計師 ━━━\n\n今日  「查詢今日」\n明日  「查詢明日」\n\n💡 輸入「使用教學」可隨時查看',
+  };
+
+  function addChatBubble(text, isUser) {
+    const container = document.getElementById('chatMessages');
+    const bubble = document.createElement('div');
+    bubble.className = `demo-chat-bubble ${isUser ? 'demo-chat-user' : 'demo-chat-bot'}`;
+    bubble.style.whiteSpace = 'pre-line';
+    bubble.textContent = text;
+    container.appendChild(bubble);
+    container.parentElement.scrollTop = container.parentElement.scrollHeight;
+  }
+
+  function sendDemoChat() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    addChatBubble(text, true);
+    setTimeout(() => {
+      const response = chatResponses[text] || '💇 歡迎使用美髮預約系統\n\n查詢預約、我的儲值、線上預約\n輸入「使用教學」看完整說明';
+      addChatBubble(response, false);
+    }, 500);
+  }
+
+  function quickChat(text) {
+    document.getElementById('chatInput').value = text;
+    sendDemoChat();
+  }
+</script>
+
+</body>
+</html>
