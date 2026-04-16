@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LINE Bot 智能查價系統 — 橙築國際</title>
+  <meta name="description" content="結合 AI 自然語言解析的 LINE Bot 查價系統。用戶直接在 LINE 輸入商品關鍵字，AI 自動解析、搜尋、計算分級報價，秒回精美商品卡片。">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #3b82f6;
+      --accent: #dc2626;
+      --accent-light: #fef2f2;
+      --bg: #ffffff;
+      --bg-alt: #f8fafc;
+      --text: #1a1a2e;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --shadow: 0 4px 24px rgba(0,0,0,0.06);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.10);
+      --radius: 16px;
+      --phone-w: 390px;
+      --phone-h: 720px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+      color: var(--text); line-height: 1.6; background: var(--bg);
+    }
+
+    /* === NAV === */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .nav-brand { font-size: 18px; font-weight: 800; color: var(--text); text-decoration: none; }
+    .nav-brand span { color: #ff6b35; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 15px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* === HERO === */
+    .hero {
+      padding: 140px 24px 80px;
+      text-align: center;
+      background: linear-gradient(180deg, #eff6ff 0%, var(--bg) 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block; background: #eff6ff; color: var(--primary-dark);
+      padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-bottom: 20px;
+    }
+    .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; line-height: 1.2; margin-bottom: 20px; position: relative; }
+    .hero h1 em { color: var(--primary); font-style: normal; }
+    .hero p { font-size: 18px; color: var(--text-muted); max-width: 620px; margin: 0 auto 36px; }
+    .hero-stats {
+      display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat .num { font-size: 36px; font-weight: 800; color: var(--primary); }
+    .hero-stat .label { font-size: 14px; color: var(--text-muted); }
+    .hero-cta { display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 12px; font-size: 16px; font-weight: 600;
+      text-decoration: none; transition: all .2s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,0.3); }
+    .btn-outline { background: #fff; color: var(--text); border: 2px solid var(--border); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* === SECTION === */
+    .section { padding: 80px 24px; }
+    .section-alt { background: var(--bg-alt); }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-header h2 { font-size: 32px; font-weight: 800; margin-bottom: 12px; }
+    .section-header p { color: var(--text-muted); font-size: 16px; max-width: 520px; margin: 0 auto; }
+
+    /* === FEATURES === */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+    .feature-card {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px; transition: all .2s;
+    }
+    .feature-card:hover {
+      border-color: var(--primary); box-shadow: var(--shadow); transform: translateY(-2px);
+    }
+    .feature-icon {
+      width: 48px; height: 48px; background: #eff6ff; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 16px;
+    }
+    .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { color: var(--text-muted); font-size: 14px; line-height: 1.7; }
+
+    /* === FLOW === */
+    .flow-steps { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+    .flow-step {
+      text-align: center; flex: 1; min-width: 200px; max-width: 260px; position: relative;
+    }
+    .flow-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 800; margin-bottom: 12px;
+    }
+    .flow-step h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .flow-step p { color: var(--text-muted); font-size: 14px; }
+
+    /* === ARCH === */
+    .arch-flow {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; flex-wrap: wrap; margin-top: 40px;
+    }
+    .arch-node {
+      background: #fff; border: 2px solid var(--border); border-radius: 14px;
+      padding: 20px 24px; text-align: center; min-width: 140px;
+      transition: all .2s;
+    }
+    .arch-node:hover { border-color: var(--primary); box-shadow: var(--shadow); transform: translateY(-2px); }
+    .arch-node .icon { font-size: 28px; margin-bottom: 8px; }
+    .arch-node .name { font-size: 14px; font-weight: 700; color: var(--text); }
+    .arch-node .desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .arch-arrow { font-size: 24px; color: var(--primary); font-weight: 700; }
+
+    /* === DEMO === */
+    .demo-wrapper { text-align: center; }
+    .demo-role-switch {
+      display: inline-flex; background: #f1f5f9; border-radius: 12px; padding: 4px; margin-bottom: 32px;
+    }
+    .demo-role-btn {
+      padding: 10px 28px; border: none; background: transparent; border-radius: 10px;
+      font-size: 15px; font-weight: 600; cursor: pointer; color: var(--text-muted); transition: all .2s;
+    }
+    .demo-role-btn.active { background: #fff; color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .phone-frame {
+      width: var(--phone-w); max-width: 100%;
+      height: var(--phone-h);
+      border: 3px solid #222; border-radius: 36px;
+      overflow: hidden; margin: 0 auto;
+      background: #f5f5f5; box-shadow: var(--shadow-lg); position: relative;
+    }
+    .phone-notch {
+      width: 120px; height: 28px; background: #222;
+      border-radius: 0 0 16px 16px; margin: 0 auto; position: relative; z-index: 2;
+    }
+    .phone-screen {
+      height: calc(100% - 28px); overflow-y: auto; padding: 16px;
+      font-family: -apple-system, sans-serif; -webkit-overflow-scrolling: touch;
+    }
+    .phone-screen::-webkit-scrollbar { width: 0; }
+    .demo-hidden { display: none; }
+
+    /* Chat bubbles */
+    .demo-chat { display: flex; flex-direction: column; gap: 8px; }
+    .demo-chat-bubble {
+      max-width: 85%; padding: 10px 14px; border-radius: 16px; font-size: 13px; line-height: 1.5;
+      animation: bubbleIn .3s ease;
+    }
+    @keyframes bubbleIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .demo-chat-bot { background: #fff; align-self: flex-start; border: 1px solid #eee; }
+    .demo-chat-user { background: var(--primary); color: #fff; align-self: flex-end; }
+    .demo-chat-input-row { display: flex; gap: 6px; margin-top: 8px; }
+    .demo-input {
+      width: 100%; padding: 9px 12px; border: 1px solid #ddd; border-radius: 10px;
+      font-size: 14px; background: #fff; color: #333;
+    }
+    .demo-btn {
+      padding: 10px 16px; border: none; border-radius: 8px;
+      background: var(--primary); color: #fff; font-weight: 600; font-size: 14px;
+      cursor: pointer; transition: background .15s; white-space: nowrap;
+    }
+    .demo-btn:hover { background: var(--primary-dark); }
+    .demo-tab {
+      padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;
+      cursor: pointer; background: #e8e8e8; color: #555; border: none; transition: all .15s;
+    }
+    .demo-tab:hover { background: #ddd; }
+
+    /* Flex card mockup */
+    .flex-card {
+      background: #fff; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin: 8px 0;
+      text-align: left; max-width: 260px;
+    }
+    .flex-card-img {
+      width: 100%; aspect-ratio: 1; background: #f5f5f5;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px; color: #ccc;
+    }
+    .flex-card-img img { width: 100%; height: 100%; object-fit: contain; }
+    .flex-card-body { padding: 12px 14px; }
+    .flex-card-name { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 2px; }
+    .flex-card-model { font-size: 12px; color: #888; margin-bottom: 8px; }
+    .flex-card-sep { height: 1px; background: #eee; margin: 8px 0; }
+    .flex-card-row { display: flex; justify-content: space-between; font-size: 12px; color: #888; margin-bottom: 4px; }
+    .flex-card-row .val { color: #333; font-weight: 600; }
+    .flex-card-price-label { font-size: 11px; color: #aaa; margin-top: 8px; }
+    .flex-card-price { font-size: 22px; font-weight: 800; color: #dc2626; }
+    .flex-card-market { font-size: 12px; color: #6b7280; margin-top: 2px; }
+    .flex-card-btn {
+      display: block; text-align: center; padding: 10px;
+      background: var(--primary); color: #fff; font-size: 13px; font-weight: 600;
+      text-decoration: none; margin-top: 10px; border-radius: 8px;
+    }
+
+    /* Carousel */
+    .flex-carousel {
+      display: flex; gap: 10px; overflow-x: auto; padding: 8px 0;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    }
+    .flex-carousel::-webkit-scrollbar { height: 4px; }
+    .flex-carousel::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+    .flex-carousel .flex-card { flex: 0 0 220px; scroll-snap-align: start; }
+
+    /* === CTA === */
+    .cta-section {
+      text-align: center; padding: 80px 24px;
+      background: linear-gradient(180deg, var(--bg) 0%, #eff6ff 100%);
+    }
+    .cta-section h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+    .cta-section p { color: var(--text-muted); margin-bottom: 28px; font-size: 16px; }
+
+    /* === FOOTER === */
+    footer {
+      text-align: center; padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted); font-size: 14px;
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .phone-frame { height: 640px; }
+      .arch-arrow { transform: rotate(90deg); }
+      .arch-flow { flex-direction: column; }
+      .hero-stats { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">橙築國際<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#features">功能</a></li>
+      <li><a href="#arch">架構</a></li>
+      <li><a href="#demo">體驗</a></li>
+      <li><a href="#contact">聯繫</a></li>
+      <li><a href="/">首頁</a></li>
+      <li><a href="/booking/" style="color:var(--primary);font-weight:600;">預約系統</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">AI + LINE Bot 智能整合</div>
+  <h1>LINE 傳訊息<br><em>秒查價・秒報價</em></h1>
+  <p>結合 Google Gemini AI 自然語言解析，用戶在 LINE 上隨意輸入商品關鍵字、數量、預算，系統自動搜尋比對、計算分級報價，秒回精美 Flex 商品卡片。</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num">AI</div>
+      <div class="label">自然語言解析</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">2000+</div>
+      <div class="label">商品資料庫</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">&lt;2s</div>
+      <div class="label">平均回覆時間</div>
+    </div>
+  </div>
+  <div class="hero-cta">
+    <a href="#demo" class="btn btn-primary">互動體驗 Demo</a>
+    <a href="#contact" class="btn btn-outline">聯繫我們</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section section-alt" id="features">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>六大核心功能</h2>
+      <p>從 AI 解析到報價回覆，一套系統搞定所有商品查價需求</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI 自然語言解析</h3>
+        <p>整合 Google Gemini AI，用戶輸入「50台 300元以內 吹風機」，AI 自動拆解出關鍵字、數量、預算上限。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>智能模糊搜尋</h3>
+        <p>三層搜尋策略：精確比對 → 子字串匹配 → 模糊匹配（相似度 60+），即使拼錯也找得到。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>多級分量報價</h3>
+        <p>依用戶等級（Level 1-4）自動套用不同的量價級距，50/100/300/500/1000 台各有專屬批發價。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎴</div>
+        <h3>精美 Flex 卡片</h3>
+        <p>回覆 LINE Flex Message 報價卡，含商品圖片、型號、數量、等級價、市價比較，一目了然。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3>會員權限管理</h3>
+        <p>LINE 帳號綁定信箱 → 對應等級與 VIP 欄位。不同客戶看到不同報價，支援 VIP 專屬價格。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>預算篩選</h3>
+        <p>用戶輸入「300以內」，系統自動過濾超出預算的商品，只回覆符合條件的結果。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="section" id="flow">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>三步完成查價</h2>
+      <p>用戶只需在 LINE 輸入文字，全部由 AI + 系統自動處理</p>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <h3>用戶傳訊息</h3>
+        <p>在 LINE 上直接打字，例如「50台吹風機 300以內」，支援各種口語化表達。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <h3>AI 解析 + 搜尋</h3>
+        <p>Gemini AI 拆解意圖，提取關鍵字、數量、預算。系統從 2000+ 商品中精準比對。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <h3>秒回報價卡片</h3>
+        <p>依用戶等級計算專屬批發價，以 Flex Message 商品卡片回覆，含圖片、價格、官網連結。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="section section-alt" id="arch">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>系統架構</h2>
+      <p>完整的 LINE Bot 後端架構，部署在 Google Cloud Run 上</p>
+    </div>
+    <div class="arch-flow">
+      <div class="arch-node">
+        <div class="icon">💬</div>
+        <div class="name">LINE</div>
+        <div class="desc">用戶訊息</div>
+      </div>
+      <span class="arch-arrow">&rarr;</span>
+      <div class="arch-node">
+        <div class="icon">⚡</div>
+        <div class="name">FastAPI</div>
+        <div class="desc">Webhook 處理</div>
+      </div>
+      <span class="arch-arrow">&rarr;</span>
+      <div class="arch-node">
+        <div class="icon">🧠</div>
+        <div class="name">Gemini AI</div>
+        <div class="desc">NLP 語意解析</div>
+      </div>
+      <span class="arch-arrow">&rarr;</span>
+      <div class="arch-node">
+        <div class="icon">🔥</div>
+        <div class="name">Firestore</div>
+        <div class="desc">商品 + 會員資料</div>
+      </div>
+      <span class="arch-arrow">&rarr;</span>
+      <div class="arch-node">
+        <div class="icon">🎴</div>
+        <div class="name">Flex Message</div>
+        <div class="desc">報價卡片回覆</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="section" id="demo">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>互動體驗</h2>
+      <p>模擬 LINE Bot 查價對話，試試看輸入商品關鍵字</p>
+    </div>
+    <div class="demo-wrapper">
+      <div class="demo-role-switch">
+        <button class="demo-role-btn active" onclick="switchView('chat')">LINE 對話</button>
+        <button class="demo-role-btn" onclick="switchView('card')">Flex 卡片</button>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+
+        <!-- CHAT VIEW -->
+        <div class="phone-screen" id="viewChat">
+          <div style="text-align:center;font-size:12px;color:#999;margin-bottom:12px;">LINE Bot 查價模擬</div>
+          <div class="demo-chat" id="chatMessages">
+            <div class="demo-chat-bubble demo-chat-bot">
+              歡迎使用智能查價系統！<br><br>
+              直接輸入商品名稱或型號即可查價，例如：<br>
+              ・「吹風機」<br>
+              ・「50台 行動電源」<br>
+              ・「KPB-2511 100台」
+            </div>
+          </div>
+          <div class="demo-chat-input-row" style="margin-top:16px;">
+            <input class="demo-input" id="chatInput" placeholder="輸入商品名稱..." style="margin:0;" onkeydown="if(event.key==='Enter')sendChat()">
+            <button class="demo-btn" onclick="sendChat()">送出</button>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+            <button class="demo-tab" onclick="quickChat('吹風機')">吹風機</button>
+            <button class="demo-tab" onclick="quickChat('50台 行動電源')">50台 行動電源</button>
+            <button class="demo-tab" onclick="quickChat('KPB-2511 100台')">KPB-2511 100台</button>
+            <button class="demo-tab" onclick="quickChat('300以內 藍牙喇叭')">300以內 藍牙喇叭</button>
+          </div>
+        </div>
+
+        <!-- CARD VIEW -->
+        <div class="phone-screen demo-hidden" id="viewCard">
+          <div style="text-align:center;font-size:12px;color:#999;margin-bottom:12px;">Flex Message 卡片預覽</div>
+          <div style="text-align:center;">
+            <div class="flex-card" style="margin:0 auto;">
+              <div class="flex-card-img">
+                <img src="https://images.weserv.nl/?url=https%3A%2F%2Fwww.kinyo.tw%2Fimages%2FProductImage%2F20230501101826_KH-9560.jpg&w=400&output=webp" alt="KH-9560" onerror="this.parentElement.innerHTML='&#128247;'">
+              </div>
+              <div class="flex-card-body">
+                <div class="flex-card-name">超輕量負離子吹風機</div>
+                <div class="flex-card-model">型號：KH-9560</div>
+                <div class="flex-card-sep"></div>
+                <div class="flex-card-row"><span>查詢數量</span><span class="val">50 pcs</span></div>
+                <div class="flex-card-row"><span>計價級距</span><span class="val">50 個報價</span></div>
+                <div class="flex-card-price-label">您的等級價</div>
+                <div class="flex-card-price">$285</div>
+                <div class="flex-card-market">賣場價：$590</div>
+                <a href="#" class="flex-card-btn" onclick="return false;">🔗 開啟官網</a>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align:center;font-size:13px;color:#555;font-weight:600;margin:20px 0 8px;">多商品 Carousel 模式</div>
+          <div class="flex-carousel">
+            <div class="flex-card">
+              <div class="flex-card-img" style="font-size:36px;background:#f0f0f0;">&#128268;</div>
+              <div class="flex-card-body">
+                <div class="flex-card-name">大容量行動電源</div>
+                <div class="flex-card-model">型號：KPB-2511</div>
+                <div class="flex-card-sep"></div>
+                <div class="flex-card-row"><span>查詢數量</span><span class="val">100 pcs</span></div>
+                <div class="flex-card-price-label">您的等級價</div>
+                <div class="flex-card-price">$420</div>
+                <div class="flex-card-market">賣場價：$990</div>
+              </div>
+            </div>
+            <div class="flex-card">
+              <div class="flex-card-img" style="font-size:36px;background:#f0f0f0;">&#128266;</div>
+              <div class="flex-card-body">
+                <div class="flex-card-name">藍牙5.0音響</div>
+                <div class="flex-card-model">型號：BTS-735</div>
+                <div class="flex-card-sep"></div>
+                <div class="flex-card-row"><span>查詢數量</span><span class="val">100 pcs</span></div>
+                <div class="flex-card-price-label">您的等級價</div>
+                <div class="flex-card-price">$380</div>
+                <div class="flex-card-market">賣場價：$890</div>
+              </div>
+            </div>
+            <div class="flex-card">
+              <div class="flex-card-img" style="font-size:36px;background:#f0f0f0;">&#127911;</div>
+              <div class="flex-card-body">
+                <div class="flex-card-name">無線藍牙耳機</div>
+                <div class="flex-card-model">型號：BTE-3895</div>
+                <div class="flex-card-sep"></div>
+                <div class="flex-card-row"><span>查詢數量</span><span class="val">100 pcs</span></div>
+                <div class="flex-card-price-label">您的等級價</div>
+                <div class="flex-card-price">$265</div>
+                <div class="flex-card-market">賣場價：$699</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>想為你的品牌打造智能 LINE Bot？</h2>
+  <p>不論是商品查價、會員管理、自動客服，我們都能依照你的需求量身開發。</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+    <a href="https://line.me/" class="btn btn-primary" target="_blank">LINE 聯繫橙築國際</a>
+    <a href="mailto:contact@chengzhu.co" class="btn btn-outline">Email 洽詢</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 橙築國際. All rights reserved.</p>
+</footer>
+
+<script>
+  // === View switch ===
+  function switchView(view) {
+    document.querySelectorAll('.demo-role-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('viewChat').classList.toggle('demo-hidden', view !== 'chat');
+    document.getElementById('viewCard').classList.toggle('demo-hidden', view !== 'card');
+  }
+
+  // === Product database (demo) ===
+  const products = [
+    { name: '超輕量負離子吹風機', model: 'KH-9560', category: '吹風機', market: 590, img: '&#128168;' },
+    { name: '大風量吹風機', model: 'KH-9750', category: '吹風機', market: 790, img: '&#128168;' },
+    { name: '陶瓷遠紅外線吹風機', model: 'KH-9660', category: '吹風機', market: 990, img: '&#128168;' },
+    { name: '大容量行動電源 20000mAh', model: 'KPB-2511', category: '行動電源', market: 990, img: '&#128268;' },
+    { name: '輕薄行動電源 10000mAh', model: 'KPB-1350', category: '行動電源', market: 590, img: '&#128268;' },
+    { name: '藍牙5.0音響', model: 'BTS-735', category: '藍牙喇叭', market: 890, img: '&#128266;' },
+    { name: '防水藍牙喇叭', model: 'BTS-810', category: '藍牙喇叭', market: 690, img: '&#128266;' },
+    { name: '無線藍牙耳機', model: 'BTE-3895', category: '藍牙耳機', market: 699, img: '&#127911;' },
+    { name: '多功能電烤盤', model: 'KIA-25', category: '電烤盤', market: 1280, img: '&#127858;' },
+    { name: '多功能料理鍋', model: 'KCR-195', category: '料理鍋', market: 1690, img: '&#127858;' },
+    { name: '14吋立式電風扇', model: 'ACF-3142', category: '風扇', market: 890, img: '&#127744;' },
+    { name: '12L除濕機', model: 'DHM-3450', category: '除濕機', market: 4990, img: '&#128167;' },
+  ];
+
+  // Pricing tiers (Level 3 simulation)
+  const tiers = [
+    { min: 50, name: '50 個報價', rate: 0.75 },
+    { min: 100, name: '100 個報價', rate: 0.78 },
+    { min: 300, name: '300 個報價', rate: 0.82 },
+    { min: 500, name: '500 個報價', rate: 0.85 },
+    { min: 1000, name: '1000 個報價', rate: 0.858 },
+  ];
+
+  function calcPrice(market, qty) {
+    let tier = tiers[0];
+    for (const t of tiers) {
+      if (qty >= t.min) tier = t;
+    }
+    const price = Math.ceil(market * tier.rate * 1.05);
+    return { price, tierName: tier.name };
+  }
+
+  function parseInput(text) {
+    let qty = 50;
+    let maxPrice = null;
+    let keyword = text;
+
+    // Extract quantity
+    const qtyMatch = text.match(/(\d+)\s*[台個份pcs]/i);
+    if (qtyMatch) {
+      qty = parseInt(qtyMatch[1]);
+      keyword = keyword.replace(qtyMatch[0], '');
+    }
+
+    // Extract budget
+    const budgetMatch = text.match(/(\d+)\s*[元以內塊]*/);
+    if (budgetMatch && !qtyMatch) {
+      // Only treat as budget if it wasn't already matched as qty
+    }
+    const budgetMatch2 = text.match(/(\d+)\s*以內/);
+    if (budgetMatch2) {
+      maxPrice = parseInt(budgetMatch2[1]);
+      keyword = keyword.replace(budgetMatch2[0], '');
+    }
+
+    keyword = keyword.replace(/[，,。、]/g, ' ').trim();
+    return { keyword, qty, maxPrice };
+  }
+
+  function searchProducts(keyword, maxPrice) {
+    const kw = keyword.toLowerCase();
+    let results = products.filter(p =>
+      p.name.toLowerCase().includes(kw) ||
+      p.model.toLowerCase().includes(kw) ||
+      p.category.toLowerCase().includes(kw)
+    );
+    if (maxPrice) {
+      results = results.filter(p => {
+        const { price } = calcPrice(p.market, 50);
+        return price <= maxPrice;
+      });
+    }
+    return results;
+  }
+
+  function buildFlexCardHTML(product, qty) {
+    const { price, tierName } = calcPrice(product.market, qty);
+    return `<div class="flex-card" style="margin:4px auto;">
+      <div class="flex-card-img" style="font-size:36px;background:#f5f5f5;">${product.img}</div>
+      <div class="flex-card-body">
+        <div class="flex-card-name">${product.name}</div>
+        <div class="flex-card-model">型號：${product.model}</div>
+        <div class="flex-card-sep"></div>
+        <div class="flex-card-row"><span>查詢數量</span><span class="val">${qty.toLocaleString()} pcs</span></div>
+        <div class="flex-card-row"><span>計價級距</span><span class="val">${tierName}</span></div>
+        <div class="flex-card-price-label">您的等級價</div>
+        <div class="flex-card-price">$${price.toLocaleString()}</div>
+        <div class="flex-card-market">賣場價：$${product.market.toLocaleString()}</div>
+        <a href="#" class="flex-card-btn" onclick="return false;">🔗 開啟官網</a>
+      </div>
+    </div>`;
+  }
+
+  function addBubble(html, isUser) {
+    const container = document.getElementById('chatMessages');
+    const bubble = document.createElement('div');
+    bubble.className = `demo-chat-bubble ${isUser ? 'demo-chat-user' : 'demo-chat-bot'}`;
+    if (isUser) {
+      bubble.textContent = html;
+    } else {
+      bubble.innerHTML = html;
+    }
+    container.appendChild(bubble);
+    container.parentElement.scrollTop = container.parentElement.scrollHeight;
+  }
+
+  function sendChat() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+
+    addBubble(text, true);
+
+    setTimeout(() => {
+      const { keyword, qty, maxPrice } = parseInput(text);
+      const results = searchProducts(keyword, maxPrice);
+
+      if (results.length === 0) {
+        addBubble('找不到符合「' + keyword + '」的商品，請換個關鍵字試試看。<br><br>💡 提示：可輸入商品名稱、型號或類別', false);
+        return;
+      }
+
+      if (results.length === 1) {
+        addBubble('找到 1 筆結果：' + buildFlexCardHTML(results[0], qty), false);
+      } else {
+        let html = `找到 ${results.length} 筆結果`;
+        if (maxPrice) html += `（預算 $${maxPrice} 以內）`;
+        html += '：<div class="flex-carousel" style="margin-top:8px;">';
+        results.slice(0, 5).forEach(p => {
+          const { price, tierName } = calcPrice(p.market, qty);
+          html += `<div class="flex-card" style="flex:0 0 200px;">
+            <div class="flex-card-img" style="font-size:28px;background:#f5f5f5;">${p.img}</div>
+            <div class="flex-card-body" style="padding:10px;">
+              <div class="flex-card-name" style="font-size:13px;">${p.name}</div>
+              <div class="flex-card-model" style="font-size:11px;">${p.model}</div>
+              <div class="flex-card-price" style="font-size:18px;">$${price.toLocaleString()}</div>
+              <div class="flex-card-market" style="font-size:11px;">賣場價：$${p.market.toLocaleString()}</div>
+            </div>
+          </div>`;
+        });
+        html += '</div>';
+        if (results.length > 5) {
+          html += `<div style="font-size:12px;color:#888;margin-top:6px;">還有 ${results.length - 5} 筆，輸入更精確的關鍵字縮小範圍</div>`;
+        }
+        addBubble(html, false);
+      }
+    }, 600);
+  }
+
+  function quickChat(text) {
+    document.getElementById('chatInput').value = text;
+    sendChat();
+  }
+</script>
+
+</body>
+</html>
