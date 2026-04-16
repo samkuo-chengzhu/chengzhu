@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>橙築國際 — LINE 智慧管理系統</title>
+  <meta name="description" content="橙築國際專注打造 LINE 整合管理系統。預約管理、球團報名、自動通知，讓你的業務管理全面自動化。">
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #06c755;
+      --accent-dark: #05a648;
+      --golf: #2E7D32;
+      --bg: #ffffff;
+      --bg-alt: #fafbfc;
+      --text: #1a1a2e;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --shadow: 0 4px 24px rgba(0,0,0,0.06);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.10);
+      --radius: 20px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+      color: var(--text); line-height: 1.6; background: var(--bg);
+    }
+
+    /* === NAV === */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .nav-brand { font-size: 20px; font-weight: 800; color: var(--text); text-decoration: none; }
+    .nav-brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-muted); font-size: 15px; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* === HERO === */
+    .hero {
+      padding: 160px 24px 100px; text-align: center;
+      background: linear-gradient(180deg, #f0fdf4 0%, #fff 50%, var(--bg-alt) 100%);
+      position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 800px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(6,199,85,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block; background: #ecfdf5; color: var(--accent-dark);
+      padding: 6px 18px; border-radius: 999px; font-size: 13px; font-weight: 600;
+      margin-bottom: 24px; letter-spacing: 0.5px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5.5vw, 60px); font-weight: 800; line-height: 1.15;
+      margin-bottom: 24px; position: relative;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p {
+      font-size: 19px; color: var(--text-muted); max-width: 600px; margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+    .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 15px 32px; border-radius: 14px; font-size: 16px; font-weight: 600;
+      text-decoration: none; transition: all .2s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(6,199,85,0.3); }
+    .btn-outline { background: #fff; color: var(--text); border: 2px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* === SECTION === */
+    .section { padding: 80px 24px; }
+    .section-alt { background: var(--bg-alt); }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-header h2 { font-size: 36px; font-weight: 800; margin-bottom: 14px; }
+    .section-header p { color: var(--text-muted); font-size: 17px; max-width: 540px; margin: 0 auto; }
+
+    /* === PRODUCTS === */
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 32px; }
+    .product-card {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; transition: all .3s; position: relative;
+    }
+    .product-card:hover { border-color: transparent; box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .product-visual {
+      height: 220px; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .product-visual-booking {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
+    }
+    .product-visual-fungolf {
+      background: linear-gradient(135deg, #e8f5e9 0%, #dcedc8 50%, #c5e1a5 100%);
+    }
+    .product-visual-inner {
+      width: 180px; height: 140px; background: #fff; border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10); display: flex; align-items: center;
+      justify-content: center; font-size: 48px; position: relative; z-index: 1;
+    }
+    .product-visual .float-icon {
+      position: absolute; font-size: 28px; opacity: 0.3;
+    }
+    .product-body { padding: 28px; }
+    .product-tag {
+      display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 12px;
+      font-weight: 700; margin-bottom: 12px; letter-spacing: 0.5px;
+    }
+    .tag-line { background: #ecfdf5; color: var(--accent-dark); }
+    .tag-golf { background: #e8f5e9; color: var(--golf); }
+    .product-body h3 { font-size: 22px; font-weight: 800; margin-bottom: 10px; }
+    .product-body p { color: var(--text-muted); font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+    .product-features {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;
+    }
+    .product-feat {
+      background: var(--bg-alt); padding: 6px 14px; border-radius: 8px;
+      font-size: 13px; font-weight: 600; color: #555;
+    }
+    .product-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 12px; font-size: 15px; font-weight: 600;
+      text-decoration: none; transition: all .2s;
+    }
+    .product-btn-booking { background: var(--accent); color: #fff; }
+    .product-btn-booking:hover { background: var(--accent-dark); }
+    .product-btn-fungolf { background: var(--golf); color: #fff; }
+    .product-btn-fungolf:hover { background: #1B5E20; }
+
+    /* === STRENGTHS === */
+    .strengths-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+    .strength-card { text-align: center; padding: 32px 20px; }
+    .strength-icon { font-size: 40px; margin-bottom: 16px; }
+    .strength-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .strength-card p { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+
+    /* === CTA === */
+    .cta-section {
+      text-align: center; padding: 100px 24px;
+      background: linear-gradient(180deg, var(--bg-alt) 0%, #e8f5e9 100%);
+    }
+    .cta-section h2 { font-size: 32px; font-weight: 800; margin-bottom: 14px; }
+    .cta-section p { color: var(--text-muted); margin-bottom: 32px; font-size: 17px; max-width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 32px; }
+
+    /* === FOOTER === */
+    footer {
+      text-align: center; padding: 36px 24px;
+      border-top: 1px solid var(--border); color: var(--text-muted); font-size: 14px;
+    }
+    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .products-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 32px; }
+      .product-visual { height: 180px; }
+    }
+    @media (max-width: 520px) {
+      .products-grid { grid-template-columns: 1fr; }
+      .strengths-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">橙築國際<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#products">產品</a></li>
+      <li><a href="#why">為什麼選我們</a></li>
+      <li><a href="/booking/">預約系統</a></li>
+      <li><a href="/fungolf/">球團系統</a></li>
+      <li><a href="#contact">聯繫</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">LINE 整合管理解決方案</div>
+  <h1>你的事業管理<br><em>自動化</em>從 LINE 開始</h1>
+  <p>橙築國際專注打造 LINE 智慧管理系統。從預約排程到球團報名，讓你的日常管理全面升級。</p>
+  <div class="hero-cta">
+    <a href="#products" class="btn btn-primary">查看產品</a>
+    <a href="#contact" class="btn btn-outline">免費諮詢</a>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>我們的產品</h2>
+      <p>針對不同場景量身打造，一套系統解決你的管理痛點</p>
+    </div>
+    <div class="products-grid">
+
+      <!-- Product 1: LINE Booking -->
+      <div class="product-card">
+        <div class="product-visual product-visual-booking">
+          <span class="float-icon" style="top:20px;left:30px;">📅</span>
+          <span class="float-icon" style="top:40px;right:40px;">🔔</span>
+          <span class="float-icon" style="bottom:30px;left:50px;">📊</span>
+          <div class="product-visual-inner">📱</div>
+        </div>
+        <div class="product-body">
+          <span class="product-tag tag-line">LINE Bot + LIFF</span>
+          <h3>LINE 預約管理系統</h3>
+          <p>專為教練、老師打造的預約管理系統。學員在 LINE 裡預約，教練一鍵管理堂數、排程、收入。</p>
+          <div class="product-features">
+            <span class="product-feat">線上預約</span>
+            <span class="product-feat">堂數管理</span>
+            <span class="product-feat">自動通知</span>
+            <span class="product-feat">收入報表</span>
+            <span class="product-feat">排程管理</span>
+            <span class="product-feat">學員管理</span>
+          </div>
+          <a href="/booking/" class="product-btn product-btn-booking">查看 Demo →</a>
+        </div>
+      </div>
+
+      <!-- Product 2: FUNgolf -->
+      <div class="product-card">
+        <div class="product-visual product-visual-fungolf">
+          <span class="float-icon" style="top:25px;left:35px;">⛳</span>
+          <span class="float-icon" style="top:35px;right:45px;">🏌️</span>
+          <span class="float-icon" style="bottom:25px;left:55px;">📋</span>
+          <div class="product-visual-inner">⛳</div>
+        </div>
+        <div class="product-body">
+          <span class="product-tag tag-golf">LINE Bot + Web</span>
+          <h3>FUNgolf 球團報名系統</h3>
+          <p>專為高爾夫球團打造的報名管理系統。400 人球團一鍵報名，候補遞補、自動分組全自動。</p>
+          <div class="product-features">
+            <span class="product-feat">一鍵報名</span>
+            <span class="product-feat">候補遞補</span>
+            <span class="product-feat">自動分組</span>
+            <span class="product-feat">名單管理</span>
+            <span class="product-feat">自動通知</span>
+            <span class="product-feat">Web 平台</span>
+          </div>
+          <a href="/fungolf/" class="product-btn product-btn-fungolf">查看 Demo →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section section-alt" id="why">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>為什麼選擇橙築國際</h2>
+      <p>我們不只做系統，更懂你的業務流程</p>
+    </div>
+    <div class="strengths-grid">
+      <div class="strength-card">
+        <div class="strength-icon">💬</div>
+        <h3>LINE 原生整合</h3>
+        <p>不需要額外 App，所有操作都在 LINE 裡完成。用戶零學習成本。</p>
+      </div>
+      <div class="strength-card">
+        <div class="strength-icon">⚡</div>
+        <h3>全自動化</h3>
+        <p>通知、候補遞補、報表產出全部自動。管理者可以專注在核心業務。</p>
+      </div>
+      <div class="strength-card">
+        <div class="strength-icon">🎨</div>
+        <h3>量身定制</h3>
+        <p>每套系統都根據你的實際流程客製。不是套模板，是真正解決問題。</p>
+      </div>
+      <div class="strength-card">
+        <div class="strength-icon">🚀</div>
+        <h3>快速部署</h3>
+        <p>雲端架構，快速上線。從需求確認到系統交付，高效完成。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>開始你的自動化管理</h2>
+  <p>不論你是教練、老師、球團團長，我們都能為你打造專屬解決方案。</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+    <a href="https://line.me/" class="btn btn-primary" target="_blank">LINE 聯繫我們</a>
+    <a href="mailto:contact@chengzhu.co" class="btn btn-outline">Email 洽詢</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="display:flex;gap:24px;justify-content:center;margin-bottom:12px;">
+    <a href="/booking/">預約系統</a>
+    <a href="/fungolf/">球團系統</a>
+    <a href="#contact">聯繫我們</a>
+  </div>
+  <p>&copy; 2026 橙築國際. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
