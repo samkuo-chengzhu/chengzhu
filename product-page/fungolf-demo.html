@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FUNgolf 球團報名系統 — 橙築國際</title>
+  <meta name="description" content="專為高爾夫球團打造的 LINE 報名管理系統。一鍵報名、候補遞補、自動分組、名單管理，400人球團輕鬆搞定。">
+  <style>
+    :root {
+      --primary: #2E7D32;
+      --primary-dark: #1B5E20;
+      --primary-light: #4CAF50;
+      --accent: #FF8F00;
+      --accent-light: #FFF3E0;
+      --blue: #1565C0;
+      --red: #C62828;
+      --bg: #ffffff;
+      --bg-alt: #f7f9f7;
+      --text: #1a1a2e;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --shadow: 0 4px 24px rgba(0,0,0,0.06);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.10);
+      --radius: 16px;
+      --phone-w: 390px;
+      --phone-h: 720px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+      color: var(--text); line-height: 1.6; background: var(--bg);
+    }
+
+    /* === NAV === */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .nav-brand { font-size: 18px; font-weight: 800; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .nav-brand span { color: var(--primary); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 15px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* === HERO === */
+    .hero {
+      padding: 140px 24px 80px;
+      text-align: center;
+      background: linear-gradient(180deg, #e8f5e9 0%, var(--bg) 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(46,125,50,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block; background: #e8f5e9; color: var(--primary-dark);
+      padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-bottom: 20px;
+    }
+    .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; line-height: 1.2; margin-bottom: 20px; position: relative; }
+    .hero h1 span { color: var(--primary); }
+    .hero p { font-size: 18px; color: var(--text-muted); max-width: 620px; margin: 0 auto 36px; }
+    .hero-stats {
+      display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat .num { font-size: 36px; font-weight: 800; color: var(--primary); }
+    .hero-stat .label { font-size: 14px; color: var(--text-muted); }
+    .hero-cta { display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 12px; font-size: 16px; font-weight: 600;
+      text-decoration: none; transition: all .2s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(46,125,50,0.3); }
+    .btn-outline { background: #fff; color: var(--text); border: 2px solid var(--border); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* === SECTION === */
+    .section { padding: 80px 24px; }
+    .section-alt { background: var(--bg-alt); }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-header h2 { font-size: 32px; font-weight: 800; margin-bottom: 12px; }
+    .section-header p { color: var(--text-muted); font-size: 16px; max-width: 520px; margin: 0 auto; }
+
+    /* === FEATURES === */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+    .feature-card {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px; transition: all .2s;
+    }
+    .feature-card:hover { border-color: var(--primary); box-shadow: var(--shadow); transform: translateY(-2px); }
+    .feature-icon {
+      width: 48px; height: 48px; background: #e8f5e9; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px;
+    }
+    .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { color: var(--text-muted); font-size: 14px; line-height: 1.7; }
+
+    /* === FLOW === */
+    .flow-steps { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+    .flow-step { text-align: center; flex: 1; min-width: 200px; max-width: 260px; position: relative; }
+    .flow-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 800; margin-bottom: 12px;
+    }
+    .flow-step h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .flow-step p { color: var(--text-muted); font-size: 14px; }
+
+    /* === DEMO === */
+    .demo-wrapper { text-align: center; }
+    .demo-role-switch {
+      display: inline-flex; background: #f1f5f1; border-radius: 12px; padding: 4px; margin-bottom: 32px;
+    }
+    .demo-role-btn {
+      padding: 10px 24px; border: none; background: transparent; border-radius: 10px;
+      font-size: 15px; font-weight: 600; cursor: pointer; color: var(--text-muted); transition: all .2s;
+    }
+    .demo-role-btn.active { background: #fff; color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .phone-frame {
+      width: var(--phone-w); max-width: 100%; height: var(--phone-h);
+      border: 3px solid #222; border-radius: 36px; overflow: hidden;
+      margin: 0 auto; background: #f5f5f5; box-shadow: var(--shadow-lg); position: relative;
+    }
+    .phone-notch {
+      width: 120px; height: 28px; background: #222; border-radius: 0 0 16px 16px;
+      margin: 0 auto; position: relative; z-index: 2;
+    }
+    .phone-screen {
+      height: calc(100% - 28px); overflow-y: auto; padding: 16px;
+      font-family: -apple-system, sans-serif; -webkit-overflow-scrolling: touch;
+    }
+    .phone-screen::-webkit-scrollbar { width: 0; }
+
+    /* Demo inner styles */
+    .demo-hidden { display: none; }
+    .demo-tabs { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+    .demo-tab {
+      padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 600;
+      cursor: pointer; background: #e8e8e8; color: #555; border: none; transition: all .15s;
+    }
+    .demo-tab.active { background: var(--primary); color: #fff; }
+    .demo-card {
+      background: #fff; border-radius: 12px; padding: 14px; margin-bottom: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .demo-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+    .demo-input {
+      width: 100%; padding: 9px 12px; border: 1px solid #ddd; border-radius: 10px;
+      margin-bottom: 8px; font-size: 14px; background: #fff; color: #333;
+    }
+    .demo-btn {
+      width: 100%; padding: 10px; border: none; border-radius: 8px;
+      background: var(--primary); color: #fff; font-weight: 600; font-size: 14px;
+      cursor: pointer; transition: background .15s;
+    }
+    .demo-btn:hover { background: var(--primary-dark); }
+    .demo-btn-sm {
+      padding: 6px 12px; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;
+    }
+    .demo-btn-green { background: var(--primary); color: #fff; }
+    .demo-btn-blue { background: var(--blue); color: #fff; }
+    .demo-btn-orange { background: var(--accent); color: #fff; }
+    .demo-btn-red { background: var(--red); color: #fff; }
+    .demo-btn-gray { background: #fff; color: #333; border: 1px solid #ddd; }
+
+    /* Event card */
+    .event-card {
+      background: #fff; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 12px;
+    }
+    .event-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: #fff; padding: 14px 16px;
+    }
+    .event-header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    .event-title { font-size: 16px; font-weight: 800; }
+    .event-badge {
+      padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700;
+      background: rgba(255,255,255,0.25); color: #fff;
+    }
+    .event-badge.full { background: #FF6F00; }
+    .event-badge.closing { background: #F44336; }
+    .event-id { font-size: 11px; opacity: 0.8; }
+    .event-body { padding: 14px 16px; }
+    .event-info-row {
+      display: flex; align-items: center; gap: 8px; font-size: 13px; margin-bottom: 6px; color: #444;
+    }
+    .event-info-row .icon { width: 20px; text-align: center; }
+    .progress-bar {
+      height: 8px; background: #e8e8e8; border-radius: 4px; margin: 10px 0 6px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 4px; transition: width .5s ease;
+    }
+    .progress-fill.green { background: var(--primary); }
+    .progress-fill.orange { background: var(--accent); }
+    .progress-fill.red { background: var(--red); }
+    .event-stats {
+      display: flex; justify-content: space-between; font-size: 12px; color: #888;
+    }
+    .event-footer {
+      display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid #f0f0f0;
+    }
+    .event-footer-btn {
+      flex: 1; padding: 10px; border: none; border-radius: 10px;
+      font-size: 13px; font-weight: 700; cursor: pointer; transition: all .15s;
+    }
+    .ef-register { background: var(--primary); color: #fff; }
+    .ef-register:hover { background: var(--primary-dark); }
+    .ef-cancel { background: #fff; color: var(--red); border: 1px solid #fce4ec; }
+    .ef-roster { background: #e3f2fd; color: var(--blue); }
+
+    /* Roster styles */
+    .roster-group {
+      background: #f9f9f9; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px;
+    }
+    .roster-group-title {
+      font-size: 12px; font-weight: 700; color: var(--primary); margin-bottom: 6px;
+      padding-bottom: 4px; border-bottom: 1px dashed #ddd;
+    }
+    .roster-member {
+      font-size: 13px; color: #444; padding: 2px 0; display: flex; justify-content: space-between;
+    }
+    .roster-member .gender-m { color: var(--blue); }
+    .roster-member .gender-f { color: #E91E63; }
+    .roster-waitlist-header {
+      font-size: 13px; font-weight: 700; color: var(--accent); margin: 12px 0 6px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .roster-wait-member { font-size: 13px; color: #888; padding: 2px 0; }
+    .group-tag {
+      display: inline-block; width: 20px; height: 20px; border-radius: 50%;
+      background: var(--primary); color: #fff; font-size: 10px; font-weight: 800;
+      text-align: center; line-height: 20px; margin-right: 4px;
+    }
+
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .stat-box { border-radius: 10px; padding: 12px; text-align: center; }
+    .stat-box .label { font-size: 11px; color: #666; }
+    .stat-box .value { font-size: 20px; font-weight: 800; margin-top: 2px; }
+
+    /* Registration modal */
+    .reg-mode {
+      background: #f9f9f9; border: 2px solid #eee; border-radius: 12px;
+      padding: 14px; margin-bottom: 8px; cursor: pointer; transition: all .15s;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .reg-mode:hover { border-color: var(--primary); background: #f0fdf4; }
+    .reg-mode.selected { border-color: var(--primary); background: #e8f5e9; }
+    .reg-mode-icon { font-size: 24px; }
+    .reg-mode-text h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .reg-mode-text p { font-size: 12px; color: #888; }
+
+    /* Chat bubbles */
+    .demo-chat { display: flex; flex-direction: column; gap: 8px; }
+    .demo-chat-bubble {
+      max-width: 85%; padding: 10px 14px; border-radius: 16px; font-size: 13px; line-height: 1.5;
+      animation: bubbleIn .3s ease;
+    }
+    @keyframes bubbleIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .demo-chat-bot { background: #fff; align-self: flex-start; border: 1px solid #eee; }
+    .demo-chat-user { background: var(--primary); color: #fff; align-self: flex-end; }
+    .demo-chat-input-row { display: flex; gap: 6px; margin-top: 8px; }
+    .demo-chat-input-row input { flex: 1; }
+    .demo-chat-input-row button { width: auto; padding: 10px 16px; white-space: nowrap; }
+
+    /* Promotion notification */
+    .promo-card {
+      background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      margin-bottom: 12px;
+    }
+    .promo-header {
+      background: linear-gradient(135deg, #4CAF50, #66BB6A); color: #fff; padding: 14px 16px; text-align: center;
+    }
+    .promo-header h3 { font-size: 16px; }
+    .promo-body { padding: 14px 16px; }
+    .promo-deadline {
+      background: #fff3e0; border-radius: 8px; padding: 8px 12px; margin: 10px 0;
+      font-size: 13px; color: var(--red); font-weight: 600; text-align: center;
+    }
+    .promo-actions { display: flex; gap: 8px; margin-top: 12px; }
+    .promo-actions button { flex: 1; }
+
+    /* === CTA === */
+    .cta-section {
+      text-align: center; padding: 80px 24px;
+      background: linear-gradient(180deg, var(--bg) 0%, #e8f5e9 100%);
+    }
+    .cta-section h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+    .cta-section p { color: var(--text-muted); margin-bottom: 28px; font-size: 16px; }
+
+    /* === FOOTER === */
+    footer {
+      text-align: center; padding: 32px 24px;
+      border-top: 1px solid var(--border); color: var(--text-muted); font-size: 14px;
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .phone-frame { height: 640px; }
+      .hero-stats { gap: 24px; }
+      .hero-stat .num { font-size: 28px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#">FUN<span>golf</span></a>
+    <ul class="nav-links">
+      <li><a href="#features">功能</a></li>
+      <li><a href="#flow">流程</a></li>
+      <li><a href="#demo">體驗</a></li>
+      <li><a href="#contact">聯繫</a></li>
+      <li><a href="index.html" style="color:#06c755;font-weight:600;">LINE 預約系統</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">LINE Bot + Web 一站整合</div>
+  <h1>400 人球團<br><span>一鍵報名管理</span></h1>
+  <p>不需要 App、不需要表單。球友在 LINE 裡一鍵報名，團長自動管理名額、候補、分組，每月 10+ 場球敘輕鬆搞定。</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">400+</div><div class="label">球友人數</div></div>
+    <div class="hero-stat"><div class="num">120</div><div class="label">每場上限</div></div>
+    <div class="hero-stat"><div class="num">10+</div><div class="label">每月球敘</div></div>
+    <div class="hero-stat"><div class="num">0</div><div class="label">手動作業</div></div>
+  </div>
+  <div class="hero-cta">
+    <a href="#demo" class="btn btn-primary">立即體驗 Demo</a>
+    <a href="#contact" class="btn btn-outline">聯繫我們</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section section-alt" id="features">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>六大核心功能</h2>
+      <p>從開團到名單產出，一套系統搞定所有球團管理需求</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#9971;</div>
+        <h3>一鍵報名</h3>
+        <p>球友收到 LINE 推播，點一下即完成報名。不用打字、不用填表單。額滿自動進入候補名單。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128260;</div>
+        <h3>候補遞補</h3>
+        <p>正取有人取消時，系統自動通知候補球友遞補。限時確認機制，超時自動遞補下一位。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128101;</div>
+        <h3>自動分組</h3>
+        <p>好友同組、代報同組，系統自動分配 4 人一組。不足人數智慧合併，不浪費任何名額。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128203;</div>
+        <h3>名單管理</h3>
+        <p>即時查看正取 / 候補 / 取消名單。支援翻頁瀏覽、圖片匯出、Excel 下載。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128276;</div>
+        <h3>自動通知</h3>
+        <p>報名截止提醒、候補遞補通知、名額即將額滿警告。所有通知透過 LINE 即時送達。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#127760;</div>
+        <h3>Web 平台</h3>
+        <p>完整的網頁報名介面。LINE 登入、群組報名模式、完整名單瀏覽，手機電腦都好用。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="section" id="flow">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>報名流程，三步完成</h2>
+      <p>球友零學習成本，LINE 裡一鍵搞定</p>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <h3>團長開團</h3>
+        <p>管理員輸入日期、球場、人數上限、截止時間，系統自動產生報名卡片推播至群組。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <h3>球友報名</h3>
+        <p>球友在 LINE 裡看到卡片，點「報名」即完成。可帶朋友同組、代報好友、加入指定組。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <h3>自動管理</h3>
+        <p>額滿自動候補、取消自動遞補、截止自動關閉。名單即時更新，團長無需手動操作。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="section section-alt" id="demo">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2>互動體驗</h2>
+      <p>切換不同視角，實際操作看看</p>
+    </div>
+    <div class="demo-wrapper">
+      <div class="demo-role-switch">
+        <button class="demo-role-btn active" onclick="switchRole('member')">球友報名</button>
+        <button class="demo-role-btn" onclick="switchRole('admin')">管理後台</button>
+        <button class="demo-role-btn" onclick="switchRole('chat')">LINE 對話</button>
+        <button class="demo-role-btn" onclick="switchRole('notify')">通知模擬</button>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+
+        <!-- ====== MEMBER DEMO ====== -->
+        <div class="phone-screen" id="demoMember">
+          <div class="demo-tabs" id="memberTabs">
+            <button class="demo-tab active" onclick="showMemberTab('events')">球敘列表</button>
+            <button class="demo-tab" onclick="showMemberTab('register')">報名流程</button>
+            <button class="demo-tab" onclick="showMemberTab('roster')">查看名單</button>
+          </div>
+
+          <!-- 球敘列表 -->
+          <div id="memberEvents">
+            <div class="event-card">
+              <div class="event-header">
+                <div class="event-header-top">
+                  <div class="event-title">04-18（五）美麗華</div>
+                  <span class="event-badge">報名中</span>
+                </div>
+                <div class="event-id">#球敘 12</div>
+              </div>
+              <div class="event-body">
+                <div class="event-info-row"><span class="icon">&#128197;</span> 2026-04-18（五）</div>
+                <div class="event-info-row"><span class="icon">&#9200;</span> 07:00 早球</div>
+                <div class="event-info-row"><span class="icon">&#127948;</span> 美麗華高爾夫球場</div>
+                <div class="event-info-row"><span class="icon">&#128176;</span> NT$ 2,800</div>
+                <div class="event-info-row"><span class="icon">&#128101;</span> 30 組 / 120 人</div>
+                <div class="event-info-row"><span class="icon">&#9203;</span> 截止：04-17 18:00</div>
+                <div class="progress-bar"><div class="progress-fill green" style="width:62%"></div></div>
+                <div class="event-stats">
+                  <span>報名 75/120</span>
+                  <span>19 組</span>
+                  <span>候補 0</span>
+                </div>
+              </div>
+              <div class="event-footer">
+                <button class="event-footer-btn ef-register" onclick="showMemberTab('register')">&#10004; 報名</button>
+                <button class="event-footer-btn ef-roster" onclick="showMemberTab('roster')">&#128203; 名單</button>
+              </div>
+            </div>
+
+            <div class="event-card">
+              <div class="event-header" style="background:linear-gradient(135deg,#FF8F00,#FFB300);">
+                <div class="event-header-top">
+                  <div class="event-title">04-22（二）八里</div>
+                  <span class="event-badge full">即將額滿</span>
+                </div>
+                <div class="event-id">#球敘 13</div>
+              </div>
+              <div class="event-body">
+                <div class="event-info-row"><span class="icon">&#128197;</span> 2026-04-22（二）</div>
+                <div class="event-info-row"><span class="icon">&#9200;</span> 12:30 午球</div>
+                <div class="event-info-row"><span class="icon">&#127948;</span> 八里高爾夫球場</div>
+                <div class="event-info-row"><span class="icon">&#128176;</span> NT$ 2,200</div>
+                <div class="event-info-row"><span class="icon">&#128101;</span> 30 組 / 120 人</div>
+                <div class="event-info-row"><span class="icon">&#9203;</span> 截止：04-21 18:00</div>
+                <div class="progress-bar"><div class="progress-fill orange" style="width:92%"></div></div>
+                <div class="event-stats">
+                  <span>報名 110/120</span>
+                  <span>27 組 + 2 人</span>
+                  <span>候補 5</span>
+                </div>
+              </div>
+              <div class="event-footer">
+                <button class="event-footer-btn ef-register" onclick="showMemberTab('register')">&#10004; 報名</button>
+                <button class="event-footer-btn ef-cancel" onclick="showDemoToast('取消成功！')">&#10060; 取消</button>
+                <button class="event-footer-btn ef-roster" onclick="showMemberTab('roster')">&#128203; 名單</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 報名流程 -->
+          <div id="memberRegister" class="demo-hidden">
+            <div class="demo-card">
+              <h3>&#128203; 報名確認 — #12 美麗華</h3>
+              <div style="background:#f9f9f9;border-radius:10px;padding:10px 12px;margin-bottom:12px;">
+                <div class="event-info-row"><span class="icon">&#128197;</span> 2026-04-18（五）</div>
+                <div class="event-info-row"><span class="icon">&#9200;</span> 07:00 早球</div>
+                <div class="event-info-row"><span class="icon">&#127948;</span> 美麗華高爾夫球場</div>
+                <div class="event-info-row"><span class="icon">&#128176;</span> NT$ 2,800</div>
+              </div>
+              <div style="background:#e8f5e9;border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:13px;color:var(--primary);font-weight:600;text-align:center;">
+                &#10004; 目前尚有名額（75/120）
+              </div>
+              <p style="font-size:13px;font-weight:700;margin-bottom:8px;">選擇報名模式：</p>
+              <div class="reg-mode selected" onclick="selectRegMode(this)">
+                <div class="reg-mode-icon">&#127948;</div>
+                <div class="reg-mode-text">
+                  <h4>只有我自己</h4>
+                  <p>個人報名</p>
+                </div>
+              </div>
+              <div class="reg-mode" onclick="selectRegMode(this)">
+                <div class="reg-mode-icon">&#128101;</div>
+                <div class="reg-mode-text">
+                  <h4>我 + 朋友同組</h4>
+                  <p>最多帶 3 位朋友，保證同組</p>
+                </div>
+              </div>
+              <div class="reg-mode" onclick="selectRegMode(this)">
+                <div class="reg-mode-icon">&#129309;</div>
+                <div class="reg-mode-text">
+                  <h4>加入朋友的組</h4>
+                  <p>選擇已報名球友，加入同組</p>
+                </div>
+              </div>
+              <div class="reg-mode" onclick="selectRegMode(this)">
+                <div class="reg-mode-icon">&#128100;</div>
+                <div class="reg-mode-text">
+                  <h4>幫朋友報名</h4>
+                  <p>代報非系統內的好友</p>
+                </div>
+              </div>
+              <input class="demo-input" placeholder="會員備註（選填）" style="margin-top:8px;">
+              <button class="demo-btn" onclick="showDemoToast('&#10004; 報名成功！正取第 76 位')">&#10004; 確認報名</button>
+            </div>
+          </div>
+
+          <!-- 查看名單 -->
+          <div id="memberRoster" class="demo-hidden">
+            <div class="demo-card">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <h3 style="margin:0;">&#9971; #12 美麗華 名單</h3>
+                <span style="font-size:12px;color:#888;">（1/4）</span>
+              </div>
+              <div style="background:#e8f5e9;border-radius:8px;padding:6px 10px;margin-bottom:10px;font-size:12px;color:var(--primary);font-weight:600;">
+                &#10004; 正取 (75/120人)
+              </div>
+
+              <div class="roster-group">
+                <div class="roster-group-title">&#9472;&#9472; 第 1 組 &#9472;&#9472;</div>
+                <div class="roster-member"><span>1. <span class="group-tag">A</span>郭庭豪<span class="gender-m">&#9794;</span></span></div>
+                <div class="roster-member"><span>2. <span class="group-tag">A</span>陳文傑<span class="gender-m">&#9794;</span>〔會長〕</span></div>
+                <div class="roster-member"><span>3. <span class="group-tag">A</span>林淑華<span class="gender-f">&#9792;</span></span></div>
+                <div class="roster-member"><span>4. <span class="group-tag">A</span>王建民<span class="gender-m">&#9794;</span></span></div>
+              </div>
+              <div class="roster-group">
+                <div class="roster-group-title">&#9472;&#9472; 第 2 組 &#9472;&#9472;</div>
+                <div class="roster-member"><span>5. <span class="group-tag" style="background:var(--blue);">B</span>張志明<span class="gender-m">&#9794;</span></span></div>
+                <div class="roster-member"><span>6. <span class="group-tag" style="background:var(--blue);">B</span>李雅婷<span class="gender-f">&#9792;</span></span></div>
+                <div class="roster-member"><span>7. <span class="group-tag" style="background:var(--blue);">B</span>黃國榮<span class="gender-m">&#9794;</span></span></div>
+                <div class="roster-member"><span>8. 吳美珍<span class="gender-f">&#9792;</span></span></div>
+              </div>
+              <div class="roster-group">
+                <div class="roster-group-title">&#9472;&#9472; 第 3 組 &#9472;&#9472;</div>
+                <div class="roster-member"><span>9. 趙大偉<span class="gender-m">&#9794;</span></span></div>
+                <div class="roster-member"><span>10. 周美玲<span class="gender-f">&#9792;</span></span></div>
+                <div class="roster-member"><span>11. 蔡志偉<span class="gender-m">&#9794;</span></span></div>
+                <div class="roster-member"><span>12. 許淑芬<span class="gender-f">&#9792;</span></span></div>
+              </div>
+
+              <div class="roster-waitlist-header">&#9203; 候補 (5人)</div>
+              <div class="roster-wait-member">候1. 鄭大明<span class="gender-m" style="color:var(--accent);">&#9794;</span></div>
+              <div class="roster-wait-member">候2. 劉怡君<span class="gender-f" style="color:var(--accent);">&#9792;</span></div>
+              <div class="roster-wait-member">候3. 楊國華<span class="gender-m" style="color:var(--accent);">&#9794;</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== ADMIN DEMO ====== -->
+        <div class="phone-screen demo-hidden" id="demoAdmin">
+          <div class="demo-tabs" id="adminTabs">
+            <button class="demo-tab active" onclick="showAdminTab('create')">開團</button>
+            <button class="demo-tab" onclick="showAdminTab('stats')">統計</button>
+            <button class="demo-tab" onclick="showAdminTab('manage')">管理</button>
+            <button class="demo-tab" onclick="showAdminTab('proxy')">代報</button>
+          </div>
+
+          <!-- 開團 -->
+          <div id="adminCreate" class="demo-card">
+            <h3>&#9971; 開新球敘</h3>
+            <p style="font-size:12px;color:#888;margin-bottom:10px;">指令：#開團 日期 時間 球場 [人數] [截止]</p>
+            <input class="demo-input" type="date" value="2026-04-25">
+            <select class="demo-input">
+              <option>07:00 早球</option>
+              <option>12:30 午球</option>
+            </select>
+            <select class="demo-input">
+              <option value="">選擇球場</option>
+              <option selected>美麗華高爾夫球場</option>
+              <option>八里高爾夫球場</option>
+              <option>林口長庚高爾夫球場</option>
+              <option>東華高爾夫球場</option>
+            </select>
+            <div style="display:flex;gap:8px;">
+              <input class="demo-input" type="number" value="120" placeholder="人數上限" style="flex:1;">
+              <input class="demo-input" type="text" value="NT$ 2,800" placeholder="費用" style="flex:1;">
+            </div>
+            <input class="demo-input" placeholder="截止時間（選填）" value="2026-04-24 18:00">
+            <input class="demo-input" placeholder="備註（選填）">
+            <button class="demo-btn" onclick="showDemoToast('&#10004; 球敘 #14 已建立，報名卡片已推播！')">建立球敘 & 推播</button>
+          </div>
+
+          <!-- 統計 -->
+          <div id="adminStats" class="demo-card demo-hidden">
+            <h3>&#128202; 球敘統計 — #12 美麗華</h3>
+            <div class="stats-grid">
+              <div class="stat-box" style="background:#e8f5e9;">
+                <div class="label">正取人數</div>
+                <div class="value" style="color:var(--primary);">75/120</div>
+              </div>
+              <div class="stat-box" style="background:#fff3e0;">
+                <div class="label">候補人數</div>
+                <div class="value" style="color:var(--accent);">5</div>
+              </div>
+              <div class="stat-box" style="background:#fce4ec;">
+                <div class="label">取消人數</div>
+                <div class="value" style="color:var(--red);">8</div>
+              </div>
+              <div class="stat-box" style="background:#e3f2fd;">
+                <div class="label">可出發組數</div>
+                <div class="value" style="color:var(--blue);">18 組</div>
+              </div>
+            </div>
+            <div style="background:#f9f9f9;border-radius:10px;padding:12px;margin-bottom:8px;">
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;">
+                <span>完整組數（4人）</span><strong>18 組</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;">
+                <span>零散人數</span><strong>3 人</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;">
+                <span>同組標記數</span><strong>A~F 共 6 組</strong>
+              </div>
+            </div>
+            <div class="progress-bar"><div class="progress-fill green" style="width:62%"></div></div>
+            <div style="text-align:center;font-size:12px;color:#888;">報名率 62.5%</div>
+          </div>
+
+          <!-- 管理 -->
+          <div id="adminManage" class="demo-card demo-hidden">
+            <h3>&#128736; 球敘管理</h3>
+            <div style="margin-bottom:12px;">
+              <select class="demo-input" style="margin-bottom:6px;">
+                <option>#12 — 04-18 美麗華 早球</option>
+                <option>#13 — 04-22 八里 午球</option>
+              </select>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">
+              <button class="demo-btn-sm demo-btn-green" onclick="showDemoToast('&#128203; 名單已推播至群組')">&#128203; 推播名單</button>
+              <button class="demo-btn-sm demo-btn-blue" onclick="showDemoToast('&#128230; 名單圖片已匯出')">&#128230; 匯出圖片</button>
+              <button class="demo-btn-sm demo-btn-orange" onclick="showDemoToast('&#128101; 自動分組完成：19 組')">&#128101; 自動分組</button>
+              <button class="demo-btn-sm demo-btn-red" onclick="showDemoToast('&#128683; 報名已關閉')">&#128683; 關閉報名</button>
+            </div>
+            <div style="background:#f9f9f9;border-radius:10px;padding:10px 12px;margin-bottom:8px;">
+              <div style="font-size:13px;font-weight:700;margin-bottom:6px;">&#128221; 管理員指令</div>
+              <div style="font-size:12px;color:#666;line-height:1.8;">
+                <code style="background:#e8e8e8;padding:2px 6px;border-radius:4px;">#開團</code> 建立新球敘<br>
+                <code style="background:#e8e8e8;padding:2px 6px;border-radius:4px;">#統計 12</code> 查看球敘統計<br>
+                <code style="background:#e8e8e8;padding:2px 6px;border-radius:4px;">#名單 12</code> 查看完整名單<br>
+                <code style="background:#e8e8e8;padding:2px 6px;border-radius:4px;">#代報 12 王大明</code> 代報球友<br>
+                <code style="background:#e8e8e8;padding:2px 6px;border-radius:4px;">#代取消 12 王大明</code> 代取消<br>
+                <code style="background:#e8e8e8;padding:2px 6px;border-radius:4px;">#關閉 12</code> 關閉報名<br>
+                <code style="background:#e8e8e8;padding:2px 6px;border-radius:4px;">#自動分組</code> 自動分組
+              </div>
+            </div>
+          </div>
+
+          <!-- 代報 -->
+          <div id="adminProxy" class="demo-card demo-hidden">
+            <h3>&#128100; 代報 / 代取消</h3>
+            <select class="demo-input">
+              <option>#12 — 04-18 美麗華 早球</option>
+              <option>#13 — 04-22 八里 午球</option>
+            </select>
+            <div style="display:flex;gap:8px;margin-bottom:8px;">
+              <select class="demo-input" style="flex:1;margin:0;">
+                <option>代報</option>
+                <option>代取消</option>
+              </select>
+            </div>
+            <input class="demo-input" placeholder="球友姓名">
+            <div style="display:flex;gap:8px;margin-bottom:8px;">
+              <select class="demo-input" style="flex:1;margin:0;">
+                <option value="">性別（選填）</option>
+                <option>男 &#9794;</option>
+                <option>女 &#9792;</option>
+              </select>
+            </div>
+            <input class="demo-input" placeholder="會員備註（選填）">
+            <select class="demo-input">
+              <option value="">同組對象（選填）</option>
+              <option>郭庭豪 [A組]</option>
+              <option>張志明 [B組]</option>
+              <option>不指定</option>
+            </select>
+            <button class="demo-btn" onclick="showDemoToast('&#10004; 代報成功！王大明（管理員代）正取第 76 位')">送出</button>
+          </div>
+        </div>
+
+        <!-- ====== CHAT DEMO ====== -->
+        <div class="phone-screen demo-hidden" id="demoChat">
+          <div style="text-align:center;font-size:13px;color:#999;margin-bottom:12px;">LINE 對話模擬</div>
+          <div class="demo-chat" id="chatMessages">
+            <div class="demo-chat-bubble demo-chat-user">查詢名單</div>
+            <div class="demo-chat-bubble demo-chat-bot" style="white-space:pre-line;">&#9971; #12 美麗華 名單（1/4）
+
+&#10004; 正取 (75/120人)
+
+&#9472; 第 1 組 &#9472;
+1. &#9398;郭庭豪&#9794;
+2. &#9398;陳文傑&#9794;〔會長〕
+3. &#9398;林淑華&#9792;
+4. &#9398;王建民&#9794;
+
+&#9472; 第 2 組 &#9472;
+5. &#9399;張志明&#9794;
+6. &#9399;李雅婷&#9792;
+7. &#9399;黃國榮&#9794;
+8. 吳美珍&#9792;
+
+&#9203; 候補 (5人)
+候1. 鄭大明&#9794;
+候2. 劉怡君&#9792;</div>
+          </div>
+          <div class="demo-chat-input-row" style="margin-top:16px;">
+            <input class="demo-input" id="chatInput" placeholder="試試輸入指令..." style="margin:0;" onkeydown="if(event.key==='Enter')sendDemoChat()">
+            <button class="demo-btn" style="width:auto;" onclick="sendDemoChat()">送出</button>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+            <button class="demo-tab" style="font-size:11px;padding:4px 10px;" onclick="quickChat('查詢名單')">查詢名單</button>
+            <button class="demo-tab" style="font-size:11px;padding:4px 10px;" onclick="quickChat('#統計 12')">統計</button>
+            <button class="demo-tab" style="font-size:11px;padding:4px 10px;" onclick="quickChat('#代報 12 王大明')">代報</button>
+            <button class="demo-tab" style="font-size:11px;padding:4px 10px;" onclick="quickChat('使用教學')">使用教學</button>
+            <button class="demo-tab" style="font-size:11px;padding:4px 10px;" onclick="quickChat('報名')">報名</button>
+          </div>
+        </div>
+
+        <!-- ====== NOTIFY DEMO ====== -->
+        <div class="phone-screen demo-hidden" id="demoNotify">
+          <div class="demo-tabs" id="notifyTabs">
+            <button class="demo-tab active" onclick="showNotifyTab('promotion')">遞補通知</button>
+            <button class="demo-tab" onclick="showNotifyTab('reminder')">截止提醒</button>
+            <button class="demo-tab" onclick="showNotifyTab('confirm')">報名確認</button>
+          </div>
+
+          <!-- 遞補通知 -->
+          <div id="notifyPromotion">
+            <div class="promo-card">
+              <div class="promo-header">
+                <h3>&#127881; 候補遞補通知</h3>
+              </div>
+              <div class="promo-body">
+                <div style="font-size:14px;margin-bottom:8px;">
+                  <strong>鄭大明</strong> 您好！
+                </div>
+                <div style="font-size:13px;color:#555;line-height:1.7;">
+                  恭喜您從候補名單遞補為正取！<br>
+                  請確認是否參加以下球敘：
+                </div>
+                <div style="background:#f9f9f9;border-radius:10px;padding:10px 12px;margin:10px 0;">
+                  <div class="event-info-row"><span class="icon">&#9971;</span> #12 美麗華高爾夫球場</div>
+                  <div class="event-info-row"><span class="icon">&#128197;</span> 2026-04-18（五）</div>
+                  <div class="event-info-row"><span class="icon">&#9200;</span> 07:00 早球</div>
+                </div>
+                <div class="promo-deadline">&#9200; 請在 2026-04-17 10:30 前確認</div>
+                <div class="promo-actions">
+                  <button class="demo-btn-sm demo-btn-green" style="flex:1;padding:10px;" onclick="showDemoToast('&#10004; 已確認參加！正取第 76 位')">&#10004; 確認參加</button>
+                  <button class="demo-btn-sm demo-btn-red" style="flex:1;padding:10px;" onclick="showDemoToast('已放棄遞補，通知下一位候補')">&#10060; 放棄遞補</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 截止提醒 -->
+          <div id="notifyReminder" class="demo-hidden">
+            <div class="demo-card" style="border-left:4px solid var(--accent);">
+              <div style="font-size:14px;font-weight:700;margin-bottom:8px;">&#9200; 報名即將截止提醒！</div>
+              <div style="font-size:13px;color:#555;line-height:1.8;white-space:pre-line;">&#9971; 04-18（五）美麗華
+&#128197; 2026-04-18 07:00 早球
+&#127948; 美麗華高爾夫球場
+&#128101; 已報 75/120
+&#128293; 還有 45 個名額！
+
+&#9203; 截止時間：04-17 18:00</div>
+              <button class="demo-btn" style="margin-top:10px;" onclick="showMemberTab('register');switchRole('member');">立即報名</button>
+            </div>
+            <div class="demo-card" style="border-left:4px solid var(--red);margin-top:12px;">
+              <div style="font-size:14px;font-weight:700;margin-bottom:8px;">&#128293; 名額即將額滿！</div>
+              <div style="font-size:13px;color:#555;line-height:1.8;white-space:pre-line;">&#9971; 04-22（二）八里
+&#128197; 2026-04-22 12:30 午球
+&#127948; 八里高爾夫球場
+&#128101; 已報 110/120
+&#128293; 剩餘 10 個名額！
+
+&#9888; 額滿後將進入候補</div>
+            </div>
+          </div>
+
+          <!-- 報名確認 -->
+          <div id="notifyConfirm" class="demo-hidden">
+            <div class="event-card">
+              <div class="event-header" style="background:linear-gradient(135deg,#1565C0,#42A5F5);">
+                <div class="event-header-top">
+                  <div class="event-title">&#128203; 報名確認</div>
+                </div>
+              </div>
+              <div class="event-body">
+                <div style="font-size:15px;font-weight:700;margin-bottom:10px;">#12 美麗華 早球</div>
+                <div style="height:1px;background:#eee;margin-bottom:10px;"></div>
+                <div class="event-info-row"><span class="icon">&#128197;</span> 2026-04-18（五）</div>
+                <div class="event-info-row"><span class="icon">&#9200;</span> 07:00 早球</div>
+                <div class="event-info-row"><span class="icon">&#127948;</span> 美麗華高爾夫球場</div>
+                <div class="event-info-row"><span class="icon">&#128176;</span> NT$ 2,800</div>
+                <div class="event-info-row"><span class="icon">&#128100;</span> 報名人：郭庭豪</div>
+                <div style="background:#e8f5e9;border-radius:8px;padding:8px 12px;margin:10px 0;font-size:13px;color:var(--primary);font-weight:600;text-align:center;">
+                  &#10004; 尚有名額，確認後為正取
+                </div>
+              </div>
+              <div class="event-footer">
+                <button class="event-footer-btn ef-register" onclick="showDemoToast('&#10004; 報名成功！你是正取第 76 位')">&#10004; 確認報名</button>
+                <button class="event-footer-btn" style="background:#f5f5f5;color:#888;">取消</button>
+              </div>
+            </div>
+
+            <div class="event-card" style="margin-top:8px;">
+              <div class="event-header" style="background:linear-gradient(135deg,#FF8F00,#FFB300);">
+                <div class="event-header-top">
+                  <div class="event-title">&#128203; 報名確認（候補）</div>
+                </div>
+              </div>
+              <div class="event-body">
+                <div style="font-size:15px;font-weight:700;margin-bottom:10px;">#13 八里 午球</div>
+                <div style="height:1px;background:#eee;margin-bottom:10px;"></div>
+                <div class="event-info-row"><span class="icon">&#128197;</span> 2026-04-22（二）</div>
+                <div class="event-info-row"><span class="icon">&#9200;</span> 12:30 午球</div>
+                <div class="event-info-row"><span class="icon">&#127948;</span> 八里高爾夫球場</div>
+                <div class="event-info-row"><span class="icon">&#128176;</span> NT$ 2,200</div>
+                <div style="background:#fff3e0;border-radius:8px;padding:8px 12px;margin:10px 0;font-size:13px;color:#E65100;font-weight:600;text-align:center;">
+                  &#9888; 名額已滿，確認後為候補第 6 位
+                </div>
+              </div>
+              <div class="event-footer">
+                <button class="event-footer-btn" style="background:var(--accent);color:#fff;" onclick="showDemoToast('已加入候補名單，候補第 6 位')">&#9203; 加入候補</button>
+                <button class="event-footer-btn" style="background:#f5f5f5;color:#888;">取消</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>讓球團管理自動化</h2>
+  <p>不論是 40 人小球團還是 400 人大社群，我們都能為你量身打造。</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+    <a href="https://line.me/" class="btn btn-primary" target="_blank">LINE 聯繫橙築國際</a>
+    <a href="mailto:contact@chengzhu.com" class="btn btn-outline">Email 洽詢</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 橙築國際. All rights reserved.</p>
+</footer>
+
+<!-- DEMO TOAST -->
+<div id="demoToast" style="position:fixed;left:50%;bottom:80px;transform:translateX(-50%) translateY(20px);background:rgba(46,125,50,0.95);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .25s;z-index:999;white-space:nowrap;max-width:90vw;text-align:center;"></div>
+
+<script>
+  // === Role switch ===
+  function switchRole(role) {
+    document.querySelectorAll('.demo-role-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('demoMember').classList.toggle('demo-hidden', role !== 'member');
+    document.getElementById('demoAdmin').classList.toggle('demo-hidden', role !== 'admin');
+    document.getElementById('demoChat').classList.toggle('demo-hidden', role !== 'chat');
+    document.getElementById('demoNotify').classList.toggle('demo-hidden', role !== 'notify');
+  }
+
+  // === Member tabs ===
+  function showMemberTab(tab) {
+    const map = { events: 'memberEvents', register: 'memberRegister', roster: 'memberRoster' };
+    document.querySelectorAll('#memberTabs .demo-tab').forEach(t => t.classList.remove('active'));
+    if (event && event.target && event.target.classList) event.target.classList.add('active');
+    else {
+      const tabs = document.querySelectorAll('#memberTabs .demo-tab');
+      const idx = Object.keys(map).indexOf(tab);
+      if (idx >= 0) tabs[idx].classList.add('active');
+    }
+    Object.values(map).forEach(id => document.getElementById(id).classList.add('demo-hidden'));
+    document.getElementById(map[tab]).classList.remove('demo-hidden');
+  }
+
+  // === Admin tabs ===
+  function showAdminTab(tab) {
+    const map = { create: 'adminCreate', stats: 'adminStats', manage: 'adminManage', proxy: 'adminProxy' };
+    document.querySelectorAll('#adminTabs .demo-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    Object.values(map).forEach(id => document.getElementById(id).classList.add('demo-hidden'));
+    document.getElementById(map[tab]).classList.remove('demo-hidden');
+  }
+
+  // === Notify tabs ===
+  function showNotifyTab(tab) {
+    const map = { promotion: 'notifyPromotion', reminder: 'notifyReminder', confirm: 'notifyConfirm' };
+    document.querySelectorAll('#notifyTabs .demo-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    Object.values(map).forEach(id => document.getElementById(id).classList.add('demo-hidden'));
+    document.getElementById(map[tab]).classList.remove('demo-hidden');
+  }
+
+  // === Registration mode ===
+  function selectRegMode(el) {
+    document.querySelectorAll('.reg-mode').forEach(m => m.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  // === Toast ===
+  function showDemoToast(msg) {
+    const t = document.getElementById('demoToast');
+    t.innerHTML = msg;
+    t.style.opacity = '1';
+    t.style.transform = 'translateX(-50%) translateY(0)';
+    setTimeout(() => {
+      t.style.opacity = '0';
+      t.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 2500);
+  }
+
+  // === Chat demo ===
+  const chatResponses = {
+    '查詢名單': '⛳ #12 美麗華 名單\n\n✅ 正取 (75/120人)\n\n── 第 1 組 ──\n1. Ⓐ郭庭豪♂\n2. Ⓐ陳文傑♂〔會長〕\n3. Ⓐ林淑華♀\n4. Ⓐ王建民♂\n\n── 第 2 組 ──\n5. Ⓑ張志明♂\n6. Ⓑ李雅婷♀\n7. Ⓑ黃國榮♂\n8. 吳美珍♀\n\n⏳ 候補 (5人)\n候1. 鄭大明♂\n候2. 劉怡君♀',
+    '#名單 12': '⛳ #12 美麗華 名單\n\n✅ 正取 (75/120人)\n\n── 第 1 組 ──\n1. Ⓐ郭庭豪♂\n2. Ⓐ陳文傑♂〔會長〕\n3. Ⓐ林淑華♀\n4. Ⓐ王建民♂\n\n── 第 2 組 ──\n5. Ⓑ張志明♂\n6. Ⓑ李雅婷♀\n7. Ⓑ黃國榮♂\n8. 吳美珍♀\n\n⏳ 候補 (5人)\n候1. 鄭大明♂\n候2. 劉怡君♀',
+    '#統計 12': '📊 #12 美麗華 統計\n\n正取人數：75/120\n候補人數：5\n取消人數：8\n\n可出發組數：18 組\n零散人數：3 人\n同組標記：A~F（6 組）',
+    '#代報 12 王大明': '✅ 代報成功！\n\n王大明（管理員代）\n→ 正取第 76 位\n\n⛳ #12 美麗華\n📅 2026-04-18 07:00',
+    '報名': '⛳ 目前開放報名球敘：\n\n1️⃣ #12 美麗華\n   📅 04-18 07:00 早球\n   👥 75/120 ✅\n\n2️⃣ #13 八里\n   📅 04-22 12:30 午球\n   👥 110/120 ⚠️\n\n👉 點擊報名按鈕或輸入「報名 12」',
+    '報名 12': '📋 報名確認\n\n⛳ #12 美麗華\n📅 2026-04-18（五）\n⏰ 07:00 早球\n💰 NT$ 2,800\n\n✅ 目前尚有名額\n確定要報名嗎？\n\n回覆「確定」完成報名',
+    '確定': '✅ 報名成功！\n\n你是正取第 76 位\n⛳ #12 美麗華\n📅 2026-04-18 07:00\n\n祝球敘愉快！⛳🏌️',
+    '使用教學': '📖 使用教學\n\n━━ 球友 ━━\n📋 報名：點報名按鈕 或「報名 12」\n❌ 取消：點取消按鈕\n📋 名單：「查詢名單」\n🎯 個人：「我的報名」\n\n━━ 管理員 ━━\n#開團 日期 時間 球場\n#統計 編號\n#名單 編號\n#代報 編號 姓名\n#代取消 編號 姓名\n#關閉 編號\n#自動分組\n\n💡 輸入「使用教學」隨時查看',
+    'help': '📖 使用教學\n\n━━ 球友 ━━\n📋 報名：點報名按鈕 或「報名 12」\n❌ 取消：點取消按鈕\n📋 名單：「查詢名單」\n🎯 個人：「我的報名」\n\n━━ 管理員 ━━\n#開團 日期 時間 球場\n#統計 編號\n#名單 編號\n#代報 編號 姓名\n#代取消 編號 姓名\n#關閉 編號\n#自動分組\n\n💡 輸入「使用教學」隨時查看',
+    '我的報名': '⛳ 你的報名紀錄\n\n✅ #12 美麗華\n   📅 04-18 07:00 早球\n   📌 正取第 76 位\n\n⏳ #13 八里\n   📅 04-22 12:30 午球\n   📌 候補第 3 位',
+  };
+
+  function addChatBubble(text, isUser) {
+    const container = document.getElementById('chatMessages');
+    const bubble = document.createElement('div');
+    bubble.className = `demo-chat-bubble ${isUser ? 'demo-chat-user' : 'demo-chat-bot'}`;
+    bubble.style.whiteSpace = 'pre-line';
+    bubble.textContent = text;
+    container.appendChild(bubble);
+    container.parentElement.scrollTop = container.parentElement.scrollHeight;
+  }
+
+  function sendDemoChat() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    addChatBubble(text, true);
+    setTimeout(() => {
+      const response = chatResponses[text] || '⛳ 歡迎使用 FUNgolf 報名系統\n\n可用指令：\n📋 報名 · 查詢名單 · 我的報名\n📖 輸入「使用教學」看完整說明';
+      addChatBubble(response, false);
+    }, 500);
+  }
+
+  function quickChat(text) {
+    document.getElementById('chatInput').value = text;
+    sendDemoChat();
+  }
+</script>
+
+</body>
+</html>
