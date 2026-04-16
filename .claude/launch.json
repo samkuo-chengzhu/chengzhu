@@ -1,0 +1,24 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "hair-salon-liff (Vite)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 5173,
+      "cwd": "D:/hair-salon-design/hair-salon-liff"
+    },
+    {
+      "name": "hair-salon-demo",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "hair-salon-demo", "-l", "3001"],
+      "port": 3001
+    },
+    {
+      "name": "product-page",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "product-page", "-l", "3002"],
+      "port": 3002
+    }
+  ]
+}
