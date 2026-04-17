@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教練預約系統 Demo｜LIFF 預約 + 堂數管理｜橙築國際</title>
+<meta name="description" content="互動試玩教練 LINE 預約系統：學員 LIFF 預約、教練一鍵核准、自動扣堂數、課前推播提醒。高爾夫、健身、瑜伽、才藝教練都能用。">
+<link rel="canonical" href="https://chengzhu.co/coach-demo/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#F8FAFC;--bg-alt:#F1F5F9;--bg-dark:#0F172A;
+  --surface:#FFFFFF;--text:#0F172A;--text-sub:#475569;--text-light:#64748B;
+  --line-color:#E2E8F0;--accent:#2563EB;--accent-hover:#1D4ED8;
+  --navy:#1E3A8A;--navy-hover:#1E40AF;
+  --line-green:#06C755;--orange:#FF6B35;
+  --success:#16A34A;--warning:#F59E0B;--danger:#DC2626;
+  --serif:'Noto Serif TC',serif;--sans:'Noto Sans TC',sans-serif;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;
+  line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+::selection{background:var(--accent);color:#fff}
+a{color:inherit;text-decoration:none}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.02;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(24px,5vw,48px)}
+.divider{height:1px;background:var(--line-color);margin:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 clamp(24px,5vw,48px);
+  height:56px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(248,250,252,0.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line-color);}
+.nav-logo{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--text);letter-spacing:0.02em}
+.nav-logo a{color:var(--text)}
+.nav-logo .dot{color:var(--orange)}
+.nav-links{display:flex;gap:8px;align-items:center}
+.nav-link{font-size:12px;letter-spacing:0.5px;color:var(--text-light);padding:6px 14px;
+  border-radius:4px;transition:all .2s;font-weight:500;}
+.nav-link:hover{color:var(--text);background:rgba(15,23,42,0.04)}
+.nav-link.accent{color:var(--accent);border:1px solid rgba(37,99,235,0.2)}
+.nav-link.accent:hover{background:rgba(37,99,235,0.06)}
+@media(max-width:600px){.nav-links{gap:4px}.nav-link{font-size:11px;padding:5px 10px}}
+
+/* BREADCRUMB */
+.breadcrumb-bar{padding:80px 0 0}
+.breadcrumb{font-size:12px;color:var(--text-light);letter-spacing:0.06em;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.breadcrumb a{color:var(--text-light);transition:color .2s}
+.breadcrumb a:hover{color:var(--accent)}
+.breadcrumb .sep{color:var(--line-color)}
+.breadcrumb .current{color:var(--text);font-weight:600}
+
+/* HERO */
+.hero{padding:32px 0 clamp(60px,10vh,100px)}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
+@media(min-width:880px){.hero-grid{grid-template-columns:1.1fr 1fr;gap:64px}}
+.hero-eyebrow{font-size:13px;font-weight:500;letter-spacing:3px;color:var(--accent);margin-bottom:24px;
+  opacity:0;animation:up .7s var(--ease-out) .15s forwards;}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(32px,6vw,54px);line-height:1.25;
+  letter-spacing:-0.02em;margin-bottom:28px;opacity:0;animation:up .7s var(--ease-out) .3s forwards;}
+.hero h1 span{color:var(--accent)}
+.hero-body{max-width:520px;font-size:clamp(15px,1.6vw,17px);color:var(--text-sub);
+  line-height:1.85;margin-bottom:36px;opacity:0;animation:up .7s var(--ease-out) .45s forwards;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:up .7s var(--ease-out) .6s forwards}
+.btn-cta{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;background:var(--navy);
+  color:#fff;font-size:15px;font-weight:700;border-radius:6px;border:none;cursor:pointer;
+  transition:background .25s,transform .25s;}
+.btn-cta:hover{background:var(--navy-hover);transform:translateY(-1px);color:#fff}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;color:var(--text);
+  background:transparent;font-size:15px;font-weight:700;border-radius:6px;
+  border:1px solid var(--line-color);transition:all .2s;}
+.btn-ghost:hover{border-color:var(--text);background:var(--surface)}
+.hero-note{margin-top:14px;font-size:12px;color:var(--text-light);
+  opacity:0;animation:up .7s var(--ease-out) .75s forwards;}
+
+/* Hero phone preview */
+.hero-phone-wrap{display:flex;justify-content:center;align-items:center;
+  opacity:0;animation:up .7s var(--ease-out) .5s forwards;}
+.hero-phone{position:relative;width:100%;max-width:300px;background:#000;border-radius:36px;padding:10px;
+  box-shadow:0 24px 64px rgba(15,23,42,0.18), inset 0 0 0 2px #444;
+  animation:floatPhone 6s ease-in-out infinite;}
+.hero-phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:110px;height:22px;background:#000;border-bottom-left-radius:14px;border-bottom-right-radius:14px;z-index:2;}
+.hero-phone-screen{background:#fff;border-radius:28px;padding:34px 14px 14px;
+  min-height:520px;display:flex;flex-direction:column;gap:8px;}
+.hero-bubble-bot{align-self:flex-start;background:#fff;border:1px solid #ececec;
+  padding:10px 14px;border-radius:14px 14px 14px 4px;font-size:13px;line-height:1.5;color:#333;max-width:85%;white-space:pre-line;}
+.hero-bubble-user{align-self:flex-end;background:var(--line-green);color:#fff;
+  padding:10px 14px;border-radius:14px 14px 4px 14px;font-size:13px;max-width:80%;}
+.hero-mini-card{align-self:flex-start;background:#fff;border:1px solid #eee;
+  border-radius:10px;padding:12px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);max-width:92%;}
+.hero-mini-card .name{font-weight:700;color:#1a1a1a;margin-bottom:6px;font-size:13px}
+.hero-mini-card .row{display:flex;justify-content:space-between;color:#888;font-size:11px;margin-bottom:3px}
+.hero-mini-card .row .v{color:#333;font-weight:600}
+@keyframes floatPhone{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* STATS */
+.stats-bar{padding:clamp(40px,6vh,60px) 0;border-top:1px solid var(--line-color);border-bottom:1px solid var(--line-color)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+@media(max-width:600px){.stats-grid{grid-template-columns:1fr 1fr}}
+.stat-item{text-align:center;padding:16px 12px}
+.stat-item+.stat-item{border-left:1px solid var(--line-color)}
+@media(max-width:600px){
+  .stat-item:nth-child(2){border-left:1px solid var(--line-color)}
+  .stat-item:nth-child(3){border-left:none;border-top:1px solid var(--line-color)}
+  .stat-item:nth-child(4){border-top:1px solid var(--line-color)}
+}
+.stat-num{font-family:var(--serif);font-size:clamp(28px,4vw,36px);font-weight:900;color:var(--accent);line-height:1}
+.stat-label{font-size:12px;color:var(--text-light);margin-top:6px}
+
+/* SECTION */
+.section-tag{font-size:12px;font-weight:700;letter-spacing:3px;color:var(--text-light);
+  text-transform:uppercase;margin-bottom:20px;}
+.section-title{font-family:var(--serif);font-weight:900;font-size:clamp(22px,3.5vw,34px);
+  line-height:1.4;margin-bottom:24px;max-width:560px;}
+.section-intro{font-size:15px;color:var(--text-sub);max-width:560px;line-height:1.85;margin-bottom:48px}
+
+/* DEMO (CENTERPIECE) */
+.demo{padding:clamp(64px,10vh,100px) 0;background:var(--bg-alt);position:relative}
+.demo-layout{display:grid;grid-template-columns:1fr;gap:40px;align-items:start}
+@media(min-width:900px){.demo-layout{grid-template-columns:1fr 400px;gap:64px}}
+.demo-side h2{font-family:var(--serif);font-weight:900;font-size:clamp(22px,3.2vw,30px);
+  line-height:1.4;margin-bottom:18px;}
+.demo-side p{font-size:15px;color:var(--text-sub);line-height:1.85;margin-bottom:20px}
+.demo-side strong{color:var(--text);font-weight:700}
+
+/* Role switcher */
+.role-switch{display:inline-flex;background:var(--surface);border:1px solid var(--line-color);
+  border-radius:6px;padding:4px;margin-bottom:24px;gap:2px;}
+.role-btn{padding:9px 18px;border:none;background:transparent;border-radius:4px;
+  font-size:13px;color:var(--text-sub);cursor:pointer;font-weight:600;font-family:var(--sans);
+  letter-spacing:0.5px;transition:all .2s;}
+.role-btn:hover{color:var(--text)}
+.role-btn.active{background:var(--navy);color:#fff}
+
+/* Phone frame */
+.phone-frame{position:relative;width:100%;max-width:400px;margin:0 auto;
+  background:#0a0a0a;border-radius:42px;padding:14px;
+  box-shadow:0 30px 80px rgba(15,23,42,0.18), inset 0 0 0 2px #333;}
+.phone-frame::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:130px;height:26px;background:#000;
+  border-bottom-left-radius:18px;border-bottom-right-radius:18px;z-index:5;}
+.phone-screen{background:#fff;border-radius:32px;height:660px;overflow-y:auto;
+  padding:36px 14px 14px;display:flex;flex-direction:column;}
+.phone-screen::-webkit-scrollbar{width:0}
+.phone-header{text-align:center;font-size:11px;color:#bbb;
+  padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid #f0f0f0;flex-shrink:0;}
+
+/* Inner tabs */
+.d-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;flex-shrink:0;}
+.d-tab{padding:6px 12px;border:1px solid #e0e0e0;background:#fafafa;border-radius:6px;
+  font-size:12px;color:#555;cursor:pointer;font-weight:500;font-family:var(--sans);transition:all .15s;}
+.d-tab:hover{background:#f0f0f0}
+.d-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* Card */
+.d-card{background:#fff;border:1px solid #eee;border-radius:10px;padding:14px;margin-bottom:12px;}
+.d-card h4{font-size:14px;font-weight:700;margin-bottom:10px;color:#1a1a1a}
+.d-input,.d-select{width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;
+  font-size:13px;font-family:var(--sans);margin-bottom:8px;outline:none;background:#fff;}
+.d-input:focus,.d-select:focus{border-color:var(--accent)}
+.d-btn{width:100%;padding:10px;background:var(--accent);color:#fff;border:none;
+  border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s;font-family:var(--sans);}
+.d-btn:hover{background:var(--accent-hover)}
+.d-btn-row{display:flex;gap:6px}
+.d-btn-sm{flex:1;padding:8px;font-size:12px;font-weight:600;border:none;border-radius:6px;
+  cursor:pointer;font-family:var(--sans);transition:all .15s;}
+.d-btn-green{background:var(--success);color:#fff}
+.d-btn-green:hover{background:#15803d}
+.d-btn-blue{background:var(--accent);color:#fff}
+.d-btn-blue:hover{background:var(--accent-hover)}
+.d-btn-gray{background:#e5e7eb;color:#374151}
+.d-btn-gray:hover{background:#d1d5db}
+
+/* Package box */
+.d-pkg{background:#f9fafb;border-radius:8px;padding:10px 12px;margin-bottom:8px;
+  border-left:3px solid var(--accent);}
+.d-pkg-title{font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
+.d-pkg-meta{font-size:11px;color:#666}
+.d-total{background:#eff6ff;color:var(--accent);padding:10px;border-radius:8px;
+  text-align:center;font-size:13px;font-weight:700;margin-top:8px;}
+
+/* Student card */
+.d-stu{background:#fff;border:1px solid #f0f0f0;border-radius:8px;padding:10px 12px;
+  margin-bottom:10px;}
+.d-stu-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.d-stu-name{font-size:13px;font-weight:700;color:#1a1a1a}
+.d-stu-credits{font-size:12px;color:var(--accent);font-weight:700}
+
+/* Booking row */
+.d-booking{background:#fff;border:1px solid #f0f0f0;border-radius:8px;padding:10px 12px;margin-bottom:8px;font-size:12px;}
+.d-booking strong{font-size:13px;color:#1a1a1a}
+.d-booking .meta{color:#666;margin-top:3px}
+.d-status{font-size:10px;padding:3px 8px;border-radius:4px;font-weight:700;letter-spacing:0.5px}
+.d-status.confirmed{background:#dcfce7;color:#166534}
+.d-status.pending{background:#fef3c7;color:#92400e}
+.d-status.fixed{background:#dbeafe;color:#1e40af}
+
+/* Revenue */
+.d-rev-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px}
+.d-rev-box{background:#f9fafb;padding:10px 8px;border-radius:8px;text-align:center}
+.d-rev-box .lbl{font-size:10px;color:#888;margin-bottom:4px}
+.d-rev-box .val{font-size:14px;font-weight:800;color:#1a1a1a}
+
+/* Chat */
+.d-chat{display:flex;flex-direction:column;gap:8px;padding:4px 2px;flex:1;overflow-y:auto;min-height:300px;}
+.d-bubble{max-width:84%;padding:10px 14px;font-size:13px;line-height:1.55;
+  border-radius:14px;word-wrap:break-word;white-space:pre-line;}
+.d-bubble-bot{align-self:flex-start;background:#f4f4f4;color:#222;border-radius:14px 14px 14px 4px}
+.d-bubble-user{align-self:flex-end;background:var(--line-green);color:#fff;border-radius:14px 14px 4px 14px}
+.d-input-row{display:flex;gap:6px;padding:10px;background:#f9f9f9;border-top:1px solid #eee;
+  border-radius:0 0 24px 24px;margin:8px -14px -14px;flex-shrink:0;}
+.d-input-row .d-input{flex:1;margin:0;border-radius:18px;padding:9px 14px}
+.d-send{padding:9px 16px;background:var(--accent);color:#fff;border:none;border-radius:18px;
+  font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);}
+.d-send:hover{background:var(--accent-hover)}
+
+/* Quick tips */
+.quick-tips{margin-top:16px;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;}
+.quick-tip{font-size:11px;padding:5px 10px;background:#fafafa;border:1px solid #e5e7eb;
+  border-radius:4px;color:#555;cursor:pointer;font-weight:500;font-family:var(--sans);transition:all .15s;}
+.quick-tip:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* Hidden helper */
+.hidden{display:none!important}
+
+/* Demo side tips */
+.demo-tips{background:var(--surface);border:1px solid var(--line-color);border-radius:8px;padding:18px 20px;margin-top:20px}
+.demo-tips h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:1px}
+.demo-tips p{font-size:13px;color:var(--text-sub);line-height:1.75;margin-bottom:0}
+
+/* FEATURES */
+.features{padding:clamp(64px,10vh,100px) 0}
+.features-intro{font-size:15px;color:var(--text-sub);max-width:520px;margin-bottom:48px;line-height:1.85}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;
+  background:var(--line-color);border:1px solid var(--line-color);}
+.feature-card{background:var(--bg);padding:28px;transition:background .2s}
+.feature-card:hover{background:var(--surface)}
+.feature-icon{font-family:var(--serif);font-size:24px;font-weight:900;color:var(--accent);
+  margin-bottom:14px;display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border:1px solid var(--accent);border-radius:50%;}
+.feature-card h3{font-family:var(--serif);font-size:17px;font-weight:900;margin-bottom:10px;line-height:1.5}
+.feature-card p{font-size:14px;color:var(--text-sub);line-height:1.75}
+
+/* PROCESS */
+.process{padding:clamp(64px,10vh,100px) 0;background:var(--bg-alt)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-top:1px solid var(--line-color);border-bottom:1px solid var(--line-color);margin-top:48px;}
+@media(max-width:700px){.steps{grid-template-columns:1fr}}
+.step-item{padding:32px 24px;border-right:1px solid var(--line-color);background:var(--bg)}
+.step-item:last-child{border-right:none}
+@media(max-width:700px){.step-item{border-right:none;border-bottom:1px solid var(--line-color)}
+  .step-item:last-child{border-bottom:none}}
+.step-num{font-family:var(--serif);font-size:32px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:14px}
+.step-item h3{font-family:var(--serif);font-size:18px;font-weight:900;margin-bottom:8px}
+.step-item p{font-size:14px;color:var(--text-sub);line-height:1.75}
+
+/* SIBLING DEMOS */
+.siblings{padding:clamp(48px,8vh,72px) 0;background:var(--bg)}
+.siblings h3{font-family:var(--serif);font-size:22px;font-weight:900;margin-bottom:32px;text-align:center}
+.sibling-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.sibling-card{background:var(--surface);border:1px solid var(--line-color);border-radius:8px;
+  padding:20px 24px;transition:all .2s;display:block;}
+.sibling-card:hover{border-color:var(--accent);box-shadow:0 4px 12px rgba(37,99,235,0.08);transform:translateY(-2px)}
+.sibling-card .eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--text-light);text-transform:uppercase;margin-bottom:8px}
+.sibling-card h4{font-family:var(--serif);font-size:17px;font-weight:900;margin-bottom:6px}
+.sibling-card p{font-size:13px;color:var(--text-sub);line-height:1.7}
+.sibling-card .arrow{font-size:12px;color:var(--accent);font-weight:700;margin-top:10px;display:inline-block}
+
+/* CROSS-SITE */
+.cross-site{padding:clamp(48px,8vh,72px) 0;background:var(--bg-alt);
+  border-top:1px solid var(--line-color);border-bottom:1px solid var(--line-color);}
+.cross-site-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.cross-site-text{flex:1;min-width:280px}
+.cross-site-text .eyebrow{font-size:12px;font-weight:700;letter-spacing:2px;color:var(--text-light);text-transform:uppercase;margin-bottom:10px}
+.cross-site-text h3{font-family:var(--serif);font-size:clamp(20px,2.6vw,26px);font-weight:900;line-height:1.5;margin-bottom:8px}
+.cross-site-text p{font-size:14.5px;color:var(--text-sub);line-height:1.75;max-width:480px}
+
+/* FINAL */
+.final{padding:clamp(80px,14vh,120px) 0;background:var(--bg-dark);color:#fff}
+.final h2{font-family:var(--serif);font-weight:900;font-size:clamp(24px,4.5vw,38px);line-height:1.35;margin-bottom:16px}
+.final p{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:36px;max-width:480px;line-height:1.85}
+.final .btn-cta{background:var(--accent);font-size:16px;padding:16px 36px}
+.final .btn-cta:hover{background:var(--accent-hover)}
+.final .btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;
+  color:rgba(255,255,255,.85);background:transparent;font-size:15px;font-weight:600;
+  border-radius:6px;border:1px solid rgba(255,255,255,.2);transition:all .2s;margin-left:12px;}
+.final .btn-secondary:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.05)}
+.final-contact{margin-top:32px;font-size:13px;color:rgba(255,255,255,.3);display:flex;gap:24px;flex-wrap:wrap}
+
+footer{padding:24px 0;background:var(--bg-dark);border-top:1px solid rgba(255,255,255,.06)}
+footer p{font-size:11px;color:rgba(255,255,255,.2);text-align:center}
+footer a{color:rgba(255,255,255,.3)}
+footer a:hover{color:rgba(255,255,255,.5)}
+
+/* Animation */
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s var(--ease-out),transform .55s var(--ease-out)}
+.reveal.v{opacity:1;transform:translateY(0)}
+
+/* Toast */
+#demoToast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);
+  background:rgba(22,163,74,0.95);color:#fff;padding:12px 20px;border-radius:10px;
+  font-size:14px;font-weight:600;opacity:0;pointer-events:none;
+  transition:all .25s;z-index:999;white-space:nowrap;}
+#demoToast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Floating LINE */
+.floating-cta{position:fixed;bottom:24px;right:24px;z-index:998;display:flex;align-items:center;
+  justify-content:center;width:60px;height:60px;background:var(--line-green);border-radius:50%;
+  box-shadow:0 8px 24px rgba(6,199,85,0.3);transition:transform .3s var(--ease-out);
+  animation:floatBounce 3s ease-in-out infinite;}
+.floating-cta:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(6,199,85,0.4)}
+.floating-cta svg{width:32px;height:32px;fill:#fff}
+@keyframes floatBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media(max-width:600px){.floating-cta{bottom:20px;right:20px;width:52px;height:52px}.floating-cta svg{width:28px;height:28px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><a href="/">橙築<span class="dot">.</span></a></div>
+  <div class="nav-links">
+    <a href="/" class="nav-link">回首頁</a>
+    <a href="/#services" class="nav-link">事業</a>
+    <a href="https://samkuo.com" class="nav-link" target="_blank" rel="noopener">完整服務 ↗</a>
+    <a href="https://line.me/R/ti/p/@616wvceo" class="nav-link accent" target="_blank" rel="noopener">免費諮詢</a>
+  </div>
+</nav>
+
+<div class="breadcrumb-bar">
+<div class="wrap">
+  <div class="breadcrumb">
+    <a href="/">橙築國際</a>
+    <span class="sep">/</span>
+    <a href="/#demos">Demo 展示</a>
+    <span class="sep">/</span>
+    <span class="current">教練預約系統</span>
+  </div>
+</div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+<div class="wrap">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <p class="hero-eyebrow">LIFF × LINE Bot 教練預約系統</p>
+      <h1>學員在 LINE 預約，<br>教練 <span>一鍵搞定</span>。</h1>
+      <p class="hero-body">
+        學員在 LINE 裡選地點、課程、時段、送出預約；<br>
+        教練收到推播，一鍵確認即扣堂數；<br>
+        課前自動提醒、堂數到期自動通知、收入拆帳即時算完。
+      </p>
+      <div class="hero-actions">
+        <a href="#demo" class="btn-cta">立即體驗 Demo →</a>
+        <a href="https://line.me/R/ti/p/@616wvceo" class="btn-ghost" target="_blank" rel="noopener">加 LINE 諮詢</a>
+      </div>
+      <p class="hero-note">高爾夫、健身、瑜伽、才藝教練都能用 · 支援單人 / 團體 / 固定班</p>
+    </div>
+    <div class="hero-phone-wrap reveal">
+      <div class="hero-phone">
+        <div class="hero-phone-screen">
+          <div class="hero-bubble-user">我的堂數</div>
+          <div class="hero-bubble-bot">⛳ 您的儲值課程：
+
+🏌️ 1對1教學 10堂
+   剩餘：8 / 10 堂
+   到期：2026-12-31
+
+🎯 總剩餘：8 堂</div>
+          <div class="hero-bubble-user">預約課程</div>
+          <div class="hero-mini-card">
+            <div class="name">📍 台北美麗華 / 1對1教學</div>
+            <div class="row"><span>日期</span><span class="v">2026-04-21 週二</span></div>
+            <div class="row"><span>時段</span><span class="v">09:00-10:00</span></div>
+            <div class="row"><span>扣堂數</span><span class="v">1 堂</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- STATS -->
+<section class="stats-bar">
+<div class="wrap">
+  <div class="stats-grid">
+    <div class="stat-item reveal"><div class="stat-num">FIFO</div><div class="stat-label">堂數先到期先扣</div></div>
+    <div class="stat-item reveal"><div class="stat-num">雙角色</div><div class="stat-label">教練／學員介面</div></div>
+    <div class="stat-item reveal"><div class="stat-num">自動</div><div class="stat-label">課前提醒 + 到期警告</div></div>
+    <div class="stat-item reveal"><div class="stat-num">0</div><div class="stat-label">額外 App 需下載</div></div>
+  </div>
+</div>
+</section>
+
+<!-- DEMO -->
+<section class="demo" id="demo">
+<div class="wrap">
+  <div class="demo-layout">
+    <div class="demo-side">
+      <p class="section-tag">互動體驗 / Live Demo</p>
+      <h2>切換教練／學員視角，<br>實際操作看看。</h2>
+      <p>右邊是真實系統的網頁版模擬。點擊上方的「<strong>教練後台</strong>」「<strong>學員介面</strong>」「<strong>LINE 對話</strong>」切換視角。</p>
+      <p>教練這邊可以試扣課、看學員明細、查行程、檢視收入統計。學員這邊可以查堂數、看預約紀錄、操作預約流程。</p>
+
+      <div class="demo-tips">
+        <h4>提示</h4>
+        <p>LINE 對話模式試試打「我的堂數」「查詢預約」「使用教學」「查詢今日」，系統會回覆相對應的訊息。</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="role-switch">
+        <button class="role-btn active" onclick="switchRole('coach')">教練後台</button>
+        <button class="role-btn" onclick="switchRole('student')">學員介面</button>
+        <button class="role-btn" onclick="switchRole('chat')">LINE 對話</button>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-screen" id="phoneScreen">
+          <div class="phone-header" id="phoneHeader">教練後台</div>
+
+          <!-- COACH VIEW -->
+          <div id="viewCoach">
+            <div class="d-tabs" id="coachTabs">
+              <button class="d-tab active" onclick="showCoachTab('deduct')">扣課</button>
+              <button class="d-tab" onclick="showCoachTab('students')">學員明細</button>
+              <button class="d-tab" onclick="showCoachTab('schedule')">行程</button>
+              <button class="d-tab" onclick="showCoachTab('revenue')">收入</button>
+            </div>
+
+            <div id="coachDeduct">
+              <div class="d-card">
+                <h4>扣課</h4>
+                <select class="d-select">
+                  <option>王小明 (U8a3f...)</option>
+                  <option>李美玲 (U2b7c...)</option>
+                  <option>張大偉 (U9e1d...)</option>
+                </select>
+                <input class="d-input" type="number" value="1" min="1" placeholder="扣課堂數">
+                <input class="d-input" placeholder="上課內容（例：練習推桿）">
+                <input class="d-input" placeholder="備註（選填）">
+                <button class="d-btn" onclick="showToast('扣課成功！王小明 剩餘 7 堂')">確認扣課</button>
+              </div>
+            </div>
+
+            <div id="coachStudents" class="hidden">
+              <input class="d-input" placeholder="🔍 搜尋學員（姓名 / ID）" style="margin-bottom:10px;">
+              <div class="d-stu">
+                <div class="d-stu-head">
+                  <div><div class="d-stu-name">王小明</div><div style="font-size:10px;color:#999;">U8a3f2e...</div></div>
+                  <div class="d-stu-credits">剩餘 8 堂</div>
+                </div>
+                <div class="d-pkg"><div class="d-pkg-title">1對1教學 10堂</div><div class="d-pkg-meta">剩餘 8 / 10 · 到期 2026-12-31</div></div>
+                <div class="d-btn-row">
+                  <button class="d-btn-sm d-btn-green" onclick="showToast('扣課成功！剩餘 7 堂')">扣課</button>
+                  <button class="d-btn-sm d-btn-blue" onclick="showToast('開課成功')">加課</button>
+                  <button class="d-btn-sm d-btn-gray">紀錄</button>
+                </div>
+              </div>
+              <div class="d-stu">
+                <div class="d-stu-head">
+                  <div><div class="d-stu-name">李美玲</div><div style="font-size:10px;color:#999;">U2b7c9d...</div></div>
+                  <div class="d-stu-credits">剩餘 3 堂</div>
+                </div>
+                <div class="d-pkg"><div class="d-pkg-title">體驗課程 5堂</div><div class="d-pkg-meta">剩餘 3 / 5 · 到期 2026-08-15</div></div>
+                <div class="d-btn-row">
+                  <button class="d-btn-sm d-btn-green" onclick="showToast('扣課成功！剩餘 2 堂')">扣課</button>
+                  <button class="d-btn-sm d-btn-blue" onclick="showToast('開課成功')">加課</button>
+                  <button class="d-btn-sm d-btn-gray">紀錄</button>
+                </div>
+              </div>
+              <div class="d-stu">
+                <div class="d-stu-head">
+                  <div><div class="d-stu-name">張大偉</div><div style="font-size:10px;color:#999;">U9e1d4f...</div></div>
+                  <div class="d-stu-credits">剩餘 15 堂</div>
+                </div>
+                <div class="d-pkg"><div class="d-pkg-title">1對1教學 20堂</div><div class="d-pkg-meta">剩餘 15 / 20 · 到期 2027-03-01</div></div>
+                <div class="d-btn-row">
+                  <button class="d-btn-sm d-btn-green" onclick="showToast('扣課成功！剩餘 14 堂')">扣課</button>
+                  <button class="d-btn-sm d-btn-blue" onclick="showToast('開課成功')">加課</button>
+                  <button class="d-btn-sm d-btn-gray">紀錄</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="coachSchedule" class="hidden">
+              <div style="font-size:12px;color:#888;margin-bottom:10px;">預設顯示未來三天</div>
+              <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px;">2026-04-17（週五）· 3 筆</div>
+              <div class="d-booking">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong>09:00 · 王小明</strong><span class="d-status confirmed">已確認</span>
+                </div>
+                <div class="meta">📍 台北美麗華 / 1對1教學</div>
+              </div>
+              <div class="d-booking">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong>11:00 · 李美玲</strong><span class="d-status pending">待確認</span>
+                </div>
+                <div class="meta">📍 新北八里 / 體驗課程</div>
+              </div>
+              <div class="d-booking">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong>14:00 · 張大偉</strong><span class="d-status fixed">固定班</span>
+                </div>
+                <div class="meta">📍 林口長庚 / 1對1教學</div>
+              </div>
+              <div style="font-size:12px;font-weight:700;color:#555;margin:14px 0 6px 0;">2026-04-18（週六）· 1 筆</div>
+              <div class="d-booking">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong>08:00 · 張大偉</strong><span class="d-status confirmed">已確認</span>
+                </div>
+                <div class="meta">📍 台北美麗華 / 下場實戰</div>
+              </div>
+            </div>
+
+            <div id="coachRevenue" class="hidden">
+              <div class="d-rev-grid">
+                <div class="d-rev-box"><div class="lbl">預收現金</div><div class="val" style="color:#166534;">$186K</div></div>
+                <div class="d-rev-box"><div class="lbl">實際收入</div><div class="val" style="color:#1e40af;">$124K</div></div>
+                <div class="d-rev-box"><div class="lbl">未消化</div><div class="val" style="color:#b45309;">$62K</div></div>
+              </div>
+              <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:8px;">學員明細</div>
+              <div class="d-stu">
+                <div class="d-stu-head">
+                  <div class="d-stu-name">張大偉</div>
+                  <div style="color:#b45309;font-weight:700;font-size:12px;">餘 $37,500</div>
+                </div>
+                <div class="d-pkg-meta">預收 $50,000 · 已上 5/20 堂 · 收入 $12,500</div>
+              </div>
+              <div class="d-stu">
+                <div class="d-stu-head">
+                  <div class="d-stu-name">王小明</div>
+                  <div style="color:#b45309;font-weight:700;font-size:12px;">餘 $14,400</div>
+                </div>
+                <div class="d-pkg-meta">預收 $18,000 · 已上 2/10 堂 · 收入 $3,600</div>
+              </div>
+              <div class="d-stu">
+                <div class="d-stu-head">
+                  <div class="d-stu-name">李美玲</div>
+                  <div style="color:#b45309;font-weight:700;font-size:12px;">餘 $9,900</div>
+                </div>
+                <div class="d-pkg-meta">預收 $16,500 · 已上 2/5 堂 · 收入 $6,600</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STUDENT VIEW -->
+          <div id="viewStudent" class="hidden">
+            <div class="d-tabs" id="studentTabs">
+              <button class="d-tab active" onclick="showStudentTab('credits')">我的堂數</button>
+              <button class="d-tab" onclick="showStudentTab('bookings')">我的預約</button>
+              <button class="d-tab" onclick="showStudentTab('book')">預約課程</button>
+            </div>
+
+            <div id="stuCredits">
+              <div class="d-card">
+                <h4>我的堂數</h4>
+                <div class="d-pkg"><div class="d-pkg-title">1對1教學 10堂</div><div class="d-pkg-meta">剩餘 8 / 10 · 到期 2026-12-31</div></div>
+                <div class="d-total">🎯 總剩餘：8 堂</div>
+              </div>
+            </div>
+
+            <div id="stuBookings" class="hidden">
+              <div class="d-card">
+                <h4>我的預約</h4>
+                <div style="display:flex;gap:4px;margin-bottom:10px;">
+                  <button class="d-tab active" style="font-size:11px;padding:4px 10px;">全部</button>
+                  <button class="d-tab" style="font-size:11px;padding:4px 10px;">已確認</button>
+                  <button class="d-tab" style="font-size:11px;padding:4px 10px;">待確認</button>
+                </div>
+                <div class="d-booking">
+                  <div style="display:flex;justify-content:space-between;"><strong>2026-04-17 09:00</strong><span class="d-status confirmed">已確認</span></div>
+                  <div class="meta">📍 台北美麗華 / 1對1教學</div>
+                </div>
+                <div class="d-booking">
+                  <div style="display:flex;justify-content:space-between;"><strong>2026-04-20 14:00</strong><span class="d-status pending">待確認</span></div>
+                  <div class="meta">📍 新北八里 / 1對1教學</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="stuBook" class="hidden">
+              <div class="d-card">
+                <h4>預約課程</h4>
+                <select class="d-select"><option value="">選擇地點</option><option>台北美麗華高爾夫練習場</option><option>新北八里高爾夫練習場</option><option>林口長庚高爾夫練習場</option></select>
+                <select class="d-select"><option value="">選擇課程</option><option>體驗課程</option><option>1對1教學</option><option>下場實戰教學</option></select>
+                <select class="d-select"><option>1 小時</option><option>2 小時</option></select>
+                <input class="d-input" type="date" value="2026-04-21">
+                <select class="d-select"><option value="">選擇時段</option><option>09:00-10:00</option><option>10:00-11:00</option><option>14:00-15:00</option><option>15:00-16:00</option></select>
+                <button class="d-btn" onclick="showToast('預約已送出，待教練確認！')">送出預約</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CHAT VIEW -->
+          <div id="viewChat" class="hidden" style="display:none;flex-direction:column;flex:1;">
+            <div class="d-chat" id="chatMessages">
+              <div class="d-bubble d-bubble-user">我的堂數</div>
+              <div class="d-bubble d-bubble-bot">⛳ 您的儲值課程：
+
+🏌️ 1對1教學 10堂
+   剩餘：8 / 10 堂
+   到期：2026-12-31
+
+🎯 總剩餘：8 堂</div>
+            </div>
+            <div class="quick-tips">
+              <button class="quick-tip" onclick="quickChat('查詢預約')">查詢預約</button>
+              <button class="quick-tip" onclick="quickChat('使用教學')">使用教學</button>
+              <button class="quick-tip" onclick="quickChat('查詢今日')">查詢今日</button>
+              <button class="quick-tip" onclick="quickChat('查詢明日')">查詢明日</button>
+            </div>
+            <div class="d-input-row">
+              <input class="d-input" id="chatInput" placeholder="輸入指令..." onkeydown="if(event.key==='Enter')sendChat()">
+              <button class="d-send" onclick="sendChat()">送出</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+<div class="wrap">
+  <p class="section-tag reveal">核心功能</p>
+  <h2 class="section-title reveal">從學員預約到收入報表，<br>一套系統全包。</h2>
+  <p class="features-intro reveal">不是一個好看的 UI，是教練真的每天在用的工具。每項功能都是從實際教學運營痛點長出來的。</p>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">i</div>
+      <h3>LIFF 線上預約</h3>
+      <p>學員在 LINE 裡選地點、課程、時段，一鍵送出。教練收到推播，點「確認」即成立預約。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">ii</div>
+      <h3>堂數自動扣抵</h3>
+      <p>FIFO 先到期先扣原則。每次完成課程系統自動扣課，學員隨時查詢剩餘堂數。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">iii</div>
+      <h3>到期 / 低堂數提醒</h3>
+      <p>課程包到期前 30 天、剩餘堂數低於門檻，系統自動推播提醒學員續購。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">iv</div>
+      <h3>收入即時報表</h3>
+      <p>預收現金、實際收入、未消化餘額一目了然。每位學員的拆帳明細自動算完。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">v</div>
+      <h3>固定班排程</h3>
+      <p>每週固定時段課程自動建立，教練臨時休假一鍵取消當週，系統自動通知學員。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">vi</div>
+      <h3>學員管理</h3>
+      <p>搜尋、查詢、扣課、加課、查歷史紀錄。VIP 標記、備註、聯絡資訊集中管理。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+<div class="wrap">
+  <p class="section-tag reveal">預約流程</p>
+  <h2 class="section-title reveal">三步完成，<br>學員零學習成本。</h2>
+  <div class="steps">
+    <div class="step-item reveal">
+      <div class="step-num">01</div>
+      <h3>學員預約</h3>
+      <p>在 LINE 開啟預約頁，選地點、課程、日期時間，一鍵送出。</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-num">02</div>
+      <h3>教練確認</h3>
+      <p>教練收到 LINE 推播，查當日行程，點「確認」或「改約」。</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-num">03</div>
+      <h3>自動提醒</h3>
+      <p>學員即時收到確認通知，課前一天自動提醒，含地點導航連結。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SIBLINGS -->
+<section class="siblings">
+<div class="wrap">
+  <h3>其他 Demo</h3>
+  <div class="sibling-grid">
+    <a href="/pricing-demo/" class="sibling-card">
+      <div class="eyebrow">No. 01</div>
+      <h4>智能查價 Demo</h4>
+      <p>B2B 企業查價，AI 解析 LINE 訊息秒回 Flex 商品卡。</p>
+      <span class="arrow">前往體驗 →</span>
+    </a>
+    <a href="/salon-demo/" class="sibling-card">
+      <div class="eyebrow">No. 03</div>
+      <h4>髮廊預約 Demo</h4>
+      <p>顧客 LINE 預約，設計師查排班、查營收，老闆一目了然。</p>
+      <span class="arrow">前往體驗 →</span>
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- CROSS-SITE -->
+<section class="cross-site">
+<div class="wrap">
+  <div class="cross-site-inner">
+    <div class="cross-site-text">
+      <div class="eyebrow">完整服務</div>
+      <h3>完整教練方案介紹，<br>請見 samkuo.com</h3>
+      <p>這裡是互動試玩版。如果想看完整的教練方案說明、定價、FAQ，請前往 samkuo.com/coach。</p>
+    </div>
+    <a href="https://samkuo.com/coach" class="btn-cta" target="_blank" rel="noopener" style="background:var(--navy);">看完整教練方案 →</a>
+  </div>
+</div>
+</section>
+
+<!-- FINAL -->
+<section class="final">
+<div class="wrap">
+  <h2 class="reveal">想為你的教學事業打造一套？</h2>
+  <p class="reveal">不論你是高爾夫、健身、瑜伽、鋼琴、才藝教練——我們都能依照你的課程模式量身打造。初次諮詢免費，30 分鐘聊完你的需求。</p>
+  <div class="reveal" style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+    <a href="https://line.me/R/ti/p/@616wvceo" class="btn-cta" target="_blank" rel="noopener">加 LINE 免費諮詢 →</a>
+    <a href="tel:0975691485" class="btn-secondary">撥打 0975-691-485</a>
+  </div>
+  <div class="final-contact reveal">
+    <span>Email：cat@cz-777.com</span>
+    <span>桃園市春日路 818 號 1F</span>
+  </div>
+</div>
+</section>
+
+<footer><p>© 2026 橙築國際 ChengZhu International · <a href="/">chengzhu.co</a></p></footer>
+
+<a href="https://line.me/R/ti/p/@616wvceo" class="floating-cta" target="_blank" rel="noopener" title="加 LINE 諮詢">
+  <svg viewBox="0 0 24 24"><path d="M23.146 10.362c0-4.38-4.408-7.946-9.824-7.946-5.416 0-9.824 3.567-9.824 7.946 0 3.931 3.513 7.234 8.28 7.859.324.068.756.208.865.485.099.25-.032.645-.064.896l-.16 1.002c-.049.303-.23.903.784.476 1.014-.427 5.483-3.23 7.55-5.591.758-.87 1.393-2.029 1.393-3.127z"/></svg>
+</a>
+
+<div id="demoToast"></div>
+
+<script>
+// Reveal
+document.addEventListener('DOMContentLoaded',()=>{
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+
+// Role switch
+function switchRole(role){
+  document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('viewCoach').classList.toggle('hidden',role!=='coach');
+  document.getElementById('viewStudent').classList.toggle('hidden',role!=='student');
+  const chat=document.getElementById('viewChat');
+  if(role==='chat'){chat.classList.remove('hidden');chat.style.display='flex'}else{chat.classList.add('hidden');chat.style.display='none'}
+  const header=document.getElementById('phoneHeader');
+  header.textContent=role==='coach'?'教練後台':role==='student'?'學員介面':'LINE 對話';
+}
+
+// Coach tabs
+function showCoachTab(tab){
+  const map={deduct:'coachDeduct',students:'coachStudents',schedule:'coachSchedule',revenue:'coachRevenue'};
+  document.querySelectorAll('#coachTabs .d-tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  Object.values(map).forEach(id=>document.getElementById(id).classList.add('hidden'));
+  document.getElementById(map[tab]).classList.remove('hidden');
+}
+
+// Student tabs
+function showStudentTab(tab){
+  const map={credits:'stuCredits',bookings:'stuBookings',book:'stuBook'};
+  document.querySelectorAll('#studentTabs .d-tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  Object.values(map).forEach(id=>document.getElementById(id).classList.add('hidden'));
+  document.getElementById(map[tab]).classList.remove('hidden');
+}
+
+// Toast
+function showToast(msg){
+  const t=document.getElementById('demoToast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+// Chat
+const chatResponses={
+  '我的堂數':'⛳ 您的儲值課程：\n\n🏌️ 1對1教學 10堂\n   剩餘：8 / 10 堂\n   到期：2026-12-31\n\n🎯 總剩餘：8 堂',
+  '查詢堂數':'⛳ 您的儲值課程：\n\n🏌️ 1對1教學 10堂\n   剩餘：8 / 10 堂\n   到期：2026-12-31\n\n🎯 總剩餘：8 堂',
+  '查詢預約':'⛳ 您的預約（共 2 筆）\n\n✅ 2026-04-17 09:00\n📍 台北美麗華 / 1對1教學\n📌 已確認\n\n⏳ 2026-04-20 14:00\n📍 新北八里 / 1對1教學\n📌 待確認',
+  '我的預約':'⛳ 您的預約（共 2 筆）\n\n✅ 2026-04-17 09:00\n📍 台北美麗華 / 1對1教學\n📌 已確認\n\n⏳ 2026-04-20 14:00\n📍 新北八里 / 1對1教學\n📌 待確認',
+  '使用教學':'📖 使用教學\n\n━━━ 學員 ━━━\n\n預約  點連結選地點、課程、日期時間\n查詢  「查詢預約」或「我的預約」\n堂數  「我的堂數」或「查詢堂數」\n\n💡 輸入「使用教學」可隨時查看',
+  '查詢今日':'⛳ 今日行程（2026-04-17）\n\n⏰ 09:00  王小明\n   📍 台北美麗華 / 1對1教學\n   📌 已確認\n\n⏰ 11:00  李美玲\n   📍 新北八里 / 體驗課程\n   📌 待確認\n\n⏰ 14:00  [固定] 張大偉\n   📍 林口長庚 / 1對1教學',
+  '查詢明日':'⛳ 明日行程（2026-04-18）\n\n⏰ 08:00  張大偉\n   📍 台北美麗華 / 下場實戰教學\n   📌 已確認'
+};
+
+function addBubble(text,isUser){
+  const c=document.getElementById('chatMessages');
+  const b=document.createElement('div');
+  b.className=`d-bubble ${isUser?'d-bubble-user':'d-bubble-bot'}`;
+  b.textContent=text;
+  c.appendChild(b);
+  c.scrollTop=c.scrollHeight;
+}
+function sendChat(){
+  const input=document.getElementById('chatInput');
+  const text=input.value.trim();
+  if(!text)return;
+  input.value='';
+  addBubble(text,true);
+  setTimeout(()=>{
+    const resp=chatResponses[text]||`⛳ 歡迎使用預約系統\n\n查詢預約、我的堂數、預約課程\n輸入「使用教學」看完整說明`;
+    addBubble(resp,false);
+  },500);
+}
+function quickChat(text){
+  document.getElementById('chatInput').value=text;
+  sendChat();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>髮廊預約系統 Demo｜LINE 預約 + 設計師排班 + 營收拆帳｜橙築國際</title>
+<meta name="description" content="互動試玩髮廊 LINE 系統：顧客 LINE 看價目表、預約設計師；設計師 LINE 打卡、鎖班、查營收；老闆即時看營收儀表板、自動拆帳。連鎖髮廊、美甲、美睫、SPA 都能用。">
+<link rel="canonical" href="https://chengzhu.co/salon-demo/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#F8FAFC;--bg-alt:#F1F5F9;--bg-dark:#0F172A;
+  --surface:#FFFFFF;--text:#0F172A;--text-sub:#475569;--text-light:#64748B;
+  --line-color:#E2E8F0;--accent:#2563EB;--accent-hover:#1D4ED8;
+  --navy:#1E3A8A;--navy-hover:#1E40AF;
+  --line-green:#06C755;--orange:#FF6B35;
+  --success:#16A34A;--warning:#F59E0B;--danger:#DC2626;--rose:#E11D48;
+  --serif:'Noto Serif TC',serif;--sans:'Noto Sans TC',sans-serif;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;
+  line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+::selection{background:var(--accent);color:#fff}
+a{color:inherit;text-decoration:none}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.02;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(24px,5vw,48px)}
+.divider{height:1px;background:var(--line-color);margin:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 clamp(24px,5vw,48px);
+  height:56px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(248,250,252,0.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line-color);}
+.nav-logo{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--text);letter-spacing:0.02em}
+.nav-logo a{color:var(--text)}
+.nav-logo .dot{color:var(--orange)}
+.nav-links{display:flex;gap:8px;align-items:center}
+.nav-link{font-size:12px;letter-spacing:0.5px;color:var(--text-light);padding:6px 14px;
+  border-radius:4px;transition:all .2s;font-weight:500;}
+.nav-link:hover{color:var(--text);background:rgba(15,23,42,0.04)}
+.nav-link.accent{color:var(--accent);border:1px solid rgba(37,99,235,0.2)}
+.nav-link.accent:hover{background:rgba(37,99,235,0.06)}
+@media(max-width:600px){.nav-links{gap:4px}.nav-link{font-size:11px;padding:5px 10px}}
+
+/* BREADCRUMB */
+.breadcrumb-bar{padding:80px 0 0}
+.breadcrumb{font-size:12px;color:var(--text-light);letter-spacing:0.06em;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.breadcrumb a{color:var(--text-light);transition:color .2s}
+.breadcrumb a:hover{color:var(--accent)}
+.breadcrumb .sep{color:var(--line-color)}
+.breadcrumb .current{color:var(--text);font-weight:600}
+
+/* HERO */
+.hero{padding:32px 0 clamp(60px,10vh,100px)}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
+@media(min-width:880px){.hero-grid{grid-template-columns:1.1fr 1fr;gap:64px}}
+.hero-eyebrow{font-size:13px;font-weight:500;letter-spacing:3px;color:var(--accent);margin-bottom:24px;
+  opacity:0;animation:up .7s var(--ease-out) .15s forwards;}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(32px,6vw,54px);line-height:1.25;
+  letter-spacing:-0.02em;margin-bottom:28px;opacity:0;animation:up .7s var(--ease-out) .3s forwards;}
+.hero h1 span{color:var(--accent)}
+.hero-body{max-width:520px;font-size:clamp(15px,1.6vw,17px);color:var(--text-sub);
+  line-height:1.85;margin-bottom:36px;opacity:0;animation:up .7s var(--ease-out) .45s forwards;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:up .7s var(--ease-out) .6s forwards}
+.btn-cta{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;background:var(--navy);
+  color:#fff;font-size:15px;font-weight:700;border-radius:6px;border:none;cursor:pointer;
+  transition:background .25s,transform .25s;}
+.btn-cta:hover{background:var(--navy-hover);transform:translateY(-1px);color:#fff}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;color:var(--text);
+  background:transparent;font-size:15px;font-weight:700;border-radius:6px;
+  border:1px solid var(--line-color);transition:all .2s;}
+.btn-ghost:hover{border-color:var(--text);background:var(--surface)}
+.hero-note{margin-top:14px;font-size:12px;color:var(--text-light);
+  opacity:0;animation:up .7s var(--ease-out) .75s forwards;}
+
+/* Hero phone preview */
+.hero-phone-wrap{display:flex;justify-content:center;align-items:center;
+  opacity:0;animation:up .7s var(--ease-out) .5s forwards;}
+.hero-phone{position:relative;width:100%;max-width:300px;background:#000;border-radius:36px;padding:10px;
+  box-shadow:0 24px 64px rgba(15,23,42,0.18), inset 0 0 0 2px #444;
+  animation:floatPhone 6s ease-in-out infinite;}
+.hero-phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:110px;height:22px;background:#000;border-bottom-left-radius:14px;border-bottom-right-radius:14px;z-index:2;}
+.hero-phone-screen{background:#fff;border-radius:28px;padding:34px 14px 14px;
+  min-height:520px;display:flex;flex-direction:column;gap:8px;}
+.hero-bubble-bot{align-self:flex-start;background:#fff;border:1px solid #ececec;
+  padding:10px 14px;border-radius:14px 14px 14px 4px;font-size:13px;line-height:1.5;color:#333;max-width:85%;white-space:pre-line;}
+.hero-bubble-user{align-self:flex-end;background:var(--line-green);color:#fff;
+  padding:10px 14px;border-radius:14px 14px 4px 14px;font-size:13px;max-width:80%;}
+.hero-mini-card{align-self:flex-start;background:#fff;border:1px solid #eee;
+  border-radius:10px;padding:12px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);max-width:92%;}
+.hero-mini-card .name{font-weight:700;color:#1a1a1a;margin-bottom:6px;font-size:13px}
+.hero-mini-card .row{display:flex;justify-content:space-between;color:#888;font-size:11px;margin-bottom:3px}
+.hero-mini-card .row .v{color:#333;font-weight:600}
+.hero-mini-card .price{color:var(--rose);font-weight:800;font-size:16px;margin-top:6px}
+@keyframes floatPhone{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* STATS */
+.stats-bar{padding:clamp(40px,6vh,60px) 0;border-top:1px solid var(--line-color);border-bottom:1px solid var(--line-color)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+@media(max-width:600px){.stats-grid{grid-template-columns:1fr 1fr}}
+.stat-item{text-align:center;padding:16px 12px}
+.stat-item+.stat-item{border-left:1px solid var(--line-color)}
+@media(max-width:600px){
+  .stat-item:nth-child(2){border-left:1px solid var(--line-color)}
+  .stat-item:nth-child(3){border-left:none;border-top:1px solid var(--line-color)}
+  .stat-item:nth-child(4){border-top:1px solid var(--line-color)}
+}
+.stat-num{font-family:var(--serif);font-size:clamp(28px,4vw,36px);font-weight:900;color:var(--accent);line-height:1}
+.stat-label{font-size:12px;color:var(--text-light);margin-top:6px}
+
+/* SECTION */
+.section-tag{font-size:12px;font-weight:700;letter-spacing:3px;color:var(--text-light);
+  text-transform:uppercase;margin-bottom:20px;}
+.section-title{font-family:var(--serif);font-weight:900;font-size:clamp(22px,3.5vw,34px);
+  line-height:1.4;margin-bottom:24px;max-width:560px;}
+.section-intro{font-size:15px;color:var(--text-sub);max-width:560px;line-height:1.85;margin-bottom:48px}
+
+/* DEMO */
+.demo{padding:clamp(64px,10vh,100px) 0;background:var(--bg-alt);position:relative}
+.demo-layout{display:grid;grid-template-columns:1fr;gap:40px;align-items:start}
+@media(min-width:900px){.demo-layout{grid-template-columns:1fr 400px;gap:64px}}
+.demo-side h2{font-family:var(--serif);font-weight:900;font-size:clamp(22px,3.2vw,30px);
+  line-height:1.4;margin-bottom:18px;}
+.demo-side p{font-size:15px;color:var(--text-sub);line-height:1.85;margin-bottom:20px}
+.demo-side strong{color:var(--text);font-weight:700}
+
+.role-switch{display:inline-flex;background:var(--surface);border:1px solid var(--line-color);
+  border-radius:6px;padding:4px;margin-bottom:24px;gap:2px;}
+.role-btn{padding:9px 18px;border:none;background:transparent;border-radius:4px;
+  font-size:13px;color:var(--text-sub);cursor:pointer;font-weight:600;font-family:var(--sans);
+  letter-spacing:0.5px;transition:all .2s;}
+.role-btn:hover{color:var(--text)}
+.role-btn.active{background:var(--navy);color:#fff}
+
+.phone-frame{position:relative;width:100%;max-width:400px;margin:0 auto;
+  background:#0a0a0a;border-radius:42px;padding:14px;
+  box-shadow:0 30px 80px rgba(15,23,42,0.18), inset 0 0 0 2px #333;}
+.phone-frame::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:130px;height:26px;background:#000;
+  border-bottom-left-radius:18px;border-bottom-right-radius:18px;z-index:5;}
+.phone-screen{background:#fff;border-radius:32px;height:660px;overflow-y:auto;
+  padding:36px 14px 14px;display:flex;flex-direction:column;}
+.phone-screen::-webkit-scrollbar{width:0}
+.phone-header{text-align:center;font-size:11px;color:#bbb;
+  padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid #f0f0f0;flex-shrink:0;}
+
+.d-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;flex-shrink:0;}
+.d-tab{padding:6px 12px;border:1px solid #e0e0e0;background:#fafafa;border-radius:6px;
+  font-size:12px;color:#555;cursor:pointer;font-weight:500;font-family:var(--sans);transition:all .15s;}
+.d-tab:hover{background:#f0f0f0}
+.d-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.d-card{background:#fff;border:1px solid #eee;border-radius:10px;padding:14px;margin-bottom:12px;}
+.d-card h4{font-size:14px;font-weight:700;margin-bottom:10px;color:#1a1a1a}
+.d-input,.d-select{width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;
+  font-size:13px;font-family:var(--sans);margin-bottom:8px;outline:none;background:#fff;}
+.d-input:focus,.d-select:focus{border-color:var(--accent)}
+.d-btn{width:100%;padding:10px;background:var(--accent);color:#fff;border:none;
+  border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s;font-family:var(--sans);}
+.d-btn:hover{background:var(--accent-hover)}
+.d-btn-row{display:flex;gap:6px}
+.d-btn-sm{flex:1;padding:8px;font-size:12px;font-weight:600;border:none;border-radius:6px;
+  cursor:pointer;font-family:var(--sans);transition:all .15s;}
+.d-btn-green{background:var(--success);color:#fff}
+.d-btn-green:hover{background:#15803d}
+.d-btn-blue{background:var(--accent);color:#fff}
+.d-btn-blue:hover{background:var(--accent-hover)}
+.d-btn-gray{background:#e5e7eb;color:#374151}
+.d-btn-gray:hover{background:#d1d5db}
+.d-btn-danger{background:var(--danger);color:#fff}
+.d-btn-danger:hover{background:#b91c1c}
+
+/* Salon-specific */
+.service-row{display:flex;justify-content:space-between;align-items:center;
+  padding:10px 12px;background:#fafafa;border-radius:8px;margin-bottom:6px;}
+.service-row .name{font-size:13px;font-weight:600;color:#1a1a1a}
+.service-row .price{font-size:13px;font-weight:700;color:var(--rose)}
+.service-row .dur{font-size:11px;color:#888;margin-top:2px}
+
+.stylist-card{background:#fff;border:1px solid #eee;border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;transition:all .2s;}
+.stylist-card:hover{border-color:var(--accent);background:#eff6ff}
+.stylist-head{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.stylist-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#fecdd3,#f0abfc);
+  display:flex;align-items:center;justify-content:center;font-weight:700;color:#881337;font-size:14px;flex-shrink:0;}
+.stylist-info{flex:1}
+.stylist-name{font-size:13px;font-weight:700;color:#1a1a1a}
+.stylist-title{font-size:10px;color:#888}
+.stylist-meta{font-size:11px;color:#666;margin-top:4px;display:flex;gap:12px}
+
+.time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:6px}
+.time-slot{padding:8px 4px;text-align:center;font-size:11px;font-weight:600;
+  border:1px solid #e5e7eb;border-radius:6px;background:#fff;cursor:pointer;transition:all .15s;}
+.time-slot:hover{border-color:var(--accent);color:var(--accent)}
+.time-slot.busy{background:#fafafa;color:#ccc;border-color:#f0f0f0;cursor:not-allowed;text-decoration:line-through}
+.time-slot.selected{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.d-booking{background:#fff;border:1px solid #f0f0f0;border-radius:8px;padding:10px 12px;margin-bottom:8px;font-size:12px;}
+.d-booking strong{font-size:13px;color:#1a1a1a}
+.d-booking .meta{color:#666;margin-top:3px;display:flex;justify-content:space-between;align-items:center}
+.d-status{font-size:10px;padding:3px 8px;border-radius:4px;font-weight:700;letter-spacing:0.5px}
+.d-status.confirmed{background:#dcfce7;color:#166534}
+.d-status.done{background:#e0e7ff;color:#3730a3}
+.d-status.pending{background:#fef3c7;color:#92400e}
+
+.d-rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px}
+.d-rev-box{background:#f9fafb;padding:10px 8px;border-radius:8px;text-align:center}
+.d-rev-box .lbl{font-size:10px;color:#888;margin-bottom:4px}
+.d-rev-box .val{font-size:14px;font-weight:800;color:#1a1a1a}
+
+.split-row{background:#fff;border:1px solid #f0f0f0;border-radius:8px;padding:10px 12px;margin-bottom:6px;font-size:12px;}
+.split-row .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.split-row .name{font-weight:700;color:#1a1a1a;font-size:13px}
+.split-row .sum{font-weight:700;color:var(--success);font-size:13px}
+.split-row .detail{color:#888;font-size:11px;display:flex;gap:8px}
+
+.checkin-row{background:#fff;border:1px solid #f0f0f0;border-radius:8px;padding:10px 12px;margin-bottom:8px}
+.checkin-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.checkin-head .name{font-size:13px;font-weight:700;color:#1a1a1a}
+.checkin-head .time{font-size:11px;color:#888}
+.checkin-svc{font-size:12px;color:#666;margin-bottom:6px}
+
+.hidden{display:none!important}
+
+/* Demo side tips */
+.demo-tips{background:var(--surface);border:1px solid var(--line-color);border-radius:8px;padding:18px 20px;margin-top:20px}
+.demo-tips h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:1px}
+.demo-tips p{font-size:13px;color:var(--text-sub);line-height:1.75;margin-bottom:0}
+
+/* FEATURES */
+.features{padding:clamp(64px,10vh,100px) 0}
+.features-intro{font-size:15px;color:var(--text-sub);max-width:520px;margin-bottom:48px;line-height:1.85}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;
+  background:var(--line-color);border:1px solid var(--line-color);}
+.feature-card{background:var(--bg);padding:28px;transition:background .2s}
+.feature-card:hover{background:var(--surface)}
+.feature-icon{font-family:var(--serif);font-size:24px;font-weight:900;color:var(--accent);
+  margin-bottom:14px;display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border:1px solid var(--accent);border-radius:50%;}
+.feature-card h3{font-family:var(--serif);font-size:17px;font-weight:900;margin-bottom:10px;line-height:1.5}
+.feature-card p{font-size:14px;color:var(--text-sub);line-height:1.75}
+
+/* PROCESS */
+.process{padding:clamp(64px,10vh,100px) 0;background:var(--bg-alt)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-top:1px solid var(--line-color);border-bottom:1px solid var(--line-color);margin-top:48px;}
+@media(max-width:700px){.steps{grid-template-columns:1fr}}
+.step-item{padding:32px 24px;border-right:1px solid var(--line-color);background:var(--bg)}
+.step-item:last-child{border-right:none}
+@media(max-width:700px){.step-item{border-right:none;border-bottom:1px solid var(--line-color)}
+  .step-item:last-child{border-bottom:none}}
+.step-num{font-family:var(--serif);font-size:32px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:14px}
+.step-item h3{font-family:var(--serif);font-size:18px;font-weight:900;margin-bottom:8px}
+.step-item p{font-size:14px;color:var(--text-sub);line-height:1.75}
+
+/* SIBLINGS */
+.siblings{padding:clamp(48px,8vh,72px) 0;background:var(--bg)}
+.siblings h3{font-family:var(--serif);font-size:22px;font-weight:900;margin-bottom:32px;text-align:center}
+.sibling-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.sibling-card{background:var(--surface);border:1px solid var(--line-color);border-radius:8px;
+  padding:20px 24px;transition:all .2s;display:block;}
+.sibling-card:hover{border-color:var(--accent);box-shadow:0 4px 12px rgba(37,99,235,0.08);transform:translateY(-2px)}
+.sibling-card .eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--text-light);text-transform:uppercase;margin-bottom:8px}
+.sibling-card h4{font-family:var(--serif);font-size:17px;font-weight:900;margin-bottom:6px}
+.sibling-card p{font-size:13px;color:var(--text-sub);line-height:1.7}
+.sibling-card .arrow{font-size:12px;color:var(--accent);font-weight:700;margin-top:10px;display:inline-block}
+
+/* CROSS-SITE */
+.cross-site{padding:clamp(48px,8vh,72px) 0;background:var(--bg-alt);
+  border-top:1px solid var(--line-color);border-bottom:1px solid var(--line-color);}
+.cross-site-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.cross-site-text{flex:1;min-width:280px}
+.cross-site-text .eyebrow{font-size:12px;font-weight:700;letter-spacing:2px;color:var(--text-light);text-transform:uppercase;margin-bottom:10px}
+.cross-site-text h3{font-family:var(--serif);font-size:clamp(20px,2.6vw,26px);font-weight:900;line-height:1.5;margin-bottom:8px}
+.cross-site-text p{font-size:14.5px;color:var(--text-sub);line-height:1.75;max-width:480px}
+
+/* FINAL */
+.final{padding:clamp(80px,14vh,120px) 0;background:var(--bg-dark);color:#fff}
+.final h2{font-family:var(--serif);font-weight:900;font-size:clamp(24px,4.5vw,38px);line-height:1.35;margin-bottom:16px}
+.final p{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:36px;max-width:480px;line-height:1.85}
+.final .btn-cta{background:var(--accent);font-size:16px;padding:16px 36px}
+.final .btn-cta:hover{background:var(--accent-hover)}
+.final .btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;
+  color:rgba(255,255,255,.85);background:transparent;font-size:15px;font-weight:600;
+  border-radius:6px;border:1px solid rgba(255,255,255,.2);transition:all .2s;margin-left:12px;}
+.final .btn-secondary:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.05)}
+.final-contact{margin-top:32px;font-size:13px;color:rgba(255,255,255,.3);display:flex;gap:24px;flex-wrap:wrap}
+
+footer{padding:24px 0;background:var(--bg-dark);border-top:1px solid rgba(255,255,255,.06)}
+footer p{font-size:11px;color:rgba(255,255,255,.2);text-align:center}
+footer a{color:rgba(255,255,255,.3)}
+footer a:hover{color:rgba(255,255,255,.5)}
+
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s var(--ease-out),transform .55s var(--ease-out)}
+.reveal.v{opacity:1;transform:translateY(0)}
+
+#demoToast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);
+  background:rgba(22,163,74,0.95);color:#fff;padding:12px 20px;border-radius:10px;
+  font-size:14px;font-weight:600;opacity:0;pointer-events:none;
+  transition:all .25s;z-index:999;white-space:nowrap;}
+#demoToast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.floating-cta{position:fixed;bottom:24px;right:24px;z-index:998;display:flex;align-items:center;
+  justify-content:center;width:60px;height:60px;background:var(--line-green);border-radius:50%;
+  box-shadow:0 8px 24px rgba(6,199,85,0.3);transition:transform .3s var(--ease-out);
+  animation:floatBounce 3s ease-in-out infinite;}
+.floating-cta:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(6,199,85,0.4)}
+.floating-cta svg{width:32px;height:32px;fill:#fff}
+@keyframes floatBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media(max-width:600px){.floating-cta{bottom:20px;right:20px;width:52px;height:52px}.floating-cta svg{width:28px;height:28px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><a href="/">橙築<span class="dot">.</span></a></div>
+  <div class="nav-links">
+    <a href="/" class="nav-link">回首頁</a>
+    <a href="/#services" class="nav-link">事業</a>
+    <a href="https://samkuo.com" class="nav-link" target="_blank" rel="noopener">完整服務 ↗</a>
+    <a href="https://line.me/R/ti/p/@616wvceo" class="nav-link accent" target="_blank" rel="noopener">免費諮詢</a>
+  </div>
+</nav>
+
+<div class="breadcrumb-bar">
+<div class="wrap">
+  <div class="breadcrumb">
+    <a href="/">橙築國際</a>
+    <span class="sep">/</span>
+    <a href="/#demos">Demo 展示</a>
+    <span class="sep">/</span>
+    <span class="current">髮廊預約系統</span>
+  </div>
+</div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+<div class="wrap">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <p class="hero-eyebrow">LINE + LIFF 髮廊系統</p>
+      <h1>客人用 LINE 預約，<br>你用 LINE <span>管整間店</span>。</h1>
+      <p class="hero-body">
+        客人在 LINE 看價目表、挑設計師、選時段；<br>
+        設計師在 LINE 打卡、鎖班、查營收；<br>
+        老闆在 LINE 看今日營收、自動拆帳、誰該分多少即時算完。
+      </p>
+      <div class="hero-actions">
+        <a href="#demo" class="btn-cta">立即體驗 Demo →</a>
+        <a href="https://line.me/R/ti/p/@616wvceo" class="btn-ghost" target="_blank" rel="noopener">加 LINE 諮詢</a>
+      </div>
+      <p class="hero-note">連鎖髮廊、美甲、美睫、SPA、美睫都能用 · 支援多店面 + 多設計師</p>
+    </div>
+    <div class="hero-phone-wrap reveal">
+      <div class="hero-phone">
+        <div class="hero-phone-screen">
+          <div class="hero-bubble-bot">✂️ 歡迎！想預約哪位設計師？</div>
+          <div class="hero-bubble-user">想預約 Ellen 明天下午</div>
+          <div class="hero-mini-card">
+            <div class="name">✂️ Ellen · 資深設計師</div>
+            <div class="row"><span>項目</span><span class="v">染燙護</span></div>
+            <div class="row"><span>時段</span><span class="v">04/18 14:00-17:00</span></div>
+            <div class="row"><span>時長</span><span class="v">3 小時</span></div>
+            <div class="price">NT$ 4,800</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- STATS -->
+<section class="stats-bar">
+<div class="wrap">
+  <div class="stats-grid">
+    <div class="stat-item reveal"><div class="stat-num">30 秒</div><div class="stat-label">完成一筆預約</div></div>
+    <div class="stat-item reveal"><div class="stat-num">即時</div><div class="stat-label">營收儀表板</div></div>
+    <div class="stat-item reveal"><div class="stat-num">自動</div><div class="stat-label">設計師拆帳</div></div>
+    <div class="stat-item reveal"><div class="stat-num">0</div><div class="stat-label">App 需下載</div></div>
+  </div>
+</div>
+</section>
+
+<!-- DEMO -->
+<section class="demo" id="demo">
+<div class="wrap">
+  <div class="demo-layout">
+    <div class="demo-side">
+      <p class="section-tag">互動體驗 / Live Demo</p>
+      <h2>三種角色，<br>三種不同的畫面。</h2>
+      <p>右邊切換「<strong>顧客</strong>」「<strong>設計師</strong>」「<strong>老闆</strong>」看各自的操作介面。</p>
+      <p><strong>顧客端</strong>：看價目表、挑設計師、選時段、預約。<br>
+      <strong>設計師端</strong>：查今日行程、完工打卡、鎖班休假、看自己營收。<br>
+      <strong>老闆端</strong>：即時營收儀表板、拆帳明細、員工績效、多店面總覽。</p>
+
+      <div class="demo-tips">
+        <h4>試試看</h4>
+        <p>在「顧客端」點設計師查看空檔、選時段預約；在「設計師端」點「完工」看自動拆帳計算；在「老闆端」看本日營收 + 自動拆帳表。</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="role-switch">
+        <button class="role-btn active" onclick="switchRole('customer')">顧客</button>
+        <button class="role-btn" onclick="switchRole('stylist')">設計師</button>
+        <button class="role-btn" onclick="switchRole('owner')">老闆</button>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="phone-header" id="phoneHeader">顧客預約</div>
+
+          <!-- CUSTOMER VIEW -->
+          <div id="viewCustomer">
+            <div class="d-tabs" id="custTabs">
+              <button class="d-tab active" onclick="showCustTab('menu')">價目表</button>
+              <button class="d-tab" onclick="showCustTab('stylists')">設計師</button>
+              <button class="d-tab" onclick="showCustTab('book')">預約</button>
+            </div>
+
+            <div id="custMenu">
+              <div class="d-card">
+                <h4>✂️ 設計剪髮</h4>
+                <div class="service-row">
+                  <div><div class="name">洗剪</div><div class="dur">約 60 分鐘</div></div>
+                  <div class="price">NT$ 800</div>
+                </div>
+                <div class="service-row">
+                  <div><div class="name">設計剪髮 + 造型</div><div class="dur">約 75 分鐘</div></div>
+                  <div class="price">NT$ 1,200</div>
+                </div>
+              </div>
+              <div class="d-card">
+                <h4>🎨 染髮 / 燙髮</h4>
+                <div class="service-row">
+                  <div><div class="name">單色染髮</div><div class="dur">約 150 分鐘</div></div>
+                  <div class="price">NT$ 2,800</div>
+                </div>
+                <div class="service-row">
+                  <div><div class="name">漂染 + 冷色</div><div class="dur">約 240 分鐘</div></div>
+                  <div class="price">NT$ 5,800</div>
+                </div>
+                <div class="service-row">
+                  <div><div class="name">燙髮（短 / 中）</div><div class="dur">約 180 分鐘</div></div>
+                  <div class="price">NT$ 3,500</div>
+                </div>
+                <div class="service-row">
+                  <div><div class="name">染燙護（全套）</div><div class="dur">約 240 分鐘</div></div>
+                  <div class="price">NT$ 4,800</div>
+                </div>
+              </div>
+              <div class="d-card">
+                <h4>💆 護髮保養</h4>
+                <div class="service-row">
+                  <div><div class="name">精油護髮</div><div class="dur">約 40 分鐘</div></div>
+                  <div class="price">NT$ 600</div>
+                </div>
+                <div class="service-row">
+                  <div><div class="name">深層結構護髮</div><div class="dur">約 60 分鐘</div></div>
+                  <div class="price">NT$ 1,500</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="custStylists" class="hidden">
+              <div class="stylist-card" onclick="selectStylist('Ellen')">
+                <div class="stylist-head">
+                  <div class="stylist-avatar">E</div>
+                  <div class="stylist-info">
+                    <div class="stylist-name">Ellen · 資深設計師</div>
+                    <div class="stylist-title">染燙護專長 · 從業 12 年</div>
+                  </div>
+                </div>
+                <div class="stylist-meta">
+                  <span>⭐ 4.9 (247 則)</span>
+                  <span>📅 今日 4 空檔</span>
+                </div>
+              </div>
+              <div class="stylist-card" onclick="selectStylist('Leo')">
+                <div class="stylist-head">
+                  <div class="stylist-avatar" style="background:linear-gradient(135deg,#bfdbfe,#a5b4fc);color:#1e3a8a;">L</div>
+                  <div class="stylist-info">
+                    <div class="stylist-name">Leo · 設計師</div>
+                    <div class="stylist-title">男士剪髮、造型 · 從業 6 年</div>
+                  </div>
+                </div>
+                <div class="stylist-meta">
+                  <span>⭐ 4.8 (134 則)</span>
+                  <span>📅 今日 6 空檔</span>
+                </div>
+              </div>
+              <div class="stylist-card" onclick="selectStylist('Mia')">
+                <div class="stylist-head">
+                  <div class="stylist-avatar" style="background:linear-gradient(135deg,#fde68a,#fca5a5);color:#7c2d12;">M</div>
+                  <div class="stylist-info">
+                    <div class="stylist-name">Mia · 助理設計師</div>
+                    <div class="stylist-title">洗剪、護髮 · 從業 2 年</div>
+                  </div>
+                </div>
+                <div class="stylist-meta">
+                  <span>⭐ 4.7 (58 則)</span>
+                  <span>📅 今日 8 空檔</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="custBook" class="hidden">
+              <div class="d-card">
+                <h4>預約設定</h4>
+                <select class="d-select"><option>Ellen · 資深設計師</option><option>Leo · 設計師</option><option>Mia · 助理設計師</option></select>
+                <select class="d-select"><option>染燙護（全套）NT$ 4,800</option><option>設計剪髮 NT$ 1,200</option><option>單色染髮 NT$ 2,800</option></select>
+                <input class="d-input" type="date" value="2026-04-18">
+                <div style="font-size:12px;color:#666;font-weight:600;margin:8px 0 4px;">選擇時段</div>
+                <div class="time-grid">
+                  <div class="time-slot busy">10:00</div>
+                  <div class="time-slot busy">11:00</div>
+                  <div class="time-slot">12:00</div>
+                  <div class="time-slot">13:00</div>
+                  <div class="time-slot selected" onclick="selectSlot(event)">14:00</div>
+                  <div class="time-slot busy">15:00</div>
+                  <div class="time-slot">16:00</div>
+                  <div class="time-slot">17:00</div>
+                </div>
+                <button class="d-btn" style="margin-top:10px;" onclick="showToast('預約成功！Ellen 將於 4/18 14:00 為您服務')">送出預約</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- STYLIST VIEW -->
+          <div id="viewStylist" class="hidden">
+            <div class="d-tabs" id="stTabs">
+              <button class="d-tab active" onclick="showStylistTab('today')">今日行程</button>
+              <button class="d-tab" onclick="showStylistTab('checkin')">打卡完工</button>
+              <button class="d-tab" onclick="showStylistTab('leave')">休假管理</button>
+              <button class="d-tab" onclick="showStylistTab('revenue')">我的營收</button>
+            </div>
+
+            <div id="stToday">
+              <div style="font-size:12px;color:#888;margin-bottom:10px;">2026-04-17 · 4 筆預約</div>
+              <div class="d-booking">
+                <div style="display:flex;justify-content:space-between;"><strong>10:00 · 王小姐</strong><span class="d-status done">已完工</span></div>
+                <div class="meta"><span>染燙護 · NT$ 4,800</span><span>180 min</span></div>
+              </div>
+              <div class="d-booking">
+                <div style="display:flex;justify-content:space-between;"><strong>13:00 · 李小姐</strong><span class="d-status confirmed">已確認</span></div>
+                <div class="meta"><span>設計剪髮 · NT$ 1,200</span><span>75 min</span></div>
+              </div>
+              <div class="d-booking">
+                <div style="display:flex;justify-content:space-between;"><strong>14:30 · 張先生</strong><span class="d-status confirmed">已確認</span></div>
+                <div class="meta"><span>單色染髮 · NT$ 2,800</span><span>150 min</span></div>
+              </div>
+              <div class="d-booking">
+                <div style="display:flex;justify-content:space-between;"><strong>17:00 · 陳小姐</strong><span class="d-status pending">待確認</span></div>
+                <div class="meta"><span>護髮 · NT$ 600</span><span>40 min</span></div>
+              </div>
+            </div>
+
+            <div id="stCheckin" class="hidden">
+              <div class="checkin-row">
+                <div class="checkin-head">
+                  <div class="name">13:00 · 李小姐</div>
+                  <div class="time">預計 75 min</div>
+                </div>
+                <div class="checkin-svc">設計剪髮 NT$ 1,200</div>
+                <div class="d-btn-row">
+                  <button class="d-btn-sm d-btn-green" onclick="showToast('完工登記！自動拆帳 Ellen +$600 / 店家 +$600')">完工</button>
+                  <button class="d-btn-sm d-btn-gray">編輯</button>
+                </div>
+              </div>
+              <div class="checkin-row">
+                <div class="checkin-head">
+                  <div class="name">14:30 · 張先生</div>
+                  <div class="time">預計 150 min</div>
+                </div>
+                <div class="checkin-svc">單色染髮 NT$ 2,800</div>
+                <div class="d-btn-row">
+                  <button class="d-btn-sm d-btn-blue" onclick="showToast('已打卡開始服務')">開始</button>
+                  <button class="d-btn-sm d-btn-gray">編輯</button>
+                </div>
+              </div>
+              <div class="checkin-row">
+                <div class="checkin-head">
+                  <div class="name">17:00 · 陳小姐</div>
+                  <div class="time">預計 40 min</div>
+                </div>
+                <div class="checkin-svc">護髮 NT$ 600</div>
+                <div class="d-btn-row">
+                  <button class="d-btn-sm d-btn-green" onclick="showToast('已確認預約，訊息已發送給客人')">確認</button>
+                  <button class="d-btn-sm d-btn-danger" onclick="showToast('已改約，客人收到通知')">改約</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="stLeave" class="hidden">
+              <div class="d-card">
+                <h4>快速鎖班</h4>
+                <input class="d-input" type="date" value="2026-04-20">
+                <select class="d-select"><option>整天</option><option>上午（10-13）</option><option>下午（14-18）</option><option>晚上（18-21）</option></select>
+                <input class="d-input" placeholder="原因（選填，如「私事」）">
+                <button class="d-btn" onclick="showToast('鎖班成功！4/20 已鎖定，該時段將不顯示給客人預約')">鎖定時段</button>
+              </div>
+              <div class="d-card">
+                <h4>已鎖定時段</h4>
+                <div class="d-booking">
+                  <div style="display:flex;justify-content:space-between;"><strong>2026-04-25</strong><span class="d-status confirmed">整天</span></div>
+                  <div class="meta">原因：家族旅遊</div>
+                </div>
+                <div class="d-booking">
+                  <div style="display:flex;justify-content:space-between;"><strong>2026-05-01</strong><span class="d-status pending">下午</span></div>
+                  <div class="meta">原因：看醫生</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="stRevenue" class="hidden">
+              <div style="font-size:12px;color:#888;margin-bottom:10px;">2026-04 · Ellen 個人營收</div>
+              <div class="d-rev-grid">
+                <div class="d-rev-box"><div class="lbl">本月營業額</div><div class="val" style="color:#166534;">$86,400</div></div>
+                <div class="d-rev-box"><div class="lbl">我的分潤</div><div class="val" style="color:#1e40af;">$43,200</div></div>
+              </div>
+              <div class="d-rev-grid">
+                <div class="d-rev-box"><div class="lbl">服務筆數</div><div class="val">42 筆</div></div>
+                <div class="d-rev-box"><div class="lbl">平均客單</div><div class="val">$2,057</div></div>
+              </div>
+              <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:8px;">近 5 筆</div>
+              <div class="split-row">
+                <div class="head"><div class="name">王小姐 · 染燙護</div><div class="sum">+$2,400</div></div>
+                <div class="detail"><span>04-17 10:00</span><span>店抽 50%</span></div>
+              </div>
+              <div class="split-row">
+                <div class="head"><div class="name">林小姐 · 漂染</div><div class="sum">+$2,900</div></div>
+                <div class="detail"><span>04-16 15:00</span><span>店抽 50%</span></div>
+              </div>
+              <div class="split-row">
+                <div class="head"><div class="name">周小姐 · 單色染髮</div><div class="sum">+$1,400</div></div>
+                <div class="detail"><span>04-16 11:00</span><span>店抽 50%</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- OWNER VIEW -->
+          <div id="viewOwner" class="hidden">
+            <div class="d-tabs" id="ownerTabs">
+              <button class="d-tab active" onclick="showOwnerTab('dashboard')">今日</button>
+              <button class="d-tab" onclick="showOwnerTab('split')">拆帳</button>
+              <button class="d-tab" onclick="showOwnerTab('perf')">績效</button>
+              <button class="d-tab" onclick="showOwnerTab('month')">月報</button>
+            </div>
+
+            <div id="ownDashboard">
+              <div style="font-size:12px;color:#888;margin-bottom:10px;">2026-04-17（即時）</div>
+              <div class="d-rev-grid">
+                <div class="d-rev-box"><div class="lbl">今日營收</div><div class="val" style="color:#166534;">$18,400</div></div>
+                <div class="d-rev-box"><div class="lbl">服務筆數</div><div class="val" style="color:#1e40af;">7 / 12</div></div>
+              </div>
+              <div class="d-rev-grid">
+                <div class="d-rev-box"><div class="lbl">設計師分潤</div><div class="val">$9,200</div></div>
+                <div class="d-rev-box"><div class="lbl">店家淨收</div><div class="val">$9,200</div></div>
+              </div>
+              <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:8px;">最近完工</div>
+              <div class="d-booking">
+                <div style="display:flex;justify-content:space-between;"><strong>王小姐 · Ellen</strong><span class="d-status done">NT$ 4,800</span></div>
+                <div class="meta"><span>染燙護 · 10:00</span><span>拆 $2,400/$2,400</span></div>
+              </div>
+              <div class="d-booking">
+                <div style="display:flex;justify-content:space-between;"><strong>黃先生 · Leo</strong><span class="d-status done">NT$ 1,200</span></div>
+                <div class="meta"><span>設計剪髮 · 11:30</span><span>拆 $600/$600</span></div>
+              </div>
+              <div class="d-booking">
+                <div style="display:flex;justify-content:space-between;"><strong>吳小姐 · Mia</strong><span class="d-status done">NT$ 600</span></div>
+                <div class="meta"><span>護髮 · 12:30</span><span>拆 $240/$360</span></div>
+              </div>
+            </div>
+
+            <div id="ownSplit" class="hidden">
+              <div style="font-size:12px;color:#888;margin-bottom:10px;">2026-04-17 · 拆帳明細</div>
+              <div class="split-row">
+                <div class="head"><div class="name">Ellen（50% 抽成）</div><div class="sum">$3,600</div></div>
+                <div class="detail"><span>3 筆 · $7,200</span><span>店抽 $3,600</span></div>
+              </div>
+              <div class="split-row">
+                <div class="head"><div class="name">Leo（50% 抽成）</div><div class="sum">$1,800</div></div>
+                <div class="detail"><span>2 筆 · $3,600</span><span>店抽 $1,800</span></div>
+              </div>
+              <div class="split-row">
+                <div class="head"><div class="name">Mia（40% 抽成）</div><div class="sum">$720</div></div>
+                <div class="detail"><span>2 筆 · $1,800</span><span>店抽 $1,080</span></div>
+              </div>
+              <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px;margin-top:12px;">
+                <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;">
+                  <span>今日總分潤</span><span style="color:var(--accent);">$6,120</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-top:4px;">
+                  <span>店家淨收</span><span style="color:var(--success);">$6,480</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="ownPerf" class="hidden">
+              <div style="font-size:12px;color:#888;margin-bottom:10px;">本月累計（4/1 - 4/17）</div>
+              <div class="split-row">
+                <div class="head"><div class="name">Ellen</div><div class="sum">$86,400</div></div>
+                <div class="detail"><span>42 筆</span><span>均客單 $2,057</span></div>
+              </div>
+              <div class="split-row">
+                <div class="head"><div class="name">Leo</div><div class="sum">$43,200</div></div>
+                <div class="detail"><span>38 筆</span><span>均客單 $1,137</span></div>
+              </div>
+              <div class="split-row">
+                <div class="head"><div class="name">Mia</div><div class="sum">$18,600</div></div>
+                <div class="detail"><span>26 筆</span><span>均客單 $715</span></div>
+              </div>
+              <div style="font-size:12px;font-weight:700;color:#555;margin:14px 0 8px 0;">本月熱門服務</div>
+              <div class="service-row">
+                <div><div class="name">染燙護（全套）</div><div class="dur">24 筆 · NT$ 115,200</div></div>
+                <div class="price">🥇</div>
+              </div>
+              <div class="service-row">
+                <div><div class="name">設計剪髮</div><div class="dur">38 筆 · NT$ 45,600</div></div>
+                <div class="price">🥈</div>
+              </div>
+              <div class="service-row">
+                <div><div class="name">單色染髮</div><div class="dur">12 筆 · NT$ 33,600</div></div>
+                <div class="price">🥉</div>
+              </div>
+            </div>
+
+            <div id="ownMonth" class="hidden">
+              <div style="font-size:12px;color:#888;margin-bottom:10px;">2026 年 4 月（至 4/17）</div>
+              <div class="d-rev-grid">
+                <div class="d-rev-box"><div class="lbl">月營業額</div><div class="val" style="color:#166534;">$148K</div></div>
+                <div class="d-rev-box"><div class="lbl">月淨收</div><div class="val" style="color:#1e40af;">$74K</div></div>
+              </div>
+              <div class="d-rev-grid">
+                <div class="d-rev-box"><div class="lbl">總服務</div><div class="val">106 筆</div></div>
+                <div class="d-rev-box"><div class="lbl">客回頭率</div><div class="val">42%</div></div>
+              </div>
+              <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:8px;">vs 上月</div>
+              <div class="split-row">
+                <div class="head"><div class="name">營業額</div><div class="sum" style="color:#16a34a;">↗ +18%</div></div>
+                <div class="detail"><span>$125K → $148K</span></div>
+              </div>
+              <div class="split-row">
+                <div class="head"><div class="name">平均客單</div><div class="sum" style="color:#16a34a;">↗ +6%</div></div>
+                <div class="detail"><span>$1,318 → $1,396</span></div>
+              </div>
+              <div class="split-row">
+                <div class="head"><div class="name">新客數</div><div class="sum" style="color:#dc2626;">↘ -8%</div></div>
+                <div class="detail"><span>25 → 23</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+<div class="wrap">
+  <p class="section-tag reveal">核心功能</p>
+  <h2 class="section-title reveal">從顧客預約到老闆看帳，<br>一套系統全包。</h2>
+  <p class="features-intro reveal">不是美化過的 POS 系統，是針對「LINE 就是工作 app」的真實場景設計。</p>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">i</div>
+      <h3>顧客 LIFF 預約</h3>
+      <p>LINE 裡直接看價目表、挑設計師、選時段——不用加好友、不用下載 app。顧客零學習成本。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">ii</div>
+      <h3>休假日曆自動阻擋</h3>
+      <p>設計師一鍵鎖班，該時段自動從客人可選的時段消失。不再出現「對不起我那天不在」的尷尬。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">iii</div>
+      <h3>完工自動拆帳</h3>
+      <p>設計師打卡完工，系統依抽成比例自動算好「設計師分潤 / 店家淨收」。不用月底手動算錢。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">iv</div>
+      <h3>即時營收儀表板</h3>
+      <p>老闆打開 LINE 就看到今日營收、每位設計師產值、拆帳明細、熱門服務排行。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">v</div>
+      <h3>多店面管理</h3>
+      <p>連鎖店一套後台管全部。可看單店也可看集團總覽，設計師可跨店支援。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">vi</div>
+      <h3>Rich Menu 雙層選單</h3>
+      <p>LINE 下方的 Rich Menu 設計師一個模式、客人一個模式，系統自動判斷身份切換選單。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+<div class="wrap">
+  <p class="section-tag reveal">顧客預約流程</p>
+  <h2 class="section-title reveal">30 秒完成一筆預約。</h2>
+  <div class="steps">
+    <div class="step-item reveal">
+      <div class="step-num">01</div>
+      <h3>看價目表</h3>
+      <p>點 LINE 下方選單進入 LIFF 預約頁，精緻的價目表一目了然。</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-num">02</div>
+      <h3>挑設計師 + 時段</h3>
+      <p>看設計師介紹、空檔，選想要的時段——已滿的時段自動隱藏。</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-num">03</div>
+      <h3>確認收通知</h3>
+      <p>送出後即時通知設計師，客人收到預約確認訊息 + 地點導航。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SIBLINGS -->
+<section class="siblings">
+<div class="wrap">
+  <h3>其他 Demo</h3>
+  <div class="sibling-grid">
+    <a href="/pricing-demo/" class="sibling-card">
+      <div class="eyebrow">No. 01</div>
+      <h4>智能查價 Demo</h4>
+      <p>B2B 企業查價，AI 解析 LINE 訊息秒回 Flex 商品卡。</p>
+      <span class="arrow">前往體驗 →</span>
+    </a>
+    <a href="/coach-demo/" class="sibling-card">
+      <div class="eyebrow">No. 02</div>
+      <h4>教練預約系統 Demo</h4>
+      <p>學員 LIFF 預約、自動扣堂數、教練看收入報表。</p>
+      <span class="arrow">前往體驗 →</span>
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- CROSS-SITE -->
+<section class="cross-site">
+<div class="wrap">
+  <div class="cross-site-inner">
+    <div class="cross-site-text">
+      <div class="eyebrow">完整服務</div>
+      <h3>完整美業方案介紹，<br>請見 samkuo.com</h3>
+      <p>這裡是互動試玩版。如果想看完整的美業方案說明、定價、FAQ，請前往 samkuo.com/salon。</p>
+    </div>
+    <a href="https://samkuo.com/salon" class="btn-cta" target="_blank" rel="noopener" style="background:var(--navy);">看完整美業方案 →</a>
+  </div>
+</div>
+</section>
+
+<!-- FINAL -->
+<section class="final">
+<div class="wrap">
+  <h2 class="reveal">想為你的店打造一套？</h2>
+  <p class="reveal">不論髮廊、美甲、美睫、SPA、美睫、紋繡——我們都能依照你的服務流程量身打造。初次諮詢免費，30 分鐘聊完你的需求。</p>
+  <div class="reveal" style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+    <a href="https://line.me/R/ti/p/@616wvceo" class="btn-cta" target="_blank" rel="noopener">加 LINE 免費諮詢 →</a>
+    <a href="tel:0975691485" class="btn-secondary">撥打 0975-691-485</a>
+  </div>
+  <div class="final-contact reveal">
+    <span>Email：cat@cz-777.com</span>
+    <span>桃園市春日路 818 號 1F</span>
+  </div>
+</div>
+</section>
+
+<footer><p>© 2026 橙築國際 ChengZhu International · <a href="/">chengzhu.co</a></p></footer>
+
+<a href="https://line.me/R/ti/p/@616wvceo" class="floating-cta" target="_blank" rel="noopener" title="加 LINE 諮詢">
+  <svg viewBox="0 0 24 24"><path d="M23.146 10.362c0-4.38-4.408-7.946-9.824-7.946-5.416 0-9.824 3.567-9.824 7.946 0 3.931 3.513 7.234 8.28 7.859.324.068.756.208.865.485.099.25-.032.645-.064.896l-.16 1.002c-.049.303-.23.903.784.476 1.014-.427 5.483-3.23 7.55-5.591.758-.87 1.393-2.029 1.393-3.127z"/></svg>
+</a>
+
+<div id="demoToast"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+
+function switchRole(role){
+  document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('viewCustomer').classList.toggle('hidden',role!=='customer');
+  document.getElementById('viewStylist').classList.toggle('hidden',role!=='stylist');
+  document.getElementById('viewOwner').classList.toggle('hidden',role!=='owner');
+  document.getElementById('phoneHeader').textContent=role==='customer'?'顧客預約':role==='stylist'?'設計師後台':'老闆儀表板';
+}
+
+function showTab(tabsSelector,map,activeKey){
+  document.querySelectorAll(tabsSelector+' .d-tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  Object.values(map).forEach(id=>document.getElementById(id).classList.add('hidden'));
+  document.getElementById(map[activeKey]).classList.remove('hidden');
+}
+function showCustTab(k){showTab('#custTabs',{menu:'custMenu',stylists:'custStylists',book:'custBook'},k)}
+function showStylistTab(k){showTab('#stTabs',{today:'stToday',checkin:'stCheckin',leave:'stLeave',revenue:'stRevenue'},k)}
+function showOwnerTab(k){showTab('#ownerTabs',{dashboard:'ownDashboard',split:'ownSplit',perf:'ownPerf',month:'ownMonth'},k)}
+
+function selectStylist(name){showToast('選擇 '+name+'，切換到「預約」分頁查看時段');}
+function selectSlot(e){
+  document.querySelectorAll('.time-slot').forEach(s=>s.classList.remove('selected'));
+  if(!e.target.classList.contains('busy'))e.target.classList.add('selected');
+}
+
+function showToast(msg){
+  const t=document.getElementById('demoToast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2400);
+}
+</script>
+</body>
+</html>

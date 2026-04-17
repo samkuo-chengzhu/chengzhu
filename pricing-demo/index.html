@@ -438,6 +438,18 @@ nav{
   border-radius:4px;color:var(--text-sub);font-weight:500;
 }
 
+/* ═══ SIBLING DEMOS ═══ */
+.siblings{padding:clamp(48px,8vh,72px) 0;background:var(--bg)}
+.siblings h3{font-family:var(--serif);font-size:22px;font-weight:900;margin-bottom:32px;text-align:center}
+.sibling-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.sibling-card{background:var(--surface);border:1px solid var(--line-color);border-radius:8px;
+  padding:20px 24px;transition:all .2s;display:block;}
+.sibling-card:hover{border-color:var(--accent);box-shadow:0 4px 12px rgba(37,99,235,0.08);transform:translateY(-2px)}
+.sibling-card .eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--text-light);text-transform:uppercase;margin-bottom:8px}
+.sibling-card h4{font-family:var(--serif);font-size:17px;font-weight:900;margin-bottom:6px}
+.sibling-card p{font-size:13px;color:var(--text-sub);line-height:1.7}
+.sibling-card .arrow{font-size:12px;color:var(--accent);font-weight:700;margin-top:10px;display:inline-block}
+
 /* ═══ CROSS-SITE NOTICE ═══ */
 .cross-site{
   padding:clamp(48px,8vh,72px) 0;background:var(--bg);
@@ -772,6 +784,27 @@ footer a:hover{color:rgba(255,255,255,.5)}
       <span class="case-tag">Google Drive 圖庫同步</span>
       <span class="case-tag">SSO 登入</span>
     </div>
+  </div>
+</div>
+</section>
+
+<!-- SIBLINGS -->
+<section class="siblings">
+<div class="wrap">
+  <h3>其他 Demo</h3>
+  <div class="sibling-grid">
+    <a href="/coach-demo/" class="sibling-card">
+      <div class="eyebrow">No. 02</div>
+      <h4>教練預約系統 Demo</h4>
+      <p>學員 LIFF 預約、自動扣堂數、教練看收入報表。</p>
+      <span class="arrow">前往體驗 →</span>
+    </a>
+    <a href="/salon-demo/" class="sibling-card">
+      <div class="eyebrow">No. 03</div>
+      <h4>髮廊預約 Demo</h4>
+      <p>顧客 LINE 預約，設計師查排班、查營收，老闆一目了然。</p>
+      <span class="arrow">前往體驗 →</span>
+    </a>
   </div>
 </div>
 </section>
