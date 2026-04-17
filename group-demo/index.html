@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>球團報名系統 Demo｜2000 人 LINE 群組一鍵報名 + 候補自動遞補｜橙築國際</title>
+<meta name="description" content="互動試玩球團／社群報名系統：一鍵報名、候補自動遞補、同組好友標記、AI 自動分組、代報／代取消、Web 名單管理。麻吉 FunGolf 2000 人群組實戰案例。">
+<link rel="canonical" href="https://chengzhu.co/group-demo/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#F8FAFC;--bg-alt:#F1F5F9;--bg-dark:#0F172A;
+  --surface:#FFFFFF;--text:#0F172A;--text-sub:#475569;--text-light:#64748B;
+  --line-color:#E2E8F0;--accent:#2563EB;--accent-hover:#1D4ED8;
+  --navy:#1E3A8A;--navy-hover:#1E40AF;
+  --line-green:#06C755;--orange:#FF6B35;
+  --success:#16A34A;--warning:#F59E0B;--danger:#DC2626;--emerald:#059669;
+  --serif:'Noto Serif TC',serif;--sans:'Noto Sans TC',sans-serif;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;
+  line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+::selection{background:var(--accent);color:#fff}
+a{color:inherit;text-decoration:none}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.02;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(24px,5vw,48px)}
+.divider{height:1px;background:var(--line-color);margin:0}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 clamp(24px,5vw,48px);
+  height:56px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(248,250,252,0.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line-color);}
+.nav-logo{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--text);letter-spacing:0.02em}
+.nav-logo a{color:var(--text)}
+.nav-logo .dot{color:var(--orange)}
+.nav-links{display:flex;gap:8px;align-items:center}
+.nav-link{font-size:12px;letter-spacing:0.5px;color:var(--text-light);padding:6px 14px;
+  border-radius:4px;transition:all .2s;font-weight:500;}
+.nav-link:hover{color:var(--text);background:rgba(15,23,42,0.04)}
+.nav-link.accent{color:var(--accent);border:1px solid rgba(37,99,235,0.2)}
+.nav-link.accent:hover{background:rgba(37,99,235,0.06)}
+@media(max-width:600px){.nav-links{gap:4px}.nav-link{font-size:11px;padding:5px 10px}}
+
+.breadcrumb-bar{padding:80px 0 0}
+.breadcrumb{font-size:12px;color:var(--text-light);letter-spacing:0.06em;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.breadcrumb a{color:var(--text-light);transition:color .2s}
+.breadcrumb a:hover{color:var(--accent)}
+.breadcrumb .sep{color:var(--line-color)}
+.breadcrumb .current{color:var(--text);font-weight:600}
+
+.hero{padding:32px 0 clamp(60px,10vh,100px)}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
+@media(min-width:880px){.hero-grid{grid-template-columns:1.1fr 1fr;gap:64px}}
+.hero-eyebrow{font-size:13px;font-weight:500;letter-spacing:3px;color:var(--accent);margin-bottom:24px;
+  opacity:0;animation:up .7s var(--ease-out) .15s forwards;}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(32px,6vw,54px);line-height:1.25;
+  letter-spacing:-0.02em;margin-bottom:28px;opacity:0;animation:up .7s var(--ease-out) .3s forwards;}
+.hero h1 span{color:var(--accent)}
+.hero-body{max-width:520px;font-size:clamp(15px,1.6vw,17px);color:var(--text-sub);
+  line-height:1.85;margin-bottom:36px;opacity:0;animation:up .7s var(--ease-out) .45s forwards;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:up .7s var(--ease-out) .6s forwards}
+.btn-cta{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;background:var(--navy);
+  color:#fff;font-size:15px;font-weight:700;border-radius:6px;border:none;cursor:pointer;
+  transition:background .25s,transform .25s;}
+.btn-cta:hover{background:var(--navy-hover);transform:translateY(-1px);color:#fff}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;color:var(--text);
+  background:transparent;font-size:15px;font-weight:700;border-radius:6px;
+  border:1px solid var(--line-color);transition:all .2s;}
+.btn-ghost:hover{border-color:var(--text);background:var(--surface)}
+.hero-note{margin-top:14px;font-size:12px;color:var(--text-light);
+  opacity:0;animation:up .7s var(--ease-out) .75s forwards;}
+
+.hero-phone-wrap{display:flex;justify-content:center;align-items:center;
+  opacity:0;animation:up .7s var(--ease-out) .5s forwards;}
+.hero-phone{position:relative;width:100%;max-width:300px;background:#000;border-radius:36px;padding:10px;
+  box-shadow:0 24px 64px rgba(15,23,42,0.18), inset 0 0 0 2px #444;
+  animation:floatPhone 6s ease-in-out infinite;}
+.hero-phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:110px;height:22px;background:#000;border-bottom-left-radius:14px;border-bottom-right-radius:14px;z-index:2;}
+.hero-phone-screen{background:#fff;border-radius:28px;padding:34px 14px 14px;
+  min-height:520px;display:flex;flex-direction:column;gap:8px;}
+.hero-bubble-bot{align-self:flex-start;background:#fff;border:1px solid #ececec;
+  padding:10px 14px;border-radius:14px 14px 14px 4px;font-size:13px;line-height:1.5;color:#333;max-width:85%;white-space:pre-line;}
+.hero-bubble-user{align-self:flex-end;background:var(--line-green);color:#fff;
+  padding:10px 14px;border-radius:14px 14px 4px 14px;font-size:13px;max-width:80%;}
+.hero-mini-card{align-self:flex-start;background:#fff;border:1px solid #eee;
+  border-radius:10px;padding:12px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);max-width:92%;}
+.hero-mini-card .name{font-weight:700;color:#1a1a1a;margin-bottom:6px;font-size:13px}
+.hero-mini-card .row{display:flex;justify-content:space-between;color:#888;font-size:11px;margin-bottom:3px}
+.hero-mini-card .row .v{color:#333;font-weight:600}
+.hero-mini-card .fill{height:6px;background:#f0f0f0;border-radius:3px;margin-top:6px;overflow:hidden}
+.hero-mini-card .fill .bar{height:100%;background:var(--success);width:62%}
+@keyframes floatPhone{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+.stats-bar{padding:clamp(40px,6vh,60px) 0;border-top:1px solid var(--line-color);border-bottom:1px solid var(--line-color)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+@media(max-width:600px){.stats-grid{grid-template-columns:1fr 1fr}}
+.stat-item{text-align:center;padding:16px 12px}
+.stat-item+.stat-item{border-left:1px solid var(--line-color)}
+@media(max-width:600px){
+  .stat-item:nth-child(2){border-left:1px solid var(--line-color)}
+  .stat-item:nth-child(3){border-left:none;border-top:1px solid var(--line-color)}
+  .stat-item:nth-child(4){border-top:1px solid var(--line-color)}
+}
+.stat-num{font-family:var(--serif);font-size:clamp(28px,4vw,36px);font-weight:900;color:var(--accent);line-height:1}
+.stat-label{font-size:12px;color:var(--text-light);margin-top:6px}
+
+.section-tag{font-size:12px;font-weight:700;letter-spacing:3px;color:var(--text-light);
+  text-transform:uppercase;margin-bottom:20px;}
+.section-title{font-family:var(--serif);font-weight:900;font-size:clamp(22px,3.5vw,34px);
+  line-height:1.4;margin-bottom:24px;max-width:560px;}
+.section-intro{font-size:15px;color:var(--text-sub);max-width:560px;line-height:1.85;margin-bottom:48px}
+
+.demo{padding:clamp(64px,10vh,100px) 0;background:var(--bg-alt);position:relative}
+.demo-layout{display:grid;grid-template-columns:1fr;gap:40px;align-items:start}
+@media(min-width:900px){.demo-layout{grid-template-columns:1fr 400px;gap:64px}}
+.demo-side h2{font-family:var(--serif);font-weight:900;font-size:clamp(22px,3.2vw,30px);
+  line-height:1.4;margin-bottom:18px;}
+.demo-side p{font-size:15px;color:var(--text-sub);line-height:1.85;margin-bottom:20px}
+.demo-side strong{color:var(--text);font-weight:700}
+
+.role-switch{display:inline-flex;background:var(--surface);border:1px solid var(--line-color);
+  border-radius:6px;padding:4px;margin-bottom:24px;gap:2px;flex-wrap:wrap;}
+.role-btn{padding:9px 14px;border:none;background:transparent;border-radius:4px;
+  font-size:12.5px;color:var(--text-sub);cursor:pointer;font-weight:600;font-family:var(--sans);
+  letter-spacing:0.5px;transition:all .2s;}
+.role-btn:hover{color:var(--text)}
+.role-btn.active{background:var(--navy);color:#fff}
+
+.phone-frame{position:relative;width:100%;max-width:400px;margin:0 auto;
+  background:#0a0a0a;border-radius:42px;padding:14px;
+  box-shadow:0 30px 80px rgba(15,23,42,0.18), inset 0 0 0 2px #333;}
+.phone-frame::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:130px;height:26px;background:#000;
+  border-bottom-left-radius:18px;border-bottom-right-radius:18px;z-index:5;}
+.phone-screen{background:#fff;border-radius:32px;height:660px;overflow-y:auto;
+  padding:36px 14px 14px;display:flex;flex-direction:column;}
+.phone-screen::-webkit-scrollbar{width:0}
+.phone-header{text-align:center;font-size:11px;color:#bbb;
+  padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid #f0f0f0;flex-shrink:0;}
+
+.d-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;flex-shrink:0;}
+.d-tab{padding:6px 12px;border:1px solid #e0e0e0;background:#fafafa;border-radius:6px;
+  font-size:12px;color:#555;cursor:pointer;font-weight:500;font-family:var(--sans);transition:all .15s;}
+.d-tab:hover{background:#f0f0f0}
+.d-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.d-card{background:#fff;border:1px solid #eee;border-radius:10px;padding:14px;margin-bottom:12px}
+.d-card h4{font-size:14px;font-weight:700;margin-bottom:10px;color:#1a1a1a}
+.d-input,.d-select{width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;
+  font-size:13px;font-family:var(--sans);margin-bottom:8px;outline:none;background:#fff;}
+.d-input:focus,.d-select:focus{border-color:var(--accent)}
+.d-btn{width:100%;padding:10px;background:var(--accent);color:#fff;border:none;
+  border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s;font-family:var(--sans);}
+.d-btn:hover{background:var(--accent-hover)}
+.d-btn-row{display:flex;gap:6px}
+.d-btn-sm{flex:1;padding:8px;font-size:12px;font-weight:600;border:none;border-radius:6px;
+  cursor:pointer;font-family:var(--sans);transition:all .15s;}
+.d-btn-green{background:var(--success);color:#fff}
+.d-btn-green:hover{background:#15803d}
+.d-btn-blue{background:var(--accent);color:#fff}
+.d-btn-blue:hover{background:var(--accent-hover)}
+.d-btn-gray{background:#e5e7eb;color:#374151}
+.d-btn-gray:hover{background:#d1d5db}
+.d-btn-danger{background:var(--danger);color:#fff}
+.d-btn-danger:hover{background:#b91c1c}
+
+/* Event card */
+.event-card{background:#fff;border:1px solid #eee;border-radius:10px;padding:12px;margin-bottom:10px;
+  transition:all .2s;cursor:pointer;}
+.event-card:hover{border-color:var(--accent)}
+.event-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:8px}
+.event-no{font-family:var(--serif);font-size:16px;font-weight:900;color:var(--accent);line-height:1}
+.event-name{font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
+.event-meta{font-size:11px;color:#888}
+.event-body{font-size:12px;color:#555;line-height:1.6}
+.event-fill{height:6px;background:#f0f0f0;border-radius:3px;margin:8px 0 6px;overflow:hidden}
+.event-fill .bar{height:100%;background:var(--success);transition:width .3s}
+.event-fill .bar.warn{background:var(--warning)}
+.event-fill .bar.full{background:var(--danger)}
+.event-foot{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-top:4px}
+.event-foot .status{font-weight:700}
+.event-foot .open{color:var(--success)}
+.event-foot .warn{color:var(--warning)}
+
+/* Roster */
+.roster-group{background:#f9fafb;border-radius:8px;padding:10px 12px;margin-bottom:8px}
+.roster-group h5{font-size:12px;font-weight:700;color:#374151;margin-bottom:6px;letter-spacing:0.5px}
+.roster-row{font-size:12px;color:#1a1a1a;padding:3px 0;display:flex;gap:6px;align-items:center}
+.roster-row .num{color:#888;font-weight:600;min-width:24px}
+.roster-row .tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 5px;border-radius:3px;background:#dcfce7;color:#166534;margin-right:2px}
+.roster-row .tag.B{background:#dbeafe;color:#1e40af}
+.roster-row .tag.C{background:#fce7f3;color:#9d174d}
+.roster-row .tag.D{background:#fed7aa;color:#9a3412}
+.roster-row .host{font-size:10px;color:#b45309;margin-left:auto}
+.roster-waitlist{background:#fef3c7;border-radius:8px;padding:10px 12px;margin-bottom:8px}
+.roster-waitlist h5{font-size:12px;font-weight:700;color:#92400e;margin-bottom:6px;letter-spacing:0.5px}
+
+/* Stats dashboard */
+.d-rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px}
+.d-rev-box{background:#f9fafb;padding:10px 8px;border-radius:8px;text-align:center}
+.d-rev-box .lbl{font-size:10px;color:#888;margin-bottom:4px}
+.d-rev-box .val{font-size:18px;font-weight:800;color:#1a1a1a;font-family:var(--serif)}
+
+/* Chat */
+.d-chat{display:flex;flex-direction:column;gap:8px;padding:4px 2px;flex:1;overflow-y:auto;min-height:300px}
+.d-bubble{max-width:86%;padding:10px 14px;font-size:12.5px;line-height:1.55;
+  border-radius:14px;word-wrap:break-word;white-space:pre-line;}
+.d-bubble-bot{align-self:flex-start;background:#f4f4f4;color:#222;border-radius:14px 14px 14px 4px}
+.d-bubble-user{align-self:flex-end;background:var(--line-green);color:#fff;border-radius:14px 14px 4px 14px}
+.d-input-row{display:flex;gap:6px;padding:10px;background:#f9f9f9;border-top:1px solid #eee;
+  border-radius:0 0 24px 24px;margin:8px -14px -14px;flex-shrink:0;}
+.d-input-row .d-input{flex:1;margin:0;border-radius:18px;padding:9px 14px}
+.d-send{padding:9px 16px;background:var(--accent);color:#fff;border:none;border-radius:18px;
+  font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);}
+.d-send:hover{background:var(--accent-hover)}
+
+.quick-tips{margin-top:16px;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;padding:0 2px;}
+.quick-tip{font-size:11px;padding:5px 10px;background:#fafafa;border:1px solid #e5e7eb;
+  border-radius:4px;color:#555;cursor:pointer;font-weight:500;font-family:var(--sans);transition:all .15s;}
+.quick-tip:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* Notify card */
+.notify-card{background:#fff;border:1px solid #f0f0f0;border-radius:10px;padding:14px;margin-bottom:10px}
+.notify-card h5{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.notify-card h5 .ico{font-size:16px}
+.notify-card .body{font-size:12px;color:#555;line-height:1.7;white-space:pre-line}
+.notify-card.promo{border-left:3px solid var(--accent)}
+.notify-card.remind{border-left:3px solid var(--warning)}
+.notify-card.confirm{border-left:3px solid var(--success)}
+
+.hidden{display:none!important}
+
+.demo-tips{background:var(--surface);border:1px solid var(--line-color);border-radius:8px;padding:18px 20px;margin-top:20px}
+.demo-tips h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:1px}
+.demo-tips p{font-size:13px;color:var(--text-sub);line-height:1.75;margin-bottom:0}
+
+.features{padding:clamp(64px,10vh,100px) 0}
+.features-intro{font-size:15px;color:var(--text-sub);max-width:520px;margin-bottom:48px;line-height:1.85}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;
+  background:var(--line-color);border:1px solid var(--line-color);}
+.feature-card{background:var(--bg);padding:28px;transition:background .2s}
+.feature-card:hover{background:var(--surface)}
+.feature-icon{font-family:var(--serif);font-size:24px;font-weight:900;color:var(--accent);
+  margin-bottom:14px;display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border:1px solid var(--accent);border-radius:50%;}
+.feature-card h3{font-family:var(--serif);font-size:17px;font-weight:900;margin-bottom:10px;line-height:1.5}
+.feature-card p{font-size:14px;color:var(--text-sub);line-height:1.75}
+
+.process{padding:clamp(64px,10vh,100px) 0;background:var(--bg-alt)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-top:1px solid var(--line-color);border-bottom:1px solid var(--line-color);margin-top:48px;}
+@media(max-width:700px){.steps{grid-template-columns:1fr}}
+.step-item{padding:32px 24px;border-right:1px solid var(--line-color);background:var(--bg)}
+.step-item:last-child{border-right:none}
+@media(max-width:700px){.step-item{border-right:none;border-bottom:1px solid var(--line-color)}
+  .step-item:last-child{border-bottom:none}}
+.step-num{font-family:var(--serif);font-size:32px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:14px}
+.step-item h3{font-family:var(--serif);font-size:18px;font-weight:900;margin-bottom:8px}
+.step-item p{font-size:14px;color:var(--text-sub);line-height:1.75}
+
+.siblings{padding:clamp(48px,8vh,72px) 0;background:var(--bg)}
+.siblings h3{font-family:var(--serif);font-size:22px;font-weight:900;margin-bottom:32px;text-align:center}
+.sibling-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.sibling-card{background:var(--surface);border:1px solid var(--line-color);border-radius:8px;
+  padding:20px 24px;transition:all .2s;display:block;}
+.sibling-card:hover{border-color:var(--accent);box-shadow:0 4px 12px rgba(37,99,235,0.08);transform:translateY(-2px)}
+.sibling-card .eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--text-light);text-transform:uppercase;margin-bottom:8px}
+.sibling-card h4{font-family:var(--serif);font-size:17px;font-weight:900;margin-bottom:6px}
+.sibling-card p{font-size:13px;color:var(--text-sub);line-height:1.7}
+.sibling-card .arrow{font-size:12px;color:var(--accent);font-weight:700;margin-top:10px;display:inline-block}
+
+.cross-site{padding:clamp(48px,8vh,72px) 0;background:var(--bg-alt);
+  border-top:1px solid var(--line-color);border-bottom:1px solid var(--line-color);}
+.cross-site-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.cross-site-text{flex:1;min-width:280px}
+.cross-site-text .eyebrow{font-size:12px;font-weight:700;letter-spacing:2px;color:var(--text-light);text-transform:uppercase;margin-bottom:10px}
+.cross-site-text h3{font-family:var(--serif);font-size:clamp(20px,2.6vw,26px);font-weight:900;line-height:1.5;margin-bottom:8px}
+.cross-site-text p{font-size:14.5px;color:var(--text-sub);line-height:1.75;max-width:480px}
+
+.final{padding:clamp(80px,14vh,120px) 0;background:var(--bg-dark);color:#fff}
+.final h2{font-family:var(--serif);font-weight:900;font-size:clamp(24px,4.5vw,38px);line-height:1.35;margin-bottom:16px}
+.final p{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:36px;max-width:480px;line-height:1.85}
+.final .btn-cta{background:var(--accent);font-size:16px;padding:16px 36px}
+.final .btn-cta:hover{background:var(--accent-hover)}
+.final .btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;
+  color:rgba(255,255,255,.85);background:transparent;font-size:15px;font-weight:600;
+  border-radius:6px;border:1px solid rgba(255,255,255,.2);transition:all .2s;margin-left:12px;}
+.final .btn-secondary:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.05)}
+.final-contact{margin-top:32px;font-size:13px;color:rgba(255,255,255,.3);display:flex;gap:24px;flex-wrap:wrap}
+
+footer{padding:24px 0;background:var(--bg-dark);border-top:1px solid rgba(255,255,255,.06)}
+footer p{font-size:11px;color:rgba(255,255,255,.2);text-align:center}
+footer a{color:rgba(255,255,255,.3)}
+footer a:hover{color:rgba(255,255,255,.5)}
+
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s var(--ease-out),transform .55s var(--ease-out)}
+.reveal.v{opacity:1;transform:translateY(0)}
+
+#demoToast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);
+  background:rgba(22,163,74,0.95);color:#fff;padding:12px 20px;border-radius:10px;
+  font-size:14px;font-weight:600;opacity:0;pointer-events:none;
+  transition:all .25s;z-index:999;max-width:90vw;text-align:center;line-height:1.5;}
+#demoToast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.floating-cta{position:fixed;bottom:24px;right:24px;z-index:998;display:flex;align-items:center;
+  justify-content:center;width:60px;height:60px;background:var(--line-green);border-radius:50%;
+  box-shadow:0 8px 24px rgba(6,199,85,0.3);transition:transform .3s var(--ease-out);
+  animation:floatBounce 3s ease-in-out infinite;}
+.floating-cta:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(6,199,85,0.4)}
+.floating-cta svg{width:32px;height:32px;fill:#fff}
+@keyframes floatBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media(max-width:600px){.floating-cta{bottom:20px;right:20px;width:52px;height:52px}.floating-cta svg{width:28px;height:28px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><a href="/">橙築<span class="dot">.</span></a></div>
+  <div class="nav-links">
+    <a href="/" class="nav-link">回首頁</a>
+    <a href="/#services" class="nav-link">事業</a>
+    <a href="https://samkuo.com" class="nav-link" target="_blank" rel="noopener">完整服務 ↗</a>
+    <a href="https://line.me/R/ti/p/@616wvceo" class="nav-link accent" target="_blank" rel="noopener">免費諮詢</a>
+  </div>
+</nav>
+
+<div class="breadcrumb-bar">
+<div class="wrap">
+  <div class="breadcrumb">
+    <a href="/">橙築國際</a>
+    <span class="sep">/</span>
+    <a href="/#demos">Demo 展示</a>
+    <span class="sep">/</span>
+    <span class="current">球團報名系統</span>
+  </div>
+</div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+<div class="wrap">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <p class="hero-eyebrow">LINE 社群團報系統</p>
+      <h1>2000 人群組，<br><span>一鍵報名完成</span>。</h1>
+      <p class="hero-body">
+        球敘、登山、社團——大型群組報名不再靠接龍。<br>
+        一鍵報名、候補自動遞補、同組好友標記、AI 自動分組，<br>
+        管理員在 LINE 裡用指令開團、統計、代報、分組，全部搞定。
+      </p>
+      <div class="hero-actions">
+        <a href="#demo" class="btn-cta">立即體驗 Demo →</a>
+        <a href="https://line.me/R/ti/p/@616wvceo" class="btn-ghost" target="_blank" rel="noopener">加 LINE 諮詢</a>
+      </div>
+      <p class="hero-note">麻吉 FunGolf 2000 人球團實戰案例 · 球敘、登山、車隊、社團皆適用</p>
+    </div>
+    <div class="hero-phone-wrap reveal">
+      <div class="hero-phone">
+        <div class="hero-phone-screen">
+          <div class="hero-bubble-user">報名 12</div>
+          <div class="hero-bubble-bot">📋 報名確認
+
+⛳ #12 美麗華
+📅 2026-04-18（五）
+⏰ 07:00 早球
+💰 NT$ 2,800
+
+✅ 目前尚有名額
+回覆「確定」完成</div>
+          <div class="hero-bubble-user">確定</div>
+          <div class="hero-mini-card">
+            <div class="name">✅ 報名成功 · 第 76 位</div>
+            <div class="row"><span>球敘</span><span class="v">#12 美麗華</span></div>
+            <div class="row"><span>人數</span><span class="v">76 / 120</span></div>
+            <div class="fill"><div class="bar"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- STATS -->
+<section class="stats-bar">
+<div class="wrap">
+  <div class="stats-grid">
+    <div class="stat-item reveal"><div class="stat-num">2000+</div><div class="stat-label">人群組支援</div></div>
+    <div class="stat-item reveal"><div class="stat-num">一鍵</div><div class="stat-label">報名 / 取消</div></div>
+    <div class="stat-item reveal"><div class="stat-num">自動</div><div class="stat-label">候補遞補</div></div>
+    <div class="stat-item reveal"><div class="stat-num">AI</div><div class="stat-label">智慧分組</div></div>
+  </div>
+</div>
+</section>
+
+<!-- DEMO -->
+<section class="demo" id="demo">
+<div class="wrap">
+  <div class="demo-layout">
+    <div class="demo-side">
+      <p class="section-tag">互動體驗 / Live Demo</p>
+      <h2>四種視角，<br>看完整個報名流程。</h2>
+      <p>右邊切換「<strong>球友</strong>」「<strong>管理後台</strong>」「<strong>LINE 對話</strong>」「<strong>通知模擬</strong>」看各自介面。</p>
+      <p><strong>球友</strong>：看球敘列表、報名、查名單。<br>
+      <strong>管理後台</strong>：開團、統計、代報、管理。<br>
+      <strong>LINE 對話</strong>：用指令操作（試打「報名 12」「查詢名單」）。<br>
+      <strong>通知模擬</strong>：看系統發出的 3 種自動推播。</p>
+
+      <div class="demo-tips">
+        <h4>試試看</h4>
+        <p>LINE 對話模式輸入「報名 12」→「確定」看報名流程；或輸入「#統計 12」看管理員指令回覆。</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="role-switch">
+        <button class="role-btn active" onclick="switchRole('member')">球友</button>
+        <button class="role-btn" onclick="switchRole('admin')">管理後台</button>
+        <button class="role-btn" onclick="switchRole('chat')">LINE 對話</button>
+        <button class="role-btn" onclick="switchRole('notify')">通知</button>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="phone-header" id="phoneHeader">球友端</div>
+
+          <!-- MEMBER VIEW -->
+          <div id="viewMember">
+            <div class="d-tabs" id="memTabs">
+              <button class="d-tab active" onclick="showMemTab('events')">球敘列表</button>
+              <button class="d-tab" onclick="showMemTab('register')">報名</button>
+              <button class="d-tab" onclick="showMemTab('roster')">名單</button>
+            </div>
+
+            <div id="memEvents">
+              <div class="event-card" onclick="showMemTab('register');document.querySelectorAll('#memTabs .d-tab')[1].click()">
+                <div class="event-head">
+                  <div class="event-no">#12</div>
+                  <div style="flex:1;">
+                    <div class="event-name">美麗華 · 早球</div>
+                    <div class="event-meta">📅 2026-04-18（五） · ⏰ 07:00 · 💰 $2,800</div>
+                  </div>
+                </div>
+                <div class="event-fill"><div class="bar" style="width:62%"></div></div>
+                <div class="event-foot">
+                  <span>👥 75 / 120 人 · 19 組</span>
+                  <span class="status open">報名中</span>
+                </div>
+              </div>
+              <div class="event-card">
+                <div class="event-head">
+                  <div class="event-no">#13</div>
+                  <div style="flex:1;">
+                    <div class="event-name">八里 · 午球</div>
+                    <div class="event-meta">📅 2026-04-22（二） · ⏰ 12:30 · 💰 $3,000</div>
+                  </div>
+                </div>
+                <div class="event-fill"><div class="bar warn" style="width:92%"></div></div>
+                <div class="event-foot">
+                  <span>👥 110 / 120 人 · 候補 5</span>
+                  <span class="status warn">即將額滿</span>
+                </div>
+              </div>
+              <div class="event-card">
+                <div class="event-head">
+                  <div class="event-no">#14</div>
+                  <div style="flex:1;">
+                    <div class="event-name">林口 · 早球</div>
+                    <div class="event-meta">📅 2026-04-25（五） · ⏰ 06:30 · 💰 $2,600</div>
+                  </div>
+                </div>
+                <div class="event-fill"><div class="bar" style="width:27%"></div></div>
+                <div class="event-foot">
+                  <span>👥 32 / 120 人 · 8 組</span>
+                  <span class="status open">報名中</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="memRegister" class="hidden">
+              <div class="d-card">
+                <h4>📋 報名確認 · #12 美麗華</h4>
+                <div style="font-size:12px;color:#666;margin-bottom:12px;line-height:1.7;">
+                  📅 2026-04-18（五）<br>
+                  ⏰ 07:00 早球<br>
+                  📍 美麗華高爾夫球場<br>
+                  💰 NT$ 2,800 / 人
+                </div>
+                <div style="font-size:12px;font-weight:700;margin-bottom:6px;color:#555;">報名模式</div>
+                <div style="display:flex;gap:6px;margin-bottom:12px;">
+                  <button class="d-tab active" onclick="this.parentElement.querySelectorAll('.d-tab').forEach(b=>b.classList.remove('active'));this.classList.add('active')">個人</button>
+                  <button class="d-tab" onclick="this.parentElement.querySelectorAll('.d-tab').forEach(b=>b.classList.remove('active'));this.classList.add('active')">含同組</button>
+                  <button class="d-tab" onclick="this.parentElement.querySelectorAll('.d-tab').forEach(b=>b.classList.remove('active'));this.classList.add('active')">代報</button>
+                </div>
+                <input class="d-input" placeholder="同組球友暱稱（選填，以 / 分隔）">
+                <input class="d-input" placeholder="備註（如：需租桿、素食便當）">
+                <button class="d-btn" onclick="showToast('✅ 報名成功！<br>你是正取第 76 位<br>⛳ #12 美麗華 · 04-18 07:00')">送出報名</button>
+              </div>
+            </div>
+
+            <div id="memRoster" class="hidden">
+              <div class="d-card" style="padding:10px 12px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <h4 style="margin:0;">⛳ #12 美麗華 名單</h4>
+                  <span style="font-size:11px;color:#888;">75 / 120</span>
+                </div>
+              </div>
+              <div class="roster-group">
+                <h5>── 第 1 組 ──</h5>
+                <div class="roster-row"><span class="num">1.</span><span class="tag">Ⓐ</span>郭庭豪<span style="color:#3b82f6;">♂</span></div>
+                <div class="roster-row"><span class="num">2.</span><span class="tag">Ⓐ</span>陳文傑<span style="color:#3b82f6;">♂</span><span class="host">〔會長〕</span></div>
+                <div class="roster-row"><span class="num">3.</span><span class="tag">Ⓐ</span>林淑華<span style="color:#ec4899;">♀</span></div>
+                <div class="roster-row"><span class="num">4.</span><span class="tag">Ⓐ</span>王建民<span style="color:#3b82f6;">♂</span></div>
+              </div>
+              <div class="roster-group">
+                <h5>── 第 2 組 ──</h5>
+                <div class="roster-row"><span class="num">5.</span><span class="tag B">Ⓑ</span>張志明<span style="color:#3b82f6;">♂</span></div>
+                <div class="roster-row"><span class="num">6.</span><span class="tag B">Ⓑ</span>李雅婷<span style="color:#ec4899;">♀</span></div>
+                <div class="roster-row"><span class="num">7.</span><span class="tag B">Ⓑ</span>黃國榮<span style="color:#3b82f6;">♂</span></div>
+                <div class="roster-row"><span class="num">8.</span>吳美珍<span style="color:#ec4899;">♀</span></div>
+              </div>
+              <div class="roster-group">
+                <h5>── 第 3 組 ──</h5>
+                <div class="roster-row"><span class="num">9.</span><span class="tag C">Ⓒ</span>蔡明德<span style="color:#3b82f6;">♂</span></div>
+                <div class="roster-row"><span class="num">10.</span><span class="tag C">Ⓒ</span>周雅芳<span style="color:#ec4899;">♀</span></div>
+                <div class="roster-row"><span class="num">11.</span>許志強<span style="color:#3b82f6;">♂</span></div>
+                <div class="roster-row"><span class="num">12.</span>林依晨<span style="color:#ec4899;">♀</span></div>
+              </div>
+              <div class="roster-waitlist">
+                <h5>⏳ 候補（5 人）</h5>
+                <div class="roster-row"><span class="num">候1.</span>鄭大明<span style="color:#3b82f6;">♂</span></div>
+                <div class="roster-row"><span class="num">候2.</span>劉怡君<span style="color:#ec4899;">♀</span></div>
+                <div class="roster-row"><span class="num">候3.</span>洪明志<span style="color:#3b82f6;">♂</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ADMIN VIEW -->
+          <div id="viewAdmin" class="hidden">
+            <div class="d-tabs" id="admTabs">
+              <button class="d-tab active" onclick="showAdmTab('create')">開團</button>
+              <button class="d-tab" onclick="showAdmTab('stats')">統計</button>
+              <button class="d-tab" onclick="showAdmTab('manage')">管理</button>
+              <button class="d-tab" onclick="showAdmTab('proxy')">代報</button>
+            </div>
+
+            <div id="admCreate">
+              <div class="d-card">
+                <h4>⛳ 開新球敘</h4>
+                <input class="d-input" placeholder="球場名稱（如：美麗華）">
+                <input class="d-input" type="date" value="2026-04-28">
+                <select class="d-select"><option>早球（07:00）</option><option>午球（12:30）</option><option>下午球（14:00）</option></select>
+                <input class="d-input" type="number" value="120" placeholder="總名額">
+                <input class="d-input" type="number" value="2800" placeholder="費用（NT$）">
+                <button class="d-btn" onclick="showToast('✅ 球敘已開團！<br>編號 #15 · 04-28 美麗華<br>訊息已發送至 LINE 群組')">發布到群組</button>
+              </div>
+            </div>
+
+            <div id="admStats" class="hidden">
+              <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:8px;">📊 #12 美麗華 統計</div>
+              <div class="d-rev-grid">
+                <div class="d-rev-box"><div class="lbl">正取</div><div class="val" style="color:#166534;">75</div></div>
+                <div class="d-rev-box"><div class="lbl">候補</div><div class="val" style="color:#b45309;">5</div></div>
+              </div>
+              <div class="d-rev-grid">
+                <div class="d-rev-box"><div class="lbl">取消</div><div class="val" style="color:#dc2626;">8</div></div>
+                <div class="d-rev-box"><div class="lbl">可發車</div><div class="val" style="color:#1e40af;">18 組</div></div>
+              </div>
+              <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px;margin-bottom:12px;">
+                <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px;">零散人數</div>
+                <div style="font-size:13px;color:#555;">3 人尚未分組，點「自動分組」系統會依同組標記、性別平衡優先分配</div>
+              </div>
+              <button class="d-btn" onclick="showToast('🎯 AI 自動分組完成！<br>共 19 組，3 人已整合')">AI 自動分組</button>
+              <div style="font-size:12px;font-weight:700;color:#555;margin:14px 0 6px 0;">同組標記分布</div>
+              <div style="display:flex;flex-wrap:wrap;gap:4px;">
+                <span class="tag" style="padding:3px 8px;">Ⓐ 4 人</span>
+                <span class="tag B" style="padding:3px 8px;">Ⓑ 4 人</span>
+                <span class="tag C" style="padding:3px 8px;">Ⓒ 3 人</span>
+                <span class="tag D" style="padding:3px 8px;">Ⓓ 2 人</span>
+              </div>
+            </div>
+
+            <div id="admManage" class="hidden">
+              <div class="d-card">
+                <h4>🛠️ #12 球敘管理</h4>
+                <div style="font-size:12px;color:#888;margin-bottom:10px;">美麗華 · 04-18 07:00 · 75/120</div>
+                <div class="d-btn-row" style="margin-bottom:8px;">
+                  <button class="d-btn-sm d-btn-blue" onclick="showToast('📋 名單已匯出 Excel')">匯出名單</button>
+                  <button class="d-btn-sm d-btn-green" onclick="showToast('🖼️ 名單圖片已產生')">產出圖片</button>
+                </div>
+                <div class="d-btn-row" style="margin-bottom:8px;">
+                  <button class="d-btn-sm d-btn-blue" onclick="showToast('📢 已重發公告訊息到群組')">重發公告</button>
+                  <button class="d-btn-sm d-btn-gray" onclick="showToast('⏸️ 已暫停新報名')">暫停報名</button>
+                </div>
+                <button class="d-btn-sm d-btn-danger" style="width:100%;" onclick="showToast('⚠️ 確認關閉球敘？（Demo 模式不實際關閉）')">關閉球敘</button>
+              </div>
+              <div class="d-card">
+                <h4>📝 公告編輯</h4>
+                <textarea class="d-input" rows="3" style="resize:none;font-family:var(--sans);padding:10px;">⛳ 提醒：4/18 早球請於 06:45 前報到，球場已確認可打早 7 點。雨天不取消。</textarea>
+                <button class="d-btn" onclick="showToast('📢 公告已更新並推播給 75 位正取球友')">更新並推播</button>
+              </div>
+            </div>
+
+            <div id="admProxy" class="hidden">
+              <div class="d-card">
+                <h4>👤 代報</h4>
+                <div style="font-size:12px;color:#666;margin-bottom:10px;">為球友代報名（如新人尚未加入 LINE）</div>
+                <select class="d-select"><option>#12 美麗華 · 04-18</option><option>#13 八里 · 04-22</option></select>
+                <input class="d-input" placeholder="姓名 / 暱稱">
+                <select class="d-select"><option>性別：男</option><option>性別：女</option></select>
+                <input class="d-input" placeholder="同組標記（選填，A/B/C...）">
+                <button class="d-btn" onclick="showToast('✅ 代報成功！<br>王大明（管理員代）<br>→ 正取第 76 位')">代報名</button>
+              </div>
+              <div class="d-card">
+                <h4>❌ 代取消</h4>
+                <select class="d-select"><option>#12 美麗華 · 04-18</option></select>
+                <input class="d-input" placeholder="姓名（模糊搜尋）">
+                <button class="d-btn-sm d-btn-danger" style="width:100%;" onclick="showToast('❌ 代取消完成 · 候補第 1 位自動遞補')">代取消 + 通知候補</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CHAT VIEW -->
+          <div id="viewChat" class="hidden" style="display:none;flex-direction:column;flex:1;">
+            <div class="d-chat" id="chatMessages">
+              <div class="d-bubble d-bubble-bot">⛳ 歡迎使用球團報名機器人！
+
+⌨️ 試試看：
+・「報名」看球敘列表
+・「我的報名」看個人紀錄
+・「使用教學」看所有指令
+
+管理員可用 # 開頭指令：
+#開團 #統計 12 #名單 12 ...</div>
+            </div>
+            <div class="quick-tips">
+              <button class="quick-tip" onclick="quickChat('報名')">報名</button>
+              <button class="quick-tip" onclick="quickChat('我的報名')">我的報名</button>
+              <button class="quick-tip" onclick="quickChat('查詢名單')">查詢名單</button>
+              <button class="quick-tip" onclick="quickChat('#統計 12')">#統計 12</button>
+              <button class="quick-tip" onclick="quickChat('#代報 12 王大明')">#代報</button>
+              <button class="quick-tip" onclick="quickChat('使用教學')">使用教學</button>
+            </div>
+            <div class="d-input-row">
+              <input class="d-input" id="chatInput" placeholder="輸入指令..." onkeydown="if(event.key==='Enter')sendChat()">
+              <button class="d-send" onclick="sendChat()">送出</button>
+            </div>
+          </div>
+
+          <!-- NOTIFY VIEW -->
+          <div id="viewNotify" class="hidden">
+            <div class="d-tabs" id="notTabs">
+              <button class="d-tab active" onclick="showNotTab('promo')">開團公告</button>
+              <button class="d-tab" onclick="showNotTab('remind')">候補遞補</button>
+              <button class="d-tab" onclick="showNotTab('confirm')">確認提醒</button>
+            </div>
+
+            <div id="notPromo">
+              <div style="font-size:11px;color:#888;text-align:center;margin-bottom:10px;">推播到 LINE 群組（2000 人）</div>
+              <div class="notify-card promo">
+                <h5><span class="ico">📢</span>新球敘開團通知</h5>
+                <div class="body">⛳ #12 美麗華 已開團！
+
+📅 2026-04-18（五）
+⏰ 07:00 早球
+📍 美麗華高爾夫球場
+💰 NT$ 2,800 / 人
+👥 名額 120 人
+
+🎯 一鍵報名：點下方按鈕
+💬 或輸入「報名 12」</div>
+                <div style="display:flex;gap:6px;margin-top:10px;">
+                  <button class="d-btn-sm d-btn-blue">我要報名</button>
+                  <button class="d-btn-sm d-btn-gray">代同組報</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="notRemind" class="hidden">
+              <div style="font-size:11px;color:#888;text-align:center;margin-bottom:10px;">發送給候補第 1 位</div>
+              <div class="notify-card remind">
+                <h5><span class="ico">🎉</span>候補遞補通知</h5>
+                <div class="body">您已從候補遞補為正取！
+
+⛳ #12 美麗華
+📅 2026-04-18 07:00
+📌 正取第 76 位
+
+⚠️ 請於 30 分鐘內回覆「確定」
+否則自動取消，順位給下一位候補</div>
+                <div style="display:flex;gap:6px;margin-top:10px;">
+                  <button class="d-btn-sm d-btn-green">✅ 確定</button>
+                  <button class="d-btn-sm d-btn-danger">❌ 放棄</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="notConfirm" class="hidden">
+              <div style="font-size:11px;color:#888;text-align:center;margin-bottom:10px;">球敘前一天 18:00 自動發送</div>
+              <div class="notify-card confirm">
+                <h5><span class="ico">⏰</span>明日球敘提醒</h5>
+                <div class="body">⛳ 明日提醒
+
+#12 美麗華
+📅 2026-04-18（五）
+⏰ 07:00 早球
+📍 美麗華高爾夫球場
+
+🚗 請於 06:45 前抵達
+☔ 雨天不取消
+
+🎯 你是第 1 組（Ⓐ組）
+👥 同組：陳文傑、林淑華、王建民</div>
+                <div style="display:flex;gap:6px;margin-top:10px;">
+                  <button class="d-btn-sm d-btn-green">🗺️ 導航</button>
+                  <button class="d-btn-sm d-btn-blue">📋 名單</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+<div class="wrap">
+  <p class="section-tag reveal">核心功能</p>
+  <h2 class="section-title reveal">從開團到分組，<br>一套系統全包。</h2>
+  <p class="features-intro reveal">針對 100 人以上大型群組設計。接龍報名的時代結束了。</p>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">i</div>
+      <h3>一鍵報名</h3>
+      <p>球友在 LINE 群組點按鈕或打「報名 12」即可報名，系統秒回確認卡。零摩擦。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">ii</div>
+      <h3>候補自動遞補</h3>
+      <p>正取取消立即通知第 1 順位候補，30 分鐘限時確認，過期自動下一位。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">iii</div>
+      <h3>同組好友標記</h3>
+      <p>報名時可填「同組球友」，系統分組時自動放一桌。Ⓐ Ⓑ Ⓒ Ⓓ 標記清楚呈現。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">iv</div>
+      <h3>AI 自動分組</h3>
+      <p>依同組標記、性別比例、報名時間自動分組，零散人數整合，一鍵產出最佳組合。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">v</div>
+      <h3>代報 / 代取消</h3>
+      <p>管理員為未加 LINE 的新人代報、為退出的球友代取消並通知候補，一氣呵成。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">vi</div>
+      <h3>Web 名單平台</h3>
+      <p>LINE 登入即查完整名單、統計、匯出 Excel／圖片。管理員多了一台電腦更順手。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+<div class="wrap">
+  <p class="section-tag reveal">三步完成</p>
+  <h2 class="section-title reveal">團長開團、球友報名、<br>系統自動管理。</h2>
+  <div class="steps">
+    <div class="step-item reveal">
+      <div class="step-num">01</div>
+      <h3>團長開團</h3>
+      <p>在 LINE 打「#開團 日期 時間 球場」或用後台表單，系統自動發公告到群組。</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-num">02</div>
+      <h3>球友報名</h3>
+      <p>點按鈕或打「報名 12」，可選個人、含同組、代報。秒回報名確認卡。</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-num">03</div>
+      <h3>自動管理</h3>
+      <p>候補遞補、AI 分組、前一天提醒、匯出名單——管理員變成監工就好。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SIBLINGS -->
+<section class="siblings">
+<div class="wrap">
+  <h3>其他 Demo</h3>
+  <div class="sibling-grid">
+    <a href="/pricing-demo/" class="sibling-card">
+      <div class="eyebrow">No. 01</div>
+      <h4>智能查價 Demo</h4>
+      <p>B2B 企業查價，AI 解析 LINE 訊息秒回 Flex 商品卡。</p>
+      <span class="arrow">前往體驗 →</span>
+    </a>
+    <a href="/coach-demo/" class="sibling-card">
+      <div class="eyebrow">No. 02</div>
+      <h4>教練預約系統 Demo</h4>
+      <p>學員 LIFF 預約、自動扣堂數、教練看收入報表。</p>
+      <span class="arrow">前往體驗 →</span>
+    </a>
+    <a href="/salon-demo/" class="sibling-card">
+      <div class="eyebrow">No. 03</div>
+      <h4>髮廊預約 Demo</h4>
+      <p>顧客 LINE 預約，設計師查排班、查營收，老闆一目了然。</p>
+      <span class="arrow">前往體驗 →</span>
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- CROSS-SITE -->
+<section class="cross-site">
+<div class="wrap">
+  <div class="cross-site-inner">
+    <div class="cross-site-text">
+      <div class="eyebrow">完整服務</div>
+      <h3>完整社群團報方案介紹，<br>請見 samkuo.com</h3>
+      <p>這裡是互動試玩版。完整的社群團報方案說明、定價、FAQ，請前往 samkuo.com/group。</p>
+    </div>
+    <a href="https://samkuo.com/group" class="btn-cta" target="_blank" rel="noopener" style="background:var(--navy);">看完整方案 →</a>
+  </div>
+</div>
+</section>
+
+<!-- FINAL -->
+<section class="final">
+<div class="wrap">
+  <h2 class="reveal">想為你的球團 / 社團做一套？</h2>
+  <p class="reveal">球敘、登山、車隊、讀書會、家長群組——任何需要團體報名的社群，我們都能依照運作模式量身打造。初次諮詢免費。</p>
+  <div class="reveal" style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+    <a href="https://line.me/R/ti/p/@616wvceo" class="btn-cta" target="_blank" rel="noopener">加 LINE 免費諮詢 →</a>
+    <a href="tel:0975691485" class="btn-secondary">撥打 0975-691-485</a>
+  </div>
+  <div class="final-contact reveal">
+    <span>Email：cat@cz-777.com</span>
+    <span>桃園市春日路 818 號 1F</span>
+  </div>
+</div>
+</section>
+
+<footer><p>© 2026 橙築國際 ChengZhu International · <a href="/">chengzhu.co</a></p></footer>
+
+<a href="https://line.me/R/ti/p/@616wvceo" class="floating-cta" target="_blank" rel="noopener" title="加 LINE 諮詢">
+  <svg viewBox="0 0 24 24"><path d="M23.146 10.362c0-4.38-4.408-7.946-9.824-7.946-5.416 0-9.824 3.567-9.824 7.946 0 3.931 3.513 7.234 8.28 7.859.324.068.756.208.865.485.099.25-.032.645-.064.896l-.16 1.002c-.049.303-.23.903.784.476 1.014-.427 5.483-3.23 7.55-5.591.758-.87 1.393-2.029 1.393-3.127z"/></svg>
+</a>
+
+<div id="demoToast"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+
+function switchRole(role){
+  document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  ['Member','Admin','Notify'].forEach(r=>{
+    document.getElementById('view'+r).classList.toggle('hidden',role.toLowerCase()!==r.toLowerCase());
+  });
+  const chat=document.getElementById('viewChat');
+  if(role==='chat'){chat.classList.remove('hidden');chat.style.display='flex'}else{chat.classList.add('hidden');chat.style.display='none'}
+  document.getElementById('phoneHeader').textContent={member:'球友端',admin:'管理後台',chat:'LINE 對話',notify:'通知模擬'}[role];
+}
+
+function showTab(tabsSel,map,key){
+  document.querySelectorAll(tabsSel+' .d-tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  Object.values(map).forEach(id=>document.getElementById(id).classList.add('hidden'));
+  document.getElementById(map[key]).classList.remove('hidden');
+}
+function showMemTab(k){showTab('#memTabs',{events:'memEvents',register:'memRegister',roster:'memRoster'},k)}
+function showAdmTab(k){showTab('#admTabs',{create:'admCreate',stats:'admStats',manage:'admManage',proxy:'admProxy'},k)}
+function showNotTab(k){showTab('#notTabs',{promo:'notPromo',remind:'notRemind',confirm:'notConfirm'},k)}
+
+function showToast(msg){
+  const t=document.getElementById('demoToast');
+  t.innerHTML=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// Chat
+const chatResponses={
+  '查詢名單':'⛳ #12 美麗華 名單\n\n✅ 正取 (75/120人)\n\n── 第 1 組 ──\n1. Ⓐ郭庭豪♂\n2. Ⓐ陳文傑♂〔會長〕\n3. Ⓐ林淑華♀\n4. Ⓐ王建民♂\n\n── 第 2 組 ──\n5. Ⓑ張志明♂\n6. Ⓑ李雅婷♀\n7. Ⓑ黃國榮♂\n8. 吳美珍♀\n\n⏳ 候補 (5人)\n候1. 鄭大明♂\n候2. 劉怡君♀',
+  '#統計 12':'📊 #12 美麗華 統計\n\n正取：75 / 120\n候補：5\n取消：8\n\n可發車：18 組\n零散：3 人\n同組標記：A~F（6 組）',
+  '#代報 12 王大明':'✅ 代報成功！\n\n王大明（管理員代）\n→ 正取第 76 位\n\n⛳ #12 美麗華\n📅 2026-04-18 07:00',
+  '報名':'⛳ 目前開放報名球敘：\n\n1️⃣ #12 美麗華\n   📅 04-18 07:00 早球\n   👥 75/120 ✅\n\n2️⃣ #13 八里\n   📅 04-22 12:30 午球\n   👥 110/120 ⚠️\n\n3️⃣ #14 林口\n   📅 04-25 06:30 早球\n   👥 32/120 ✅\n\n👉 點按鈕或輸入「報名 12」',
+  '報名 12':'📋 報名確認\n\n⛳ #12 美麗華\n📅 2026-04-18（五）\n⏰ 07:00 早球\n💰 NT$ 2,800\n\n✅ 目前尚有名額\n確定要報名嗎？\n\n回覆「確定」完成報名',
+  '確定':'✅ 報名成功！\n\n你是正取第 76 位\n⛳ #12 美麗華\n📅 2026-04-18 07:00\n\n祝球敘愉快！⛳🏌️',
+  '使用教學':'📖 使用教學\n\n━━ 球友 ━━\n📋 報名：點報名按鈕 或「報名 12」\n❌ 取消：點取消按鈕\n📋 名單：「查詢名單」\n🎯 個人：「我的報名」\n\n━━ 管理員 ━━\n#開團 日期 時間 球場\n#統計 編號\n#名單 編號\n#代報 編號 姓名\n#代取消 編號 姓名\n#關閉 編號\n#自動分組',
+  '我的報名':'⛳ 你的報名紀錄\n\n✅ #12 美麗華\n   📅 04-18 07:00 早球\n   📌 正取第 76 位\n\n⏳ #13 八里\n   📅 04-22 12:30 午球\n   📌 候補第 3 位'
+};
+
+function addBubble(text,isUser){
+  const c=document.getElementById('chatMessages');
+  const b=document.createElement('div');
+  b.className=`d-bubble ${isUser?'d-bubble-user':'d-bubble-bot'}`;
+  b.textContent=text;
+  c.appendChild(b);
+  c.scrollTop=c.scrollHeight;
+}
+function sendChat(){
+  const input=document.getElementById('chatInput');
+  const text=input.value.trim();
+  if(!text)return;
+  input.value='';
+  addBubble(text,true);
+  setTimeout(()=>{
+    const resp=chatResponses[text]||`⛳ 歡迎使用球團報名系統\n\n指令：報名、查詢名單、我的報名\n管理員 # 指令：#統計 #名單 #代報\n\n輸入「使用教學」看完整說明`;
+    addBubble(resp,false);
+  },500);
+}
+function quickChat(text){
+  document.getElementById('chatInput').value=text;
+  sendChat();
+}
+</script>
+</body>
+</html>
