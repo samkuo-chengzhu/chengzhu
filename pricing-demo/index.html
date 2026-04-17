@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智能查價 Demo｜LINE Bot × AI 互動體驗｜橙築國際</title>
+<meta name="description" content="實際操作看看：在網頁版 LINE Bot 模擬器輸入「50台 吹風機」，AI 自動解析、搜尋商品、依客戶等級回傳報價卡。橙築國際 × samkuo.com B2B 智能查價系統 demo。">
+<link rel="canonical" href="https://chengzhu.co/pricing-demo/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#F8FAFC;
+  --bg-alt:#F1F5F9;
+  --bg-dark:#0F172A;
+  --surface:#FFFFFF;
+  --text:#0F172A;
+  --text-sub:#475569;
+  --text-light:#64748B;
+  --line-color:#E2E8F0;
+  --accent:#2563EB;
+  --accent-hover:#1D4ED8;
+  --navy:#1E3A8A;
+  --navy-hover:#1E40AF;
+  --line-green:#06C755;
+  --price-red:#DC2626;
+  --orange:#FF6B35;
+  --serif:'Noto Serif TC',serif;
+  --sans:'Noto Sans TC',sans-serif;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--sans);font-weight:400;
+  line-height:1.8;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+::selection{background:var(--accent);color:#fff}
+a{color:inherit;text-decoration:none}
+
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.02;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(24px,5vw,48px)}
+.divider{height:1px;background:var(--line-color);margin:0}
+
+/* ═══ NAV ═══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 clamp(24px,5vw,48px);height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(248,250,252,0.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line-color);
+}
+.nav-logo{
+  font-family:var(--serif);font-size:18px;font-weight:700;
+  color:var(--text);letter-spacing:0.02em;
+}
+.nav-logo a{color:var(--text)}
+.nav-logo .dot{color:var(--orange)}
+.nav-links{display:flex;gap:8px;align-items:center}
+.nav-link{
+  font-size:12px;letter-spacing:0.5px;color:var(--text-light);
+  padding:6px 14px;border-radius:4px;transition:all .2s;font-weight:500;
+}
+.nav-link:hover{color:var(--text);background:rgba(15,23,42,0.04)}
+.nav-link.accent{color:var(--accent);border:1px solid rgba(37,99,235,0.2)}
+.nav-link.accent:hover{background:rgba(37,99,235,0.06)}
+@media(max-width:600px){.nav-links{gap:4px}.nav-link{font-size:11px;padding:5px 10px}}
+
+/* ═══ BREADCRUMB ═══ */
+.breadcrumb-bar{
+  padding:80px 0 0;
+}
+.breadcrumb{
+  font-size:12px;color:var(--text-light);letter-spacing:0.06em;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.breadcrumb a{color:var(--text-light);transition:color .2s}
+.breadcrumb a:hover{color:var(--accent)}
+.breadcrumb .sep{color:var(--line-color)}
+.breadcrumb .current{color:var(--text);font-weight:600}
+
+/* ═══ HERO ═══ */
+.hero{padding:32px 0 clamp(60px,10vh,100px)}
+.hero-grid{
+  display:grid;grid-template-columns:1fr;gap:48px;align-items:center;
+}
+@media(min-width:880px){
+  .hero-grid{grid-template-columns:1.1fr 1fr;gap:64px}
+}
+.hero-eyebrow{
+  font-size:13px;font-weight:500;letter-spacing:3px;
+  color:var(--accent);margin-bottom:24px;
+  opacity:0;animation:up .7s var(--ease-out) .15s forwards;
+}
+.hero h1{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(32px,6vw,54px);line-height:1.25;
+  letter-spacing:-0.02em;margin-bottom:28px;
+  opacity:0;animation:up .7s var(--ease-out) .3s forwards;
+}
+.hero h1 span{color:var(--accent)}
+.hero-body{
+  max-width:520px;font-size:clamp(15px,1.6vw,17px);
+  color:var(--text-sub);line-height:1.85;margin-bottom:36px;
+  opacity:0;animation:up .7s var(--ease-out) .45s forwards;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;
+  opacity:0;animation:up .7s var(--ease-out) .6s forwards;}
+.btn-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 28px;background:var(--navy);color:#fff;
+  font-size:15px;font-weight:700;border-radius:6px;
+  border:none;cursor:pointer;transition:background .25s,transform .25s;
+}
+.btn-cta:hover{background:var(--navy-hover);transform:translateY(-1px);color:#fff}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 28px;color:var(--text);background:transparent;
+  font-size:15px;font-weight:700;border-radius:6px;
+  border:1px solid var(--line-color);transition:all .2s;
+}
+.btn-ghost:hover{border-color:var(--text);background:var(--surface)}
+.hero-note{
+  margin-top:14px;font-size:12px;color:var(--text-light);
+  opacity:0;animation:up .7s var(--ease-out) .75s forwards;
+}
+
+/* Hero phone preview */
+.hero-phone-wrap{
+  display:flex;justify-content:center;align-items:center;
+  opacity:0;animation:up .7s var(--ease-out) .5s forwards;
+}
+.hero-phone{
+  position:relative;width:100%;max-width:300px;
+  background:#000;border-radius:36px;padding:10px;
+  box-shadow:0 24px 64px rgba(15,23,42,0.18), inset 0 0 0 2px #444;
+  animation:floatPhone 6s ease-in-out infinite;
+}
+.hero-phone::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:110px;height:22px;background:#000;
+  border-bottom-left-radius:14px;border-bottom-right-radius:14px;z-index:2;
+}
+.hero-phone-screen{
+  background:#fff;border-radius:28px;padding:34px 14px 14px;
+  min-height:520px;display:flex;flex-direction:column;gap:8px;
+}
+.hero-bubble-bot{
+  align-self:flex-start;background:#fff;border:1px solid #ececec;
+  padding:10px 14px;border-radius:14px 14px 14px 4px;
+  font-size:13px;line-height:1.5;color:#333;max-width:80%;
+}
+.hero-bubble-user{
+  align-self:flex-end;background:var(--line-green);color:#fff;
+  padding:10px 14px;border-radius:14px 14px 4px 14px;
+  font-size:13px;max-width:80%;
+}
+.hero-mini-card{
+  align-self:flex-start;background:#fff;border:1px solid #eee;
+  border-radius:10px;padding:12px;font-size:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);max-width:88%;
+}
+.hero-mini-card .name{font-weight:700;color:#1a1a1a;margin-bottom:2px;font-size:13px}
+.hero-mini-card .model{color:#888;font-size:11px;margin-bottom:8px}
+.hero-mini-card .row{display:flex;justify-content:space-between;color:#888;font-size:11px;margin-bottom:3px}
+.hero-mini-card .row .v{color:#333;font-weight:600}
+.hero-mini-card .price{color:var(--price-red);font-weight:800;font-size:18px;margin-top:6px}
+.hero-mini-card .market{color:#999;font-size:11px}
+
+@keyframes floatPhone{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+
+/* ═══ STATS ═══ */
+.stats-bar{
+  padding:clamp(40px,6vh,60px) 0;
+  border-top:1px solid var(--line-color);
+  border-bottom:1px solid var(--line-color);
+}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+@media(max-width:600px){.stats-grid{grid-template-columns:1fr 1fr}}
+.stat-item{text-align:center;padding:16px 12px}
+.stat-item+.stat-item{border-left:1px solid var(--line-color)}
+@media(max-width:600px){
+  .stat-item:nth-child(2){border-left:1px solid var(--line-color)}
+  .stat-item:nth-child(3){border-left:none;border-top:1px solid var(--line-color)}
+  .stat-item:nth-child(4){border-top:1px solid var(--line-color)}
+}
+.stat-num{
+  font-family:var(--serif);font-size:clamp(28px,4vw,36px);
+  font-weight:900;color:var(--accent);line-height:1;
+}
+.stat-label{font-size:12px;color:var(--text-light);margin-top:6px}
+
+/* ═══ SECTION ═══ */
+.section-tag{
+  font-size:12px;font-weight:700;letter-spacing:3px;
+  color:var(--text-light);text-transform:uppercase;margin-bottom:20px;
+}
+.section-title{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(22px,3.5vw,34px);line-height:1.4;
+  margin-bottom:24px;max-width:560px;
+}
+.section-intro{
+  font-size:15px;color:var(--text-sub);max-width:560px;
+  line-height:1.85;margin-bottom:48px;
+}
+
+/* ═══ DEMO (centerpiece) ═══ */
+.demo{padding:clamp(64px,10vh,100px) 0;background:var(--bg-alt);position:relative}
+.demo-grid{
+  display:grid;grid-template-columns:1fr;gap:40px;align-items:start;
+}
+@media(min-width:880px){
+  .demo-grid{grid-template-columns:1fr 380px;gap:64px}
+}
+.demo-side h2{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(22px,3.2vw,30px);line-height:1.4;margin-bottom:18px;
+}
+.demo-side p{font-size:15px;color:var(--text-sub);line-height:1.85;margin-bottom:20px}
+.demo-side strong{color:var(--text);font-weight:700}
+.demo-tips{
+  background:var(--surface);border:1px solid var(--line-color);
+  border-radius:8px;padding:18px 20px;margin-top:24px;
+}
+.demo-tips h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:1px}
+.demo-tip-row{display:flex;flex-wrap:wrap;gap:6px}
+.demo-tip{
+  font-size:12px;padding:6px 12px;background:var(--bg-alt);
+  border:1px solid var(--line-color);border-radius:4px;
+  color:var(--text-sub);cursor:pointer;transition:all .2s;font-weight:500;
+}
+.demo-tip:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.phone-frame{
+  position:relative;width:100%;max-width:380px;margin:0 auto;
+  background:#0a0a0a;border-radius:42px;padding:14px;
+  box-shadow:0 30px 80px rgba(15,23,42,0.18), inset 0 0 0 2px #333;
+}
+.phone-frame::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:130px;height:26px;background:#000;
+  border-bottom-left-radius:18px;border-bottom-right-radius:18px;z-index:5;
+}
+.phone-screen{
+  background:#fff;border-radius:32px;
+  height:640px;overflow-y:auto;padding:36px 12px 12px;
+  display:flex;flex-direction:column;
+}
+.phone-screen::-webkit-scrollbar{width:0}
+.phone-header{
+  text-align:center;font-size:11px;color:#bbb;
+  padding-bottom:10px;border-bottom:1px solid #f0f0f0;margin-bottom:10px;
+  flex-shrink:0;
+}
+.chat{display:flex;flex-direction:column;gap:8px;flex:1}
+.bubble{
+  max-width:82%;padding:10px 14px;font-size:13px;line-height:1.55;
+  border-radius:14px;word-wrap:break-word;
+}
+.bubble-bot{
+  align-self:flex-start;background:#f4f4f4;color:#222;
+  border-radius:14px 14px 14px 4px;
+}
+.bubble-user{
+  align-self:flex-end;background:var(--line-green);color:#fff;
+  border-radius:14px 14px 4px 14px;
+}
+.bubble-card{
+  align-self:flex-start;background:#fff;
+  padding:0;border:1px solid #eee;
+  border-radius:12px;overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);max-width:85%;
+}
+.bubble-typing{
+  align-self:flex-start;background:#f4f4f4;color:#888;
+  padding:10px 14px;border-radius:14px 14px 14px 4px;
+  font-size:13px;
+}
+.bubble-typing span{
+  display:inline-block;width:6px;height:6px;background:#aaa;
+  border-radius:50%;margin:0 1px;animation:dots 1.4s infinite;
+}
+.bubble-typing span:nth-child(2){animation-delay:.2s}
+.bubble-typing span:nth-child(3){animation-delay:.4s}
+@keyframes dots{
+  0%,80%,100%{transform:translateY(0);opacity:.4}
+  40%{transform:translateY(-4px);opacity:1}
+}
+
+/* Flex card inside chat */
+.flex-card{width:220px}
+.flex-card-img{
+  width:100%;aspect-ratio:1;background:#f5f5f5;
+  display:flex;align-items:center;justify-content:center;
+  font-size:42px;color:#bbb;
+}
+.flex-card-img img{width:100%;height:100%;object-fit:contain}
+.flex-card-body{padding:10px 12px}
+.flex-card-name{font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:2px;line-height:1.3}
+.flex-card-model{font-size:11px;color:#888;margin-bottom:8px}
+.flex-card-sep{height:1px;background:#eee;margin:6px 0}
+.flex-card-row{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-bottom:3px}
+.flex-card-row .val{color:#333;font-weight:600}
+.flex-card-price-label{font-size:10px;color:#aaa;margin-top:6px}
+.flex-card-price{font-size:20px;font-weight:800;color:var(--price-red)}
+.flex-card-market{font-size:11px;color:#888;margin-top:1px}
+.flex-card-btn{
+  display:block;text-align:center;padding:8px;margin-top:8px;
+  background:var(--accent);color:#fff;font-size:12px;font-weight:600;
+  text-decoration:none;border-radius:6px;
+}
+
+.flex-carousel{
+  display:flex;gap:8px;overflow-x:auto;padding:6px 0;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  max-width:280px;
+}
+.flex-carousel::-webkit-scrollbar{height:3px}
+.flex-carousel::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px}
+.flex-carousel .flex-card{flex:0 0 180px;scroll-snap-align:start}
+
+.demo-input-row{
+  display:flex;gap:6px;padding:10px;background:#f9f9f9;
+  border-top:1px solid #eee;border-radius:0 0 24px 24px;
+  margin:8px -12px -12px;flex-shrink:0;
+}
+.demo-input{
+  flex:1;padding:10px 14px;border:1px solid #ddd;border-radius:18px;
+  font-size:13px;font-family:var(--sans);outline:none;
+}
+.demo-input:focus{border-color:var(--accent)}
+.demo-send{
+  padding:10px 16px;background:var(--accent);color:#fff;
+  border:none;border-radius:18px;font-size:13px;font-weight:600;
+  cursor:pointer;transition:background .2s;
+}
+.demo-send:hover{background:var(--accent-hover)}
+
+/* ═══ FEATURES ═══ */
+.features{padding:clamp(64px,10vh,100px) 0}
+.features-intro{font-size:15px;color:var(--text-sub);max-width:520px;margin-bottom:48px;line-height:1.85}
+.features-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;
+  background:var(--line-color);border:1px solid var(--line-color);
+}
+.feature-card{
+  background:var(--bg);padding:28px;
+  transition:background .2s;
+}
+.feature-card:hover{background:var(--surface)}
+.feature-icon{
+  font-family:var(--serif);font-size:24px;font-weight:900;
+  color:var(--accent);margin-bottom:14px;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border:1px solid var(--accent);border-radius:50%;
+}
+.feature-card h3{font-family:var(--serif);font-size:17px;font-weight:900;margin-bottom:10px;line-height:1.5}
+.feature-card p{font-size:14px;color:var(--text-sub);line-height:1.75}
+
+/* ═══ ARCHITECTURE ═══ */
+.arch{padding:clamp(64px,10vh,100px) 0;background:var(--bg-alt)}
+.arch-flow{
+  display:flex;gap:18px;justify-content:space-between;align-items:stretch;
+  margin-top:48px;flex-wrap:wrap;
+}
+.arch-node{
+  flex:1 1 140px;min-width:140px;
+  background:var(--surface);border:1px solid var(--line-color);
+  padding:24px 20px;text-align:center;
+  border-radius:8px;position:relative;
+}
+.arch-node .icon{font-size:28px;margin-bottom:12px}
+.arch-node .name{font-family:var(--serif);font-size:16px;font-weight:900;color:var(--text);margin-bottom:6px}
+.arch-node .desc{font-size:12px;color:var(--text-light);line-height:1.5}
+.arch-arrow{display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--text-light);min-width:20px}
+@media(max-width:780px){
+  .arch-flow{flex-direction:column;gap:12px}
+  .arch-arrow{transform:rotate(90deg);padding:4px 0}
+}
+
+/* ═══ PROCESS ═══ */
+.process{padding:clamp(64px,10vh,100px) 0}
+.steps{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-top:1px solid var(--line-color);
+  border-bottom:1px solid var(--line-color);margin-top:48px;
+}
+@media(max-width:700px){.steps{grid-template-columns:1fr}}
+.step-item{padding:32px 24px;border-right:1px solid var(--line-color)}
+.step-item:last-child{border-right:none}
+@media(max-width:700px){
+  .step-item{border-right:none;border-bottom:1px solid var(--line-color)}
+  .step-item:last-child{border-bottom:none}
+}
+.step-num{
+  font-family:var(--serif);font-size:32px;font-weight:900;
+  color:var(--accent);line-height:1;margin-bottom:14px;
+}
+.step-item h3{font-family:var(--serif);font-size:18px;font-weight:900;margin-bottom:8px}
+.step-item p{font-size:14px;color:var(--text-sub);line-height:1.75}
+
+/* ═══ CASE ═══ */
+.case-section{padding:clamp(64px,10vh,100px) 0;background:var(--bg-alt)}
+.case-highlight{
+  background:var(--surface);border:1px solid var(--line-color);
+  border-radius:12px;padding:clamp(28px,4vw,40px);
+  box-shadow:0 8px 32px rgba(15,23,42,0.03);
+}
+.case-highlight h3{
+  font-family:var(--serif);font-size:20px;font-weight:900;margin-bottom:20px;
+}
+.case-metrics{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:16px;margin-bottom:24px;
+}
+.case-metric{
+  padding:16px;background:var(--bg);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;
+}
+.case-metric-num{font-family:var(--serif);font-size:24px;font-weight:900;color:var(--accent)}
+.case-metric-text{font-size:12px;color:var(--text-light);margin-top:4px}
+.case-tags{display:flex;flex-wrap:wrap;gap:6px}
+.case-tag{
+  font-size:11px;padding:4px 10px;background:var(--bg-alt);
+  border-radius:4px;color:var(--text-sub);font-weight:500;
+}
+
+/* ═══ CROSS-SITE NOTICE ═══ */
+.cross-site{
+  padding:clamp(48px,8vh,72px) 0;background:var(--bg);
+  border-top:1px solid var(--line-color);
+  border-bottom:1px solid var(--line-color);
+}
+.cross-site-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;
+}
+.cross-site-text{flex:1;min-width:280px}
+.cross-site-text .eyebrow{
+  font-size:12px;font-weight:700;letter-spacing:2px;color:var(--text-light);
+  text-transform:uppercase;margin-bottom:10px;
+}
+.cross-site-text h3{
+  font-family:var(--serif);font-size:clamp(20px,2.6vw,26px);font-weight:900;
+  line-height:1.5;margin-bottom:8px;
+}
+.cross-site-text p{font-size:14.5px;color:var(--text-sub);line-height:1.75;max-width:480px}
+
+/* ═══ FINAL ═══ */
+.final{padding:clamp(80px,14vh,120px) 0;background:var(--bg-dark);color:#fff}
+.final h2{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(24px,4.5vw,38px);line-height:1.35;margin-bottom:16px;
+}
+.final p{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:36px;max-width:480px;line-height:1.85}
+.final .btn-cta{background:var(--accent);font-size:16px;padding:16px 36px}
+.final .btn-cta:hover{background:var(--accent-hover)}
+.final .btn-secondary{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 32px;color:rgba(255,255,255,.85);background:transparent;
+  font-size:15px;font-weight:600;border-radius:6px;
+  border:1px solid rgba(255,255,255,.2);transition:all .2s;margin-left:12px;
+}
+.final .btn-secondary:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.05)}
+.final-contact{
+  margin-top:32px;font-size:13px;color:rgba(255,255,255,.3);
+  display:flex;gap:24px;flex-wrap:wrap;
+}
+
+footer{
+  padding:24px 0;background:var(--bg-dark);
+  border-top:1px solid rgba(255,255,255,.06);
+}
+footer p{font-size:11px;color:rgba(255,255,255,.2);text-align:center}
+footer a{color:rgba(255,255,255,.3)}
+footer a:hover{color:rgba(255,255,255,.5)}
+
+/* Animations */
+@keyframes up{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.reveal{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .55s var(--ease-out),transform .55s var(--ease-out);
+}
+.reveal.v{opacity:1;transform:translateY(0)}
+
+/* Floating LINE CTA */
+.floating-cta{
+  position:fixed;bottom:24px;right:24px;z-index:999;
+  display:flex;align-items:center;justify-content:center;
+  width:60px;height:60px;background:var(--line-green);border-radius:50%;
+  box-shadow:0 8px 24px rgba(6,199,85,0.3);
+  transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out);
+  animation:floatBounce 3s ease-in-out infinite;
+}
+.floating-cta:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(6,199,85,0.4)}
+.floating-cta svg{width:32px;height:32px;fill:#fff}
+@keyframes floatBounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+@media(max-width:600px){
+  .floating-cta{bottom:20px;right:20px;width:52px;height:52px}
+  .floating-cta svg{width:28px;height:28px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><a href="/">橙築<span class="dot">.</span></a></div>
+  <div class="nav-links">
+    <a href="/" class="nav-link">回首頁</a>
+    <a href="/#services" class="nav-link">事業</a>
+    <a href="https://samkuo.com" class="nav-link" target="_blank" rel="noopener">完整服務 ↗</a>
+    <a href="https://line.me/R/ti/p/@616wvceo" class="nav-link accent" target="_blank" rel="noopener">免費諮詢</a>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-bar">
+<div class="wrap">
+  <div class="breadcrumb">
+    <a href="/">橙築國際</a>
+    <span class="sep">/</span>
+    <span class="current">智能查價 Demo</span>
+  </div>
+</div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+<div class="wrap">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <p class="hero-eyebrow">AI × LINE Bot 互動體驗</p>
+      <h1>LINE 傳一句話，<br>AI <span>秒回報價卡</span>。</h1>
+      <p class="hero-body">
+        業務人員在 LINE 群組打「50 台吹風機 300 以內」，<br>
+        系統自動拆解需求、搜尋 2000+ 商品、依客戶等級計算報價，<br>
+        秒回 Flex 卡片含商品圖、型號、價格、官網連結。
+      </p>
+      <div class="hero-actions">
+        <a href="#demo" class="btn-cta">立即體驗 Demo →</a>
+        <a href="https://line.me/R/ti/p/@616wvceo" class="btn-ghost" target="_blank" rel="noopener">加 LINE 諮詢</a>
+      </div>
+      <p class="hero-note">下方有實際可操作的對話模擬 · 試試看打字或點選快捷鍵</p>
+    </div>
+    <div class="hero-phone-wrap reveal">
+      <div class="hero-phone">
+        <div class="hero-phone-screen">
+          <div class="hero-bubble-bot">需要幫您查價嗎？告訴我商品和數量。</div>
+          <div class="hero-bubble-user">50 台吹風機 300 以內</div>
+          <div class="hero-bubble-bot" style="font-size:12px;color:#888;">收到，正在搜尋⋯</div>
+          <div class="hero-mini-card">
+            <div class="name">超輕量負離子吹風機</div>
+            <div class="model">型號：KH-9560</div>
+            <div class="row"><span>查詢數量</span><span class="v">50 pcs</span></div>
+            <div class="row"><span>計價級距</span><span class="v">50 個報價</span></div>
+            <div class="price">$285</div>
+            <div class="market">賣場價：$590</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- STATS -->
+<section class="stats-bar">
+<div class="wrap">
+  <div class="stats-grid">
+    <div class="stat-item reveal"><div class="stat-num">2000+</div><div class="stat-label">商品即時查價</div></div>
+    <div class="stat-item reveal"><div class="stat-num">4 級</div><div class="stat-label">客戶分級定價</div></div>
+    <div class="stat-item reveal"><div class="stat-num">&lt;2s</div><div class="stat-label">AI 回覆時間</div></div>
+    <div class="stat-item reveal"><div class="stat-num">AI</div><div class="stat-label">自然語言解析</div></div>
+  </div>
+</div>
+</section>
+
+<!-- DEMO (CENTERPIECE) -->
+<section class="demo" id="demo">
+<div class="wrap">
+  <div class="demo-grid">
+    <div class="demo-side">
+      <p class="section-tag">互動體驗 / Live Demo</p>
+      <h2>實際操作看看，<br>不用註冊、不用加好友。</h2>
+      <p>右邊是真實 LINE Bot 邏輯的網頁版模擬。試著輸入商品、數量、預算，看看 AI 怎麼解析、怎麼回報價卡片。</p>
+      <p>背後跑的是跟正式系統一樣的<strong>關鍵字解析 + 數量解析 + 預算過濾 + 階梯定價</strong>邏輯（資料用示範用商品庫）。</p>
+
+      <div class="demo-tips">
+        <h4>試試看這些查詢 →</h4>
+        <div class="demo-tip-row">
+          <button class="demo-tip" onclick="quickChat('吹風機')">吹風機</button>
+          <button class="demo-tip" onclick="quickChat('50 台行動電源')">50 台行動電源</button>
+          <button class="demo-tip" onclick="quickChat('KPB-2511 100 台')">KPB-2511 100 台</button>
+          <button class="demo-tip" onclick="quickChat('300 以內 藍牙喇叭')">300 以內 藍牙喇叭</button>
+          <button class="demo-tip" onclick="quickChat('500 個 風扇')">500 個 風扇</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-phone">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="phone-header">LINE Bot · 智能查價</div>
+          <div class="chat" id="chatMessages">
+            <div class="bubble bubble-bot">
+              歡迎使用智能查價！<br>輸入商品名、型號、數量或預算就能查。<br>例如「50 台吹風機 300 以內」。
+            </div>
+          </div>
+          <div class="demo-input-row">
+            <input class="demo-input" id="chatInput" placeholder="輸入商品..." onkeydown="if(event.key==='Enter')sendChat()">
+            <button class="demo-send" onclick="sendChat()">送出</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+<div class="wrap">
+  <p class="section-tag reveal">核心功能</p>
+  <h2 class="section-title reveal">六項從真實企業需求<br>長出來的能力。</h2>
+  <p class="features-intro reveal">不是想像中應該有什麼功能，是某品牌每天用、發現缺什麼就補什麼，慢慢長成的。</p>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">i</div>
+      <h3>AI 自然語言解析</h3>
+      <p>整合 Google Gemini AI。打「50 台 300 以內 吹風機」，AI 自動拆出關鍵字、數量、預算上限。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">ii</div>
+      <h3>智能模糊搜尋</h3>
+      <p>三層搜尋策略：精確比對 → 子字串 → 模糊匹配（相似度 60%+）。型號打錯、簡寫、同義詞都找得到。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">iii</div>
+      <h3>四級客戶分級定價</h3>
+      <p>不同等級客戶看到不同價格。50 / 100 / 300 / 500 / 1000 台階梯報價自動算。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">iv</div>
+      <h3>Flex Message 報價卡</h3>
+      <p>回覆 LINE Flex 商品卡：圖片、型號、數量、等級價、市價對照、官網連結。一眼看完。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">v</div>
+      <h3>會員權限管理</h3>
+      <p>LINE 帳號綁定信箱 → 對應等級。VIP 客戶享有專屬欄位價格，業務不用記哪個客戶該報多少。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">vi</div>
+      <h3>預算自動過濾</h3>
+      <p>客戶說「300 以內」，系統自動篩掉超出預算的商品，只回符合條件的選擇。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="arch">
+<div class="wrap">
+  <p class="section-tag reveal">系統架構</p>
+  <h2 class="section-title reveal">底層怎麼運作。</h2>
+  <p class="section-intro reveal">完整的 LINE Bot 後端架構，部署在 Google Cloud 上。從訊息進來到報價卡出去，五個節點完成。</p>
+
+  <div class="arch-flow reveal">
+    <div class="arch-node">
+      <div class="icon">💬</div>
+      <div class="name">LINE</div>
+      <div class="desc">用戶訊息</div>
+    </div>
+    <span class="arch-arrow">→</span>
+    <div class="arch-node">
+      <div class="icon">⚡</div>
+      <div class="name">Cloud Run</div>
+      <div class="desc">Webhook 接收</div>
+    </div>
+    <span class="arch-arrow">→</span>
+    <div class="arch-node">
+      <div class="icon">🧠</div>
+      <div class="name">Gemini AI</div>
+      <div class="desc">語意解析</div>
+    </div>
+    <span class="arch-arrow">→</span>
+    <div class="arch-node">
+      <div class="icon">🔥</div>
+      <div class="name">Firestore</div>
+      <div class="desc">商品 + 會員</div>
+    </div>
+    <span class="arch-arrow">→</span>
+    <div class="arch-node">
+      <div class="icon">🎴</div>
+      <div class="name">Flex Card</div>
+      <div class="desc">報價卡回覆</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+<div class="wrap">
+  <p class="section-tag reveal">使用者體驗</p>
+  <h2 class="section-title reveal">從業務角度，<br>三步完成查價。</h2>
+  <div class="steps">
+    <div class="step-item reveal">
+      <div class="step-num">01</div>
+      <h3>LINE 打字</h3>
+      <p>業務在群組或聊天視窗用口語打需求，不用記正確品名、不用切換系統。</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-num">02</div>
+      <h3>AI 解析 + 搜尋</h3>
+      <p>Gemini 拆解意圖，提取關鍵字／數量／預算。系統從 2000+ 商品比對、依等級計算報價。</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-num">03</div>
+      <h3>秒回 Flex 卡片</h3>
+      <p>商品卡含圖片、型號、等級價、市價對照、官網連結。直接轉傳給客戶看。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="divider">
+
+<!-- CASE -->
+<section class="case-section">
+<div class="wrap">
+  <p class="section-tag reveal">實戰案例</p>
+  <h2 class="section-title reveal">這不是 demo 系統。<br>是某台灣小家電品牌正在用的。</h2>
+  <p class="section-intro reveal">這套智能查價系統是為某台灣小家電領導品牌量身開發的內部工具。每天有業務團隊在 LINE 群組裡用，從查價到下單到出貨追蹤都在 LINE 完成。</p>
+
+  <div class="case-highlight reveal">
+    <h3>導入成果</h3>
+    <div class="case-metrics">
+      <div class="case-metric"><div class="case-metric-num">2000+</div><div class="case-metric-text">商品即時查價</div></div>
+      <div class="case-metric"><div class="case-metric-num">4 級</div><div class="case-metric-text">客戶自動定價</div></div>
+      <div class="case-metric"><div class="case-metric-num">秒級</div><div class="case-metric-text">AI 報價回應</div></div>
+      <div class="case-metric"><div class="case-metric-num">全自動</div><div class="case-metric-text">下單→出貨→通知</div></div>
+    </div>
+    <div class="case-tags">
+      <span class="case-tag">Gemini AI</span>
+      <span class="case-tag">LINE Messaging API</span>
+      <span class="case-tag">Cloud Run</span>
+      <span class="case-tag">Firestore</span>
+      <span class="case-tag">Flex Message Carousel</span>
+      <span class="case-tag">四級階梯定價引擎</span>
+      <span class="case-tag">PPT/Excel 匯出</span>
+      <span class="case-tag">Web 查價後台</span>
+      <span class="case-tag">Google Drive 圖庫同步</span>
+      <span class="case-tag">SSO 登入</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CROSS-SITE NOTICE -->
+<section class="cross-site">
+<div class="wrap">
+  <div class="cross-site-inner">
+    <div class="cross-site-text">
+      <div class="eyebrow">完整服務</div>
+      <h3>LINE Bot 自動化的完整方案，<br>請見 samkuo.com</h3>
+      <p>這個 demo 只展示「智能查價」單一場景。完整的美業預約、教練排課、社群報名、企業流程自動化方案，請前往橙築國際旗下的 LINE Bot 專屬服務站。</p>
+    </div>
+    <a href="https://samkuo.com" class="btn-cta" target="_blank" rel="noopener" style="background:var(--navy);">前往 samkuo.com →</a>
+  </div>
+</div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+<div class="wrap">
+  <h2 class="reveal">想為你們公司也做一套？</h2>
+  <p class="reveal">商品查價只是冰山一角。下單、出貨、追蹤、簽核——任何重複的業務流程，都可以用 LINE + AI 自動化。<br>30 分鐘免費通話，聊聊你們公司最煩的那段流程。</p>
+  <div class="reveal" style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+    <a href="https://line.me/R/ti/p/@616wvceo" class="btn-cta" target="_blank" rel="noopener">加 LINE 免費諮詢 →</a>
+    <a href="tel:0975691485" class="btn-secondary">撥打 0975-691-485</a>
+  </div>
+  <div class="final-contact reveal">
+    <span>Email：cat@cz-777.com</span>
+    <span>桃園市春日路 818 號 1F</span>
+  </div>
+</div>
+</section>
+
+<footer><p>© 2026 橙築國際 ChengZhu International · <a href="/">chengzhu.co</a></p></footer>
+
+<!-- FLOATING CTA -->
+<a href="https://line.me/R/ti/p/@616wvceo" class="floating-cta" title="加 LINE 諮詢" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24"><path d="M23.146 10.362c0-4.38-4.408-7.946-9.824-7.946-5.416 0-9.824 3.567-9.824 7.946 0 3.931 3.513 7.234 8.28 7.859.324.068.756.208.865.485.099.25-.032.645-.064.896l-.16 1.002c-.049.303-.23.903.784.476 1.014-.427 5.483-3.23 7.55-5.591.758-.87 1.393-2.029 1.393-3.127zm-13.844.75h-2.147v-3.79c0-.289.234-.523.523-.523s.523.234.523.523v2.744h1.101c.289 0 .523.234.523.523s-.234.523-.523.523zm3.176 0h-1.046c-.289 0-.523-.234-.523-.523v-3.79c0-.289.234-.523.523-.523s.523.234.523.523v3.79c0 .289-.234.523-.523.523zm3.033-2.181l-1.396-1.579c-.214-.241-.531-.38-.857-.38h-.002c-.289 0-.523.234-.523.523v3.79c0 .289.234.523.523.523s.523-.234.523-.523v-1.637l1.396 1.576c.214.241.531.38.857.38h.002c.289 0 .523-.234.523-.523v-3.79c0-.289-.234-.523-.523-.523s-.523.234-.523.523v1.64z"/></svg>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) e.target.classList.add('v') });
+  }, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+});
+
+const products = [
+  { name: '超輕量負離子吹風機', model: 'KH-9560', category: '吹風機', market: 590, img: '💨' },
+  { name: '大風量吹風機', model: 'KH-9750', category: '吹風機', market: 790, img: '💨' },
+  { name: '陶瓷遠紅外線吹風機', model: 'KH-9660', category: '吹風機', market: 990, img: '💨' },
+  { name: '大容量行動電源 20000mAh', model: 'KPB-2511', category: '行動電源', market: 990, img: '🔌' },
+  { name: '輕薄行動電源 10000mAh', model: 'KPB-1350', category: '行動電源', market: 590, img: '🔌' },
+  { name: '藍牙5.0音響', model: 'BTS-735', category: '藍牙喇叭', market: 890, img: '🔊' },
+  { name: '防水藍牙喇叭', model: 'BTS-810', category: '藍牙喇叭', market: 690, img: '🔊' },
+  { name: '無線藍牙耳機', model: 'BTE-3895', category: '藍牙耳機', market: 699, img: '🎧' },
+  { name: '多功能電烤盤', model: 'KIA-25', category: '電烤盤', market: 1280, img: '🍳' },
+  { name: '多功能料理鍋', model: 'KCR-195', category: '料理鍋', market: 1690, img: '🍳' },
+  { name: '14吋立式電風扇', model: 'ACF-3142', category: '風扇', market: 890, img: '🌀' },
+  { name: '12L除濕機', model: 'DHM-3450', category: '除濕機', market: 4990, img: '💧' },
+];
+
+const tiers = [
+  { min: 50, name: '50 個報價', rate: 0.75 },
+  { min: 100, name: '100 個報價', rate: 0.78 },
+  { min: 300, name: '300 個報價', rate: 0.82 },
+  { min: 500, name: '500 個報價', rate: 0.85 },
+  { min: 1000, name: '1000 個報價', rate: 0.858 },
+];
+
+function calcPrice(market, qty) {
+  let tier = tiers[0];
+  for (const t of tiers) if (qty >= t.min) tier = t;
+  const price = Math.ceil(market * tier.rate * 1.05);
+  return { price, tierName: tier.name };
+}
+
+function parseInput(text) {
+  let qty = 50, maxPrice = null, keyword = text;
+  const qtyMatch = text.match(/(\d+)\s*[台個份pcs]/i);
+  if (qtyMatch) { qty = parseInt(qtyMatch[1]); keyword = keyword.replace(qtyMatch[0], ''); }
+  const budgetMatch = text.match(/(\d+)\s*以內/);
+  if (budgetMatch) { maxPrice = parseInt(budgetMatch[1]); keyword = keyword.replace(budgetMatch[0], ''); }
+  keyword = keyword.replace(/[，,。、]/g, ' ').trim();
+  return { keyword, qty, maxPrice };
+}
+
+function searchProducts(keyword, maxPrice) {
+  const kw = keyword.toLowerCase();
+  let results = products.filter(p =>
+    p.name.toLowerCase().includes(kw) ||
+    p.model.toLowerCase().includes(kw) ||
+    p.category.toLowerCase().includes(kw)
+  );
+  if (maxPrice) {
+    results = results.filter(p => calcPrice(p.market, 50).price <= maxPrice);
+  }
+  return results;
+}
+
+function buildFlexCardHTML(product, qty) {
+  const { price, tierName } = calcPrice(product.market, qty);
+  return `<div class="flex-card">
+    <div class="flex-card-img">${product.img}</div>
+    <div class="flex-card-body">
+      <div class="flex-card-name">${product.name}</div>
+      <div class="flex-card-model">型號：${product.model}</div>
+      <div class="flex-card-sep"></div>
+      <div class="flex-card-row"><span>查詢數量</span><span class="val">${qty.toLocaleString()} pcs</span></div>
+      <div class="flex-card-row"><span>計價級距</span><span class="val">${tierName}</span></div>
+      <div class="flex-card-price-label">您的等級價</div>
+      <div class="flex-card-price">$${price.toLocaleString()}</div>
+      <div class="flex-card-market">賣場價：$${product.market.toLocaleString()}</div>
+      <a href="#" class="flex-card-btn" onclick="return false;">🔗 開啟官網</a>
+    </div>
+  </div>`;
+}
+
+function addBubble(content, type) {
+  const container = document.getElementById('chatMessages');
+  const bubble = document.createElement('div');
+  if (type === 'user') {
+    bubble.className = 'bubble bubble-user';
+    bubble.textContent = content;
+  } else if (type === 'card') {
+    bubble.className = 'bubble bubble-card';
+    bubble.innerHTML = content;
+  } else {
+    bubble.className = 'bubble bubble-bot';
+    bubble.innerHTML = content;
+  }
+  container.appendChild(bubble);
+  const screen = container.closest('.phone-screen');
+  if (screen) screen.scrollTop = screen.scrollHeight;
+}
+
+function addTyping() {
+  const container = document.getElementById('chatMessages');
+  const t = document.createElement('div');
+  t.className = 'bubble-typing'; t.id = 'typing';
+  t.innerHTML = '<span></span><span></span><span></span>';
+  container.appendChild(t);
+  const screen = container.closest('.phone-screen');
+  if (screen) screen.scrollTop = screen.scrollHeight;
+}
+function removeTyping() { const t = document.getElementById('typing'); if (t) t.remove(); }
+
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addBubble(text, 'user');
+  addTyping();
+  setTimeout(() => {
+    removeTyping();
+    const { keyword, qty, maxPrice } = parseInput(text);
+    const results = searchProducts(keyword, maxPrice);
+    if (results.length === 0) {
+      addBubble(`找不到符合「${keyword}」的商品，換個關鍵字試試？<br><br>💡 可輸入商品名、型號或類別。`);
+      return;
+    }
+    if (results.length === 1) {
+      addBubble(`找到 1 筆結果：`);
+      addBubble(buildFlexCardHTML(results[0], qty), 'card');
+    } else {
+      let intro = `找到 ${results.length} 筆結果`;
+      if (maxPrice) intro += `（預算 $${maxPrice} 以內）`;
+      intro += `：`;
+      addBubble(intro);
+      let html = `<div class="flex-carousel">`;
+      results.slice(0, 5).forEach(p => { html += buildFlexCardHTML(p, qty); });
+      html += `</div>`;
+      if (results.length > 5) html += `<div style="font-size:11px;color:#888;margin-top:6px;padding:0 4px;">還有 ${results.length - 5} 筆，輸入更精確的關鍵字縮小範圍</div>`;
+      addBubble(html);
+    }
+  }, 700);
+}
+
+function quickChat(text) {
+  document.getElementById('chatInput').value = text;
+  sendChat();
+}
+</script>
+
+</body>
+</html>
