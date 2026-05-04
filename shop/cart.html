@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>購物車 — 橙築選物</title>
+  <link rel="preconnect" href="https://images.weserv.nl">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .page-title {
+      font-size: 22px; font-weight: 800;
+      margin: 8px 0 16px;
+      display: flex; align-items: baseline; gap: 8px;
+    }
+    .page-title .count {
+      font-size: 14px; color: var(--pink);
+      font-weight: 700;
+    }
+
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    /* === CART LIST === */
+    .cart-list {
+      background: #fff;
+      border: 1px solid var(--border);
+    }
+    .cart-head {
+      display: grid;
+      grid-template-columns: 32px 80px 1fr 100px 130px 100px 60px;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg-soft);
+      border-bottom: 1px solid var(--border);
+      font-size: 12px; color: var(--text-muted);
+      font-weight: 600;
+    }
+    .cart-head > div { text-align: center; }
+    .cart-head > div:nth-child(3) { text-align: left; }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 32px 80px 1fr 100px 130px 100px 60px;
+      gap: 12px;
+      padding: 16px;
+      border-bottom: 1px solid var(--border-soft);
+      align-items: center;
+    }
+    .cart-item:last-child { border-bottom: none; }
+    .cart-checkbox {
+      width: 18px; height: 18px;
+      accent-color: var(--pink);
+      cursor: pointer;
+      justify-self: center;
+    }
+    .cart-img {
+      width: 80px; height: 80px;
+      background: #fafafa;
+      border: 1px solid var(--border-soft);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cart-img img {
+      max-width: 100%; max-height: 100%;
+      object-fit: contain; padding: 6px;
+    }
+    .cart-name {
+      font-size: 13px; color: var(--text);
+      line-height: 1.5;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .cart-name a:hover { color: var(--pink); }
+    .cart-name .model {
+      display: block;
+      font-size: 11px; color: var(--text-faint);
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      margin-top: 4px;
+    }
+    .cart-price {
+      text-align: center;
+      font-size: 14px; font-weight: 700;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+    .cart-qty {
+      justify-self: center;
+      display: flex; align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .cart-qty button {
+      width: 32px; height: 32px;
+      font-size: 16px; font-weight: 700;
+      color: var(--text);
+      transition: background .15s;
+    }
+    .cart-qty button:hover:not(:disabled) { background: var(--bg-soft); }
+    .cart-qty button:disabled { color: var(--border); cursor: not-allowed; }
+    .cart-qty input {
+      width: 48px; height: 32px;
+      text-align: center;
+      border: none;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      font-size: 13px; font-weight: 700;
+      outline: none;
+    }
+    .cart-subtotal {
+      text-align: center;
+      font-size: 16px; font-weight: 800;
+      color: var(--red);
+      font-variant-numeric: tabular-nums;
+    }
+    .cart-remove {
+      justify-self: center;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      color: var(--text-muted);
+      transition: all .15s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cart-remove:hover { background: var(--red-light); color: var(--red); }
+
+    .cart-foot {
+      padding: 16px;
+      display: flex; align-items: center; gap: 12px;
+      border-top: 1px solid var(--border);
+      background: var(--bg-soft);
+      font-size: 13px;
+    }
+    .cart-foot .left {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .cart-foot .right { margin-left: auto; }
+    .cart-foot button.link {
+      color: var(--pink); font-weight: 600;
+      transition: color .15s;
+    }
+    .cart-foot button.link:hover { color: var(--pink-dark); text-decoration: underline; }
+
+    /* === SUMMARY === */
+    .summary {
+      background: #fff;
+      border: 1px solid var(--border);
+      position: sticky;
+      top: 80px;
+    }
+    .summary h3 {
+      font-size: 15px; font-weight: 800;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--dark);
+    }
+    .summary-rows {
+      padding: 16px;
+    }
+    .summary-row {
+      display: flex; justify-content: space-between;
+      align-items: baseline;
+      padding: 6px 0;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .summary-row .v {
+      color: var(--text); font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .summary-row.discount .v { color: var(--green); }
+    .summary-divider {
+      border-top: 1px dashed var(--border);
+      margin: 8px 0;
+    }
+    .summary-total {
+      display: flex; justify-content: space-between;
+      align-items: baseline;
+      padding: 8px 0 16px;
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
+    }
+    .summary-total .label {
+      font-size: 14px; font-weight: 700;
+    }
+    .summary-total .v {
+      font-size: 26px; font-weight: 900;
+      color: var(--red);
+      font-variant-numeric: tabular-nums;
+    }
+    .summary-total .v small { font-size: 14px; font-weight: 700; }
+    .summary .checkout-btn {
+      display: block; width: 100%;
+      padding: 14px;
+      background: var(--pink); color: #fff;
+      font-size: 15px; font-weight: 700;
+      text-align: center;
+      transition: background .15s;
+    }
+    .summary .checkout-btn:hover { background: var(--pink-dark); }
+    .summary .checkout-btn:disabled {
+      background: #ccc; cursor: not-allowed;
+    }
+    .summary .note {
+      padding: 12px 16px;
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--yellow-soft);
+      border-top: 1px solid var(--border);
+      line-height: 1.6;
+    }
+    .summary .promos {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+    }
+    .summary .promos .promo {
+      display: flex; align-items: center; gap: 6px;
+      padding: 4px 0;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* === EMPTY === */
+    .cart-empty {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .cart-empty .ic { font-size: 64px; margin-bottom: 12px; }
+    .cart-empty h3 {
+      font-size: 18px; font-weight: 800;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .cart-empty p {
+      font-size: 14px; color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .cart-layout { grid-template-columns: 1fr; }
+      .summary { position: static; }
+    }
+    @media (max-width: 700px) {
+      .cart-head { display: none; }
+      .cart-item {
+        grid-template-columns: 32px 80px 1fr;
+        grid-template-areas:
+          "chk img name"
+          "chk img price"
+          "chk qty subtotal"
+          ". rm rm";
+        gap: 8px 12px;
+        padding: 12px;
+      }
+      .cart-checkbox { grid-area: chk; align-self: start; }
+      .cart-img { grid-area: img; }
+      .cart-name { grid-area: name; font-size: 13px; }
+      .cart-price { grid-area: price; text-align: left; font-size: 13px; color: var(--text-muted); font-weight: 500; }
+      .cart-price::before { content: "單價 "; }
+      .cart-qty { grid-area: qty; justify-self: start; }
+      .cart-subtotal { grid-area: subtotal; text-align: right; font-size: 16px; align-self: center; }
+      .cart-remove { grid-area: rm; justify-self: end; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="demo-banner">
+  <span class="badge">DEMO</span>
+  橙築 LINE 整合電商示範站
+  <span class="muted">· 結帳不會實際扣款</span>
+</div>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="#">客服中心</a><span class="sep">|</span>
+    <a href="#">訂單查詢</a><span class="sep">|</span>
+    <a href="#">會員登入</a><span class="sep">|</span>
+    <a href="#">加入會員</a><span class="sep">|</span>
+    <a href="/">回橙築主站</a>
+  </div>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">橙築<span>選物</span></span>
+      <span class="logo-sub">SHOP</span>
+    </a>
+    <div class="search-wrap">
+      <input type="search" placeholder="輸入商品名稱、型號或關鍵字" onchange="if(this.value)location.href='index.html?q='+encodeURIComponent(this.value)">
+      <button type="button">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        搜尋
+      </button>
+    </div>
+    <div class="header-actions">
+      <a class="header-btn cart" href="cart.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        <span class="label">購物車</span>
+        <span class="badge js-cart-count">0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="breadcrumb">
+    <a href="index.html">首頁</a>
+    <span class="sep">›</span>
+    <span class="current">購物車</span>
+  </div>
+
+  <h1 class="page-title">
+    🛒 購物車
+    <span class="count" id="itemCount">(0 件商品)</span>
+  </h1>
+
+  <div id="cartContent"></div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">橙築<span>選物</span></div>
+    <ul class="footer-links">
+      <li><a href="/">主站</a></li>
+      <li><a href="/linebot/">LINE Bot</a></li>
+      <li><a href="/booking/">預約系統</a></li>
+      <li><a href="#">客服中心</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 橙築國際 · 此商城為 demo 展示</div>
+  </div>
+</footer>
+
+<script src="products.js"></script>
+<script src="cart.js"></script>
+<script>
+const cartContent = document.getElementById('cartContent');
+const itemCount = document.getElementById('itemCount');
+
+// "選擇" 狀態:商品 id → bool。預設全選。
+const selectKey = 'chengzhu_shop_select_v1';
+function getSelected() {
+  try { return new Set(JSON.parse(localStorage.getItem(selectKey) || '[]')); }
+  catch { return new Set(); }
+}
+function saveSelected(set) {
+  localStorage.setItem(selectKey, JSON.stringify([...set]));
+}
+
+function calcShipping(subtotal) {
+  return subtotal >= 499 ? 0 : 60;
+}
+function calcDiscount(subtotal) {
+  return subtotal >= 1000 ? 100 : 0;
+}
+
+function render() {
+  const items = cartStore.itemsWithProduct();
+  itemCount.textContent = `(${cartStore.count()} 件商品)`;
+
+  if (items.length === 0) {
+    cartContent.innerHTML = `
+      <div class="cart-empty">
+        <div class="ic">🛒</div>
+        <h3>購物車是空的</h3>
+        <p>還沒挑到喜歡的商品?去逛逛吧!</p>
+        <a class="btn btn-primary" href="index.html">前往購物</a>
+      </div>`;
+    return;
+  }
+
+  // 同步 selected: 確保所有 cart 項目都在 selected 內(預設全選)
+  let selected = getSelected();
+  let changed = false;
+  items.forEach(it => {
+    if (!selected.has(it.id)) { selected.add(it.id); changed = true; }
+  });
+  // 移除已不在購物車的選擇
+  [...selected].forEach(id => {
+    if (!items.find(it => it.id === id)) { selected.delete(id); changed = true; }
+  });
+  if (changed) saveSelected(selected);
+
+  const allSelected = items.every(it => selected.has(it.id));
+
+  // 已選商品的小計
+  const selectedItems = items.filter(it => selected.has(it.id));
+  const subtotal = selectedItems.reduce((s, it) => s + it.price * it.qty, 0);
+  const shipping = calcShipping(subtotal);
+  const discount = calcDiscount(subtotal);
+  const total = Math.max(0, subtotal + shipping - discount);
+  const totalCoins = selectedItems.reduce((s, it) => {
+    const e = getEnrichment(it);
+    return s + Math.floor(it.price * it.qty * e.coinPct / 100);
+  }, 0);
+
+  cartContent.innerHTML = `
+    <div class="cart-layout">
+      <div class="cart-list">
+        <div class="cart-head">
+          <div><input type="checkbox" id="selectAll" class="cart-checkbox" ${allSelected ? 'checked' : ''}></div>
+          <div></div>
+          <div>商品</div>
+          <div>單價</div>
+          <div>數量</div>
+          <div>小計</div>
+          <div></div>
+        </div>
+        ${items.map(it => `
+          <div class="cart-item" data-id="${it.id}">
+            <input type="checkbox" class="cart-checkbox js-select" data-id="${it.id}" ${selected.has(it.id) ? 'checked' : ''}>
+            <a class="cart-img" href="product.html?id=${it.id}">
+              <img src="${it.image}" alt="${escapeHtml(it.name)}" loading="lazy">
+            </a>
+            <div class="cart-name">
+              <a href="product.html?id=${it.id}">${escapeHtml(it.name)}</a>
+              <span class="model">型號 ${escapeHtml(it.model)}</span>
+            </div>
+            <div class="cart-price">$${formatPrice(it.price)}</div>
+            <div class="cart-qty">
+              <button data-act="dec" data-id="${it.id}" type="button" ${it.qty <= 1 ? 'disabled' : ''}>−</button>
+              <input type="text" class="js-qty" data-id="${it.id}" value="${it.qty}" inputmode="numeric">
+              <button data-act="inc" data-id="${it.id}" type="button">+</button>
+            </div>
+            <div class="cart-subtotal">$${formatPrice(it.price * it.qty)}</div>
+            <button class="cart-remove" data-act="rm" data-id="${it.id}" type="button" aria-label="移除">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>
+            </button>
+          </div>
+        `).join('')}
+        <div class="cart-foot">
+          <div class="left">
+            <input type="checkbox" id="selectAllFoot" class="cart-checkbox" ${allSelected ? 'checked' : ''}>
+            <span>全選 (${selectedItems.length} / ${items.length})</span>
+            <button class="link" id="clearCart">清空購物車</button>
+          </div>
+          <div class="right">
+            已選 <b style="color:var(--pink)">${selectedItems.reduce((s, it) => s + it.qty, 0)}</b> 件,合計
+            <b style="color:var(--red);font-size:16px">$${formatPrice(subtotal)}</b>
+          </div>
+        </div>
+      </div>
+
+      <aside class="summary">
+        <h3>訂單摘要</h3>
+        <div class="summary-rows">
+          <div class="summary-row">
+            <span>商品總額(${selectedItems.reduce((s, it) => s + it.qty, 0)} 件)</span>
+            <span class="v">$${formatPrice(subtotal)}</span>
+          </div>
+          <div class="summary-row">
+            <span>運費</span>
+            <span class="v">${shipping === 0 ? '<span style="color:var(--green)">免運</span>' : '$' + formatPrice(shipping)}</span>
+          </div>
+          ${discount > 0 ? `
+          <div class="summary-row discount">
+            <span>滿千折抵 −$100</span>
+            <span class="v">−$${formatPrice(discount)}</span>
+          </div>` : ''}
+          <div class="summary-divider"></div>
+          <div class="summary-row" style="font-size:11px">
+            <span>下單可得橙幣回饋</span>
+            <span class="v" style="color:#c87800">+${totalCoins} 橙幣</span>
+          </div>
+          <div class="summary-total">
+            <span class="label">應付總額</span>
+            <span class="v"><small>NT$</small>${formatPrice(total)}</span>
+          </div>
+          <a class="checkout-btn ${selectedItems.length === 0 ? 'disabled' : ''}"
+             href="${selectedItems.length === 0 ? '#' : 'checkout.html'}"
+             ${selectedItems.length === 0 ? 'onclick="return false"' : ''}>
+            ${selectedItems.length === 0 ? '請先勾選商品' : '前往結帳 ›'}
+          </a>
+        </div>
+        <div class="promos">
+          <div class="promo">🚚 滿 $499 免運費${shipping === 0 ? ' (已達標)' : ' (還差 $' + (499 - subtotal) + ')'}</div>
+          <div class="promo">🎁 滿 $1,000 折抵 $100${discount > 0 ? ' (已達標)' : ' (還差 $' + (1000 - subtotal) + ')'}</div>
+          <div class="promo">💳 信用卡分期 0 利率</div>
+        </div>
+        <div class="note">
+          <strong>📢 Demo 提醒</strong><br>
+          此為展示用 demo,結帳流程完整但不會實際扣款,訂單也只會儲存在你瀏覽器內。
+        </div>
+      </aside>
+    </div>
+  `;
+
+  wireUp();
+}
+
+function wireUp() {
+  // Quantity controls
+  document.querySelectorAll('[data-act]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const item = cartStore.itemsWithProduct().find(i => i.id === id);
+      if (!item) return;
+      if (btn.dataset.act === 'inc') cartStore.setQty(id, item.qty + 1);
+      else if (btn.dataset.act === 'dec') cartStore.setQty(id, item.qty - 1);
+      else if (btn.dataset.act === 'rm') {
+        cartStore.remove(id);
+        showToast(`已移除 · ${item.name}`);
+      }
+      render();
+    });
+  });
+  document.querySelectorAll('.js-qty').forEach(input => {
+    input.addEventListener('change', () => {
+      const id = input.dataset.id;
+      const n = Math.max(1, Math.min(99, parseInt(input.value) || 1));
+      cartStore.setQty(id, n);
+      render();
+    });
+  });
+
+  // Select toggles
+  document.querySelectorAll('.js-select').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const id = cb.dataset.id;
+      const sel = getSelected();
+      if (cb.checked) sel.add(id); else sel.delete(id);
+      saveSelected(sel);
+      render();
+    });
+  });
+  ['selectAll', 'selectAllFoot'].forEach(idEl => {
+    const el = document.getElementById(idEl);
+    if (!el) return;
+    el.addEventListener('change', () => {
+      const sel = el.checked
+        ? new Set(cartStore.get().map(i => i.id))
+        : new Set();
+      saveSelected(sel);
+      render();
+    });
+  });
+
+  // Clear cart
+  const clr = document.getElementById('clearCart');
+  if (clr) clr.addEventListener('click', () => {
+    if (confirm('確定要清空購物車?')) {
+      cartStore.clear();
+      render();
+    }
+  });
+}
+
+render();
+</script>
+
+</body>
+</html>
