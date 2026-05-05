@@ -1,142 +1,200 @@
 /* ============================================
    橙築選物 ChengZhu Shop — Design Tokens
+   Refined: clean, premium, golf-boutique aesthetic
    ============================================ */
 :root {
-  /* Brand — 橙系 (warm, lively, promo-friendly) */
-  --cz-orange: #FF6B2C;        /* primary action, hot price */
-  --cz-orange-dark: #E5481A;
-  --cz-orange-light: #FFE4D6;
-  --cz-amber: #FFB547;         /* accent, badges */
-  --cz-yellow: #FFD93D;        /* flash sale */
+  /* Brand — restrained terracotta (was loud orange) */
+  --cz-orange: #B85320;        /* primary accent / CTA only — used sparingly */
+  --cz-orange-dark: #8E3D17;
+  --cz-orange-light: #FAF1E8;  /* very subtle peach wash */
+  --cz-amber: #B89860;         /* refined gold for stars/highlights */
+  --cz-sage: #5C7864;          /* subtle sage accent (golf-tone) */
+  --cz-sage-light: #EAEFE9;
 
-  /* LINE */
+  /* LINE — kept but softened in usage */
   --line-green: #06C755;
-  --line-green-dark: #04A246;
+  --line-green-dark: #048F3D;
 
-  /* Neutrals — warm-tinted */
-  --ink-900: #1A1410;
-  --ink-700: #3A2E25;
-  --ink-500: #6B5A4D;
-  --ink-400: #8C7B6E;
-  --ink-300: #B8AA9E;
-  --ink-200: #E5DDD3;
-  --ink-100: #F2EDE6;
-  --ink-50:  #FAF7F2;
+  /* Neutrals — warm, refined */
+  --ink-900: #1F1A14;
+  --ink-700: #4A4138;
+  --ink-500: #807464;
+  --ink-400: #A89B8D;
+  --ink-300: #C8BCA8;
+  --ink-200: #E8DFD0;
+  --ink-100: #F5F1E8;          /* page bg accent */
+  --ink-50:  #FBF9F4;          /* main bg */
   --white:   #FFFFFF;
 
-  /* Status */
-  --red-hot: #E5304A;
-  --green-ok: #1F9A5C;
-  --blue-info: #2B7BD5;
+  /* Status — calmer */
+  --red-hot: #A24048;
+  --green-ok: #4A7A52;
+  --blue-info: #4A6B8A;
 
-  /* Radii (loose default — switchable via density) */
-  --r-sm: 8px;
-  --r-md: 12px;
-  --r-lg: 18px;
-  --r-xl: 24px;
+  /* Radii — squared, refined */
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 10px;
+  --r-xl: 14px;
   --r-pill: 999px;
 
-  /* Shadows */
-  --sh-1: 0 1px 2px rgba(26,20,16,0.06), 0 1px 3px rgba(26,20,16,0.04);
-  --sh-2: 0 4px 12px rgba(26,20,16,0.08), 0 2px 4px rgba(26,20,16,0.04);
-  --sh-3: 0 12px 32px rgba(26,20,16,0.12), 0 4px 8px rgba(26,20,16,0.06);
-  --sh-orange: 0 8px 24px rgba(255,107,44,0.28);
+  /* Shadows — barely there */
+  --sh-1: 0 1px 2px rgba(31,26,20,0.04);
+  --sh-2: 0 2px 8px rgba(31,26,20,0.06);
+  --sh-3: 0 6px 18px rgba(31,26,20,0.08);
+  --sh-orange: 0 1px 3px rgba(184,83,32,0.15);
 
   /* Density (overridden by tweaks) */
-  --gap: 20px;
-  --pad: 20px;
-  --card-pad: 16px;
-  --section-pad-y: 80px;
+  --gap: 24px;
+  --pad: 24px;
+  --card-pad: 18px;
+  --section-pad-y: 96px;
 
   /* Type */
   --font-sans: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  --font-display: "Noto Serif TC", "PingFang TC", serif;
+  --font-display: "Noto Serif TC", "PingFang TC", "Songti TC", Georgia, serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 [data-density="tight"] {
-  --gap: 12px;
-  --pad: 14px;
-  --card-pad: 12px;
-  --section-pad-y: 56px;
+  --gap: 14px;
+  --pad: 16px;
+  --card-pad: 14px;
+  --section-pad-y: 64px;
 }
 
 [data-density="loose"] {
-  --gap: 28px;
-  --pad: 28px;
-  --card-pad: 20px;
-  --section-pad-y: 104px;
+  --gap: 32px;
+  --pad: 32px;
+  --card-pad: 24px;
+  --section-pad-y: 120px;
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; font-family: var(--font-sans); color: var(--ink-900); background: var(--ink-50); -webkit-font-smoothing: antialiased; }
-button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; padding: 0; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--ink-900);
+  background: var(--ink-50);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.005em;
+}
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; padding: 0; letter-spacing: inherit; }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 input, textarea, select { font-family: inherit; }
 
-/* Utility helpers */
+h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.01em; }
+
+/* === Buttons === */
 .cz-btn-primary {
-  background: var(--cz-orange);
+  background: var(--ink-900);
   color: white;
-  padding: 12px 22px;
-  border-radius: var(--r-pill);
-  font-weight: 700;
-  font-size: 15px;
+  padding: 13px 24px;
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.04em;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  box-shadow: var(--sh-orange);
-  transition: transform .15s ease, box-shadow .15s ease, background .15s;
+  transition: background .2s ease;
 }
-.cz-btn-primary:hover { transform: translateY(-1px); background: var(--cz-orange-dark); }
-.cz-btn-primary:active { transform: translateY(0); }
+.cz-btn-primary:hover { background: #000; }
 
 .cz-btn-line {
   background: var(--line-green);
   color: white;
-  padding: 12px 22px;
-  border-radius: var(--r-pill);
-  font-weight: 700;
+  padding: 13px 24px;
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.04em;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 6px 18px rgba(6,199,85,0.32);
-  transition: transform .15s ease, background .15s;
+  transition: background .2s;
 }
-.cz-btn-line:hover { transform: translateY(-1px); background: var(--line-green-dark); }
+.cz-btn-line:hover { background: var(--line-green-dark); }
 
 .cz-btn-ghost {
-  border: 1.5px solid var(--ink-200);
-  background: white;
+  border: 1px solid var(--ink-300);
+  background: transparent;
   color: var(--ink-900);
-  padding: 10px 18px;
-  border-radius: var(--r-pill);
-  font-weight: 600;
+  padding: 11px 22px;
+  border-radius: var(--r-sm);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.04em;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   transition: border-color .15s, background .15s;
 }
-.cz-btn-ghost:hover { border-color: var(--ink-900); background: var(--ink-50); }
+.cz-btn-ghost:hover { border-color: var(--ink-900); background: var(--ink-100); }
 
+.cz-btn-orange {
+  background: var(--cz-orange);
+  color: white;
+  padding: 13px 24px;
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background .2s ease;
+}
+.cz-btn-orange:hover { background: var(--cz-orange-dark); }
+
+/* === Chips (unified, hairline-border style) === */
 .cz-chip {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   padding: 4px 10px;
-  border-radius: var(--r-pill);
-  font-size: 12px;
-  font-weight: 600;
-  background: var(--ink-100);
+  border-radius: var(--r-sm);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  background: white;
+  border: 1px solid var(--ink-200);
   color: var(--ink-700);
 }
-.cz-chip-hot { background: linear-gradient(135deg, #FFE4D6, #FFD3B8); color: var(--cz-orange-dark); }
-.cz-chip-line { background: rgba(6,199,85,0.12); color: var(--line-green-dark); }
-.cz-chip-new { background: #E8F5E8; color: var(--green-ok); }
+.cz-chip-hot { border-color: var(--cz-orange); color: var(--cz-orange); }
+.cz-chip-line { border-color: var(--line-green); color: var(--line-green-dark); }
+.cz-chip-new { border-color: var(--cz-sage); color: var(--cz-sage); }
+
+/* === Eyebrow (subtle uppercase label) === */
+.cz-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-500);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* === Section title (refined serif) === */
+.cz-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-900);
+  line-height: 1.25;
+  margin: 0;
+}
+
+/* === Hairline divider === */
+.cz-rule {
+  border: none;
+  border-top: 1px solid var(--ink-200);
+  margin: 0;
+}
 
 /* Scrollbar polish */
-::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--ink-200); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: var(--ink-200); border-radius: 8px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--ink-300); }
