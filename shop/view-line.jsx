@@ -114,7 +114,7 @@ const LiffView = ({ cart, onNav, setOrder }) => {
 const BotView = ({ onNav }) => {
   const messages = [
     { from: "user", t: "氣炸鍋" },
-    { from: "bot", type: "products", items: PRODUCTS.filter(p => p.id === "ar-2018").concat(PRODUCTS.filter(p => p.id === "kc-coffee").slice(0, 1)) },
+    { from: "bot", type: "products", items: PRODUCTS.filter(p => p.id === "af598").concat(PRODUCTS.filter(p => p.id === "cmh7570").slice(0, 1)) },
     { from: "bot", t: "為您推薦以上熱銷商品 🔥 點「立即購買」即可在 LINE 內直接結帳" },
     { from: "user", t: "查詢訂單" },
     { from: "bot", type: "order" },

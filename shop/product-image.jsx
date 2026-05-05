@@ -1,15 +1,39 @@
-// 商品縮圖 — 簡約幾何插畫,單色淡背景 + 細節線條
-// 商品依 catKey 用不同抽象構圖,色調統一往溫潤精品方向走
+// 商品縮圖 — 優先用真實照片 (product.image),沒有時退回 emoji + 細線幾何 fallback
 
 const ProductImage = ({ product, size = "default", showPrice = false }) => {
-  const { color, accent, icon, name } = product;
+  const { image, imageFull, icon } = product;
   const isLarge = size === "large";
   const isHero = size === "hero";
 
-  // 用很淡的暖色背景作為「展示底」,主要視覺是 emoji + 細線描繪幾何
-  const bgTone = "var(--ink-50)";
-  const strokeTone = "var(--ink-300)";
+  // 真實圖片優先 (大圖用 imageFull,有的話)
+  const src = isHero && imageFull ? imageFull : image;
 
+  if (src) {
+    return (
+      <div style={{
+        position: "relative",
+        width: "100%",
+        aspectRatio: isHero ? "16/10" : "1",
+        background: "var(--ink-50)",
+        overflow: "hidden",
+      }}>
+        <img
+          src={src}
+          alt={product.name}
+          loading="lazy"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+            padding: isHero ? "32px" : "12px",
+          }}
+        />
+      </div>
+    );
+  }
+
+  // === Fallback: 沒有圖片時用 emoji + 細線幾何 ===
+  const strokeTone = "var(--ink-300)";
   const renderShape = () => {
     if (product.catKey === "appliance") {
       return (
@@ -23,12 +47,11 @@ const ProductImage = ({ product, size = "default", showPrice = false }) => {
     if (product.catKey === "lifestyle") {
       return (
         <>
-          <circle cx="50%" cy="50%" r={isHero ? "30" : "30"} fill="none" stroke={strokeTone} strokeWidth="1.2" />
-          <circle cx="50%" cy="50%" r={isHero ? "20" : "18"} fill="none" stroke={strokeTone} strokeWidth="1" opacity="0.5" />
+          <circle cx="50%" cy="50%" r="30" fill="none" stroke={strokeTone} strokeWidth="1.2" />
+          <circle cx="50%" cy="50%" r="18" fill="none" stroke={strokeTone} strokeWidth="1" opacity="0.5" />
         </>
       );
     }
-    // home
     return (
       <>
         <rect x="22%" y="32%" width="56%" height="48%" rx="2" fill="none" stroke={strokeTone} strokeWidth="1.2" />
@@ -42,7 +65,7 @@ const ProductImage = ({ product, size = "default", showPrice = false }) => {
       position: "relative",
       width: "100%",
       aspectRatio: isHero ? "16/10" : "1",
-      background: bgTone,
+      background: "var(--ink-50)",
       overflow: "hidden",
     }}>
       <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" style={{ position: "absolute", inset: 0 }}>
