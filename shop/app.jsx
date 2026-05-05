@@ -44,8 +44,8 @@ const App = () => {
   useEffect(() => {
     if ((view === "cart" || view === "checkout" || view === "liff") && cart.length === 0) {
       setCart([
-        { product: PRODUCTS.find(p => p.id === "ar-2018"), qty: 1 },
-        { product: PRODUCTS.find(p => p.id === "kim-21w"), qty: 1 },
+        { product: PRODUCTS.find(p => p.id === "af598"), qty: 1 },
+        { product: PRODUCTS.find(p => p.id === "kim3025"), qty: 1 },
       ]);
     }
   }, [view]);
