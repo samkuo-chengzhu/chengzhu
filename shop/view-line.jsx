@@ -11,9 +11,10 @@ const LiffView = ({ cart, onNav, setOrder }) => {
 
   return (
     <main style={{ padding: "32px 24px", maxWidth: 1100, margin: "0 auto" }}>
-      <div style={{ marginBottom: 20 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, margin: "0 0 6px" }}>LIFF 一鍵結帳</h1>
-        <p style={{ fontSize: 14, color: "var(--ink-500)", margin: 0 }}>在 LINE 內開啟 LIFF 結帳頁，免註冊、免輸入，3 秒下單。</p>
+      <div style={{ marginBottom: 32 }}>
+        <div className="cz-eyebrow" style={{ marginBottom: 10 }}>LIFF · LINE Front-end Framework</div>
+        <h1 style={{ fontFamily: "var(--font-display)", fontSize: 36, fontWeight: 600, letterSpacing: "-0.015em", margin: "0 0 8px", color: "var(--ink-900)" }}>LIFF 一鍵結帳</h1>
+        <p style={{ fontSize: 14, color: "var(--ink-500)", margin: 0 }}>在 LINE 內開啟 LIFF 結帳頁,免註冊、免輸入,3 秒下單。</p>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "380px 1fr", gap: 48, alignItems: "flex-start" }}>
@@ -62,14 +63,14 @@ const LiffView = ({ cart, onNav, setOrder }) => {
                 </div>
               </div>
 
-              <div style={{ marginTop: 14, padding: 12, background: "linear-gradient(135deg, #FFF8F0, #FFE4D6)", borderRadius: 10 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--ink-700)", marginBottom: 4 }}><span>小計</span><span>${subtotal.toLocaleString()}</span></div>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--ink-700)", marginBottom: 4 }}><span>運費</span><span>{subtotal >= 499 ? "免費" : "$80"}</span></div>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, fontWeight: 800, color: "var(--cz-orange-dark)", paddingTop: 6, borderTop: "1px solid rgba(0,0,0,0.08)", marginTop: 4 }}><span>總計</span><span>${total.toLocaleString()}</span></div>
+              <div style={{ marginTop: 14, padding: 12, background: "var(--ink-50)", border: "1px solid var(--ink-200)", borderRadius: 6 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--ink-700)", marginBottom: 4 }}><span>小計</span><span>NT$ {subtotal.toLocaleString()}</span></div>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--ink-700)", marginBottom: 4 }}><span>運費</span><span>{subtotal >= 499 ? "免費" : "NT$ 80"}</span></div>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, fontWeight: 600, color: "var(--ink-900)", paddingTop: 6, borderTop: "1px solid var(--ink-200)", marginTop: 4 }}><span>總計</span><span style={{ color: "var(--cz-orange)" }}>NT$ {total.toLocaleString()}</span></div>
               </div>
 
-              <button onClick={placeOrder} style={{ width: "100%", marginTop: 14, background: "var(--line-green)", color: "white", padding: 14, borderRadius: "var(--r-pill)", fontSize: 14, fontWeight: 800, boxShadow: "0 6px 16px rgba(6,199,85,0.3)" }}>
-                確認付款 ${total.toLocaleString()}
+              <button onClick={placeOrder} style={{ width: "100%", marginTop: 14, background: "var(--line-green)", color: "white", padding: 14, borderRadius: 6, fontSize: 14, fontWeight: 600, letterSpacing: "0.04em" }}>
+                確認付款 NT$ {total.toLocaleString()}
               </button>
               <p style={{ fontSize: 9, color: "var(--ink-400)", textAlign: "center", marginTop: 8 }}>點擊即表示同意服務條款 · Demo 不會實際扣款</p>
             </div>
@@ -78,27 +79,26 @@ const LiffView = ({ cart, onNav, setOrder }) => {
 
         {/* Explanation */}
         <div>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(6,199,85,0.1)", padding: "6px 14px", borderRadius: "var(--r-pill)", fontSize: 12, fontWeight: 700, color: "var(--line-green-dark)", marginBottom: 16 }}>
-            <Icon.Line style={{ width: 14, height: 14 }} /> LIFF · LINE Front-end Framework
-          </div>
-          <h2 style={{ fontSize: 32, fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 16px", lineHeight: 1.2 }}>從 LINE 對話直達結帳，<br/>不需要打開瀏覽器</h2>
-          <p style={{ fontSize: 15, color: "var(--ink-700)", lineHeight: 1.8, marginBottom: 24 }}>
-            LIFF 是 LINE 官方的 Web 應用框架。整套商城頁面嵌入 LINE 內，自動取得使用者資訊、LINE Pay 已綁定。客戶無需註冊帳號、無需填寫地址（從 LINE Profile 帶入）、無需重新輸入信用卡（LINE Pay 直接付）——<b>真正的 3 秒下單</b>。
+          <h2 style={{ fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 600, letterSpacing: "-0.015em", margin: "0 0 18px", lineHeight: 1.25, color: "var(--ink-900)" }}>從 LINE 對話直達結帳,<br/>不需要打開瀏覽器</h2>
+          <p style={{ fontSize: 15, color: "var(--ink-700)", lineHeight: 1.85, marginBottom: 28 }}>
+            LIFF 是 LINE 官方的 Web 應用框架。整套商城頁面嵌入 LINE 內,自動取得使用者資訊、LINE Pay 已綁定。客戶無需註冊帳號、無需填寫地址 (從 LINE Profile 帶入)、無需重新輸入信用卡 (LINE Pay 直接付) — <b style={{ color: "var(--ink-900)" }}>真正的 3 秒下單</b>。
           </p>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 24 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 28 }}>
             {[
               { t: "免註冊", d: "LINE 帳號即會員" },
               { t: "免輸入", d: "從 Profile 帶入" },
               { t: "免綁卡", d: "LINE Pay 直接付" },
               { t: "原生通知", d: "Bot 主動推送" },
             ].map(x => (
-              <div key={x.t} style={{ background: "white", padding: 16, borderRadius: 12, boxShadow: "var(--sh-1)" }}>
-                <div style={{ fontSize: 14, fontWeight: 800, marginBottom: 4 }}>✓ {x.t}</div>
+              <div key={x.t} style={{ background: "white", padding: 18, border: "1px solid var(--ink-200)" }}>
+                <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 6, display: "flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ color: "var(--cz-sage)" }}><Icon.Check width={14} height={14} /></span> {x.t}
+                </div>
                 <div style={{ fontSize: 12, color: "var(--ink-500)" }}>{x.d}</div>
               </div>
             ))}
           </div>
-          <div style={{ background: "var(--ink-900)", color: "white", borderRadius: 14, padding: 18, fontFamily: "var(--font-mono)", fontSize: 12, lineHeight: 1.7 }}>
+          <div style={{ background: "var(--ink-900)", color: "white", padding: 20, fontFamily: "var(--font-mono)", fontSize: 12, lineHeight: 1.85 }}>
             <div style={{ color: "var(--cz-amber)", marginBottom: 6 }}>// LIFF 整合範例</div>
             <div><span style={{ color: "#7CC8FF" }}>liff</span>.init(&#123; liffId: <span style={{ color: "#A0DC51" }}>"2006xxxxxx-xxxxx"</span> &#125;);</div>
             <div><span style={{ color: "#7CC8FF" }}>const</span> profile = <span style={{ color: "#7CC8FF" }}>await</span> liff.<span style={{ color: "#FFD93D" }}>getProfile</span>();</div>
@@ -124,9 +124,10 @@ const BotView = ({ onNav }) => {
 
   return (
     <main style={{ padding: "32px 24px", maxWidth: 1100, margin: "0 auto" }}>
-      <div style={{ marginBottom: 20 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, margin: "0 0 6px" }}>LINE Bot 對話 Demo</h1>
-        <p style={{ fontSize: 14, color: "var(--ink-500)", margin: 0 }}>關鍵字觸發商品卡、訂單查詢、會員資訊——24 小時自動服務。</p>
+      <div style={{ marginBottom: 32 }}>
+        <div className="cz-eyebrow" style={{ marginBottom: 10 }}>LINE Bot · Conversational Commerce</div>
+        <h1 style={{ fontFamily: "var(--font-display)", fontSize: 36, fontWeight: 600, letterSpacing: "-0.015em", margin: "0 0 8px", color: "var(--ink-900)" }}>Bot 對話 Demo</h1>
+        <p style={{ fontSize: 14, color: "var(--ink-500)", margin: 0 }}>關鍵字觸發商品卡、訂單查詢、會員資訊 — 24 小時自動服務。</p>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "380px 1fr", gap: 48, alignItems: "flex-start" }}>
@@ -138,7 +139,7 @@ const BotView = ({ onNav }) => {
             </div>
             <div style={{ background: "rgba(255,255,255,0.95)", padding: "8px 14px", display: "flex", alignItems: "center", gap: 10, borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
               <Icon.ChevL />
-              <div style={{ width: 32, height: 32, borderRadius: "50%", background: "linear-gradient(135deg, var(--cz-orange), var(--cz-amber))", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 800, fontSize: 14 }}>橙</div>
+              <div style={{ width: 32, height: 32, borderRadius: "50%", background: "var(--ink-900)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 14 }}>橙</div>
               <div>
                 <div style={{ fontSize: 13, fontWeight: 700 }}>橙築選物</div>
                 <div style={{ fontSize: 9, color: "var(--ink-500)" }}>● 線上 · 24h 服務</div>
@@ -174,10 +175,10 @@ const BotView = ({ onNav }) => {
                   </div>
                 );
                 if (m.type === "points") return (
-                  <div key={i} style={{ alignSelf: "flex-start", background: "linear-gradient(135deg, #FFE4D6, #FFB547)", borderRadius: 10, padding: 12, fontSize: 11, maxWidth: "85%" }}>
-                    <div style={{ fontSize: 10, color: "var(--ink-700)" }}>會員等級 · 黃金</div>
-                    <div style={{ fontSize: 22, fontWeight: 800, color: "var(--cz-orange-dark)", margin: "4px 0" }}>1,248 橙幣</div>
-                    <div style={{ fontSize: 10, color: "var(--ink-700)" }}>可折抵 $1,248 · 升級 VIP 還差 $852</div>
+                  <div key={i} style={{ alignSelf: "flex-start", background: "var(--cz-orange-light)", border: "1px solid var(--ink-200)", borderRadius: 8, padding: 12, fontSize: 11, maxWidth: "85%" }}>
+                    <div className="cz-eyebrow" style={{ fontSize: 9, marginBottom: 4 }}>會員等級 · 黃金</div>
+                    <div style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 600, color: "var(--cz-orange)", margin: "4px 0", letterSpacing: "-0.01em" }}>1,248 橙幣</div>
+                    <div style={{ fontSize: 10, color: "var(--ink-700)", letterSpacing: "0.04em" }}>可折抵 $1,248 · 升級 VIP 還差 $852</div>
                   </div>
                 );
                 return <div key={i} style={{ alignSelf: "flex-start", background: "white", padding: "6px 10px", borderRadius: "14px 14px 14px 4px", fontSize: 11, maxWidth: "80%" }}>{m.t}</div>;
