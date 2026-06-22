@@ -23,8 +23,34 @@ function coverOf(car) {
   if (car.photos && car.photos.length) return car.photos[0].url;
   return car.cover_photo || null;
 }
-// 身分 header：DEV 用 dev:<role> 模擬；正式 LIFF 改成 liff.getAccessToken()
-function authHeaders() { return { Authorization: 'Bearer dev:' + getRole() }; }
+// ── LIFF 整合 ───────────────────────────────
+const LIFF_ID = '2010475696-IrFQfA6v';
+const __liff = { ready: false, token: null, role: null };
+
+// 進頁面前先跑：在 LINE 內 → 用真實身分；純瀏覽器 → 維持 dev 模擬（不強制登入）
+async function bootstrap() {
+  window.__DEV = true;                                // 預設 demo（純靜態 fallback 時保留切換器）
+  try { const r = await fetch('/api/config'); if (r.ok) window.__DEV = !!(await r.json()).devMode; } catch (e) {}
+  if (typeof liff === 'undefined') return;           // SDK 沒載入＝純靜態
+  try {
+    await liff.init({ liffId: LIFF_ID });
+    if (liff.isInClient() || liff.isLoggedIn()) {     // 只有在 LINE 內才走真實身分
+      if (!liff.isLoggedIn()) { liff.login(); await new Promise(() => {}); }
+      __liff.ready = true;
+      __liff.token = liff.getAccessToken();
+      try {
+        const r = await fetch('/api/dealers/me', { headers: { Authorization: 'Bearer ' + __liff.token } });
+        if (r.ok) __liff.role = (await r.json()).role;
+      } catch (e) {}
+    }
+  } catch (e) { console.warn('LIFF init 失敗，改用瀏覽器模式', e); }
+}
+function inLiff() { return __liff.ready && !!__liff.token; }
+
+// 身分 header：LIFF 用真實 access token；純瀏覽器用 dev:<role> 模擬
+function authHeaders() {
+  return inLiff() ? { Authorization: 'Bearer ' + __liff.token } : { Authorization: 'Bearer dev:' + getRole() };
+}
 
 // 優先打真後端 API；後端不在（純靜態開啟）時回退本地 cars.json
 async function loadCars() {
@@ -52,7 +78,10 @@ function canSeeWholesale(car) { return window.__API ? (!!car && car.wholesalePri
 function getParam(k) { return new URLSearchParams(location.search).get(k); }
 
 // ── DEMO 身分（權限階梯 L1 散客 / L2 申請中 / L3 已驗證車商）──
-function getRole() { try { return localStorage.getItem('cz_role') || 'guest'; } catch (e) { return 'guest'; } }
+function getRole() {
+  if (inLiff()) return __liff.role || 'guest';   // LINE 內：用後端驗證的真實身分
+  try { return localStorage.getItem('cz_role') || 'guest'; } catch (e) { return 'guest'; }
+}
 function setRole(r) { try { localStorage.setItem('cz_role', r); } catch (e) {} location.reload(); }
 function isDealer() { return getRole() === 'dealer'; }
 const ROLE_LABEL = { guest: '散客（未驗證）', pending: '車商審核中', dealer: '已驗證車商' };
@@ -61,4 +90,4 @@ function roleSwitcherHTML() {
   const b = (k, t) => `<button class="rs-btn${r === k ? ' on' : ''}" onclick="setRole('${k}')">${t}</button>`;
   return `<div class="role-sw"><span class="rs-lab">👁 DEMO 視角</span>${b('guest', '散客')}${b('pending', '申請中')}${b('dealer', '車商')}</div>`;
 }
-function mountRoleSwitcher() { const el = document.getElementById('rsw'); if (el) el.innerHTML = roleSwitcherHTML(); }
+function mountRoleSwitcher() { const el = document.getElementById('rsw'); if (el) el.innerHTML = (inLiff() || !window.__DEV) ? '' : roleSwitcherHTML(); }

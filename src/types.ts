@@ -6,6 +6,7 @@ export interface Env {
   LINE_CHANNEL_ACCESS_TOKEN?: string;
   LINE_CHANNEL_SECRET?: string;
   ADMIN_TOKEN: string;
+  SITE_URL?: string;
 }
 
 export type Role = 'guest' | 'pending' | 'dealer';

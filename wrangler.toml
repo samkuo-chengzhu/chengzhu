@@ -13,6 +13,10 @@ database_id = "846c20db-6636-4c65-81c0-d82fa27ef081"  # 遠端 D1（APAC）
 migrations_dir = "db/migrations"
 
 [vars]
-DEV_MODE = "1"            # 1=允許 dev:<role> 模擬身分（本機測試）；正式請設 0
-LIFF_CHANNEL_ID = ""
+DEV_MODE = "0"            # 0=正式（只認真實 LIFF 身分）；1=允許 dev:<role> 模擬（開發測試）
+LIFF_CHANNEL_ID = "2010475696-IrFQfA6v"  # LIFF app ID
+SITE_URL = "https://chengzhu-cars.kuo-tinghow.workers.dev"
 ADMIN_TOKEN = "dev-admin" # 後台審核用，正式請改強密碼並改用 secret
+# LINE_CHANNEL_ACCESS_TOKEN / LINE_CHANNEL_SECRET 用 secret 設定（勿寫在這）：
+#   npx wrangler secret put LINE_CHANNEL_ACCESS_TOKEN
+#   npx wrangler secret put LINE_CHANNEL_SECRET

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>批發車源｜橙築車商批發</title>
 <link rel="stylesheet" href="app.css">
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
 <div class="app">
@@ -85,6 +86,9 @@
     document.getElementById('clist').innerHTML = list.map(card).join('');
   }
 
+  bootstrap().then(() => {
+  // 會員專區在 LINE 內：未驗證車商導向申請頁
+  if (getParam('goto') === 'apply' && !isDealer()) { location.replace('apply.html'); return; }
   mountRoleSwitcher();
   document.getElementById('idtag').textContent = isDealer() ? '🔓 車商批發' : '🔒 車商批發';
 
@@ -97,6 +101,7 @@
     document.getElementById('cnt').innerHTML = `共 ${cars.length} 台 · 日本 / 韓國進口直送 ${hint ? '<span style="color:var(--gold)">· ' + hint + '</span>' : ''}`;
     tabList();
     renderCards();
+  });
   });
 </script>
 </body>

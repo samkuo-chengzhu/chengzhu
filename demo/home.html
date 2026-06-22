@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>橙築車商批發｜官方帳號</title>
 <link rel="stylesheet" href="app.css">
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
 <div class="app">
@@ -71,8 +72,7 @@
     tg.appendChild(b);
   });
 
-  mountRoleSwitcher();
-  renderChat();
+  bootstrap().then(() => { mountRoleSwitcher(); renderChat(); });
 </script>
 </body>
 </html>

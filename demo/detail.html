@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>車源詳情｜橙築車商批發</title>
 <link rel="stylesheet" href="app.css">
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
 <div class="app" id="app"></div>
@@ -196,7 +197,7 @@ function render(car) {
   }
 }
 
-loadCar(getParam('id')).then(render);
+bootstrap().then(() => loadCar(getParam('id'))).then(render);
 </script>
 </body>
 </html>

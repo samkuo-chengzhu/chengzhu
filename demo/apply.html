@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>申請成為車商｜橙築車商批發</title>
 <link rel="stylesheet" href="app.css">
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
 <div class="app">
@@ -53,13 +54,14 @@
   }
 
   function successHTML() {
+    const approveBtn = inLiff() ? '' : `<button class="approve" onclick="approve()">（DEMO）模擬審核通過 → 立即解鎖
+        <small>實際由橙築後台人工 approve 後，自動切換車商版選單</small>
+      </button>`;
     return `<div class="success">
       <div class="em">📨</div>
       <h2>申請已送出！</h2>
       <p>我們會在 <b style="color:var(--gold-bright)">1 個工作天</b> 內完成審核，<br>通過後 LINE 會通知您，批發專區將自動開通、解鎖所有批發價。</p>
-      <button class="approve" onclick="approve()">（DEMO）模擬審核通過 → 立即解鎖
-        <small>實際由橙築後台人工 approve 後，自動切換車商版選單</small>
-      </button>
+      ${approveBtn}
     </div>`;
   }
 
@@ -74,12 +76,21 @@
 
   window.toggle = (el, b) => { el.classList.toggle('on'); picked.has(b) ? picked.delete(b) : picked.add(b); };
 
-  window.submitForm = () => {
+  window.submitForm = async () => {
     const need = ['f_name', 'f_tax', 'f_contact', 'f_phone'];
     for (const id of need) {
       if (!document.getElementById(id).value.trim()) { alert('請填寫必填欄位（公司名稱 / 統編 / 聯絡人 / 電話）'); return; }
     }
-    try { localStorage.setItem('cz_role', 'pending'); } catch (e) {}
+    const payload = {
+      companyName: document.getElementById('f_name').value.trim(),
+      taxId: document.getElementById('f_tax').value.trim(),
+      contactName: document.getElementById('f_contact').value.trim(),
+      phone: document.getElementById('f_phone').value.trim(),
+      brands: [...picked],
+      note: document.getElementById('f_note').value.trim(),
+    };
+    try { await fetch('/api/dealers/apply', { method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeaders() }, body: JSON.stringify(payload) }); } catch (e) {}
+    if (inLiff()) { __liff.role = 'pending'; } else { try { localStorage.setItem('cz_role', 'pending'); } catch (e) {} }
     document.getElementById('body').innerHTML = successHTML();
     mountRoleSwitcher();
     window.scrollTo(0, 0);
@@ -92,8 +103,7 @@
     document.getElementById('body').innerHTML = role === 'dealer' ? alreadyHTML() : (role === 'pending' ? successHTML() : formHTML());
   }
 
-  mountRoleSwitcher();
-  render();
+  bootstrap().then(() => { mountRoleSwitcher(); render(); });
 </script>
 </body>
 </html>

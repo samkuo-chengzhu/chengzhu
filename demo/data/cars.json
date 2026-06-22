@@ -6,7 +6,7 @@
         "model":  "GLC 43 4MATIC+ Coupé",
         "modelYear":  2025,
         "regionSpec":  "韓規",
-        "mileageKm":  6800,
+        "mileageKm":  18000,
         "fuel":  "汽油",
         "displacementCc":  1991,
         "drivetrain":  "4MATIC",
@@ -18,8 +18,8 @@
         "interiorColor":  "黑/炭灰皮革 · 紅安全帶",
         "vinDisplay":  "W1NKJ8...366009",
         "productionDate":  "2025-02-17",
-        "wholesalePrice":  3280000,
-        "suggestedRetail":  3780000,
+        "wholesalePrice":  3500000,
+        "suggestedRetail":  3580000,
         "lockDays":  3,
         "depositPct":  30,
         "etaWeeksMin":  6,
@@ -1365,6 +1365,57 @@
                        },
                        {
                            "url":  "assets/cla250-5226/01.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "glc300coupe-6499",
+        "status":  "in_stock",
+        "brand":  "Mercedes-Benz",
+        "model":  "GLC 300 4MATIC Coupé",
+        "modelYear":  2024,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC",
+        "horsepower":  258,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  2730000,
+        "suggestedRetail":  2830000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/glc300coupe-6499/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-6499/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-6499/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-6499/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-6499/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-6499/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-6499/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-6499/08.jpg",
                            "caption":  "實拍"
                        }
                    ],

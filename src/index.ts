@@ -3,11 +3,14 @@ import type { Env } from './types';
 import { resolveIdentity } from './auth';
 import { listCars, getCar } from './cars';
 import { applyDealer, approveDealer } from './dealers';
+import { verifyLineSignature } from './line/signature';
+import { handleEvents } from './line/webhook';
 
 const app = new Hono<{ Bindings: Env }>();
 
 app.get('/', (c) => c.redirect('/home.html'));
 app.get('/api/health', (c) => c.json({ ok: true }));
+app.get('/api/config', (c) => c.json({ devMode: c.env.DEV_MODE === '1', liffId: c.env.LIFF_CHANNEL_ID || null }));
 
 // 目前身分（前端可用來決定畫面）
 app.get('/api/dealers/me', async (c) => {
@@ -41,7 +44,22 @@ app.post('/api/admin/dealers/:id/approve', async (c) => {
   return c.json(await approveDealer(c.env, c.req.param('id')));
 });
 
-// LINE webhook ─ 下一階段接：簽章驗證 + follow 歡迎訊息 + approve 後切 Rich Menu
-app.post('/line/webhook', (c) => c.json({ ok: true }));
+// LINE webhook ─ 簽章驗證 + 事件處理（加好友→歡迎訊息）
+app.post('/line/webhook', async (c) => {
+  const raw = await c.req.text();
+  const ok = await verifyLineSignature(raw, c.req.header('x-line-signature'), c.env.LINE_CHANNEL_SECRET || '');
+  if (!ok) return c.text('signature mismatch', 401);
+  const body = JSON.parse(raw || '{}');
+  await handleEvents(body.events || [], c.env);
+  return c.json({ ok: true });
+});
+
+// LINE 設定狀態：檢查憑證是否就緒（設定時方便除錯）
+app.get('/api/line/status', (c) => c.json({
+  hasToken: !!c.env.LINE_CHANNEL_ACCESS_TOKEN,
+  hasSecret: !!c.env.LINE_CHANNEL_SECRET,
+  liffId: c.env.LIFF_CHANNEL_ID || null,
+  webhookUrl: (c.env.SITE_URL || 'https://chengzhu-cars.kuo-tinghow.workers.dev') + '/line/webhook',
+}));
 
 export default app;
