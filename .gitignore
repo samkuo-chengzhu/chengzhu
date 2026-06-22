@@ -1,0 +1,9 @@
+node_modules/
+.wrangler/
+.dev.vars
+*.bak
+dist/
+
+# 大型來源照片（原始 LINE 相簿）與棄用車，不進版控
+韓國照片-*/
+_backups/

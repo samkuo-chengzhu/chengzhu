@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>橙築車商批發｜官方帳號</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="app">
+  <div id="rsw"></div>
+  <div class="demo-bar">🔧 DEMO ─ 這是官方帳號圖文選單；點各格看該狀態車源，切換上方視角看散客／車商批發價差異</div>
+
+  <div class="oa-head">
+    <div class="oa-av">OB</div>
+    <div style="flex:1">
+      <div class="oa-nm">橙築國際汽車 · 車商批發</div>
+      <div class="oa-st">● 官方帳號</div>
+    </div>
+    <div class="dealer-tag" id="idtag">🔒 車商專屬</div>
+  </div>
+
+  <div class="oa-chat" id="chat" style="min-height:0"></div>
+
+  <!-- 圖文選單：用真實設計圖當底圖，6 格疊透明點擊區（同真實 LINE Rich Menu 運作方式）-->
+  <div class="richmenu-panel">
+    <img src="assets/richmenu.jpg" alt="橙築國際汽車 圖文選單">
+    <div class="rm-tapgrid" id="tapgrid"></div>
+    <button class="rm-foottap" title="展開選單" onclick="alert('（DEMO）展開／收合圖文選單')"></button>
+  </div>
+  <div class="rm-hint">↑ 圖文選單為實際設計圖；6 格皆可點，依車輛狀態進入車源清單</div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  // 6 格對應狀態（順序＝左上→右下）：現車在庫 / 車測中 / 船運中 / 報關中 / 預訂中 / 會員專區
+  const CELLS = [
+    { label: '現車在庫', go: "location.href='list.html?status=in_stock'" },
+    { label: '車測中',   go: "location.href='list.html?status=inspection'" },
+    { label: '船運中',   go: "location.href='list.html?status=shipping'" },
+    { label: '報關中',   go: "location.href='list.html?status=customs'" },
+    { label: '預訂中',   go: "location.href='list.html?status=reserved'" },
+    { label: '會員專區', go: "memberArea()" },
+  ];
+
+  function memberArea() {
+    const r = getRole();
+    if (r === 'dealer') alert('（DEMO）會員專區：公司資料 / 車商等級 / 收車偏好 / 我的下訂鎖車');
+    else if (r === 'pending') alert('您的車商申請審核中 ⏳ 通過後即可使用會員專區');
+    else if (confirm('會員專區為已驗證車商專屬。要現在申請成為車商嗎？')) location.href = 'apply.html';
+  }
+  window.memberArea = memberArea;
+
+  function renderChat() {
+    const r = getRole();
+    const B = {
+      guest: `歡迎加入【橙築車商批發】👋<br>您目前是一般訪客，可瀏覽各狀態車源（<b>批發價隱藏</b>）。<b>申請成為車商</b>通過後即解鎖批發底價與線上下訂。
+        <div class="bb-btn" onclick="location.href='apply.html'">⭐ 申請成為車商</div>`,
+      pending: `您的車商申請<b>審核中</b> ⏳<br>通常 1 個工作天完成，通過後自動開通批發專區、解鎖所有批發價。`,
+      dealer: `<b>橙築車業</b> 您好，歡迎回來 🎉<br>點下方選單依狀態看車源；批發底價已對您開放。
+        <div class="bb-btn" onclick="location.href='list.html?status=in_stock'">📦 看現車在庫</div>`,
+    };
+    document.getElementById('chat').innerHTML = `<div class="bubble">${B[r]}</div>`;
+    document.getElementById('idtag').textContent = isDealer() ? '🔓 已開通' : '🔒 車商專屬';
+  }
+
+  const tg = document.getElementById('tapgrid');
+  CELLS.forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'rm-tap'; b.title = c.label; b.setAttribute('onclick', c.go);
+    tg.appendChild(b);
+  });
+
+  mountRoleSwitcher();
+  renderChat();
+</script>
+</body>
+</html>

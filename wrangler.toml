@@ -1,0 +1,18 @@
+name = "chengzhu-cars"
+main = "src/index.ts"
+compatibility_date = "2025-06-01"
+
+# 靜態頁面（LIFF 前端）：demo/ 直接由 Worker 同源提供，前端打 /api/* 即同源無 CORS
+[assets]
+directory = "./demo"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "chengzhu-cars"
+database_id = "846c20db-6636-4c65-81c0-d82fa27ef081"  # 遠端 D1（APAC）
+migrations_dir = "db/migrations"
+
+[vars]
+DEV_MODE = "1"            # 1=允許 dev:<role> 模擬身分（本機測試）；正式請設 0
+LIFF_CHANNEL_ID = ""
+ADMIN_TOKEN = "dev-admin" # 後台審核用，正式請改強密碼並改用 secret

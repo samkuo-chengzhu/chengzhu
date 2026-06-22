@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>申請成為車商｜橙築車商批發</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="app">
+  <div id="rsw"></div>
+  <div class="demo-bar">🔧 DEMO ─ 車商申請表單（實際上線為 LINE 內 LIFF 網頁，自動帶入 LINE 身分）</div>
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="back" onclick="location.href='home.html'">‹</div>
+      <div class="logo">OB</div>
+      <div><b>橙築國際汽車</b><small>ORANGE BUILDING MOTOR</small></div>
+    </div>
+    <div class="dealer-tag">車商申請</div>
+  </div>
+
+  <div id="body"></div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  const BRANDS = ['雙B（賓士/BMW）', '保時捷', '日系', '歐系', '性能車', '休旅車', '電動車', '其他'];
+  let picked = new Set();
+
+  function formHTML() {
+    return `<div class="form">
+      <div class="intro">通過審核後即可看到所有車源的<b style="color:var(--gold-bright)">批發底價</b>、線上下訂鎖車。審核約 1 個工作天，結果以 LINE 通知。</div>
+
+      <div class="field"><label>公司 / 商號名稱<span class="req">*</span></label><input id="f_name" placeholder="例：橙築車業有限公司"></div>
+      <div class="field"><label>統一編號<span class="req">*</span></label><input id="f_tax" inputmode="numeric" placeholder="8 碼統編"></div>
+      <div class="field"><label>負責人 / 聯絡人<span class="req">*</span></label><input id="f_contact" placeholder="姓名"></div>
+      <div class="field"><label>聯絡電話<span class="req">*</span></label><input id="f_phone" inputmode="tel" placeholder="手機或市話"></div>
+
+      <div class="field"><label>主要收車類型（可複選 · 之後用來推播對的車源）</label>
+        <div class="chips" id="chips">${BRANDS.map(b => `<span class="chip-sel" onclick="toggle(this,'${b}')">${b}</span>`).join('')}</div>
+      </div>
+
+      <div class="field"><label>上傳名片 / 營登（擇一）</label>
+        <label class="upload" for="f_file">📎 <span id="fname">點擊上傳照片…</span></label>
+        <input id="f_file" type="file" accept="image/*" style="display:none" onchange="document.getElementById('fname').textContent=this.files[0]?this.files[0].name:'點擊上傳照片…'">
+      </div>
+
+      <div class="field"><label>備註（選填）</label><textarea id="f_note" rows="2" placeholder="想批的車款、預算帶、其他需求…"></textarea></div>
+
+      <button class="submit-btn" onclick="submitForm()">送出申請</button>
+    </div>`;
+  }
+
+  function successHTML() {
+    return `<div class="success">
+      <div class="em">📨</div>
+      <h2>申請已送出！</h2>
+      <p>我們會在 <b style="color:var(--gold-bright)">1 個工作天</b> 內完成審核，<br>通過後 LINE 會通知您，批發專區將自動開通、解鎖所有批發價。</p>
+      <button class="approve" onclick="approve()">（DEMO）模擬審核通過 → 立即解鎖
+        <small>實際由橙築後台人工 approve 後，自動切換車商版選單</small>
+      </button>
+    </div>`;
+  }
+
+  function alreadyHTML() {
+    return `<div class="success">
+      <div class="em">✅</div>
+      <h2>您已是已驗證車商</h2>
+      <p>批發專區已開通，可直接瀏覽批發車源與下訂鎖車。</p>
+      <button class="approve" onclick="location.href='list.html'">🚗 前往批發車源</button>
+    </div>`;
+  }
+
+  window.toggle = (el, b) => { el.classList.toggle('on'); picked.has(b) ? picked.delete(b) : picked.add(b); };
+
+  window.submitForm = () => {
+    const need = ['f_name', 'f_tax', 'f_contact', 'f_phone'];
+    for (const id of need) {
+      if (!document.getElementById(id).value.trim()) { alert('請填寫必填欄位（公司名稱 / 統編 / 聯絡人 / 電話）'); return; }
+    }
+    try { localStorage.setItem('cz_role', 'pending'); } catch (e) {}
+    document.getElementById('body').innerHTML = successHTML();
+    mountRoleSwitcher();
+    window.scrollTo(0, 0);
+  };
+
+  window.approve = () => { try { localStorage.setItem('cz_role', 'dealer'); } catch (e) {} location.href = 'list.html'; };
+
+  function render() {
+    const role = getRole();
+    document.getElementById('body').innerHTML = role === 'dealer' ? alreadyHTML() : (role === 'pending' ? successHTML() : formHTML());
+  }
+
+  mountRoleSwitcher();
+  render();
+</script>
+</body>
+</html>

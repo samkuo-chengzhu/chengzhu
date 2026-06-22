@@ -1,0 +1,1373 @@
+[
+    {
+        "id":  "glc43-366009",
+        "status":  "reserved",
+        "brand":  "Mercedes-AMG",
+        "model":  "GLC 43 4MATIC+ Coupé",
+        "modelYear":  2025,
+        "regionSpec":  "韓規",
+        "mileageKm":  6800,
+        "fuel":  "汽油",
+        "displacementCc":  1991,
+        "drivetrain":  "4MATIC",
+        "transmission":  "9G 自手排",
+        "engine":  "M139 2.0T + 48V",
+        "tires":  "前265/後295 R21",
+        "horsepower":  421,
+        "exteriorColor":  "蛋白石白（金屬）",
+        "interiorColor":  "黑/炭灰皮革 · 紅安全帶",
+        "vinDisplay":  "W1NKJ8...366009",
+        "productionDate":  "2025-02-17",
+        "wholesalePrice":  3280000,
+        "suggestedRetail":  3780000,
+        "lockDays":  3,
+        "depositPct":  30,
+        "etaWeeksMin":  6,
+        "etaWeeksMax":  8,
+        "accidentFree":  true,
+        "highlights":  [
+                           "AMG 夜色外觀套件",
+                           "21\" AMG 鍛造輪圈",
+                           "360° 環景",
+                           "HUD 抬頭顯示",
+                           "全景天窗",
+                           "後軸轉向",
+                           "DISTRONIC 全速域 ACC",
+                           "納帕真皮方向盤",
+                           "前座通風 / 加熱",
+                           "後座加熱",
+                           "高級音響",
+                           "環艙氣氛燈",
+                           "無線充電 · CarPlay",
+                           "指紋辨識"
+                       ],
+        "spec":  {
+                     "車型系列":  "GLC 43 4MATIC+ Coupé (C254)",
+                     "年式 / 產地":  "2025 · 德國不來梅廠",
+                     "外觀色":  "蛋白石白（金屬 885U）",
+                     "內裝":  "黑 / 炭灰皮革 · 紅色安全帶",
+                     "規格別":  "韓規（左駕）",
+                     "排氣量":  "1,991 c.c. 直四渦輪"
+                 },
+        "carfaxUrl":  "#",
+        "decodeUrl":  "#",
+        "photos":  [
+                       {
+                           "url":  "assets/01-front.jpg",
+                           "caption":  "正面"
+                       },
+                       {
+                           "url":  "assets/02-side-r.jpg",
+                           "caption":  "右側"
+                       },
+                       {
+                           "url":  "assets/03-side-l.jpg",
+                           "caption":  "左側"
+                       },
+                       {
+                           "url":  "assets/04-rear.jpg",
+                           "caption":  "後面"
+                       },
+                       {
+                           "url":  "assets/05-engine.jpg",
+                           "caption":  "引擎室"
+                       },
+                       {
+                           "url":  "assets/06-interior.jpg",
+                           "caption":  "內裝"
+                       },
+                       {
+                           "url":  "assets/07-mbux.jpg",
+                           "caption":  "中控螢幕"
+                       },
+                       {
+                           "url":  "assets/08-seat.jpg",
+                           "caption":  "座椅"
+                       },
+                       {
+                           "url":  "assets/09-trunk.jpg",
+                           "caption":  "後行李廂"
+                       },
+                       {
+                           "url":  "assets/10-wheel.jpg",
+                           "caption":  "輪圈"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "gt63s-3221",
+        "status":  "in_stock",
+        "brand":  "Mercedes-AMG",
+        "model":  "GT 63 S 4-Door Coupé",
+        "modelYear":  2020,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC+",
+        "horsepower":  639,
+        "exteriorColor":  "消光灰",
+        "wholesalePrice":  3980000,
+        "suggestedRetail":  4150000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/gt63s-3221/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-3221/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-3221/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-3221/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-3221/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-3221/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-3221/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-3221/08.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "cla45s-3318",
+        "status":  "in_stock",
+        "brand":  "Mercedes-AMG",
+        "model":  "CLA 45 S 4MATIC+",
+        "modelYear":  2023,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC+",
+        "horsepower":  421,
+        "exteriorColor":  "消光黑",
+        "wholesalePrice":  2300000,
+        "suggestedRetail":  2380000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/cla45s-3318/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-3318/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-3318/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-3318/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-3318/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-3318/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-3318/08.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-3318/01.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "cle450-3070",
+        "status":  "in_stock",
+        "brand":  "Mercedes-Benz",
+        "model":  "CLE 450 4MATIC Coupé",
+        "modelYear":  2024,
+        "regionSpec":  "韓規",
+        "mileageKm":  6000,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC",
+        "horsepower":  381,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  2880000,
+        "suggestedRetail":  2980000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/cle450-3070/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cle450-3070/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cle450-3070/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cle450-3070/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cle450-3070/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cle450-3070/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cle450-3070/08.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cle450-3070/01.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "e300-4918",
+        "status":  "in_stock",
+        "brand":  "Mercedes-Benz",
+        "model":  "E 300 4MATIC",
+        "modelYear":  2024,
+        "regionSpec":  "韓規",
+        "mileageKm":  5000,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC",
+        "horsepower":  258,
+        "exteriorColor":  "曜石黑",
+        "wholesalePrice":  2800000,
+        "suggestedRetail":  2880000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/e300-4918/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-4918/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-4918/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-4918/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-4918/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-4918/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-4918/08.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-4918/01.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "glc43-9386",
+        "status":  "inspection",
+        "brand":  "Mercedes-AMG",
+        "model":  "GLC 43 4MATIC+",
+        "modelYear":  2024,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC+",
+        "horsepower":  421,
+        "exteriorColor":  "石墨灰",
+        "wholesalePrice":  2800000,
+        "suggestedRetail":  2880000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/glc43-9386/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9386/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9386/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9386/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9386/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9386/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9386/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9386/08.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "glc43coupe-1734",
+        "status":  "customs",
+        "brand":  "Mercedes-AMG",
+        "model":  "GLC 43 4MATIC+ Coupé",
+        "modelYear":  2024,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC+",
+        "horsepower":  421,
+        "exteriorColor":  "曜石黑",
+        "wholesalePrice":  3300000,
+        "suggestedRetail":  3380000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/glc43coupe-1734/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-1734/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-1734/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-1734/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-1734/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-1734/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-1734/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-1734/08.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "glc300coupe-8750",
+        "status":  "shipping",
+        "brand":  "Mercedes-Benz",
+        "model":  "GLC 300 4MATIC Coupé",
+        "modelYear":  2024,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC",
+        "horsepower":  258,
+        "exteriorColor":  "曜石黑",
+        "wholesalePrice":  2660000,
+        "suggestedRetail":  2780000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/glc300coupe-8750/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-8750/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-8750/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-8750/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-8750/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-8750/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-8750/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-8750/08.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "glc43-9924",
+        "status":  "in_stock",
+        "brand":  "Mercedes-AMG",
+        "model":  "GLC 43 4MATIC+",
+        "modelYear":  2025,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC+",
+        "horsepower":  421,
+        "exteriorColor":  "曜石黑",
+        "wholesalePrice":  3180000,
+        "suggestedRetail":  3280000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/glc43-9924/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9924/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9924/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9924/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9924/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9924/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9924/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43-9924/08.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "glc43coupe-5248",
+        "status":  "reserved",
+        "brand":  "Mercedes-AMG",
+        "model":  "GLC 43 4MATIC+ Coupé",
+        "modelYear":  2026,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC+",
+        "horsepower":  421,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  3580000,
+        "suggestedRetail":  3680000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/glc43coupe-5248/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-5248/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-5248/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-5248/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-5248/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-5248/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-5248/08.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43coupe-5248/01.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "e350-3305",
+        "status":  "inspection",
+        "brand":  "Mercedes-Benz",
+        "model":  "E 350 4MATIC",
+        "modelYear":  2021,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC",
+        "horsepower":  299,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  1780000,
+        "suggestedRetail":  1880000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/e350-3305/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e350-3305/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e350-3305/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e350-3305/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e350-3305/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e350-3305/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e350-3305/08.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e350-3305/01.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "gt63s-6498",
+        "status":  "customs",
+        "brand":  "Mercedes-AMG",
+        "model":  "GT 63 S 4-Door Coupé",
+        "modelYear":  2021,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC+",
+        "horsepower":  639,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  4250000,
+        "suggestedRetail":  4380000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/gt63s-6498/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-6498/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-6498/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-6498/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-6498/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-6498/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-6498/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt63s-6498/08.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "minijcw-4949",
+        "status":  "in_stock",
+        "brand":  "MINI",
+        "model":  "John Cooper Works",
+        "modelYear":  2022,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "FWD",
+        "horsepower":  231,
+        "exteriorColor":  "銀灰",
+        "wholesalePrice":  1430000,
+        "suggestedRetail":  1550000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/minijcw-4949/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/minijcw-4949/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/minijcw-4949/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/minijcw-4949/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/minijcw-4949/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/minijcw-4949/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/minijcw-4949/08.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/minijcw-4949/01.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "c300-0133",
+        "status":  "shipping",
+        "brand":  "Mercedes-Benz",
+        "model":  "C 300 4MATIC",
+        "modelYear":  2022,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC",
+        "horsepower":  258,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  1720000,
+        "suggestedRetail":  1790000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/c300-0133/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/c300-0133/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/c300-0133/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/c300-0133/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/c300-0133/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/c300-0133/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/c300-0133/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/c300-0133/08.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "glc300coupe-9806",
+        "status":  "reserved",
+        "brand":  "Mercedes-Benz",
+        "model":  "GLC 300 4MATIC Coupé",
+        "modelYear":  2024,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC",
+        "horsepower":  258,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  2700000,
+        "suggestedRetail":  2780000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/glc300coupe-9806/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-9806/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-9806/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-9806/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-9806/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-9806/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-9806/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300coupe-9806/08.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "cla45s-4814",
+        "status":  "in_stock",
+        "brand":  "Mercedes-AMG",
+        "model":  "CLA 45 S 4MATIC+",
+        "modelYear":  2022,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC+",
+        "horsepower":  421,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  2130000,
+        "suggestedRetail":  2250000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/cla45s-4814/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-4814/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-4814/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-4814/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-4814/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-4814/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-4814/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla45s-4814/08.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "glc43suv-9571",
+        "status":  "inspection",
+        "brand":  "Mercedes-AMG",
+        "model":  "GLC 43 4MATIC",
+        "modelYear":  2024,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC+",
+        "horsepower":  421,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  2880000,
+        "suggestedRetail":  2980000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/glc43suv-9571/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43suv-9571/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43suv-9571/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43suv-9571/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43suv-9571/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43suv-9571/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43suv-9571/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc43suv-9571/08.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "e300-8516",
+        "status":  "customs",
+        "brand":  "Mercedes-Benz",
+        "model":  "E 300 4MATIC",
+        "modelYear":  2024,
+        "regionSpec":  "韓規",
+        "mileageKm":  19000,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC",
+        "horsepower":  258,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  2730000,
+        "suggestedRetail":  2830000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/e300-8516/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-8516/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-8516/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-8516/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-8516/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-8516/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-8516/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/e300-8516/08.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "m2-6415",
+        "status":  "reserved",
+        "brand":  "BMW",
+        "model":  "M2 Coupé",
+        "modelYear":  2025,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "RWD",
+        "horsepower":  460,
+        "exteriorColor":  "白",
+        "wholesalePrice":  3050000,
+        "suggestedRetail":  3180000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/m2-6415/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m2-6415/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m2-6415/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m2-6415/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m2-6415/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m2-6415/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m2-6415/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m2-6415/08.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "glc300amg-0195",
+        "status":  "shipping",
+        "brand":  "Mercedes-Benz",
+        "model":  "GLC 300 4MATIC",
+        "modelYear":  2025,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC",
+        "horsepower":  258,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  2800000,
+        "suggestedRetail":  2880000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/glc300amg-0195/01.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300amg-0195/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300amg-0195/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300amg-0195/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300amg-0195/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300amg-0195/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300amg-0195/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/glc300amg-0195/08.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "cla250-2921",
+        "status":  "in_stock",
+        "brand":  "Mercedes-Benz",
+        "model":  "CLA 250 4MATIC",
+        "modelYear":  2021,
+        "regionSpec":  "韓規",
+        "mileageKm":  18000,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC",
+        "horsepower":  224,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  1400000,
+        "suggestedRetail":  1480000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/cla250-2921/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-2921/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-2921/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-2921/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-2921/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-2921/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-2921/08.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-2921/01.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "m340-9432",
+        "status":  "customs",
+        "brand":  "BMW",
+        "model":  "M340i xDrive Touring",
+        "modelYear":  2023,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "xDrive",
+        "horsepower":  374,
+        "exteriorColor":  "礦石白",
+        "wholesalePrice":  2500000,
+        "suggestedRetail":  2580000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/m340-9432/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m340-9432/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m340-9432/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m340-9432/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m340-9432/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m340-9432/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m340-9432/08.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/m340-9432/01.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "bmw520-8600",
+        "status":  "reserved",
+        "brand":  "BMW",
+        "model":  "520i M Sport",
+        "modelYear":  2024,
+        "regionSpec":  "韓規",
+        "mileageKm":  16000,
+        "fuel":  "汽油",
+        "drivetrain":  "RWD",
+        "horsepower":  208,
+        "exteriorColor":  "礦石白",
+        "wholesalePrice":  2280000,
+        "suggestedRetail":  2380000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/bmw520-8600/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-8600/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-8600/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-8600/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-8600/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-8600/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-8600/08.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-8600/01.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "bmw520-9227",
+        "status":  "shipping",
+        "brand":  "BMW",
+        "model":  "520i M Sport",
+        "modelYear":  2024,
+        "regionSpec":  "韓規",
+        "mileageKm":  21000,
+        "fuel":  "汽油",
+        "drivetrain":  "RWD",
+        "horsepower":  208,
+        "exteriorColor":  "礦石白",
+        "wholesalePrice":  2280000,
+        "suggestedRetail":  2380000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/bmw520-9227/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-9227/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-9227/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-9227/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-9227/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-9227/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-9227/08.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/bmw520-9227/01.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "gt43-3343",
+        "status":  "reserved",
+        "brand":  "Mercedes-AMG",
+        "model":  "GT 43 4-Door Coupé",
+        "modelYear":  2021,
+        "regionSpec":  "韓規",
+        "mileageKm":  null,
+        "fuel":  "汽油",
+        "drivetrain":  "4MATIC+",
+        "horsepower":  367,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  2860000,
+        "suggestedRetail":  2980000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/gt43-3343/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt43-3343/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt43-3343/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt43-3343/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt43-3343/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt43-3343/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt43-3343/08.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/gt43-3343/01.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    },
+    {
+        "id":  "cla250-5226",
+        "status":  "in_stock",
+        "brand":  "Mercedes-Benz",
+        "model":  "CLA 250",
+        "modelYear":  2021,
+        "regionSpec":  "韓規",
+        "mileageKm":  47000,
+        "fuel":  "汽油",
+        "drivetrain":  "FWD",
+        "horsepower":  224,
+        "exteriorColor":  "北極白",
+        "wholesalePrice":  1400000,
+        "suggestedRetail":  1480000,
+        "accidentFree":  true,
+        "photos":  [
+                       {
+                           "url":  "assets/cla250-5226/02.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-5226/03.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-5226/04.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-5226/05.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-5226/06.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-5226/07.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-5226/08.jpg",
+                           "caption":  "實拍"
+                       },
+                       {
+                           "url":  "assets/cla250-5226/01.jpg",
+                           "caption":  "實拍"
+                       }
+                   ],
+        "placeholder":  false
+    }
+]
