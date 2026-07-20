@@ -2,9 +2,14 @@ name = "chengzhu-cars"
 main = "src/index.ts"
 compatibility_date = "2025-06-01"
 
-# 靜態頁面（LIFF 前端）：demo/ 直接由 Worker 同源提供，前端打 /api/* 即同源無 CORS
+# 自訂網域（與 *.workers.dev 並存，不影響舊網址）；Cloudflare 自動建 DNS + 簽 SSL
+routes = [
+  { pattern = "cars.chengzhu.co", custom_domain = true }
+]
+
+# 靜態頁面（LIFF 前端）：public/ 直接由 Worker 同源提供，前端打 /api/* 即同源無 CORS
 [assets]
-directory = "./demo"
+directory = "./public"
 
 [[d1_databases]]
 binding = "DB"
@@ -12,11 +17,19 @@ database_name = "chengzhu-cars"
 database_id = "846c20db-6636-4c65-81c0-d82fa27ef081"  # 遠端 D1（APAC）
 migrations_dir = "db/migrations"
 
+# R2：車輛照片儲存（後台上傳，/photos/* 由 Worker 提供）
+[[r2_buckets]]
+binding = "PHOTOS"
+bucket_name = "chengzhu-cars-photos"
+
 [vars]
 DEV_MODE = "0"            # 0=正式（只認真實 LIFF 身分）；1=允許 dev:<role> 模擬（開發測試）
 LIFF_CHANNEL_ID = "2010475696-IrFQfA6v"  # LIFF app ID
-SITE_URL = "https://chengzhu-cars.kuo-tinghow.workers.dev"
-ADMIN_TOKEN = "dev-admin" # 後台審核用，正式請改強密碼並改用 secret
+SITE_URL = "https://cars.chengzhu.co"
+# 公開官網（Astro）部署到 Cloudflare Pages 後，把它的 *.pages.dev 填這裡；Worker 會把非 /app・/api 路徑反代過去。
+# Phase 3 設定，例：PAGES_ORIGIN = "https://chengzhu-cars-site.pages.dev"
+PAGES_ORIGIN = "https://chengzhu-cars-site.pages.dev"
+# ADMIN_TOKEN 已改用 secret（強密碼）：npx wrangler secret put ADMIN_TOKEN
 # LINE_CHANNEL_ACCESS_TOKEN / LINE_CHANNEL_SECRET 用 secret 設定（勿寫在這）：
 #   npx wrangler secret put LINE_CHANNEL_ACCESS_TOKEN
 #   npx wrangler secret put LINE_CHANNEL_SECRET
