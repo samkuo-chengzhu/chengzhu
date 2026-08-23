@@ -3,661 +3,259 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KINYO 家電專區 — 橙築國際授權經銷商</title>
-  <meta name="description" content="橙築國際是 KINYO 授權經銷商，專為企業提供尾牙禮品、股東會贈品、員工福利的客製化採購方案。一站式報價、配送、開立發票。">
+  <title>KINYO 家電專區 — 企業禮贈品一次採購到位｜橙築國際</title>
+  <meta name="description" content="橙築國際是 KINYO 小家電授權經銷商。尾牙抽獎、股東會紀念品、員工三節福利，從選品、議價、配送到開立三聯式發票，一個窗口完成。">
   <link rel="canonical" href="https://chengzhu.co/appliances/">
+  <meta property="og:title" content="KINYO 家電專區 — 企業禮贈品一次採購到位｜橙築國際">
+  <meta property="og:description" content="KINYO 授權經銷商。企業禮贈品採購，一個窗口輕鬆搞定。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chengzhu.co/appliances/">
+  <meta property="og:locale" content="zh_TW">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --orange: #d8623a;
-      --orange-soft: #c1542f;
-      --paper: #f7f1e6;
-      --paper-deep: #ede4d2;
-      --paper-line: #e3d8c1;
-      --ink: #2b2620;
-      --ink-mid: #5e564a;
-      --ink-soft: #8a8071;
-      --serif: "Noto Serif TC", "Source Han Serif TC", "Songti TC", Georgia, serif;
-      --sans: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--sans);
-      color: var(--ink);
-      line-height: 1.8;
-      background: var(--paper);
-      font-size: 16px;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-    a { color: inherit; text-decoration: none; }
-
-    body::before {
-      content: '';
-      position: fixed; inset: 0; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.14 0 0 0 0 0.12 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      opacity: 0.5;
-      mix-blend-mode: multiply;
-      z-index: 0;
-    }
-    main, header, footer { position: relative; z-index: 1; }
-
-    /* NAV */
-    header.nav {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(247, 241, 230, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--paper-line);
-    }
-    .nav-inner {
-      max-width: 1080px; margin: 0 auto; padding: 18px 32px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-brand {
-      font-family: var(--serif);
-      font-size: 22px; font-weight: 500;
-      color: var(--ink); letter-spacing: 0.02em;
-    }
-    .nav-brand .dot { color: var(--orange); }
-    .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
-    .nav-links a {
-      font-size: 14px; color: var(--ink-mid);
-      letter-spacing: 0.06em; transition: color .25s;
-    }
-    .nav-links a:hover { color: var(--orange); }
-    .mobile-toggle {
-      display: none; background: none; border: none; cursor: pointer;
-      width: 32px; height: 24px; position: relative;
-    }
-    .mobile-toggle span {
-      display: block; width: 24px; height: 1.5px; background: var(--ink);
-      position: absolute; left: 4px;
-    }
-    .mobile-toggle span:nth-child(1) { top: 5px; }
-    .mobile-toggle span:nth-child(2) { top: 12px; }
-    .mobile-toggle span:nth-child(3) { top: 19px; }
-
-    /* BREADCRUMB */
-    .crumb {
-      max-width: 1080px; margin: 0 auto;
-      padding: 32px 32px 0;
-      font-size: 12px; color: var(--ink-soft);
-      letter-spacing: 0.08em;
-    }
-    .crumb a:hover { color: var(--orange); }
-    .crumb .sep { margin: 0 10px; color: var(--paper-line); }
-
-    /* HERO */
-    .hero {
-      max-width: 1080px; margin: 0 auto;
-      padding: 80px 32px 100px;
-    }
-    .hero .eyebrow {
-      font-family: var(--sans);
-      font-size: 12px; letter-spacing: 0.3em;
-      color: var(--orange); text-transform: uppercase;
-      margin-bottom: 32px;
-      display: inline-flex; align-items: center; gap: 14px;
-    }
-    .hero .eyebrow::before {
-      content: ''; display: block;
-      width: 32px; height: 1px; background: var(--orange);
-    }
-    .hero h1 {
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: clamp(34px, 5vw, 56px);
-      line-height: 1.35;
-      letter-spacing: 0.01em;
-      color: var(--ink);
-      margin-bottom: 32px;
-      max-width: 18ch;
-    }
-    .hero h1 em {
-      font-style: normal;
-      color: var(--orange);
-    }
-    .hero-lede {
-      font-family: var(--sans);
-      font-size: 17px; line-height: 1.95;
-      color: var(--ink-mid);
-      max-width: 48ch;
-    }
-
-    /* SECTION */
-    section { position: relative; }
-    .container {
-      max-width: 1080px; margin: 0 auto;
-      padding: 0 32px;
-    }
-    .section-divider {
-      max-width: 1080px; margin: 0 auto;
-      padding: 0 32px;
-    }
-    .section-divider hr {
-      border: 0; height: 1px; background: var(--paper-line);
-    }
-    .section-pad { padding: 110px 0; }
-    .section-pad-sm { padding: 88px 0; }
-    .section-eyebrow {
-      font-family: var(--sans);
-      font-size: 12px; letter-spacing: 0.3em;
-      color: var(--ink-soft); text-transform: uppercase;
-      margin-bottom: 24px;
-      display: inline-flex; align-items: center; gap: 14px;
-    }
-    .section-eyebrow::before {
-      content: ''; display: block;
-      width: 24px; height: 1px; background: var(--ink-soft);
-    }
-    .section-title {
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: clamp(28px, 3.6vw, 40px);
-      line-height: 1.45;
-      color: var(--ink);
-      margin-bottom: 24px;
-      max-width: 22ch;
-    }
-    .section-lede {
-      font-family: var(--sans);
-      font-size: 16px; line-height: 1.95;
-      color: var(--ink-mid);
-      max-width: 44ch;
-    }
-
-    /* SCENARIOS — 編號條列 */
-    .scenarios {
-      background: var(--paper-deep);
-    }
-    .scenarios-list {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 56px;
-      margin-top: 64px;
-    }
-    .scenario {
-      padding-top: 28px;
-      border-top: 1px solid var(--paper-line);
-    }
-    .scenario .num {
-      font-family: var(--serif);
-      font-size: 14px; letter-spacing: 0.25em;
-      color: var(--orange);
-      margin-bottom: 16px;
-    }
-    .scenario h3 {
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: 22px; line-height: 1.5;
-      color: var(--ink);
-      margin-bottom: 14px;
-    }
-    .scenario p {
-      font-family: var(--sans);
-      font-size: 15px; line-height: 1.9;
-      color: var(--ink-mid);
-      margin-bottom: 18px;
-    }
-    .scenario ul { list-style: none; }
-    .scenario ul li {
-      font-family: var(--sans);
-      font-size: 14px; color: var(--ink-mid);
-      padding: 6px 0; padding-left: 22px;
-      position: relative;
-      line-height: 1.7;
-    }
-    .scenario ul li::before {
-      content: '—';
-      position: absolute; left: 0; top: 6px;
-      color: var(--orange);
-    }
-
-    /* CATEGORIES — table-style */
-    .categories {
-      margin-top: 64px;
-      border-top: 1px solid var(--paper-line);
-    }
-    .cat-row {
-      display: grid; grid-template-columns: 80px 1.4fr 2fr;
-      gap: 32px; align-items: baseline;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--paper-line);
-    }
-    .cat-row .num {
-      font-family: var(--serif);
-      font-size: 13px; letter-spacing: 0.25em;
-      color: var(--orange);
-    }
-    .cat-row .name {
-      font-family: var(--serif);
-      font-size: 22px; font-weight: 500;
-      color: var(--ink);
-    }
-    .cat-row .desc {
-      font-family: var(--sans);
-      font-size: 15px; line-height: 1.8;
-      color: var(--ink-mid);
-    }
-
-    /* PROCESS — 直立步驟 */
-    .process {
-      background: var(--paper-deep);
-    }
-    .process-list {
-      margin-top: 56px;
-      max-width: 720px;
-    }
-    .process-step {
-      display: grid; grid-template-columns: 80px 1fr;
-      gap: 32px; align-items: baseline;
-      padding: 32px 0;
-      border-bottom: 1px solid var(--paper-line);
-    }
-    .process-step:last-child { border-bottom: 0; }
-    .process-step .num {
-      font-family: var(--serif);
-      font-size: 36px; font-weight: 400;
-      color: var(--orange);
-      line-height: 1;
-    }
-    .process-step h4 {
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: 20px; line-height: 1.5;
-      color: var(--ink);
-      margin-bottom: 8px;
-    }
-    .process-step p {
-      font-family: var(--sans);
-      font-size: 15px; line-height: 1.85;
-      color: var(--ink-mid);
-    }
-
-    /* WHY */
-    .why-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 48px 56px;
-      margin-top: 56px;
-    }
-    .why-item {
-      padding-top: 22px;
-      border-top: 1px solid var(--paper-line);
-    }
-    .why-item .num {
-      font-family: var(--serif);
-      font-size: 13px; letter-spacing: 0.25em;
-      color: var(--orange);
-      margin-bottom: 14px;
-    }
-    .why-item h4 {
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: 19px; line-height: 1.55;
-      color: var(--ink);
-      margin-bottom: 12px;
-    }
-    .why-item p {
-      font-family: var(--sans);
-      font-size: 15px; line-height: 1.9;
-      color: var(--ink-mid);
-    }
-
-    /* CLOSING / CONTACT NOTE */
-    .closing {
-      padding: 110px 0;
-    }
-    .closing-inner {
-      max-width: 720px;
-    }
-    .closing .signoff {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: clamp(22px, 2.4vw, 28px);
-      line-height: 1.7;
-      color: var(--ink);
-      margin-bottom: 36px;
-    }
-    .contact-list {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 28px 48px;
-      max-width: 640px;
-    }
-    .contact-item {
-      padding-top: 18px;
-      border-top: 1px solid var(--paper-line);
-    }
-    .contact-item .label {
-      font-family: var(--sans);
-      font-size: 11px; letter-spacing: 0.25em;
-      color: var(--ink-soft); text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .contact-item .value {
-      font-family: var(--serif);
-      font-size: 18px;
-      color: var(--ink);
-    }
-    .contact-item .value a:hover { color: var(--orange); }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--paper-line);
-      padding: 48px 32px 36px;
-      background: var(--paper);
-    }
-    .footer-inner {
-      max-width: 1080px; margin: 0 auto;
-      display: flex; justify-content: space-between;
-      align-items: flex-end;
-      flex-wrap: wrap; gap: 24px;
-    }
-    .footer-brand {
-      font-family: var(--serif);
-      font-size: 18px; color: var(--ink);
-    }
-    .footer-brand .dot { color: var(--orange); }
-    .footer-cols {
-      display: flex; gap: 36px;
-      font-size: 13px; color: var(--ink-mid);
-      letter-spacing: 0.06em;
-    }
-    .footer-cols a:hover { color: var(--orange); }
-    .footer-copy {
-      max-width: 1080px; margin: 28px auto 0;
-      padding-top: 20px;
-      border-top: 1px dotted var(--paper-line);
-      font-size: 12px; color: var(--ink-soft);
-      letter-spacing: 0.08em;
-      text-align: center;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-      .nav-inner { padding: 16px 24px; }
-      .crumb { padding: 28px 24px 0; }
-      .hero { padding: 60px 24px 80px; }
-      .container, .section-divider { padding: 0 24px; }
-      .section-pad { padding: 80px 0; }
-      .section-pad-sm { padding: 64px 0; }
-      .scenarios-list { grid-template-columns: 1fr; gap: 36px; }
-      .cat-row { grid-template-columns: 60px 1fr; gap: 16px; }
-      .cat-row .desc { grid-column: 2; }
-      .process-step { grid-template-columns: 56px 1fr; gap: 20px; }
-      .process-step .num { font-size: 28px; }
-      .why-grid { grid-template-columns: 1fr; gap: 32px; }
-      .closing { padding: 80px 0; }
-      .contact-list { grid-template-columns: 1fr; gap: 24px; }
-    }
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-      .mobile-toggle { display: block; }
-      .nav-links.open {
-        display: flex; flex-direction: column;
-        gap: 0;
-        position: absolute; top: 64px; left: 0; right: 0;
-        background: var(--paper);
-        border-bottom: 1px solid var(--paper-line);
-        padding: 8px 24px 16px;
-      }
-      .nav-links.open a { display: block; padding: 14px 0; border-bottom: 1px dotted var(--paper-line); }
-      .hero h1 { font-size: 30px; }
-      .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
-      .footer-cols { flex-wrap: wrap; gap: 20px; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
 
-<!-- NAV -->
 <header class="nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="/">橙築<span class="dot">.</span></a>
-    <button class="mobile-toggle" onclick="toggleMobileNav()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="/">首頁</a></li>
-      <li><a href="/#services">事業</a></li>
-      <li><a href="https://chengzhuiv.com" target="_blank" rel="noopener">外匯汽車 ↗</a></li>
-      <li><a href="https://cz-777.com" target="_blank" rel="noopener">室內設計 ↗</a></li>
-      <li><a href="https://samkuo.com" target="_blank" rel="noopener">LINE Bot ↗</a></li>
-    </ul>
+    <a href="/" class="nav-brand">橙築<span class="dot">.</span></a>
+    <nav class="nav-links">
+      <a href="/solutions/">解決方案</a>
+      <a href="/demos/">互動 Demo</a>
+      <a href="/case/">案例</a>
+      <a href="/#group">集團事業</a>
+      <a href="/#contact">聯絡</a>
+      <a class="nav-cta" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">LINE 免費諮詢</a>
+    </nav>
   </div>
 </header>
 
-<!-- BREADCRUMB -->
-<div class="crumb">
-  <a href="/">橙築國際</a>
-  <span class="sep">/</span>
-  <span>KINYO 家電專區</span>
-</div>
-
 <main>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="eyebrow">No. 02 · KINYO 授權經銷商</div>
-  <h1>
-    企業禮贈品，<br>
-    一次<em>採購到位</em>。
-  </h1>
-  <p class="hero-lede">
-    橙築國際是 KINYO 小家電的授權經銷商。從尾牙抽獎、股東會紀念品到員工三節福利，由專人陪您挑選、議價、配送，並依公司會計需求開立三聯式發票——禮品採購這件事，可以很簡單。
-  </p>
-</section>
-
-<div class="section-divider"><hr></div>
-
-<!-- SCENARIOS -->
-<section class="scenarios section-pad">
-  <div class="container">
-    <div class="section-eyebrow">採購情境 / Scenarios</div>
-    <h2 class="section-title">不同場合，<br>不同的安排。</h2>
-    <p class="section-lede">告訴我們預算與人數，由我們依照場合推薦合適的家電組合與分級配置。</p>
-
-    <div class="scenarios-list">
-      <div class="scenario">
-        <div class="num">No. 01</div>
-        <h3>尾牙抽獎禮品</h3>
-        <p>公司年度尾牙不知道送什麼？兼具實用性與話題性的家電組合，讓員工拿到都有感。</p>
-        <ul>
-          <li>頭獎、二獎、三獎分級配置</li>
-          <li>大量採購折扣優惠</li>
-          <li>客製禮品包裝</li>
-        </ul>
+  <section class="page-head">
+    <div class="container">
+      <div class="crumb"><a href="/">首頁</a> / <a href="/#group">集團事業</a> / KINYO 家電</div>
+      <div class="chip-row">
+        <span class="chip chip-orange">KINYO 授權經銷商</span>
+        <span class="chip chip-quiet">企業禮贈品</span>
       </div>
-      <div class="scenario">
-        <div class="num">No. 02</div>
-        <h3>股東會紀念品</h3>
-        <p>上市櫃公司股東會贈品，需要有質感、能呈現公司品味的選擇。</p>
-        <ul>
-          <li>精緻包裝、品牌印製</li>
-          <li>上千份大量供貨能力</li>
-          <li>準時配送至指定會場</li>
-        </ul>
+      <h1 class="h-display" style="font-size: clamp(1.9rem, 4.4vw, 2.8rem);">
+        企業禮贈品，<br>一次採購到位。
+      </h1>
+      <p class="lede" style="margin-top: 22px;">
+        橙築國際是 KINYO 小家電的授權經銷商。
+        從尾牙抽獎、股東會紀念品到員工三節福利，由專人陪您挑選、議價、配送，
+        並依公司會計需求開立三聯式發票——禮品採購這件事，可以很簡單。
+      </p>
+      <div class="btn-row" style="margin-top: 28px;">
+        <a class="btn btn-primary" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">
+          用 LINE 索取報價 →
+        </a>
+        <a class="btn btn-ghost" href="tel:0975691485">直接來電 0975-691-485</a>
       </div>
-      <div class="scenario">
-        <div class="num">No. 03</div>
-        <h3>員工三節福利</h3>
-        <p>端午、中秋、年終——給員工有感的福利禮，提升留任率與向心力。</p>
-        <ul>
-          <li>節慶限定組合</li>
-          <li>客製化福委會專案</li>
-          <li>一次配送到府／到公司</li>
-        </ul>
-      </div>
+      <p class="kw" style="margin-top: 14px;">告訴我們預算與人數，24 小時內提供客製報價單。初次諮詢免費。</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CATEGORIES -->
-<section class="section-pad-sm">
-  <div class="container">
-    <div class="section-eyebrow">商品類別 / Categories</div>
-    <h2 class="section-title">KINYO 全系列<br>小家電一站採購。</h2>
+  <!-- 採購情境 -->
+  <section class="section-tight">
+    <div class="container">
+      <span class="eyebrow">Scenarios</span>
+      <h2 class="h-section">不同場合，不同的安排。</h2>
+      <p class="lede">
+        告訴我們預算與人數，由我們依照場合推薦合適的家電組合與分級配置。
+      </p>
 
-    <div class="categories">
-      <div class="cat-row">
-        <div class="num">No. 01</div>
-        <div class="name">數位科技</div>
-        <div class="desc">耳機、藍芽喇叭、行動電源、充電線</div>
-      </div>
-      <div class="cat-row">
-        <div class="num">No. 02</div>
-        <div class="name">生活家電</div>
-        <div class="desc">循環扇、除濕機、清淨機、廚房家電</div>
-      </div>
-      <div class="cat-row">
-        <div class="num">No. 03</div>
-        <div class="name">辦公周邊</div>
-        <div class="desc">無線滑鼠、計算機、檯燈、文具</div>
-      </div>
-      <div class="cat-row">
-        <div class="num">No. 04</div>
-        <div class="name">季節限定</div>
-        <div class="desc">節慶禮盒、限量套組、客製專案</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section class="process section-pad">
-  <div class="container">
-    <div class="section-eyebrow">採購流程 / Process</div>
-    <h2 class="section-title">從詢價到收貨，<br>全程專人對接。</h2>
-
-    <div class="process-list">
-      <div class="process-step">
-        <div class="num">i.</div>
-        <div>
-          <h4>需求溝通</h4>
-          <p>告訴我們預算、人數、用途、希望氛圍。一通電話、一則訊息開始就好。</p>
+      <div class="grid grid-3" style="margin-top: 32px;">
+        <div class="card">
+          <span class="no">01</span>
+          <h3 class="h-card">尾牙抽獎禮品</h3>
+          <p>公司年度尾牙不知道送什麼？兼具實用性與話題性的家電組合，讓員工拿到都有感。</p>
+          <span class="kw">頭獎二獎三獎分級 / 大量採購折扣 / 客製包裝</span>
+        </div>
+        <div class="card">
+          <span class="no">02</span>
+          <h3 class="h-card">股東會紀念品</h3>
+          <p>上市櫃公司股東會贈品，需要有質感、能呈現公司品味的選擇。</p>
+          <span class="kw">精緻包裝品牌印製 / 上千份供貨 / 準時送達會場</span>
+        </div>
+        <div class="card">
+          <span class="no">03</span>
+          <h3 class="h-card">員工三節福利</h3>
+          <p>端午、中秋、年終——給員工有感的福利禮，提升留任率與向心力。</p>
+          <span class="kw">節慶限定組合 / 福委會專案 / 到府或到公司</span>
         </div>
       </div>
-      <div class="process-step">
-        <div class="num">ii.</div>
-        <div>
-          <h4>客製報價</h4>
+    </div>
+  </section>
+
+  <!-- 商品類別 -->
+  <section class="section-tight">
+    <div class="container">
+      <span class="eyebrow">Categories</span>
+      <h2 class="h-section">KINYO 全系列小家電，<br>一站採購。</h2>
+
+      <div class="grid grid-4" style="margin-top: 32px;">
+        <div class="card">
+          <span class="no">01</span>
+          <h3 class="h-card">數位科技</h3>
+          <p>耳機、藍牙喇叭、行動電源、充電線。</p>
+        </div>
+        <div class="card">
+          <span class="no">02</span>
+          <h3 class="h-card">生活家電</h3>
+          <p>循環扇、除濕機、清淨機、廚房家電。</p>
+        </div>
+        <div class="card">
+          <span class="no">03</span>
+          <h3 class="h-card">辦公周邊</h3>
+          <p>無線滑鼠、計算機、檯燈、文具。</p>
+        </div>
+        <div class="card">
+          <span class="no">04</span>
+          <h3 class="h-card">季節限定</h3>
+          <p>節慶禮盒、限量套組、客製專案。</p>
+        </div>
+      </div>
+
+      <div class="btn-row" style="margin-top: 26px;">
+        <a class="btn btn-ghost" href="/shop/">看看選物商城的商品呈現 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 採購流程 -->
+  <section class="slab">
+    <div class="container">
+      <span class="eyebrow eyebrow-light">Process</span>
+      <h2 class="h-section">從詢價到收貨，<br>全程專人對接。</h2>
+
+      <div class="grid grid-4" style="margin-top: 32px;">
+        <div class="card">
+          <span class="no">01</span>
+          <h3 class="h-card">需求溝通</h3>
+          <p>告訴我們預算、人數、用途、希望的氛圍。一通電話、一則訊息開始就好。</p>
+        </div>
+        <div class="card">
+          <span class="no">02</span>
+          <h3 class="h-card">客製報價</h3>
           <p>專人推薦選品與分級組合，提供清楚的報價單與選品建議書。</p>
         </div>
-      </div>
-      <div class="process-step">
-        <div class="num">iii.</div>
-        <div>
-          <h4>下單備貨</h4>
+        <div class="card">
+          <span class="no">03</span>
+          <h3 class="h-card">下單備貨</h3>
           <p>確認後安排出貨，需要客製包裝、印製 logo 也都能處理。</p>
         </div>
-      </div>
-      <div class="process-step">
-        <div class="num">iv.</div>
-        <div>
-          <h4>配送開票</h4>
+        <div class="card">
+          <span class="no">04</span>
+          <h3 class="h-card">配送開票</h3>
           <p>準時送達指定地點，開立三聯式發票，符合公司會計與稅務作業需求。</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- WHY -->
-<section class="section-pad-sm">
-  <div class="container">
-    <div class="section-eyebrow">為什麼選橙築 / Why</div>
-    <h2 class="section-title">不是冷冰冰的線上下單，<br>而是有人在的窗口。</h2>
+  <!-- 為什麼 -->
+  <section class="section-tight">
+    <div class="container">
+      <span class="eyebrow">Why ChengZhu</span>
+      <h2 class="h-section">不是冷冰冰的線上下單，<br>而是有人在的窗口。</h2>
 
-    <div class="why-grid">
-      <div class="why-item">
-        <div class="num">i.</div>
-        <h4>原廠授權保證</h4>
-        <p>KINYO 官方授權經銷商，全系列原廠正品，享有原廠保固，沒有來路不明的疑慮。</p>
-      </div>
-      <div class="why-item">
-        <div class="num">ii.</div>
-        <h4>大量採購優惠</h4>
-        <p>數十至上千件大量採購，提供企業優惠價格，讓您的預算更有效率。</p>
-      </div>
-      <div class="why-item">
-        <div class="num">iii.</div>
-        <h4>專人客製對接</h4>
-        <p>不是機器人也不是表單，由專人協助選品、議價、安排配送，有問題隨時找得到人。</p>
-      </div>
-      <div class="why-item">
-        <div class="num">iv.</div>
-        <h4>三聯式發票</h4>
-        <p>正規開立三聯式發票，符合公司會計與稅務作業需求，採購流程合規不出錯。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"><hr></div>
-
-<!-- CLOSING -->
-<section class="closing">
-  <div class="container">
-    <div class="closing-inner">
-      <div class="section-eyebrow">聯絡 / Contact</div>
-      <p class="signoff">
-        告訴我們預算與人數，<br>
-        我們會在 24 小時內提供客製報價單。<br>
-        初次諮詢免費。
-      </p>
-
-      <div class="contact-list">
-        <div class="contact-item">
-          <div class="label">行動電話</div>
-          <div class="value"><a href="tel:0975691485">0975-691-485</a></div>
+      <div class="grid grid-2" style="margin-top: 32px;">
+        <div class="pain">
+          <h4>原廠授權保證</h4>
+          <p>KINYO 官方授權經銷商，全系列原廠正品，享有原廠保固，沒有來路不明的疑慮。</p>
         </div>
-        <div class="contact-item">
-          <div class="label">公司電話</div>
-          <div class="value"><a href="tel:0333708108">03-370-8108</a></div>
+        <div class="pain">
+          <h4>大量採購優惠</h4>
+          <p>數十至上千件大量採購，提供企業優惠價格，讓您的預算更有效率。</p>
         </div>
-        <div class="contact-item">
-          <div class="label">LINE 諮詢</div>
-          <div class="value"><a href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">@165aegfe</a></div>
+        <div class="pain">
+          <h4>專人客製對接</h4>
+          <p>不是機器人也不是表單，由專人協助選品、議價、安排配送，有問題隨時找得到人。</p>
         </div>
-        <div class="contact-item">
-          <div class="label">電子郵件</div>
-          <div class="value"><a href="mailto:cat@cz-777.com">cat@cz-777.com</a></div>
+        <div class="pain">
+          <h4>三聯式發票</h4>
+          <p>正規開立三聯式發票，符合公司會計與稅務作業需求，採購流程合規不出錯。</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- 聯絡 -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <span class="eyebrow">Contact</span>
+          <h2 class="h-section">告訴我們預算與人數。</h2>
+          <p style="font-size: .97rem; color: var(--ink-mid); max-width: 34ch;">
+            我們會在 24 小時內提供客製報價單。初次諮詢免費，沒有壓力。
+          </p>
+          <div class="btn-row" style="margin-top: 24px;">
+            <a class="btn btn-primary" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">
+              加 LINE 索取報價 →
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="label">LINE 諮詢</div>
+            <div class="value"><a href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">官方帳號</a></div>
+            <div class="sub">@165aegfe</div>
+          </div>
+          <div class="contact-item">
+            <div class="label">行動電話</div>
+            <div class="value"><a href="tel:0975691485">0975-691-485</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="label">公司電話</div>
+            <div class="value"><a href="tel:0333708108">03-370-8108</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="label">電子郵件</div>
+            <div class="value"><a href="mailto:cat@cz-777.com">cat@cz-777.com</a></div>
+          </div>
+          <div class="contact-item" style="grid-column: 1 / -1;">
+            <div class="label">公司地址</div>
+            <div class="value">
+              <a href="https://maps.google.com/?q=桃園市桃園區春日路818號" target="_blank" rel="noopener">
+                桃園市桃園區春日路 818 號 1F
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <a class="footer-brand" href="/">橙築<span class="dot">.</span> 國際</a>
+    <div class="footer-brand">
+      橙築<span class="dot">.</span> 國際
+      <span class="sub">CHENGZHU INTERNATIONAL</span>
+    </div>
     <div class="footer-cols">
-      <a href="/">首頁</a>
-      <a href="/#services">事業</a>
-      <a href="/#contact">聯絡</a>
+      <a href="/solutions/">解決方案</a>
+      <a href="/demos/">互動 Demo</a>
+      <a href="/case/">案例</a>
+      <a href="/appliances/">KINYO 家電</a>
+      <a href="https://cz-777.com" target="_blank" rel="noopener">室內設計 ↗</a>
+      <a href="https://chengzhuiv.com" target="_blank" rel="noopener">外匯汽車 ↗</a>
     </div>
   </div>
   <div class="footer-copy">
-    &copy; 2026 ChengZhu International · KINYO 授權經銷商
+    <span>&copy; 2026 ChengZhu International · 橙築國際</span>
+    <span>KINYO 授權經銷商</span>
+    <span>03-370-8108</span>
   </div>
 </footer>
-
-<script>
-  function toggleMobileNav() {
-    document.getElementById('navLinks').classList.toggle('open');
-  }
-  document.querySelectorAll('#navLinks a').forEach(a => {
-    a.addEventListener('click', () => {
-      document.getElementById('navLinks').classList.remove('open');
-    });
-  });
-</script>
 
 </body>
 </html>
