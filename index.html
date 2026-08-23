@@ -3,689 +3,398 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>橙築國際 ChengZhu — 從居家到事業，每件事都用心築起</title>
-  <meta name="description" content="橙築國際是深耕桃園的多元事業集團，提供室內設計、KINYO 家電經銷、外匯汽車與企業 LINE Bot 自動化，從居家到事業一站式整合服務。">
+  <title>橙築國際 ChengZhu — 企業數位轉型整合商</title>
+  <meta name="description" content="橙築國際整合企業網站、ERP、CRM、POS、LINE 與資料自動化。我們自己也在經營零售、車業與門市，交付的系統此刻正在客戶的營運現場運作。">
   <link rel="canonical" href="https://chengzhu.co">
-  <meta property="og:title" content="橙築國際 ChengZhu — 從居家到事業，每件事都用心築起">
-  <meta property="og:description" content="室內設計 · KINYO 家電 · 外匯汽車 · 企業 LINE Bot — 桃園在地，多元整合。">
+  <meta property="og:title" content="橙築國際 ChengZhu — 企業數位轉型整合商">
+  <meta property="og:description" content="網站 × ERP × CRM × POS × LINE × 資料自動化。桃園在地，實際上線的企業系統。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://chengzhu.co">
+  <meta property="og:locale" content="zh_TW">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --orange: #d8623a;
-      --orange-soft: #c1542f;
-      --paper: #f7f1e6;
-      --paper-deep: #ede4d2;
-      --paper-line: #e3d8c1;
-      --ink: #2b2620;
-      --ink-mid: #5e564a;
-      --ink-soft: #8a8071;
-      --serif: "Noto Serif TC", "Source Han Serif TC", "Songti TC", Georgia, serif;
-      --sans: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--sans);
-      color: var(--ink);
-      line-height: 1.8;
-      background: var(--paper);
-      font-size: 16px;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-    a { color: inherit; text-decoration: none; }
-
-    /* Subtle paper grain */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.14 0 0 0 0 0.12 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      opacity: 0.5;
-      mix-blend-mode: multiply;
-      z-index: 0;
-    }
-    main, header, footer { position: relative; z-index: 1; }
-
-    /* NAV */
-    header.nav {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(247, 241, 230, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--paper-line);
-    }
-    .nav-inner {
-      max-width: 1080px; margin: 0 auto; padding: 18px 32px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-brand {
-      font-family: var(--serif);
-      font-size: 22px; font-weight: 500;
-      color: var(--ink); letter-spacing: 0.02em;
-    }
-    .nav-brand .dot { color: var(--orange); }
-    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
-    .nav-links a {
-      font-size: 14px; color: var(--ink-mid);
-      letter-spacing: 0.06em; transition: color .25s;
-    }
-    .nav-links a:hover { color: var(--orange); }
-    .mobile-toggle {
-      display: none; background: none; border: none; cursor: pointer;
-      width: 32px; height: 24px; position: relative;
-    }
-    .mobile-toggle span {
-      display: block; width: 24px; height: 1.5px; background: var(--ink);
-      position: absolute; left: 4px;
-    }
-    .mobile-toggle span:nth-child(1) { top: 5px; }
-    .mobile-toggle span:nth-child(2) { top: 12px; }
-    .mobile-toggle span:nth-child(3) { top: 19px; }
-
-    /* HERO */
-    .hero {
-      max-width: 1080px; margin: 0 auto;
-      padding: 140px 32px 120px;
-      text-align: left;
-    }
-    .hero .eyebrow {
-      font-family: var(--sans);
-      font-size: 12px; letter-spacing: 0.3em;
-      color: var(--orange); text-transform: uppercase;
-      margin-bottom: 36px;
-      display: inline-flex; align-items: center; gap: 14px;
-    }
-    .hero .eyebrow::before {
-      content: ''; display: block;
-      width: 32px; height: 1px; background: var(--orange);
-    }
-    .hero h1 {
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: clamp(36px, 5.6vw, 64px);
-      line-height: 1.35;
-      letter-spacing: 0.01em;
-      color: var(--ink);
-      margin-bottom: 36px;
-      max-width: 18ch;
-    }
-    .hero h1 em {
-      font-style: normal;
-      color: var(--orange);
-    }
-    .hero-lede {
-      font-family: var(--sans);
-      font-size: 17px; line-height: 1.95;
-      color: var(--ink-mid);
-      max-width: 44ch;
-    }
-    .hero-meta {
-      margin-top: 56px;
-      display: flex; gap: 40px; flex-wrap: wrap;
-      font-size: 13px; color: var(--ink-soft);
-      letter-spacing: 0.08em;
-    }
-    .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
-    .hero-meta span::before {
-      content: ''; width: 4px; height: 4px;
-      background: var(--orange); border-radius: 50%;
-    }
-
-    /* SECTION */
-    section { position: relative; }
-    .container {
-      max-width: 1080px; margin: 0 auto;
-      padding: 0 32px;
-    }
-    .section-divider {
-      max-width: 1080px; margin: 0 auto;
-      padding: 0 32px;
-    }
-    .section-divider hr {
-      border: 0; height: 1px; background: var(--paper-line);
-    }
-    .section-pad { padding: 120px 0; }
-    .section-pad-sm { padding: 96px 0; }
-    .section-eyebrow {
-      font-family: var(--sans);
-      font-size: 12px; letter-spacing: 0.3em;
-      color: var(--ink-soft); text-transform: uppercase;
-      margin-bottom: 24px;
-      display: inline-flex; align-items: center; gap: 14px;
-    }
-    .section-eyebrow::before {
-      content: ''; display: block;
-      width: 24px; height: 1px; background: var(--ink-soft);
-    }
-    .section-title {
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: clamp(28px, 3.6vw, 42px);
-      line-height: 1.45;
-      color: var(--ink);
-      margin-bottom: 24px;
-      max-width: 22ch;
-    }
-
-    /* ABOUT */
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1.4fr;
-      gap: 80px; align-items: start;
-    }
-    .about-body {
-      font-family: var(--sans);
-      font-size: 16.5px; line-height: 1.95;
-      color: var(--ink-mid);
-    }
-    .about-body p + p { margin-top: 22px; }
-    .about-body strong {
-      color: var(--ink); font-weight: 500;
-    }
-    .about-body .pull {
-      display: block; margin-top: 36px;
-      padding-left: 22px;
-      border-left: 2px solid var(--orange);
-      font-family: var(--serif);
-      font-size: 18px; line-height: 1.85;
-      color: var(--ink); font-style: normal;
-    }
-
-    /* SERVICES — 編號式 z 字形 */
-    .services {
-      background: var(--paper-deep);
-    }
-    .services-intro { margin-bottom: 80px; }
-    .services-list {
-      display: flex; flex-direction: column;
-      gap: 96px;
-    }
-    .service-row {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 64px; align-items: center;
-    }
-    .service-row.reverse .service-block {
-      order: 2;
-    }
-    .service-row.reverse .service-text {
-      order: 1;
-    }
-    .service-block {
-      aspect-ratio: 4 / 3;
-      display: flex; flex-direction: column;
-      justify-content: space-between;
-      padding: 36px;
-      position: relative;
-      overflow: hidden;
-    }
-    .service-block.tone-1 { background: #ede1c8; }
-    .service-block.tone-2 { background: #e8d4b3; }
-    .service-block.tone-3 { background: #d6dac4; }
-    .service-block.tone-4 { background: #ddd4c0; }
-    .service-block .index {
-      font-family: var(--serif);
-      font-size: 14px; letter-spacing: 0.25em;
-      color: var(--ink-mid);
-    }
-    .service-block .glyph {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: clamp(96px, 14vw, 200px);
-      line-height: 1;
-      color: var(--ink);
-      align-self: flex-end;
-      letter-spacing: -0.04em;
-    }
-    .service-block .meta {
-      font-family: var(--sans);
-      font-size: 12px; letter-spacing: 0.2em;
-      color: var(--ink-mid); text-transform: uppercase;
-    }
-    .service-text .label {
-      font-family: var(--sans);
-      font-size: 12px; letter-spacing: 0.25em;
-      color: var(--orange); text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .service-text h3 {
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: clamp(26px, 3vw, 34px);
-      line-height: 1.45; color: var(--ink);
-      margin-bottom: 18px;
-    }
-    .service-text p {
-      font-family: var(--sans);
-      font-size: 16px; line-height: 1.95;
-      color: var(--ink-mid);
-      margin-bottom: 28px;
-      max-width: 36ch;
-    }
-    .service-link {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 14px; letter-spacing: 0.08em;
-      color: var(--ink); font-weight: 500;
-      padding-bottom: 4px;
-      border-bottom: 1px solid var(--ink);
-      transition: all .25s;
-    }
-    .service-link:hover {
-      color: var(--orange); border-color: var(--orange);
-      gap: 14px;
-    }
-    .service-link .ext {
-      font-size: 11px; letter-spacing: 0.1em;
-      color: var(--ink-soft);
-    }
-
-    /* WHY */
-    .why-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 60px; margin-top: 64px;
-    }
-    .why-item .num {
-      font-family: var(--serif);
-      font-size: 22px; color: var(--orange);
-      letter-spacing: 0.1em;
-      margin-bottom: 18px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--paper-line);
-    }
-    .why-item h4 {
-      font-family: var(--serif);
-      font-weight: 500;
-      font-size: 19px; line-height: 1.5;
-      color: var(--ink);
-      margin-bottom: 14px;
-    }
-    .why-item p {
-      font-family: var(--sans);
-      font-size: 15px; line-height: 1.9;
-      color: var(--ink-mid);
-    }
-
-    /* CONTACT */
-    .contact {
-      background: var(--paper-deep);
-    }
-    .contact-grid {
-      display: grid; grid-template-columns: 1fr 1.6fr;
-      gap: 80px; align-items: start;
-    }
-    .contact-list {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 36px 56px;
-    }
-    .contact-item {
-      padding-top: 22px;
-      border-top: 1px solid var(--paper-line);
-    }
-    .contact-item .label {
-      font-family: var(--sans);
-      font-size: 11px; letter-spacing: 0.25em;
-      color: var(--ink-soft); text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .contact-item .value {
-      font-family: var(--serif);
-      font-size: 19px; line-height: 1.5;
-      color: var(--ink); font-weight: 500;
-    }
-    .contact-item .value a:hover { color: var(--orange); }
-    .contact-item .sub {
-      font-family: var(--sans);
-      font-size: 13px; color: var(--ink-mid);
-      margin-top: 6px; letter-spacing: 0.04em;
-    }
-
-    /* CLOSING NOTE */
-    .closing {
-      padding: 120px 0;
-      text-align: left;
-    }
-    .closing-inner {
-      max-width: 720px;
-    }
-    .closing .signoff {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: clamp(24px, 2.6vw, 30px);
-      line-height: 1.7;
-      color: var(--ink);
-      margin-bottom: 32px;
-    }
-    .closing .signature {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 17px; color: var(--ink-mid);
-      letter-spacing: 0.04em;
-    }
-    .closing .signature::before {
-      content: '— '; color: var(--orange);
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--paper-line);
-      padding: 56px 32px 40px;
-      background: var(--paper);
-    }
-    .footer-inner {
-      max-width: 1080px; margin: 0 auto;
-      display: flex; justify-content: space-between;
-      align-items: flex-end;
-      flex-wrap: wrap; gap: 32px;
-    }
-    .footer-brand {
-      font-family: var(--serif);
-      font-size: 18px; color: var(--ink);
-    }
-    .footer-brand .dot { color: var(--orange); }
-    .footer-brand .sub {
-      display: block;
-      font-family: var(--sans);
-      font-size: 12px; color: var(--ink-soft);
-      letter-spacing: 0.15em; margin-top: 6px;
-    }
-    .footer-cols {
-      display: flex; gap: 48px;
-      font-size: 13px; color: var(--ink-mid);
-      letter-spacing: 0.06em;
-    }
-    .footer-cols a:hover { color: var(--orange); }
-    .footer-copy {
-      max-width: 1080px; margin: 32px auto 0;
-      padding-top: 24px;
-      border-top: 1px dotted var(--paper-line);
-      font-size: 12px; color: var(--ink-soft);
-      letter-spacing: 0.08em;
-      display: flex; justify-content: space-between;
-      flex-wrap: wrap; gap: 12px;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-      .nav-inner { padding: 16px 24px; }
-      .hero { padding: 100px 24px 80px; }
-      .container, .section-divider { padding: 0 24px; }
-      .section-pad { padding: 88px 0; }
-      .section-pad-sm { padding: 72px 0; }
-      .about-grid { grid-template-columns: 1fr; gap: 36px; }
-      .service-row { grid-template-columns: 1fr; gap: 32px; }
-      .service-row.reverse .service-block { order: 0; }
-      .service-row.reverse .service-text { order: 0; }
-      .services-list { gap: 72px; }
-      .why-grid { grid-template-columns: 1fr; gap: 40px; }
-      .contact-grid { grid-template-columns: 1fr; gap: 36px; }
-      .contact-list { grid-template-columns: 1fr; gap: 28px; }
-      .closing { padding: 88px 0; }
-    }
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-      .mobile-toggle { display: block; }
-      .nav-links.open {
-        display: flex; flex-direction: column;
-        gap: 0;
-        position: absolute; top: 64px; left: 0; right: 0;
-        background: var(--paper);
-        border-bottom: 1px solid var(--paper-line);
-        padding: 8px 24px 16px;
-      }
-      .nav-links.open a { display: block; padding: 14px 0; border-bottom: 1px dotted var(--paper-line); }
-      .hero h1 { font-size: 32px; }
-      .hero-meta { gap: 18px; }
-      .footer-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
-      .footer-cols { flex-wrap: wrap; gap: 24px; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
 
-<!-- NAV -->
 <header class="nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="/">橙築<span class="dot">.</span></a>
-    <button class="mobile-toggle" onclick="toggleMobileNav()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#about">關於</a></li>
-      <li><a href="#services">事業</a></li>
-      <li><a href="/shop/">選物商城</a></li>
-      <li><a href="#why">為什麼選我們</a></li>
-      <li><a href="#contact">聯絡我們</a></li>
-    </ul>
+    <a href="/" class="nav-brand">橙築<span class="dot">.</span></a>
+    <nav class="nav-links">
+      <a href="/solutions/">解決方案</a>
+      <a href="/demos/">互動 Demo</a>
+      <a href="#cases">案例</a>
+      <a href="#group">集團事業</a>
+      <a href="#contact">聯絡</a>
+      <a class="nav-cta" href="https://line.me/R/ti/p/@616wvceo" target="_blank" rel="noopener">LINE 免費諮詢</a>
+    </nav>
   </div>
 </header>
 
 <main>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="eyebrow">桃園 · ChengZhu International</div>
-  <h1>
-    從居家到事業，<br>
-    每件事都<em>用心築起</em>。
-  </h1>
-  <p class="hero-lede">
-    我們在桃園做四件不同但都踏實的事——室內設計、KINYO 家電、外匯汽車與企業 LINE Bot 自動化。一個窗口，多元服務；不只是技術，更像是住家附近那個你願意託付的老朋友。
-  </p>
-  <div class="hero-meta">
-    <span>橙築室內設計</span>
-    <span>KINYO 授權經銷</span>
-    <span>橙築國際車業</span>
-    <span>LINE Bot 自動化</span>
-  </div>
-</section>
-
-<div class="section-divider"><hr></div>
-
-<!-- ABOUT -->
-<section id="about" class="section-pad">
-  <div class="container">
-    <div class="about-grid">
-      <div>
-        <div class="section-eyebrow">關於 / About</div>
-        <h2 class="section-title">築，不只是建造，<br>是把心放進去。</h2>
+  <!-- ============ HERO ============ -->
+  <section class="section" style="padding-bottom: 64px;">
+    <div class="container">
+      <span class="eyebrow">ChengZhu Digital · 企業數位轉型整合</span>
+      <h1 class="h-display">
+        我們交付的系統，<br>
+        此刻正在客戶的<br>
+        營運現場跑。
+      </h1>
+      <p class="lede" style="margin-top: 26px;">
+        橙築整合企業網站、ERP、CRM、POS、LINE 與資料自動化。
+        我們自己也在經營室內設計、外匯汽車與家電經銷——
+        所以這些流程不是聽客戶轉述的，是每天自己走過的。
+      </p>
+      <div class="btn-row" style="margin-top: 32px;">
+        <a class="btn btn-primary" href="https://line.me/R/ti/p/@616wvceo" target="_blank" rel="noopener">
+          用 LINE 聊聊需求 →
+        </a>
+        <a class="btn btn-ghost" href="/demos/">看可以點的 Demo</a>
       </div>
-      <div class="about-body">
-        <p>
-          「橙」是日落前的暖色——溫度與行動力；「築」是疊起一磚一瓦——把每件事踏實做好。橙築國際從桃園起家，做的事看似分散，其實本質一樣：把一件件需要被認真對待的事情，一塊一塊地築起來。
-        </p>
-        <p>
-          無論是您家裡那個還沒完工的客廳、公司年底要送出去的兩百份禮品、那台找了半年還沒看到的車，或是想了很久卻不知道怎麼數位化的訂單流程——交給橙築，我們會像處理自己家的事那樣處理。
-        </p>
-        <span class="pull">
-          一個窗口，多元服務。<br>
-          少一點層層轉接，多一點人對人的溝通。
-        </span>
+
+      <div class="stats" style="margin-top: 52px;">
+        <div class="stat"><span class="v num">29</span><span class="l">支後端服務在正式環境運行</span></div>
+        <div class="stat"><span class="v num">1,858</span><span class="l">筆料件即時庫存管理</span></div>
+        <div class="stat"><span class="v num">2,000+</span><span class="l">商品 B2B 即時查價</span></div>
+        <div class="stat"><span class="v num">5</span><span class="l">個可以直接點的互動 Demo</span></div>
+      </div>
+      <p class="kw" style="margin-top: 12px;">
+        數字來自橙築實際交付並仍在運行的系統。客戶名稱依保密原則不公開。
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 六大方案 ============ -->
+  <section class="section-tight" id="solutions">
+    <div class="container">
+      <span class="eyebrow">What We Solve</span>
+      <h2 class="h-section">橙築能幫企業做到什麼？</h2>
+      <p class="lede">
+        不是把更多工具堆在一起，而是先釐清流程，
+        再讓每一筆資料在正確的系統之間流動。
+      </p>
+
+      <div class="grid grid-3" style="margin-top: 34px;">
+        <a class="card" href="/solutions/#web">
+          <span class="no">01</span>
+          <h3 class="h-card">企業網站與會員平台</h3>
+          <p>讓客戶看懂價值、找到方案，並把每一則詢問直接送進後台，而不是停在信箱裡。</p>
+          <span class="kw">內容架構 / UIUX / SEO / 會員分級</span>
+          <span class="more">了解方案 →</span>
+        </a>
+        <a class="card" href="/solutions/#erp">
+          <span class="no">02</span>
+          <h3 class="h-card">ERP 與流程中台</h3>
+          <p>把採購、庫存、工單、對帳與報表收進同一套可追蹤的工作流程，狀態不靠記憶與口頭。</p>
+          <span class="kw">進銷存 / 掃碼盤點 / 工單 / 多倉</span>
+          <span class="more">了解方案 →</span>
+        </a>
+        <a class="card" href="/solutions/#crm">
+          <span class="no">03</span>
+          <h3 class="h-card">CRM 與會員經營</h3>
+          <p>從第一次詢問到成交後服務，完整累積每一位客戶的互動、消費與偏好。</p>
+          <span class="kw">名單 / 標籤 / 會員卡 / 消費紀錄</span>
+          <span class="more">了解方案 →</span>
+        </a>
+        <a class="card" href="/solutions/#pos">
+          <span class="no">04</span>
+          <h3 class="h-card">POS 與門市營運</h3>
+          <p>前台掃碼成交之後，庫存、會員、業績與帳務同一秒更新，不用晚上再對一次帳。</p>
+          <span class="kw">條碼結帳 / 即時庫存 / 拆帳 / 對帳</span>
+          <span class="more">了解方案 →</span>
+        </a>
+        <a class="card" href="/solutions/#line">
+          <span class="no">05</span>
+          <h3 class="h-card">LINE Bot 服務流程</h3>
+          <p>預約、通知、查價、客服與售後，全部發生在客戶本來就每天在用的介面裡。</p>
+          <span class="kw">官方帳號 / LIFF / 推播 / Rich Menu</span>
+          <span class="more">了解方案 →</span>
+        </a>
+        <a class="card" href="/solutions/#data">
+          <span class="no">06</span>
+          <h3 class="h-card">資料與營運儀表板</h3>
+          <p>把跨系統的資料收攏成看得懂的數字與該處理的任務，而不是漂亮但沒人打開的報表。</p>
+          <span class="kw">儀表板 / 自動報表 / 異常預警 / OCR</span>
+          <span class="more">了解方案 →</span>
+        </a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SERVICES -->
-<section id="services" class="services section-pad">
-  <div class="container">
-    <div class="services-intro">
-      <div class="section-eyebrow">事業 / Services</div>
-      <h2 class="section-title">四件事，<br>都是橙築。</h2>
+  <!-- ============ 系統架構（深板） ============ -->
+  <section class="slab">
+    <div class="container">
+      <span class="eyebrow eyebrow-light">ChengZhu Business OS</span>
+      <h2 class="h-section">資料只進一次，<br>營運流程全部串起來。</h2>
+      <p class="lede">
+        網站不是孤島，ERP 也不該只是一個沒人想登入的後台。
+        橙築以客戶資料為核心，連接銷售、庫存、會員、LINE 與管理報表。
+      </p>
+
+      <div class="os-core">
+        <span class="t">CHENGZHU</span>
+        <span class="b">資料核心</span>
+      </div>
+
+      <div class="os-ring">
+        <div class="os-node"><span class="k">WEBSITE</span><span class="v">客戶入口與詢問收單</span></div>
+        <div class="os-node"><span class="k">CRM</span><span class="v">會員關係與消費紀錄</span></div>
+        <div class="os-node"><span class="k">ERP</span><span class="v">採購、庫存與工單</span></div>
+        <div class="os-node"><span class="k">POS</span><span class="v">前台成交與拆帳</span></div>
+        <div class="os-node"><span class="k">LINE OA</span><span class="v">預約、通知與客服</span></div>
+        <div class="os-node"><span class="k">REPORT</span><span class="v">營運數字與異常預警</span></div>
+      </div>
     </div>
+  </section>
 
-    <div class="services-list">
+  <!-- ============ 互動 Demo ============ -->
+  <section class="section" id="demos">
+    <div class="container">
+      <span class="eyebrow">Try It Yourself</span>
+      <h2 class="h-section">不用相信我們，<br>自己點點看。</h2>
+      <p class="lede">
+        簡報上的截圖誰都做得出來。這五個是可以直接操作的實際流程——
+        在手機或電腦上打開就能走完一次。
+      </p>
 
-      <!-- 01 室內設計 -->
-      <article class="service-row">
-        <div class="service-block tone-1">
-          <span class="index">No. 01</span>
-          <span class="glyph">築</span>
-          <span class="meta">Interior Design</span>
-        </div>
-        <div class="service-text">
-          <div class="label">橙築室內設計</div>
-          <h3>重新定義居家美學的<br>簡單品味</h3>
-          <p>從空間規劃到細節軟裝，融合歐美現代化與亞洲生活感。每一個案子，我們都當作朋友的家在做。</p>
-          <a href="https://cz-777.com" target="_blank" rel="noopener" class="service-link">
-            前往 cz-777.com <span class="ext">↗</span>
-          </a>
-        </div>
-      </article>
+      <div class="grid grid-3" style="margin-top: 34px;">
+        <a class="card" href="/pricing-demo/">
+          <div class="chip-row"><span class="chip chip-teal">LINE Bot × AI</span></div>
+          <h3 class="h-card">智能查價系統</h3>
+          <p>在 LINE 裡用一句話說預算與數量，系統自動搜尋商品、計算階梯報價、回傳商品卡片。</p>
+          <span class="kw">自然語言查價 / 階梯定價 / Flex Message</span>
+          <span class="more">開始體驗 →</span>
+        </a>
+        <a class="card" href="/coach-demo/">
+          <div class="chip-row"><span class="chip chip-teal">LIFF 預約</span></div>
+          <h3 class="h-card">教練預約系統</h3>
+          <p>學員 LIFF 選課、教練一鍵核准、系統自動扣堂數，課程包到期前自動提醒。</p>
+          <span class="kw">堂數管理 / 一鍵核准 / 到期提醒</span>
+          <span class="more">開始體驗 →</span>
+        </a>
+        <a class="card" href="/salon-demo/">
+          <div class="chip-row"><span class="chip chip-teal">排班 × 拆帳</span></div>
+          <h3 class="h-card">髮廊預約系統</h3>
+          <p>顧客 LINE 預約、設計師鎖班打卡、休假自動擋預約，完工紀錄自動結算營收與拆帳。</p>
+          <span class="kw">設計師排班 / 營收儀表板 / 自動拆帳</span>
+          <span class="more">開始體驗 →</span>
+        </a>
+        <a class="card" href="/group-demo/">
+          <div class="chip-row"><span class="chip chip-teal">大型群組</span></div>
+          <h3 class="h-card">球團報名系統</h3>
+          <p>兩千人 LINE 群組一鍵報名，額滿自動排候補、有人退出自動遞補，並可自動分組。</p>
+          <span class="kw">一鍵報名 / 候補遞補 / 自動分組</span>
+          <span class="more">開始體驗 →</span>
+        </a>
+        <a class="card" href="/shop/">
+          <div class="chip-row"><span class="chip chip-teal">商城 × LIFF</span></div>
+          <h3 class="h-card">選物商城</h3>
+          <p>從商品瀏覽、加入購物車到結帳的完整流程，含 LINE Bot 與 LIFF 前台的實際介面。</p>
+          <span class="kw">商品目錄 / 購物車 / 結帳流程</span>
+          <span class="more">開始體驗 →</span>
+        </a>
+        <a class="card" href="/demos/">
+          <div class="chip-row"><span class="chip chip-quiet">總覽</span></div>
+          <h3 class="h-card">全部 Demo</h3>
+          <p>五個 Demo 的完整說明、對應的解決方案，以及各自展示了哪一段營運流程。</p>
+          <span class="kw">五個流程 / 對應六大方案</span>
+          <span class="more">查看總覽 →</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-      <!-- 02 家電 -->
-      <article class="service-row reverse">
-        <div class="service-block tone-2">
-          <span class="index">No. 02</span>
-          <span class="glyph">禮</span>
-          <span class="meta">KINYO Distributor</span>
-        </div>
-        <div class="service-text">
-          <div class="label">KINYO 家電專區</div>
-          <h3>企業禮贈品，<br>一次採購到位</h3>
-          <p>KINYO 授權經銷商。尾牙、股東會、員工福利，從選品、報價、配送到開立三聯式發票，一個窗口輕鬆搞定。</p>
-          <a href="/appliances/" class="service-link">
-            了解更多 →
-          </a>
-        </div>
-      </article>
+  <!-- ============ 案例 ============ -->
+  <section class="section-tight" id="cases">
+    <div class="container">
+      <span class="eyebrow">Selected Work</span>
+      <h2 class="h-section">已經在跑的系統。</h2>
+      <p class="lede">
+        以下都是實際交付、目前仍在運行的專案。
+        依與客戶的保密原則，這裡不揭露品牌名稱——但數字與技術細節都是真的。
+      </p>
 
-      <!-- 03 車業 -->
-      <article class="service-row">
-        <div class="service-block tone-3">
-          <span class="index">No. 03</span>
-          <span class="glyph">車</span>
-          <span class="meta">Imported Cars</span>
+      <div class="grid grid-3" style="margin-top: 34px;">
+        <div class="card">
+          <div class="chip-row">
+            <span class="chip chip-orange">旗艦案例</span>
+            <span class="chip chip-quiet">高爾夫產業</span>
+          </div>
+          <h3 class="h-card">高爾夫工坊與教學中心</h3>
+          <p>會員 CRM、球具 Fitting 工單、工坊技師派工、掃碼庫存、教練堂數與預約，收進同一套系統。前台成交到後台管理是同一條資料流。</p>
+          <span class="kw">1,858 筆料件 · 29 支後端服務 · 7 人工坊團隊</span>
         </div>
-        <div class="service-text">
-          <div class="label">橙築國際車業</div>
-          <h3>嚴選全球外匯好車，<br>讓您買得安心</h3>
-          <p>第三方鑑定、價格透明、里程保證、客製選配。我們不只賣車，更陪您完成從找車到交車的每一步。</p>
-          <a href="https://chengzhuiv.com" target="_blank" rel="noopener" class="service-link">
-            前往 chengzhuiv.com <span class="ext">↗</span>
-          </a>
+        <div class="card">
+          <div class="chip-row"><span class="chip chip-quiet">連鎖零售</span></div>
+          <h3 class="h-card">連鎖電器品牌</h3>
+          <p>各門市店員每天拍照傳 LINE，系統自動依店名歸檔到雲端，總部每週收到自動產出的統計報表與 email。從「人工收圖整理」變成「傳完就結束」。</p>
+          <span class="kw">數十間門市同時運作 · 人工整理歸零 · 自動週報月報</span>
         </div>
-      </article>
+        <div class="card">
+          <div class="chip-row"><span class="chip chip-quiet">B2B 採購</span></div>
+          <h3 class="h-card">企業採購查價平台</h3>
+          <p>業務在 LINE 群組說「預算多少、要幾個」，系統自動搜尋商品、計算階梯報價、回傳商品卡片，並可直接下單與追蹤。</p>
+          <span class="kw">2,000+ 商品即時查價 · 自然語言下單 · 階梯定價引擎</span>
+        </div>
+        <div class="card">
+          <div class="chip-row"><span class="chip chip-quiet">美業</span></div>
+          <h3 class="h-card">連鎖髮廊預約系統</h3>
+          <p>顧客在 LINE 看價目表並預約；設計師在 LINE 打卡、鎖班、查營收。休假自動擋預約，完工紀錄自動結算日月營收與拆帳。</p>
+          <span class="kw">30 秒完成一筆預約 · 即時營收儀表板 · 零額外 App</span>
+        </div>
+        <div class="card">
+          <div class="chip-row"><span class="chip chip-quiet">一對一教學</span></div>
+          <h3 class="h-card">高爾夫教練系統</h3>
+          <p>學員 LIFF 預約、教練一鍵核准、系統自動扣堂數，前一晚推播明日行程，課程包到期前 30 天自動提醒。</p>
+          <span class="kw">FIFO 堂數先到期先扣 · 雙角色介面 · 自動提醒</span>
+        </div>
+        <div class="card">
+          <div class="chip-row"><span class="chip chip-quiet">社群營運</span></div>
+          <h3 class="h-card">大型球敘社群</h3>
+          <p>兩千人規模的 LINE 群組一鍵報名，額滿自動排候補、有人退出自動遞補，並依需求自動分組。</p>
+          <span class="kw">2,000 人群組 · 候補自動遞補 · 自動分組</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <!-- 04 LINE Bot -->
-      <article class="service-row reverse" id="demos">
-        <div class="service-block tone-4">
-          <span class="index">No. 04</span>
-          <span class="glyph">智</span>
-          <span class="meta">LINE Bot Automation</span>
+  <!-- ============ 方法論 ============ -->
+  <section class="section-tight" id="how">
+    <div class="container">
+      <span class="eyebrow">How We Work</span>
+      <h2 class="h-section">先釐清問題，再決定工具。</h2>
+      <p class="lede">
+        每個階段都有明確產出，讓決策、設計與開發對齊同一個營運目標。
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="n">01</div>
+          <div>
+            <h4>探索與盤點</h4>
+            <p>從現場流程開始：客戶怎麼進來、資料怎麼流動、團隊怎麼協作、管理者需要看見什麼。先找出斷點，而不是先挑工具。</p>
+          </div>
         </div>
-        <div class="service-text">
-          <div class="label">企業 LINE Bot</div>
-          <h3>用 LINE Bot 自動完成<br>日常作業</h3>
-          <p>橙築國際 LINE Bot + AI 自動化。從預約管理到客戶服務，讓 LINE 成為企業的 24 小時員工。</p>
-          <a href="https://samkuo.com" target="_blank" rel="noopener" class="service-link">
-            前往 samkuo.com <span class="ext">↗</span>
-          </a>
-          <div style="margin-top:28px;padding-top:24px;border-top:1px dotted var(--paper-line);">
-            <div style="font-family:var(--sans);font-size:11px;letter-spacing:0.25em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:14px;">互動 Demo 試玩</div>
-            <div style="display:flex;flex-direction:column;gap:10px;">
-              <a href="/pricing-demo/" style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--paper-line);text-decoration:none;color:inherit;">
-                <span style="font-family:var(--serif);font-size:15px;color:var(--ink);">▸ 智能查價系統</span>
-                <span style="font-size:12px;color:var(--ink-soft);letter-spacing:0.08em;">B2B · AI 報價</span>
-              </a>
-              <a href="/coach-demo/" style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--paper-line);text-decoration:none;color:inherit;">
-                <span style="font-family:var(--serif);font-size:15px;color:var(--ink);">▸ 教練預約系統</span>
-                <span style="font-size:12px;color:var(--ink-soft);letter-spacing:0.08em;">LIFF · 堂數管理</span>
-              </a>
-              <a href="/salon-demo/" style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--paper-line);text-decoration:none;color:inherit;">
-                <span style="font-family:var(--serif);font-size:15px;color:var(--ink);">▸ 髮廊預約系統</span>
-                <span style="font-size:12px;color:var(--ink-soft);letter-spacing:0.08em;">美業 · 拆帳</span>
-              </a>
-              <a href="/group-demo/" style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;text-decoration:none;color:inherit;">
-                <span style="font-family:var(--serif);font-size:15px;color:var(--ink);">▸ 球團報名系統</span>
-                <span style="font-size:12px;color:var(--ink-soft);letter-spacing:0.08em;">社群 · 候補 · AI 分組</span>
+        <div class="step">
+          <div class="n">02</div>
+          <div>
+            <h4>藍圖與原型</h4>
+            <p>把流程畫成可討論的藍圖與可點擊的原型。在寫下第一行正式程式碼之前，先確認方向是對的。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="n">03</div>
+          <div>
+            <h4>整合與上線</h4>
+            <p>分批交付，每一批都是可以真的拿來用的狀態。不做那種半年後才第一次見光的系統。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="n">04</div>
+          <div>
+            <h4>數據與迭代</h4>
+            <p>上線只是開始。用實際運行的數字找出下一個該優化的環節，持續調整而不是交完就走。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 集團事業 ============ -->
+  <section class="section-tight" id="group">
+    <div class="container">
+      <span class="eyebrow">ChengZhu Group</span>
+      <h2 class="h-section">我們自己，<br>就是這些系統的使用者。</h2>
+      <p class="lede">
+        橙築同時經營室內設計、外匯汽車與家電經銷。
+        做零售、車業與門市系統時，是從自己踩過的坑出發，不是從功能規格表出發。
+      </p>
+
+      <div class="grid grid-4" style="margin-top: 34px;">
+        <a class="card" href="https://cz-777.com" target="_blank" rel="noopener">
+          <span class="no">築</span>
+          <h3 class="h-card">橙築室內設計</h3>
+          <p>從空間規劃到細節軟裝，融合歐美現代化與亞洲生活感。</p>
+          <span class="more">cz-777.com ↗</span>
+        </a>
+        <a class="card" href="/appliances/">
+          <span class="no">禮</span>
+          <h3 class="h-card">KINYO 授權經銷</h3>
+          <p>企業禮贈品一次採購到位。尾牙、股東會、員工福利，含三聯式發票。</p>
+          <span class="more">了解更多 →</span>
+        </a>
+        <a class="card" href="https://chengzhuiv.com" target="_blank" rel="noopener">
+          <span class="no">車</span>
+          <h3 class="h-card">橙築國際車業</h3>
+          <p>嚴選全球外匯好車。第三方鑑定、價格透明、里程保證、客製選配。</p>
+          <span class="more">chengzhuiv.com ↗</span>
+        </a>
+        <a class="card" href="https://cars.chengzhu.co" target="_blank" rel="noopener">
+          <span class="no">批</span>
+          <h3 class="h-card">橙築 CARS 車商批發</h3>
+          <p>給台灣車商的批發專屬通路。已驗證車商可在 LINE 內看批發底價、線上下訂鎖車。</p>
+          <span class="more">cars.chengzhu.co ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 聯絡 ============ -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <span class="eyebrow">Contact</span>
+          <h2 class="h-section">想先聊聊哪一個<br>營運問題？</h2>
+          <p style="font-size: .97rem; color: var(--ink-mid); max-width: 34ch;">
+            不管是重整官網、串接現有系統，或想從最卡的那段流程開始，
+            都可以先用 LINE 說一句。初次諮詢免費，沒有壓力。
+          </p>
+          <div class="btn-row" style="margin-top: 24px;">
+            <a class="btn btn-primary" href="https://line.me/R/ti/p/@616wvceo" target="_blank" rel="noopener">
+              加 LINE 開始對話 →
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="label">LINE 諮詢</div>
+            <div class="value"><a href="https://line.me/R/ti/p/@616wvceo" target="_blank" rel="noopener">官方帳號</a></div>
+            <div class="sub">@616wvceo</div>
+          </div>
+          <div class="contact-item">
+            <div class="label">行動電話</div>
+            <div class="value"><a href="tel:0975691485">0975-691-485</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="label">公司電話</div>
+            <div class="value"><a href="tel:0333708108">03-370-8108</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="label">電子郵件</div>
+            <div class="value"><a href="mailto:cat@cz-777.com">cat@cz-777.com</a></div>
+          </div>
+          <div class="contact-item" style="grid-column: 1 / -1;">
+            <div class="label">公司地址</div>
+            <div class="value">
+              <a href="https://maps.google.com/?q=桃園市桃園區春日路818號" target="_blank" rel="noopener">
+                桃園市桃園區春日路 818 號 1F
               </a>
             </div>
           </div>
         </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- WHY -->
-<section id="why" class="section-pad-sm">
-  <div class="container">
-    <div class="section-eyebrow">為什麼選我們 / Why ChengZhu</div>
-    <h2 class="section-title">不只是多角化，<br>而是真正能整合。</h2>
-
-    <div class="why-grid">
-      <div class="why-item">
-        <div class="num">i.</div>
-        <h4>一個窗口，<br>多元服務。</h4>
-        <p>裝修、家電、汽車、企業數位化——找一家就好，省去四處比價、轉接、對接的時間成本。</p>
-      </div>
-      <div class="why-item">
-        <div class="num">ii.</div>
-        <h4>桃園在地，<br>面對面才安心。</h4>
-        <p>春日路實體據點。當面看作品、當面談需求、當面交車交貨——不只是線上交易，是真的能找到人的服務。</p>
-      </div>
-      <div class="why-item">
-        <div class="num">iii.</div>
-        <h4>每條業務，<br>都獨立成熟。</h4>
-        <p>室內設計、車業、LINE Bot 各有獨立官網與實績累積，跨領域整合不是空話，是已經在做的事。</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="section-divider"><hr></div>
-
-<!-- CONTACT -->
-<section id="contact" class="contact section-pad">
-  <div class="container">
-    <div class="contact-grid">
-      <div>
-        <div class="section-eyebrow">聯絡 / Contact</div>
-        <h2 class="section-title">想聊聊嗎？</h2>
-        <p style="font-family: var(--sans); font-size: 15.5px; line-height: 1.95; color: var(--ink-mid); max-width: 30ch;">
-          無論是哪一條業務線，或只是想先了解一下，歡迎來電或加 LINE。初次諮詢免費，沒有壓力。
-        </p>
-      </div>
-
-      <div class="contact-list">
-        <div class="contact-item">
-          <div class="label">行動電話</div>
-          <div class="value"><a href="tel:0975691485">0975-691-485</a></div>
-        </div>
-        <div class="contact-item">
-          <div class="label">公司電話</div>
-          <div class="value"><a href="tel:0333708108">03-370-8108</a></div>
-        </div>
-        <div class="contact-item">
-          <div class="label">LINE 諮詢</div>
-          <div class="value"><a href="https://line.me/R/ti/p/@616wvceo" target="_blank" rel="noopener">官方帳號</a></div>
-          <div class="sub">@616wvceo</div>
-        </div>
-        <div class="contact-item">
-          <div class="label">電子郵件</div>
-          <div class="value"><a href="mailto:cat@cz-777.com">cat@cz-777.com</a></div>
-        </div>
-        <div class="contact-item" style="grid-column: 1 / -1;">
-          <div class="label">公司地址</div>
-          <div class="value">
-            <a href="https://maps.google.com/?q=桃園市桃園區春日路818號" target="_blank" rel="noopener">
-              桃園市桃園區春日路 818 號 1F
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CLOSING NOTE -->
-<section class="closing">
-  <div class="container">
-    <div class="closing-inner">
+  <!-- ============ 收尾 ============ -->
+  <section class="closing">
+    <div class="container">
       <p class="signoff">
         如果您讀到這裡，謝謝。<br>
         歡迎來桃園春日路找我們聊聊，<br>
@@ -693,12 +402,10 @@
       </p>
       <p class="signature">橙築國際</p>
     </div>
-  </div>
-</section>
+  </section>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
@@ -706,28 +413,20 @@
       <span class="sub">CHENGZHU INTERNATIONAL</span>
     </div>
     <div class="footer-cols">
-      <a href="https://cz-777.com" target="_blank" rel="noopener">室內設計 ↗</a>
+      <a href="/solutions/">解決方案</a>
+      <a href="/demos/">互動 Demo</a>
       <a href="/appliances/">KINYO 家電</a>
+      <a href="https://cz-777.com" target="_blank" rel="noopener">室內設計 ↗</a>
       <a href="https://chengzhuiv.com" target="_blank" rel="noopener">外匯汽車 ↗</a>
-      <a href="https://samkuo.com" target="_blank" rel="noopener">LINE Bot ↗</a>
+      <a href="https://cars.chengzhu.co" target="_blank" rel="noopener">車商批發 ↗</a>
     </div>
   </div>
   <div class="footer-copy">
     <span>&copy; 2026 ChengZhu International · 橙築國際</span>
     <span>桃園市桃園區春日路 818 號 1F</span>
+    <span>03-370-8108</span>
   </div>
 </footer>
-
-<script>
-  function toggleMobileNav() {
-    document.getElementById('navLinks').classList.toggle('open');
-  }
-  document.querySelectorAll('#navLinks a').forEach(a => {
-    a.addEventListener('click', () => {
-      document.getElementById('navLinks').classList.remove('open');
-    });
-  });
-</script>
 
 </body>
 </html>

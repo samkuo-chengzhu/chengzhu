@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>互動 Demo — 橙築國際 ChengZhu</title>
+  <meta name="description" content="五個可以直接操作的實際流程：智能查價、教練預約、髮廊排班拆帳、球團報名候補、選物商城結帳。不用相信簡報，自己點點看。">
+  <link rel="canonical" href="https://chengzhu.co/demos/">
+  <meta property="og:title" content="互動 Demo — 橙築國際 ChengZhu">
+  <meta property="og:description" content="五個可以直接點的實際流程，在手機或電腦上打開就能走完一次。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chengzhu.co/demos/">
+  <meta property="og:locale" content="zh_TW">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .demo {
+      display: grid; gap: 40px; padding: 52px 0;
+      border-top: 1px solid var(--line-soft);
+      grid-template-columns: minmax(250px, .8fr) 1.2fr;
+    }
+    .demo:first-of-type { border-top: 0; }
+    .demo .no {
+      font-family: var(--mono); font-size: .78rem; font-weight: 600;
+      letter-spacing: .12em; color: var(--orange); display: block; margin-bottom: 12px;
+    }
+    .demo h2 { font-size: 1.36rem; line-height: 1.45; margin-bottom: 12px; }
+    .demo .desc { font-size: .95rem; color: var(--ink-mid); line-height: 1.9; }
+    .flow {
+      list-style: none; display: grid; gap: 10px; margin: 0 0 20px;
+      counter-reset: s;
+    }
+    .flow li {
+      font-size: .93rem; line-height: 1.75; padding-left: 30px; position: relative;
+      counter-increment: s;
+    }
+    .flow li::before {
+      content: counter(s, decimal-leading-zero);
+      position: absolute; left: 0; top: 1px;
+      font-family: var(--mono); font-size: .7rem; font-weight: 600;
+      color: var(--teal); letter-spacing: .05em;
+    }
+    .meta-h {
+      font-family: var(--mono); font-size: .68rem; letter-spacing: .13em;
+      text-transform: uppercase; color: var(--ink-soft); margin-bottom: 12px;
+    }
+    .demo .foot {
+      padding-top: 16px; border-top: 1px solid var(--line-soft);
+      display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center;
+    }
+    .demo .maps { font-family: var(--mono); font-size: .73rem; color: var(--ink-soft); line-height: 1.8; }
+    .demo .maps a { color: var(--teal); }
+    .demo .maps a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .roles { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; }
+    @media (max-width: 860px) {
+      .demo { grid-template-columns: 1fr; gap: 22px; padding: 40px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">橙築<span class="dot">.</span></a>
+    <nav class="nav-links">
+      <a href="/solutions/">解決方案</a>
+      <a href="/demos/">互動 Demo</a>
+      <a href="/#cases">案例</a>
+      <a href="/#group">集團事業</a>
+      <a href="/#contact">聯絡</a>
+      <a class="nav-cta" href="https://line.me/R/ti/p/@616wvceo" target="_blank" rel="noopener">LINE 免費諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-head">
+    <div class="container">
+      <div class="crumb"><a href="/">首頁</a> / 互動 Demo</div>
+      <span class="eyebrow">Try It Yourself</span>
+      <h1 class="h-display" style="font-size: clamp(1.9rem, 4.4vw, 2.8rem);">
+        不用相信我們，<br>自己點點看。
+      </h1>
+      <p class="lede" style="margin-top: 22px;">
+        簡報上的截圖誰都做得出來。下面五個是可以直接操作的實際流程，
+        在手機或電腦上打開就能走完一次——包含出錯的分支、候補遞補、
+        以及老闆端看到的數字。都不需要註冊。
+      </p>
+      <div class="btn-row" style="margin-top: 26px;">
+        <a class="btn btn-ghost" href="/solutions/">先看六大解決方案</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+
+      <!-- 01 -->
+      <div class="demo">
+        <div>
+          <span class="no">Demo 01</span>
+          <h2>智能查價系統</h2>
+          <div class="roles">
+            <span class="chip chip-teal">LINE Bot</span>
+            <span class="chip chip-teal">B2B 報價</span>
+          </div>
+          <p class="desc">
+            業務在 LINE 群組講一句「預算五百到七百，要三百個」，
+            系統自動搜尋商品、計算階梯報價、回傳可以直接下單的商品卡片。
+            把整套 B2B 採購流程塞進一個對話框。
+          </p>
+        </div>
+        <div>
+          <div class="meta-h">這個 Demo 走過的流程</div>
+          <ol class="flow">
+            <li>用自然語言描述預算、數量與品類</li>
+            <li>系統比對商品庫，依客戶分級套用階梯定價</li>
+            <li>回傳商品卡片，可即時調整條件重新報價</li>
+            <li>確認後直接下單，並產生可追蹤的訂單狀態</li>
+          </ol>
+          <div class="foot">
+            <a class="btn btn-primary" href="/pricing-demo/">開始體驗 →</a>
+            <span class="maps">對應方案：<a href="/solutions/#line">LINE Bot 服務流程</a> · <a href="/solutions/#data">資料與營運儀表板</a></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="demo">
+        <div>
+          <span class="no">Demo 02</span>
+          <h2>教練預約系統</h2>
+          <div class="roles">
+            <span class="chip chip-teal">LIFF</span>
+            <span class="chip chip-teal">堂數管理</span>
+          </div>
+          <p class="desc">
+            學員在 LINE 裡選課送出，教練一鍵核准，系統自動扣堂數。
+            課程包依到期日先進先出扣抵，到期前自動提醒。
+            教練只需要專心教課，其餘由系統處理。
+          </p>
+        </div>
+        <div>
+          <div class="meta-h">這個 Demo 走過的流程</div>
+          <ol class="flow">
+            <li>學員開啟 LIFF 頁面，選擇教練與時段</li>
+            <li>送出預約，教練端收到通知並一鍵核准</li>
+            <li>完課後自動扣抵堂數，依到期日先進先出</li>
+            <li>前一晚推播明日行程，課程包到期前自動提醒</li>
+          </ol>
+          <div class="foot">
+            <a class="btn btn-primary" href="/coach-demo/">開始體驗 →</a>
+            <span class="maps">對應方案：<a href="/solutions/#crm">CRM 與會員經營</a> · <a href="/solutions/#line">LINE Bot 服務流程</a></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="demo">
+        <div>
+          <span class="no">Demo 03</span>
+          <h2>髮廊預約系統</h2>
+          <div class="roles">
+            <span class="chip chip-teal">排班</span>
+            <span class="chip chip-teal">營收拆帳</span>
+          </div>
+          <p class="desc">
+            顧客在 LINE 看價目表並預約；設計師在 LINE 打卡、鎖班、查自己的營收。
+            休假日曆自動擋掉預約，完工紀錄自動結算日月營收，
+            設計師與店家的拆帳系統直接算好。
+          </p>
+        </div>
+        <div>
+          <div class="meta-h">這個 Demo 走過的流程</div>
+          <ol class="flow">
+            <li>顧客瀏覽價目表、選設計師與時段送出預約</li>
+            <li>設計師端鎖班、打卡，休假自動阻擋該時段</li>
+            <li>完工登錄後自動結算當日營收</li>
+            <li>老闆端即時看到營收儀表板與拆帳明細</li>
+          </ol>
+          <div class="foot">
+            <a class="btn btn-primary" href="/salon-demo/">開始體驗 →</a>
+            <span class="maps">對應方案：<a href="/solutions/#pos">POS 與門市營運</a> · <a href="/solutions/#crm">CRM 與會員經營</a></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="demo">
+        <div>
+          <span class="no">Demo 04</span>
+          <h2>球團報名系統</h2>
+          <div class="roles">
+            <span class="chip chip-teal">大型群組</span>
+            <span class="chip chip-teal">候補遞補</span>
+          </div>
+          <p class="desc">
+            兩千人規模的 LINE 群組一鍵報名。額滿自動排候補、
+            有人退出立刻自動遞補並通知，還能依需求自動分組。
+            主辦不用再手動數人頭與私訊確認。
+          </p>
+        </div>
+        <div>
+          <div class="meta-h">這個 Demo 走過的流程</div>
+          <ol class="flow">
+            <li>主辦在群組發起活動，設定名額與分組規則</li>
+            <li>成員一鍵報名，額滿後自動進入候補序列</li>
+            <li>有人取消時，候補第一位自動遞補並收到通知</li>
+            <li>截止後自動分組，並產出可對帳的名單</li>
+          </ol>
+          <div class="foot">
+            <a class="btn btn-primary" href="/group-demo/">開始體驗 →</a>
+            <span class="maps">對應方案：<a href="/solutions/#line">LINE Bot 服務流程</a></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="demo">
+        <div>
+          <span class="no">Demo 05</span>
+          <h2>選物商城</h2>
+          <div class="roles">
+            <span class="chip chip-teal">商城</span>
+            <span class="chip chip-teal">LIFF 結帳</span>
+          </div>
+          <p class="desc">
+            從商品瀏覽、加入購物車到結帳的完整流程，
+            包含 LINE Bot 對話與 LIFF 前台兩種入口。
+            這是電商與門市共用同一份商品與庫存資料的前台樣貌。
+          </p>
+        </div>
+        <div>
+          <div class="meta-h">這個 Demo 走過的流程</div>
+          <ol class="flow">
+            <li>從 LINE 或網頁進入商品型錄</li>
+            <li>瀏覽商品細節、規格與庫存狀態</li>
+            <li>加入購物車，調整數量與配送方式</li>
+            <li>結帳並產生訂單，可於 LINE 內追蹤狀態</li>
+          </ol>
+          <div class="foot">
+            <a class="btn btn-primary" href="/shop/">開始體驗 →</a>
+            <span class="maps">對應方案：<a href="/solutions/#web">企業網站與會員平台</a> · <a href="/solutions/#pos">POS 與門市營運</a></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="slab">
+    <div class="container" style="text-align: center;">
+      <span class="eyebrow eyebrow-light">Your Workflow</span>
+      <h2 class="h-section">你的流程，也可以變成這樣。</h2>
+      <p class="lede" style="margin: 0 auto;">
+        這些 Demo 對應的都是實際交付過的系統。
+        說一下你目前最花人力的那一段，我們幫你看值不值得做。
+      </p>
+      <div class="btn-row" style="margin-top: 26px; justify-content: center;">
+        <a class="btn btn-primary" href="https://line.me/R/ti/p/@616wvceo" target="_blank" rel="noopener">
+          用 LINE 聊聊需求 →
+        </a>
+        <a class="btn btn-light" href="/solutions/">看六大解決方案</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      橙築<span class="dot">.</span> 國際
+      <span class="sub">CHENGZHU INTERNATIONAL</span>
+    </div>
+    <div class="footer-cols">
+      <a href="/solutions/">解決方案</a>
+      <a href="/demos/">互動 Demo</a>
+      <a href="/appliances/">KINYO 家電</a>
+      <a href="https://cz-777.com" target="_blank" rel="noopener">室內設計 ↗</a>
+      <a href="https://chengzhuiv.com" target="_blank" rel="noopener">外匯汽車 ↗</a>
+      <a href="https://cars.chengzhu.co" target="_blank" rel="noopener">車商批發 ↗</a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    <span>&copy; 2026 ChengZhu International · 橙築國際</span>
+    <span>桃園市桃園區春日路 818 號 1F</span>
+    <span>03-370-8108</span>
+  </div>
+</footer>
+
+</body>
+</html>
