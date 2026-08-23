@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>案例 — 橙築國際 ChengZhu</title>
+  <meta name="description" content="六個實際交付並仍在運行的系統：高爾夫工坊營運、連鎖門市自動歸檔、B2B 查價平台、髮廊預約拆帳、教練堂數管理、大型社群報名。依保密原則不揭露品牌名稱。">
+  <link rel="canonical" href="https://chengzhu.co/case/">
+  <meta property="og:title" content="案例 — 橙築國際 ChengZhu">
+  <meta property="og:description" content="六個實際交付並仍在運行的系統。數字與技術細節都是真的。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chengzhu.co/case/">
+  <meta property="og:locale" content="zh_TW">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">橙築<span class="dot">.</span></a>
+    <nav class="nav-links">
+      <a href="/solutions/">解決方案</a>
+      <a href="/demos/">互動 Demo</a>
+      <a href="/case/">案例</a>
+      <a href="/#group">集團事業</a>
+      <a href="/#contact">聯絡</a>
+      <a class="nav-cta" href="https://line.me/R/ti/p/@616wvceo" target="_blank" rel="noopener">LINE 免費諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-head">
+    <div class="container">
+      <div class="crumb"><a href="/">首頁</a> / 案例</div>
+      <span class="eyebrow">Selected Work</span>
+      <h1 class="h-display" style="font-size: clamp(1.9rem, 4.4vw, 2.8rem);">
+        已經在跑的系統。
+      </h1>
+      <p class="lede" style="margin-top: 22px;">
+        以下六個都是實際交付、目前仍在客戶營運現場運行的專案。
+        依與客戶的保密原則，這裡不揭露品牌名稱——
+        但數字、流程與技術細節都是真的。
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+
+      <!-- 旗艦 -->
+      <div class="case-row">
+        <div>
+          <div class="chip-row">
+            <span class="chip chip-orange">旗艦案例</span>
+            <span class="chip chip-quiet">高爾夫產業</span>
+          </div>
+          <h2>高爾夫工坊與教學中心</h2>
+          <p class="desc">
+            從分散作業到一套完整的營運系統。
+            會員、球具 Fitting、工坊派工、庫存、教學與預約，
+            全部收進同一條資料流——前台成交到後台管理不再需要重複輸入。
+          </p>
+          <div class="btn-row" style="margin-top: 18px;">
+            <a class="btn btn-ghost" href="/case/golf-studio/">看完整案例 →</a>
+          </div>
+        </div>
+        <div>
+          <div class="case-stats">
+            <div class="s"><span class="v num">1,858</span><span class="l">筆料件即時庫存</span></div>
+            <div class="s"><span class="v num">29</span><span class="l">支後端服務上線</span></div>
+            <div class="s"><span class="v num">7</span><span class="l">人工坊團隊每天使用</span></div>
+          </div>
+          <p class="desc">
+            工單走完整的五階段流程，完成動作才能前進；缺料自動進待訂貨清單；
+            庫存靠掃碼收發盤，每筆都有異動帳。教學端則涵蓋教練、堂數包、
+            預約核准、完課扣堂與月結拆帳。
+          </p>
+          <p class="stack">Firebase Functions Gen 2 / Firestore / LIFF / Next.js / Rich Menu / 掃碼庫存</p>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="case-row">
+        <div>
+          <div class="chip-row"><span class="chip chip-quiet">連鎖零售</span></div>
+          <h2>連鎖電器品牌<br>門市回報自動化</h2>
+          <p class="desc">
+            各門市店員每天拍照回傳 LINE，系統自動依店名歸檔到雲端資料夾，
+            總部每週收到自動產出的統計報表與 email。
+            從「人工收圖整理」變成「傳完就結束」。
+          </p>
+        </div>
+        <div>
+          <div class="case-stats">
+            <div class="s"><span class="v">數十間</span><span class="l">門市同時運作</span></div>
+            <div class="s"><span class="v num">0</span><span class="l">分鐘人工整理時間</span></div>
+            <div class="s"><span class="v">自動</span><span class="l">週報 + 月報 + Email</span></div>
+          </div>
+          <p class="desc">
+            導入前，總部要有人每天從群組把照片一張張抓下來、依門市分類、
+            月底再彙整成報表。導入後這段流程完全消失，店員的動作也沒有增加——
+            他們本來就在傳照片。
+          </p>
+          <p class="stack">FastAPI / 雲端儲存 API / Firebase / 排程報表 / Email 自動寄送</p>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="case-row">
+        <div>
+          <div class="chip-row"><span class="chip chip-quiet">B2B 採購</span></div>
+          <h2>企業採購查價平台</h2>
+          <p class="desc">
+            業務在 LINE 群組說「預算五百到七百、要三百個」，
+            系統自動搜尋商品、計算階梯報價、回傳商品卡片，
+            還能直接在 LINE 裡下單、追蹤與處理異常。
+          </p>
+        </div>
+        <div>
+          <div class="case-stats">
+            <div class="s"><span class="v num">2,000+</span><span class="l">商品即時查價</span></div>
+            <div class="s"><span class="v num">4 級</span><span class="l">客戶分級報價</span></div>
+            <div class="s"><span class="v">AI</span><span class="l">自然語言查價下單</span></div>
+          </div>
+          <p class="desc">
+            定價邏輯是寫死的規則，AI 只負責理解業務講的話，所以不會報錯價。
+            同義詞會自動修正，業務不用記正確品名。
+            下單訊息可自動解析成結構化訂單，省掉手抄轉錄。
+          </p>
+          <p class="stack">Gemini / Cloud Functions / Flex Message / 階梯定價引擎 / 匯出報表</p>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="case-row">
+        <div>
+          <div class="chip-row"><span class="chip chip-quiet">美業</span></div>
+          <h2>連鎖髮廊預約系統</h2>
+          <p class="desc">
+            顧客在 LINE 看價目表、點連結預約；
+            設計師在 LINE 打卡、鎖班、查營收。
+            休假日曆自動阻擋預約，完工紀錄自動結算日月營收與拆帳。
+          </p>
+        </div>
+        <div>
+          <div class="case-stats">
+            <div class="s"><span class="v num">30 秒</span><span class="l">完成一筆預約</span></div>
+            <div class="s"><span class="v">即時</span><span class="l">營收儀表板</span></div>
+            <div class="s"><span class="v num">0</span><span class="l">額外 App 需下載</span></div>
+          </div>
+          <p class="desc">
+            導入前月底要花一整天對帳；導入後系統自動算好，老闆只要看數字。
+            設計師也能自己在 LINE 裡管班表與請假，店長不再是全店的客服。
+          </p>
+          <p class="stack">LIFF / Firestore / Rich Menu 雙層選單 / 行事曆串接 / 拆帳結算</p>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="case-row">
+        <div>
+          <div class="chip-row"><span class="chip chip-quiet">一對一教學</span></div>
+          <h2>高爾夫教練管理系統</h2>
+          <p class="desc">
+            學員用 LIFF 預約課程，教練在 LINE 一鍵核准，
+            系統自動扣堂數、前一晚推播明日行程、
+            課程包到期前 30 天自動提醒。
+          </p>
+        </div>
+        <div>
+          <div class="case-stats">
+            <div class="s"><span class="v">FIFO</span><span class="l">堂數先到期先扣</span></div>
+            <div class="s"><span class="v">雙角色</span><span class="l">學員端與教練端</span></div>
+            <div class="s"><span class="v">自動</span><span class="l">提醒與到期警告</span></div>
+          </div>
+          <p class="desc">
+            堂數扣抵用交易確保不會重複扣或漏扣。
+            學員手上有多個課程包時依到期日先進先出，
+            避免快到期的放到過期產生爭議。
+          </p>
+          <p class="stack">TypeScript / Cloud Run / Cloud Scheduler / Firestore Transaction / LIFF</p>
+        </div>
+      </div>
+
+      <!-- 06 -->
+      <div class="case-row">
+        <div>
+          <div class="chip-row"><span class="chip chip-quiet">社群營運</span></div>
+          <h2>大型球敘社群報名系統</h2>
+          <p class="desc">
+            兩千人規模的 LINE 群組一鍵報名。
+            額滿自動排候補、有人退出自動遞補並通知，
+            截止後依同組需求自動分組。
+          </p>
+        </div>
+        <div>
+          <div class="case-stats">
+            <div class="s"><span class="v num">2,000</span><span class="l">人群組運作</span></div>
+            <div class="s"><span class="v">自動</span><span class="l">候補依序遞補</span></div>
+            <div class="s"><span class="v">自動</span><span class="l">同組需求分組</span></div>
+          </div>
+          <p class="desc">
+            導入前主辦要在群組裡數「+1」、手記候補順序、私訊通知遞補。
+            導入後這些全部由系統處理，順位公開透明，
+            也不會再有「誰先誰後」的爭議。
+          </p>
+          <p class="stack">LINE Messaging API / Flex Message / 候補佇列 / 排程提醒 / 名單匯出</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 為什麼不具名 -->
+  <section class="slab">
+    <div class="container">
+      <span class="eyebrow eyebrow-light">A Note</span>
+      <h2 class="h-section">為什麼這裡沒有客戶名字？</h2>
+      <div class="prose">
+        <p style="color: var(--slate-soft); line-height: 1.95;">
+          因為我們答應過不寫。這些系統裡有客戶的營收、庫存、會員與定價資料，
+          有些還是他們的競爭優勢所在。把名字拿出來當行銷素材，
+          對正在合作的人不公平。
+        </p>
+        <p style="color: var(--slate-soft); line-height: 1.95; margin-top: 14px;">
+          代價是你得多花一點力氣判斷我們的真假。
+          所以我們把能給的都給了——具體的數字、實際的技術棧，
+          以及五個可以直接點開操作的 Demo。
+        </p>
+      </div>
+      <div class="btn-row" style="margin-top: 26px;">
+        <a class="btn btn-primary" href="/demos/">去點點看 Demo →</a>
+        <a class="btn btn-light" href="/solutions/">看六大解決方案</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-tight">
+    <div class="container" style="text-align: center;">
+      <h2 class="h-section">你的企業，<br>也能有自己的營運系統。</h2>
+      <p class="lede" style="margin: 0 auto;">
+        先從最關鍵的一段流程開始，逐步建立可擴充的數位底座。
+      </p>
+      <div class="btn-row" style="margin-top: 26px; justify-content: center;">
+        <a class="btn btn-primary" href="https://line.me/R/ti/p/@616wvceo" target="_blank" rel="noopener">
+          用 LINE 聊聊需求 →
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      橙築<span class="dot">.</span> 國際
+      <span class="sub">CHENGZHU INTERNATIONAL</span>
+    </div>
+    <div class="footer-cols">
+      <a href="/solutions/">解決方案</a>
+      <a href="/demos/">互動 Demo</a>
+      <a href="/case/">案例</a>
+      <a href="/appliances/">KINYO 家電</a>
+      <a href="https://cz-777.com" target="_blank" rel="noopener">室內設計 ↗</a>
+      <a href="https://chengzhuiv.com" target="_blank" rel="noopener">外匯汽車 ↗</a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    <span>&copy; 2026 ChengZhu International · 橙築國際</span>
+    <span>桃園市桃園區春日路 818 號 1F</span>
+    <span>03-370-8108</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高爾夫工坊與教學中心 — 案例｜橙築國際 ChengZhu</title>
+  <meta name="description" content="從分散作業到一套完整的高爾夫營運系統：會員 CRM、球具 Fitting 工單、工坊派工、掃碼庫存、教學堂數與預約。1,858 筆料件、29 支後端服務、7 人團隊每天使用。">
+  <link rel="canonical" href="https://chengzhu.co/case/golf-studio/">
+  <meta property="og:title" content="高爾夫工坊與教學中心 — 案例｜橙築國際">
+  <meta property="og:description" content="前台成交到後台管理，變成同一條資料流。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://chengzhu.co/case/golf-studio/">
+  <meta property="og:locale" content="zh_TW">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .stage-flow {
+      display: grid; gap: 1px; background: var(--line);
+      border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
+      grid-template-columns: repeat(auto-fit, minmax(168px, 1fr)); margin-top: 26px;
+    }
+    .stage { background: var(--paper-2); padding: 18px 19px; }
+    .stage .n {
+      font-family: var(--mono); font-size: .68rem; letter-spacing: .12em;
+      color: var(--teal); display: block; margin-bottom: 7px;
+    }
+    .stage .t { font-family: var(--serif); font-size: 1.02rem; font-weight: 600; }
+    .stage .g {
+      display: block; margin-top: 8px; font-size: .84rem;
+      color: var(--ink-mid); line-height: 1.7;
+    }
+    .stage .gate {
+      display: block; margin-top: 9px; font-family: var(--mono);
+      font-size: .68rem; color: var(--orange); line-height: 1.6;
+    }
+    .mod {
+      background: var(--paper-2); border: 1px solid var(--line-soft);
+      border-radius: 3px; padding: 19px 20px;
+    }
+    .mod h4 { font-size: 1rem; margin-bottom: 8px; }
+    .mod ul { list-style: none; display: grid; gap: 6px; }
+    .mod li {
+      font-size: .875rem; color: var(--ink-mid); line-height: 1.7;
+      padding-left: 16px; position: relative;
+    }
+    .mod li::before {
+      content: "·"; position: absolute; left: 4px; color: var(--teal); font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">橙築<span class="dot">.</span></a>
+    <nav class="nav-links">
+      <a href="/solutions/">解決方案</a>
+      <a href="/demos/">互動 Demo</a>
+      <a href="/case/">案例</a>
+      <a href="/#group">集團事業</a>
+      <a href="/#contact">聯絡</a>
+      <a class="nav-cta" href="https://line.me/R/ti/p/@616wvceo" target="_blank" rel="noopener">LINE 免費諮詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-head">
+    <div class="container">
+      <div class="crumb"><a href="/">首頁</a> / <a href="/case/">案例</a> / 高爾夫工坊與教學中心</div>
+      <div class="chip-row">
+        <span class="chip chip-orange">旗艦案例</span>
+        <span class="chip chip-quiet">高爾夫產業</span>
+        <span class="chip chip-quiet">營運中</span>
+      </div>
+      <h1 class="h-display" style="font-size: clamp(1.9rem, 4.4vw, 2.8rem);">
+        從分散作業，<br>到一套完整的營運系統。
+      </h1>
+      <p class="lede" style="margin-top: 22px;">
+        一間同時做球具訂製、工坊維修、教學課程與零售的高爾夫據點。
+        我們把會員、Fitting、派工、庫存、教學與預約整合成一條資料流——
+        前台成交到後台管理，不再需要任何人重複輸入。
+      </p>
+
+      <div class="stats" style="margin-top: 40px;">
+        <div class="stat"><span class="v num">1,858</span><span class="l">筆料件即時庫存</span></div>
+        <div class="stat"><span class="v num">29</span><span class="l">支後端服務上線</span></div>
+        <div class="stat"><span class="v num">7</span><span class="l">人工坊團隊每天使用</span></div>
+        <div class="stat"><span class="v num">5</span><span class="l">種角色權限分層</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 挑戰 -->
+  <section class="section-tight">
+    <div class="container">
+      <span class="eyebrow">The Challenge</span>
+      <h2 class="h-section">資訊分散，<br>管理者看不到完整的營運畫面。</h2>
+      <div class="prose">
+        <p>
+          導入前，會員資料、課程安排、球具料件與工坊進度各自存在不同的工具裡：
+          有的在紙本、有的在試算表、有的只在某個人的腦袋和 LINE 對話紀錄裡。
+        </p>
+        <p>
+          結果是前線每天重複輸入同一筆資料，客人問「我的球桿好了沒」要有人走去工坊看一眼，
+          而主管要等到月底才拼得出一份不太確定的營運數字。
+        </p>
+      </div>
+      <div class="quote" style="margin-top: 28px; max-width: 62ch;">
+        系統的價值不只是數位化，而是讓每個角色在同一份資料上協作。
+        <span class="by">— 導入時定下的原則</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 系統範圍 -->
+  <section class="section-tight">
+    <div class="container">
+      <span class="eyebrow">Scope</span>
+      <h2 class="h-section">系統涵蓋的六個模組</h2>
+      <p class="lede">
+        不是六套工具，是六個共用同一份資料的模組。
+        會員在教學端消費，庫存與消費紀錄同時更新。
+      </p>
+
+      <div class="grid grid-3" style="margin-top: 32px;">
+        <div class="mod">
+          <h4>會員 CRM</h4>
+          <ul>
+            <li>對話式綁定，在 LINE 內完成</li>
+            <li>會員卡與消費紀錄</li>
+            <li>年度消費自動累計</li>
+            <li>等級與標籤分群</li>
+          </ul>
+        </div>
+        <div class="mod">
+          <h4>球具 Fitting</h4>
+          <ul>
+            <li>六大類接單精靈，可套桿或單支</li>
+            <li>1,858 筆料件庫，含雙價與廠商</li>
+            <li>量身資料與客戶偏好留存</li>
+            <li>Fitting 預約排程</li>
+          </ul>
+        </div>
+        <div class="mod">
+          <h4>工坊派工</h4>
+          <ul>
+            <li>工單五階段流程管控</li>
+            <li>技師指派與工時區段</li>
+            <li>工坊看板依階段分欄</li>
+            <li>完工自動通知客戶</li>
+          </ul>
+        </div>
+        <div class="mod">
+          <h4>庫存管理</h4>
+          <ul>
+            <li>掃碼收貨、出貨與盤點</li>
+            <li>每筆異動留帳與條碼紀錄</li>
+            <li>門市有無庫存即時標記</li>
+            <li>待訂貨清單依廠商彙整</li>
+          </ul>
+        </div>
+        <div class="mod">
+          <h4>教學管理</h4>
+          <ul>
+            <li>教練、堂數包與課程預約</li>
+            <li>完課自動扣堂</li>
+            <li>月結報表含拆帳與場地收入</li>
+            <li>打席與租場資源管理</li>
+          </ul>
+        </div>
+        <div class="mod">
+          <h4>LINE 整合</h4>
+          <ul>
+            <li>Rich Menu 六格全對話式操作</li>
+            <li>預約、查詢、綁定不離開 LINE</li>
+            <li>內部通知群即時派工提醒</li>
+            <li>分眾推播</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 工單流程 -->
+  <section class="slab">
+    <div class="container">
+      <span class="eyebrow eyebrow-light">Core Flow</span>
+      <h2 class="h-section">工單五階段：<br>完成動作才能前進。</h2>
+      <p class="lede">
+        這是整套系統的核心。過去工單狀態靠口頭與記憶，
+        現在每個階段都有明確的完成條件——沒做到就不能跳下一步。
+        這個設計消滅了「以為別人做了」造成的漏單。
+      </p>
+
+      <div class="stage-flow">
+        <div class="stage">
+          <span class="n">STAGE 01</span>
+          <span class="t">已成立</span>
+          <span class="g">接單精靈完成建單，料件與規格入庫，客戶簽名確認。</span>
+          <span class="gate">閘門：客戶簽名</span>
+        </div>
+        <div class="stage">
+          <span class="n">STAGE 02</span>
+          <span class="t">待料</span>
+          <span class="g">缺貨自動進此階段，並列入依廠商彙整的待訂貨清單。</span>
+          <span class="gate">閘門：料件到貨</span>
+        </div>
+        <div class="stage">
+          <span class="n">STAGE 03</span>
+          <span class="t">組裝中</span>
+          <span class="g">指派技師並記錄開始時段，工坊看板同步顯示。</span>
+          <span class="gate">閘門：必須先指派技師</span>
+        </div>
+        <div class="stage">
+          <span class="n">STAGE 04</span>
+          <span class="t">可取桿</span>
+          <span class="g">組裝完成自動通知客戶，並產生取件資訊。</span>
+          <span class="gate">閘門：尾款付清</span>
+        </div>
+        <div class="stage">
+          <span class="n">STAGE 05</span>
+          <span class="t">已交付</span>
+          <span class="g">交付紀錄回寫會員消費紀錄與年度累計。</span>
+          <span class="gate">完成</span>
+        </div>
+      </div>
+
+      <p class="lede" style="margin-top: 26px;">
+        訂貨通知會記錄是誰、什麼時候通知的；
+        尾款沒付清系統不讓交付；沒指派技師就進不了組裝。
+        規則寫進流程，就不需要有人在旁邊盯。
+      </p>
+    </div>
+  </section>
+
+  <!-- 成果 -->
+  <section class="section-tight">
+    <div class="container">
+      <span class="eyebrow">Outcome</span>
+      <h2 class="h-section">三件事變得不一樣</h2>
+
+      <div class="grid grid-3" style="margin-top: 32px;">
+        <div class="card">
+          <span class="no">01</span>
+          <h3 class="h-card">服務一致</h3>
+          <p>教練、櫃台與工坊技師都取得同一份最新的會員與工單資訊。客人問進度，任何人都答得出來。</p>
+        </div>
+        <div class="card">
+          <span class="no">02</span>
+          <h3 class="h-card">流程可追蹤</h3>
+          <p>從接單到交付的每個節點都留下狀態、時間與經手人。出問題時查得到卡在哪一段。</p>
+        </div>
+        <div class="card">
+          <span class="no">03</span>
+          <h3 class="h-card">決策有依據</h3>
+          <p>營收、工單量與會員活躍度變成可讀的數字，不用等月底手工拼湊。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 誠實段落 -->
+  <section class="section-tight">
+    <div class="container">
+      <span class="eyebrow">Still Building</span>
+      <h2 class="h-section">還沒做完的部分</h2>
+      <div class="prose">
+        <p>
+          這套系統仍在持續開發。目前門市 POS 結帳尚未導入，
+          消費紀錄以手動補登作為過渡；擊球數據的儀器串接、
+          整體財務分析與自動化的會員分級也還在規劃中。
+        </p>
+        <p>
+          我們選擇把這件事寫出來，是因為分批交付本來就是我們的做法——
+          每一批上線的都是能真的拿來用的功能，而不是等全部做完才一次見光。
+          會列在這裡的，都是已經上正式環境、團隊每天在用的部分。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-tight">
+    <div class="container" style="text-align: center;">
+      <h2 class="h-section">你的企業，<br>也能有自己的營運系統。</h2>
+      <p class="lede" style="margin: 0 auto;">
+        先從最關鍵的一段流程開始，逐步建立可擴充的數位底座。
+      </p>
+      <div class="btn-row" style="margin-top: 26px; justify-content: center;">
+        <a class="btn btn-primary" href="https://line.me/R/ti/p/@616wvceo" target="_blank" rel="noopener">
+          用 LINE 聊聊需求 →
+        </a>
+        <a class="btn btn-ghost" href="/case/">看其他案例</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      橙築<span class="dot">.</span> 國際
+      <span class="sub">CHENGZHU INTERNATIONAL</span>
+    </div>
+    <div class="footer-cols">
+      <a href="/solutions/">解決方案</a>
+      <a href="/demos/">互動 Demo</a>
+      <a href="/case/">案例</a>
+      <a href="/appliances/">KINYO 家電</a>
+      <a href="https://cz-777.com" target="_blank" rel="noopener">室內設計 ↗</a>
+      <a href="https://chengzhuiv.com" target="_blank" rel="noopener">外匯汽車 ↗</a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    <span>&copy; 2026 ChengZhu International · 橙築國際</span>
+    <span>桃園市桃園區春日路 818 號 1F</span>
+    <span>03-370-8108</span>
+  </div>
+</footer>
+
+</body>
+</html>
