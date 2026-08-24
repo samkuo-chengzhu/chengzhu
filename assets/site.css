@@ -229,7 +229,9 @@ a.card:hover {
 .slab .card .kw { color: var(--slate-soft); opacity: .8; }
 .slab .card .no { color: #7fc0cf; }
 
-/* 系統架構圖 */
+/* 系統架構圖 — 桌機用 SVG 輻輳圖，窄螢幕改用節點列表 */
+.os-svg { display: none; }
+
 .os-core {
   margin: 34px auto 0; max-width: 250px; text-align: center;
   border: 1px solid #4d8f9d; background: rgba(47, 125, 140, .16);
@@ -256,6 +258,12 @@ a.card:hover {
   color: #7fc0cf; display: block; margin-bottom: 5px;
 }
 .os-node .v { font-size: .89rem; color: var(--slate-ink); line-height: 1.65; }
+
+/* 切換必須放在 .os-core / .os-ring 定義之後，否則同權重下會被後面的規則覆蓋 */
+@media (min-width: 800px) {
+  .os-svg { display: block; width: 100%; height: auto; margin-top: 34px; }
+  .os-core, .os-ring { display: none; }
+}
 
 /* --------------------------------------------------------------- 流程列 */
 .steps { display: grid; gap: 0; margin-top: 30px; }
@@ -339,6 +347,30 @@ footer { border-top: 1px solid var(--line); background: var(--paper-2); }
   padding: 15px 28px 30px; border-top: 1px solid var(--line-soft);
   display: flex; flex-wrap: wrap; gap: 8px 22px;
   font-family: var(--mono); font-size: .7rem; color: var(--ink-soft); letter-spacing: .02em;
+}
+
+/* --------------------------------------------------------------- 頁首圖形 */
+/* 抽象幾何：多路資料收斂到單一核心。放在版面右側，不與文字爭注意力。
+   內容欄以 .container 的 max-width 收住，圖形只在還有餘裕時出現。 */
+.hero-art {
+  position: relative;
+  background-image: url("/assets/hero-converge.svg");
+  background-repeat: no-repeat;
+  background-position: right -40px center;
+  background-size: auto 118%;
+}
+.hero-art > .container { position: relative; }
+.hero-art .lede,
+.hero-art .h-display,
+.hero-art .standfirst { max-width: 46ch; }
+
+@media (max-width: 1080px) {
+  .hero-art { background-position: right -140px center; background-size: auto 105%; }
+  .hero-art .lede, .hero-art .h-display { max-width: 52ch; }
+}
+@media (max-width: 820px) {
+  .hero-art { background-image: none; }
+  .hero-art .lede, .hero-art .h-display, .hero-art .standfirst { max-width: 60ch; }
 }
 
 /* --------------------------------------------------------------- 內頁頭 */

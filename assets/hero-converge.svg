@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 420" fill="none" aria-hidden="true">
+  <!-- 多路資料收斂到單一核心：站的核心論點「資料只進一次」 -->
+  <g stroke="#8a8071" stroke-width="1" opacity=".38">
+    <path d="M520 40  C 400 40, 330 150, 262 205"/>
+    <path d="M520 118 C 430 118, 350 178, 262 208"/>
+    <path d="M520 196 C 440 196, 340 205, 262 210"/>
+    <path d="M520 274 C 430 274, 348 240, 262 214"/>
+    <path d="M520 352 C 400 352, 332 268, 262 216"/>
+    <path d="M520 420 C 380 400, 318 292, 262 220"/>
+  </g>
+
+  <!-- 線上的資料節點 -->
+  <g fill="#8a8071" opacity=".5">
+    <circle cx="446" cy="47"  r="3"/>
+    <circle cx="372" cy="96"  r="3"/>
+    <circle cx="462" cy="128" r="3"/>
+    <circle cx="386" cy="170" r="3"/>
+    <circle cx="450" cy="199" r="3"/>
+    <circle cx="356" cy="207" r="3"/>
+    <circle cx="464" cy="266" r="3"/>
+    <circle cx="380" cy="238" r="3"/>
+    <circle cx="440" cy="336" r="3"/>
+    <circle cx="352" cy="278" r="3"/>
+  </g>
+
+  <!-- 系統青：兩條被強調的資料流 -->
+  <g stroke="#2f7d8c" stroke-width="1.5" opacity=".62">
+    <path d="M520 196 C 440 196, 340 205, 262 210"/>
+    <path d="M520 274 C 430 274, 348 240, 262 214"/>
+  </g>
+  <g fill="#2f7d8c" opacity=".75">
+    <circle cx="450" cy="199" r="3.5"/>
+    <circle cx="380" cy="238" r="3.5"/>
+  </g>
+
+  <!-- 核心 -->
+  <circle cx="252" cy="211" r="46" stroke="#d8623a" stroke-width="1" opacity=".22"/>
+  <circle cx="252" cy="211" r="30" stroke="#d8623a" stroke-width="1" opacity=".38"/>
+  <circle cx="252" cy="211" r="15" stroke="#d8623a" stroke-width="1.5" opacity=".7"/>
+  <circle cx="252" cy="211" r="5.5" fill="#d8623a"/>
+
+  <!-- 核心左側：整併後的單一輸出 -->
+  <path d="M237 211 H 96" stroke="#d8623a" stroke-width="1.5" opacity=".5"/>
+  <circle cx="96" cy="211" r="4" fill="#d8623a" opacity=".5"/>
+</svg>
