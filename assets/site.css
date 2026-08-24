@@ -352,23 +352,31 @@ footer { border-top: 1px solid var(--line); background: var(--paper-2); }
 /* --------------------------------------------------------------- 頁首圖形 */
 /* 抽象幾何：多路資料收斂到單一核心。放在版面右側，不與文字爭注意力。
    內容欄以 .container 的 max-width 收住，圖形只在還有餘裕時出現。 */
+/* 尺寸用絕對 px 而非百分比：百分比會隨區塊高度放大，在高的 hero 上
+   圖形會寬到蓋住內文。固定寬度才能確保圖永遠只佔右側。 */
 .hero-art {
   position: relative;
   background-image: url("/assets/hero-converge.svg");
   background-repeat: no-repeat;
-  background-position: right -40px center;
-  background-size: auto 118%;
+  background-position: right -30px center;
+  background-size: 760px auto;
 }
 .hero-art > .container { position: relative; }
+/* 用 px 而非 ch：ch 會隨字級放大，套在 clamp 到 56px 的大標題上等於沒有限制，
+   標題一長就會鑽到圖形底下。下列數值是各斷點下「圖形左緣扣掉容器內距」的安全寬度。 */
 .hero-art .lede,
 .hero-art .h-display,
-.hero-art .standfirst { max-width: 46ch; }
+.hero-art .standfirst { max-width: 660px; }
 
-@media (max-width: 1080px) {
-  .hero-art { background-position: right -140px center; background-size: auto 105%; }
-  .hero-art .lede, .hero-art .h-display { max-width: 52ch; }
+@media (max-width: 1399px) {
+  .hero-art { background-size: 620px auto; background-position: right -60px center; }
+  .hero-art .lede, .hero-art .h-display, .hero-art .standfirst { max-width: 565px; }
 }
-@media (max-width: 820px) {
+@media (max-width: 1099px) {
+  .hero-art { background-size: 500px auto; background-position: right -80px center; }
+  .hero-art .lede, .hero-art .h-display, .hero-art .standfirst { max-width: 535px; }
+}
+@media (max-width: 939px) {
   .hero-art { background-image: none; }
   .hero-art .lede, .hero-art .h-display, .hero-art .standfirst { max-width: 60ch; }
 }
