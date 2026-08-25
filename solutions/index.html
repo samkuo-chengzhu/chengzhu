@@ -61,6 +61,20 @@
     @media (max-width: 860px) {
       .sol { grid-template-columns: 1fr; gap: 22px; padding: 42px 0; }
     }
+    .sol-mock {
+      margin: 20px 0 0; padding: 14px; border-radius: 10px;
+      background: #1c1f24; border: 1px solid rgba(255,255,255,.08);
+      display: flex; flex-direction: column; gap: 5px; max-width: 200px;
+    }
+    .sm-hdr { height: 14px; border-radius: 4px; }
+    .sm-bar { height: 5px; border-radius: 2px; background: rgba(255,255,255,.08); flex: 1; }
+    .sm-row { display: flex; gap: 4px; align-items: center; }
+    .sm-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .sm-block { border-radius: 4px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); }
+    .sm-badge { width: 14px; height: 7px; border-radius: 2px; flex-shrink: 0; }
+    @media (max-width: 860px) {
+      .sol-mock { margin: 16px auto 0; }
+    }
   </style>
 </head>
 <body>
@@ -89,9 +103,8 @@
         不是再多一套工具，<br>而是一套能一起運作的系統。
       </h1>
       <p class="lede" style="margin-top: 22px;">
-        從顧客接觸、內部作業到管理決策，橙築以企業流程為核心，
-        選擇合適的技術並負責把它們接起來。
-        以下每一項底下列的都是實際交付過的功能，不是規格表。
+        橙築以企業流程為核心，選擇合適的技術並負責接起來。
+        以下每一項列的都是實際交付過的功能，不是規格表。
       </p>
     </div>
   </section>
@@ -106,10 +119,18 @@
           <span class="no">01</span>
           <h2>企業網站與會員平台</h2>
           <p class="desc">
-            網站的工作不是好看，是把對的人帶進來、把詢問變成可追蹤的資料。
-            品牌官網、內容管理、會員分級與多語系，讓網站成為可衡量的營運入口，
-            而不是一年更新一次的型錄。
+            網站的工作不是好看，是把詢問變成可追蹤的資料。
+            品牌官網、會員分級與多語系，讓網站成為可衡量的營運入口。
           </p>
+          <div class="sol-mock">
+            <div class="sm-hdr" style="background:var(--teal);opacity:.5"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+              <div class="sm-block" style="height:36px"></div>
+              <div class="sm-block" style="height:36px"></div>
+            </div>
+            <div class="sm-bar" style="width:60%"></div>
+            <div class="sm-bar" style="width:80%"></div>
+          </div>
         </div>
         <div>
           <div class="did-h">我們實際做過</div>
@@ -131,10 +152,22 @@
           <span class="no">02</span>
           <h2>ERP 與流程中台</h2>
           <p class="desc">
-            把採購、庫存、工單、對帳與報表收進同一套可追蹤的工作流程。
-            重點不是功能多，是每一個狀態都有人負責、有時間戳、
-            而且下一步該做什麼是系統說了算，不靠記憶與口頭交代。
+            採購、庫存、工單、對帳收進同一套工作流程。
+            每個狀態有人負責、有時間戳，下一步系統說了算。
           </p>
+          <div class="sol-mock">
+            <div class="sm-row">
+              <div class="sm-bar"></div><div class="sm-bar"></div><div class="sm-bar"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px">
+              <div class="sm-block" style="height:24px"></div>
+              <div class="sm-block" style="height:24px"></div>
+              <div class="sm-block" style="height:24px"></div>
+              <div class="sm-block" style="height:24px"></div>
+              <div></div>
+              <div class="sm-block" style="height:24px"></div>
+            </div>
+          </div>
         </div>
         <div>
           <div class="did-h">我們實際做過</div>
@@ -157,10 +190,16 @@
           <span class="no">03</span>
           <h2>CRM 與會員經營</h2>
           <p class="desc">
-            從第一次詢問到成交後服務，完整累積每一位客戶的互動、消費與偏好。
-            資料不是為了做報表而存在，是為了讓下一次接觸的人
-            知道這位客戶上次談到哪裡。
+            從詢問到成交後服務，累積每位客戶的互動、消費與偏好——
+            讓下一次接觸的人知道上次談到哪裡。
           </p>
+          <div class="sol-mock">
+            <div class="sm-row"><div class="sm-dot" style="background:var(--teal);opacity:.4"></div><div class="sm-bar"></div></div>
+            <div class="sm-bar" style="width:70%"></div>
+            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
+            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
+            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--orange);opacity:.3"></div></div>
+          </div>
         </div>
         <div>
           <div class="did-h">我們實際做過</div>
@@ -183,10 +222,16 @@
           <span class="no">04</span>
           <h2>POS 與門市營運</h2>
           <p class="desc">
-            前台掃碼成交之後，庫存、會員、業績與帳務同一秒更新。
-            門市不該是「白天做生意、晚上再對一次帳」，
-            那些重複輸入本來就該由系統處理掉。
+            掃碼成交，庫存、會員、業績同一秒更新。
+            門市不該「白天做生意、晚上再對帳」。
           </p>
+          <div class="sol-mock">
+            <div class="sm-row"><div class="sm-bar" style="flex:2"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
+            <div class="sm-row"><div class="sm-bar" style="flex:2"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
+            <div class="sm-row"><div class="sm-bar" style="flex:2"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
+            <div style="border-top:1px solid rgba(255,255,255,.06);margin:2px 0"></div>
+            <div class="sm-hdr" style="background:var(--orange);opacity:.4"></div>
+          </div>
         </div>
         <div>
           <div class="did-h">我們實際做過</div>
@@ -209,10 +254,16 @@
           <span class="no">05</span>
           <h2>LINE Bot 服務流程</h2>
           <p class="desc">
-            預約、通知、查價、客服與售後，全部發生在客戶本來就每天在用的介面裡。
-            不用說服任何人下載新的 App，也不用教長輩怎麼登入——
-            這是導入成本最低的一條路，也是橙築累積最深的一塊。
+            預約、通知、查價、客服，全在客戶每天在用的介面裡。
+            不用下載 App、不用教登入——導入成本最低的一條路。
           </p>
+          <div class="sol-mock">
+            <div class="sm-hdr" style="background:#06C755"></div>
+            <div class="sm-bar" style="width:55%;height:8px;border-radius:5px;margin-left:auto"></div>
+            <div class="sm-bar" style="width:70%;height:12px;border-radius:5px"></div>
+            <div class="sm-bar" style="width:45%;height:8px;border-radius:5px;margin-left:auto"></div>
+            <div class="sm-block" style="height:28px"></div>
+          </div>
         </div>
         <div>
           <div class="did-h">我們實際做過</div>
@@ -236,10 +287,20 @@
           <span class="no">06</span>
           <h2>資料與營運儀表板</h2>
           <p class="desc">
-            把跨系統的資料收攏成看得懂的數字，以及該處理的任務。
-            我們的做法是先讓資料乾淨且只進一次，
-            再談自動化——順序反過來做出來的都是漂亮但沒人打開的報表。
+            跨系統資料收攏成看得懂的數字。
+            先讓資料乾淨且只進一次，再談自動化。
           </p>
+          <div class="sol-mock">
+            <div class="sm-row" style="height:32px;align-items:flex-end">
+              <div style="flex:1;height:50%;border-radius:2px 2px 0 0;background:var(--teal);opacity:.4"></div>
+              <div style="flex:1;height:80%;border-radius:2px 2px 0 0;background:var(--teal);opacity:.5"></div>
+              <div style="flex:1;height:60%;border-radius:2px 2px 0 0;background:var(--teal);opacity:.4"></div>
+              <div style="flex:1;height:100%;border-radius:2px 2px 0 0;background:var(--teal);opacity:.6"></div>
+              <div style="flex:1;height:70%;border-radius:2px 2px 0 0;background:var(--orange);opacity:.4"></div>
+            </div>
+            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
+            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--orange);opacity:.3"></div></div>
+          </div>
         </div>
         <div>
           <div class="did-h">我們實際做過</div>

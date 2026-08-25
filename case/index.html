@@ -22,6 +22,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chiron+Sung+HK:wght@400;500;600&family=Chiron+Hei+HK:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .case-img {
+      grid-column: 1 / -1;
+      width: 100%; height: 220px;
+      object-fit: cover; border-radius: 8px;
+      margin-bottom: -8px;
+    }
+    @media (max-width: 860px) {
+      .case-img { height: 160px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -61,6 +72,7 @@
 
       <!-- 旗艦 -->
       <div class="case-row">
+        <img class="case-img" src="/assets/img/golf-clubs.jpg" alt="高爾夫球桿與工坊設備" loading="lazy">
         <div>
           <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.5,2h1v15.5h-1ZM8.5,3h7l-3,2,3,2h-7ZM5.5,20a2.5,2.5,0,1,1,5,0,2.5,2.5,0,1,1-5,0Zm1,0a1.5,1.5,0,1,0,3,0,1.5,1.5,0,1,0-3,0Z"/></svg>
           <div class="chip-row">
@@ -69,9 +81,8 @@
           </div>
           <h2>高爾夫工坊與教學中心</h2>
           <p class="desc">
-            從分散作業到一套完整的營運系統。
             會員、球具 Fitting、工坊派工、庫存、教學與預約，
-            全部收進同一條資料流——前台成交到後台管理不再需要重複輸入。
+            收進同一條資料流——前台成交到後台管理不再重複輸入。
           </p>
           <div class="btn-row" style="margin-top: 18px;">
             <a class="btn btn-ghost" href="/case/golf-studio/">看完整案例 →</a>
@@ -84,9 +95,8 @@
             <div class="s"><span class="v num">7</span><span class="l">人工坊團隊每天使用</span></div>
           </div>
           <p class="desc">
-            工單走完整的五階段流程，完成動作才能前進；缺料自動進待訂貨清單；
-            庫存靠掃碼收發盤，每筆都有異動帳。教學端則涵蓋教練、堂數包、
-            預約核准、完課扣堂與月結拆帳。
+            工單五階段流程管控；缺料自動進待訂貨清單；
+            庫存掃碼收發盤。教學端涵蓋教練堂數包、預約核准與月結拆帳。
           </p>
           <p class="stack">Firebase Functions Gen 2 / Firestore / LIFF / Next.js / Rich Menu / 掃碼庫存</p>
         </div>
@@ -99,9 +109,8 @@
           <div class="chip-row"><span class="chip chip-quiet">連鎖零售</span></div>
           <h2>連鎖電器品牌<br>門市回報自動化</h2>
           <p class="desc">
-            各門市店員每天拍照回傳 LINE，系統自動依店名歸檔到雲端資料夾，
-            總部每週收到自動產出的統計報表與 email。
-            從「人工收圖整理」變成「傳完就結束」。
+            門市店員每天拍照傳 LINE，系統自動依店名歸檔雲端，
+            總部每週收到自動產出的統計報表。「傳完就結束」。
           </p>
         </div>
         <div>
@@ -111,9 +120,8 @@
             <div class="s"><span class="v">自動</span><span class="l">週報 + 月報 + Email</span></div>
           </div>
           <p class="desc">
-            導入前，總部要有人每天從群組把照片一張張抓下來、依門市分類、
-            月底再彙整成報表。導入後這段流程完全消失，店員的動作也沒有增加——
-            他們本來就在傳照片。
+            導入前總部要有人每天從群組抓照片、分類、彙整報表。
+            導入後這段流程消失，店員動作也沒增加——他們本來就在傳照片。
           </p>
           <p class="stack">FastAPI / 雲端儲存 API / Firebase / 排程報表 / Email 自動寄送</p>
         </div>
@@ -126,9 +134,8 @@
           <div class="chip-row"><span class="chip chip-quiet">B2B 採購</span></div>
           <h2>企業採購查價平台</h2>
           <p class="desc">
-            業務在 LINE 群組說「預算五百到七百、要三百個」，
-            系統自動搜尋商品、計算階梯報價、回傳商品卡片，
-            還能直接在 LINE 裡下單、追蹤與處理異常。
+            業務在 LINE 群組說「預算多少、要幾個」，
+            系統自動搜尋、計算階梯報價、回傳商品卡片，可直接下單與追蹤。
           </p>
         </div>
         <div>
@@ -153,9 +160,8 @@
           <div class="chip-row"><span class="chip chip-quiet">美業</span></div>
           <h2>連鎖髮廊預約系統</h2>
           <p class="desc">
-            顧客在 LINE 看價目表、點連結預約；
-            設計師在 LINE 打卡、鎖班、查營收。
-            休假日曆自動阻擋預約，完工紀錄自動結算日月營收與拆帳。
+            顧客在 LINE 看價目、預約；設計師在 LINE 打卡、鎖班、查營收。
+            休假自動阻擋預約，完工紀錄自動結算拆帳。
           </p>
         </div>
         <div>
@@ -165,8 +171,8 @@
             <div class="s"><span class="v num">0</span><span class="l">額外 App 需下載</span></div>
           </div>
           <p class="desc">
-            導入前月底要花一整天對帳；導入後系統自動算好，老闆只要看數字。
-            設計師也能自己在 LINE 裡管班表與請假，店長不再是全店的客服。
+            導入前月底花一整天對帳；導入後系統自動結算，老闆只看數字。
+            設計師自己管班表與請假，店長不再當全店客服。
           </p>
           <p class="stack">LIFF / Firestore / Rich Menu 雙層選單 / 行事曆串接 / 拆帳結算</p>
         </div>
@@ -179,9 +185,8 @@
           <div class="chip-row"><span class="chip chip-quiet">一對一教學</span></div>
           <h2>高爾夫教練管理系統</h2>
           <p class="desc">
-            學員用 LIFF 預約課程，教練在 LINE 一鍵核准，
-            系統自動扣堂數、前一晚推播明日行程、
-            課程包到期前 30 天自動提醒。
+            學員用 LIFF 預約，教練在 LINE 一鍵核准；
+            系統自動扣堂數、推播明日行程、到期前 30 天提醒。
           </p>
         </div>
         <div>
@@ -191,9 +196,8 @@
             <div class="s"><span class="v">自動</span><span class="l">提醒與到期警告</span></div>
           </div>
           <p class="desc">
-            堂數扣抵用交易確保不會重複扣或漏扣。
-            學員手上有多個課程包時依到期日先進先出，
-            避免快到期的放到過期產生爭議。
+            堂數扣抵用交易確保不重複扣或漏扣。
+            多課程包依到期日先進先出，避免過期爭議。
           </p>
           <p class="stack">TypeScript / Cloud Run / Cloud Scheduler / Firestore Transaction / LIFF</p>
         </div>
@@ -206,8 +210,7 @@
           <div class="chip-row"><span class="chip chip-quiet">社群營運</span></div>
           <h2>大型球敘社群報名系統</h2>
           <p class="desc">
-            兩千人規模的 LINE 群組一鍵報名。
-            額滿自動排候補、有人退出自動遞補並通知，
+            兩千人 LINE 群組一鍵報名。額滿自動候補、退出自動遞補通知，
             截止後依同組需求自動分組。
           </p>
         </div>
@@ -218,9 +221,8 @@
             <div class="s"><span class="v">自動</span><span class="l">同組需求分組</span></div>
           </div>
           <p class="desc">
-            導入前主辦要在群組裡數「+1」、手記候補順序、私訊通知遞補。
-            導入後這些全部由系統處理，順位公開透明，
-            也不會再有「誰先誰後」的爭議。
+            導入前主辦要數「+1」、手記候補、私訊遞補。
+            導入後全由系統處理，順位公開透明，不再有先後爭議。
           </p>
           <p class="stack">LINE Messaging API / Flex Message / 候補佇列 / 排程提醒 / 名單匯出</p>
         </div>

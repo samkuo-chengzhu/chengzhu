@@ -22,6 +22,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chiron+Sung+HK:wght@400;500;600&family=Chiron+Hei+HK:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .hero-phone {
+      display: inline-block; margin-top: 28px;
+      width: 180px; border: 2px solid rgba(255,255,255,.12);
+      border-radius: 24px; background: #1c1f24;
+      padding: 28px 10px 16px; position: relative;
+    }
+    .hero-phone::before {
+      content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      width: 48px; height: 4px; background: rgba(255,255,255,.1); border-radius: 4px;
+    }
+    .hp { display: flex; flex-direction: column; gap: 6px; }
+    .hp-hdr { height: 22px; border-radius: 5px; }
+    .hp-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,.08); flex: 1; }
+    .hp-row { display: flex; gap: 5px; align-items: center; }
+    .hp-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+    .hp-badge { width: 18px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+    .hp-block { border-radius: 5px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); }
+  </style>
 </head>
 <body>
 
@@ -57,6 +76,17 @@
           聊聊你的社團 →
         </a>
         <a class="btn btn-ghost" href="/group-demo/">先玩玩看 Demo</a>
+      </div>
+      <div class="hero-phone">
+        <div class="hp">
+          <div class="hp-hdr" style="background:#06C755"></div>
+          <div class="hp-row"><div class="hp-dot" style="background:var(--teal);opacity:.3"></div><div class="hp-bar" style="flex:1"></div><div class="hp-badge" style="background:var(--teal);opacity:.5"></div></div>
+          <div class="hp-row"><div class="hp-dot" style="background:var(--teal);opacity:.3"></div><div class="hp-bar" style="flex:1"></div><div class="hp-badge" style="background:var(--teal);opacity:.5"></div></div>
+          <div class="hp-row"><div class="hp-dot" style="background:var(--teal);opacity:.3"></div><div class="hp-bar" style="flex:1"></div><div class="hp-badge" style="background:var(--teal);opacity:.5"></div></div>
+          <div class="hp-row"><div class="hp-dot" style="background:var(--orange);opacity:.3"></div><div class="hp-bar" style="flex:1"></div><div class="hp-badge" style="background:var(--orange);opacity:.4"></div></div>
+          <div class="hp-row"><div class="hp-dot" style="background:var(--orange);opacity:.3"></div><div class="hp-bar" style="flex:1"></div><div class="hp-badge" style="background:var(--orange);opacity:.4"></div></div>
+          <div class="hp-block" style="height:18px"></div>
+        </div>
       </div>
       <p class="kw" style="margin-top: 14px;">30 分鐘免費諮詢 · 不強迫推銷 · 無額外隱藏費用</p>
     </div>

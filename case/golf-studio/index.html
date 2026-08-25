@@ -23,6 +23,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Chiron+Sung+HK:wght@400;500;600&family=Chiron+Hei+HK:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
   <style>
+    .hero-banner {
+      width: 100%; height: 280px; object-fit: cover;
+      border-radius: 8px; margin-top: 32px;
+    }
+    @media (max-width: 860px) {
+      .hero-banner { height: 180px; }
+    }
     .stage-flow {
       display: grid; gap: 1px; background: var(--line);
       border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
@@ -98,6 +105,8 @@
         <div class="stat"><span class="v num">7</span><span class="l">人工坊團隊每天使用</span></div>
         <div class="stat"><span class="v num">5</span><span class="l">種角色權限分層</span></div>
       </div>
+
+      <img class="hero-banner" src="/assets/img/golf-course.jpg" alt="高爾夫球場全景" loading="lazy">
     </div>
   </section>
 

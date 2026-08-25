@@ -54,8 +54,14 @@
     .ind .links a { color: var(--orange); font-weight: 500; }
     .ind .links a:hover { text-decoration: underline; text-underline-offset: 3px; }
     .ind .links .lbl { font-family: var(--mono); font-size: .72rem; color: var(--ink-soft); }
+    .ind-img {
+      grid-column: 1 / -1;
+      width: 100%; height: 260px;
+      object-fit: cover; border-radius: 8px;
+    }
     @media (max-width: 860px) {
       .ind { grid-template-columns: 1fr; gap: 22px; padding: 40px 0; }
+      .ind-img { height: 180px; }
     }
   </style>
 </head>
@@ -97,6 +103,7 @@
 
       <!-- 高爾夫 -->
       <div class="ind" id="golf">
+        <img class="ind-img" src="/assets/img/golf-course.jpg" alt="高爾夫球場全景" loading="lazy">
         <div>
           <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.5,2h1v15.5h-1ZM8.5,3h7l-3,2,3,2h-7ZM5.5,20a2.5,2.5,0,1,1,5,0,2.5,2.5,0,1,1-5,0Zm1,0a1.5,1.5,0,1,0,3,0,1.5,1.5,0,1,0-3,0Z"/></svg>
           <span class="no">01</span>

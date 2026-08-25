@@ -64,6 +64,32 @@
     @media (max-width: 860px) {
       .demo { grid-template-columns: 1fr; gap: 22px; padding: 40px 0; }
     }
+    .phone-mock {
+      width: 180px; margin: 20px 0 0;
+      border: 2px solid rgba(255,255,255,.12); border-radius: 24px;
+      background: #1c1f24; padding: 28px 10px 16px; position: relative;
+    }
+    .phone-mock::before {
+      content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      width: 48px; height: 4px; background: rgba(255,255,255,.1); border-radius: 4px;
+    }
+    .pm { display: flex; flex-direction: column; gap: 6px; }
+    .pm-hdr { height: 22px; border-radius: 5px; background: #06C755; }
+    .pm-hdr-t { height: 22px; border-radius: 5px; background: var(--teal); opacity: .6; }
+    .pm-bub { border-radius: 10px; background: rgba(255,255,255,.08); }
+    .pm-bub-r { margin-left: auto; }
+    .pm-card { border-radius: 6px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.04); }
+    .pm-btn { height: 22px; border-radius: 5px; background: var(--teal); opacity: .5; }
+    .pm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+    .pm-row { display: flex; gap: 5px; align-items: center; }
+    .pm-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--teal); opacity: .4; flex-shrink: 0; }
+    .pm-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,.08); flex: 1; }
+    .pm-badge { width: 18px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+    .pm-badge-ok { background: var(--teal); opacity: .5; }
+    .pm-badge-wait { background: var(--orange); opacity: .4; }
+    @media (max-width: 860px) {
+      .phone-mock { margin: 16px auto 0; }
+    }
   </style>
 </head>
 <body>
@@ -92,9 +118,8 @@
         不用相信我們，<br>自己點點看。
       </h1>
       <p class="lede" style="margin-top: 22px;">
-        簡報上的截圖誰都做得出來。下面五個是可以直接操作的實際流程，
-        在手機或電腦上打開就能走完一次——包含出錯的分支、候補遞補、
-        以及老闆端看到的數字。都不需要註冊。
+        下面五個是可以直接操作的實際流程——
+        包含出錯的分支、候補遞補、以及老闆端看到的數字。不需要註冊。
       </p>
       <div class="btn-row" style="margin-top: 26px;">
         <a class="btn btn-ghost" href="/solutions/">先看六大解決方案</a>
@@ -116,10 +141,18 @@
             <span class="chip chip-teal">B2B 報價</span>
           </div>
           <p class="desc">
-            業務在 LINE 群組講一句「預算五百到七百，要三百個」，
-            系統自動搜尋商品、計算階梯報價、回傳可以直接下單的商品卡片。
-            把整套 B2B 採購流程塞進一個對話框。
+            業務在 LINE 群組講一句話，系統自動搜尋、計算階梯報價、
+            回傳可直接下單的商品卡片。整套 B2B 採購流程塞進一個對話框。
           </p>
+          <div class="phone-mock"><div class="pm">
+            <div class="pm-hdr"></div>
+            <div class="pm-bub pm-bub-r" style="width:60%;height:16px"></div>
+            <div class="pm-bub" style="width:80%;height:28px"></div>
+            <div class="pm-bub pm-bub-r" style="width:50%;height:14px"></div>
+            <div class="pm-bub" style="width:75%;height:22px"></div>
+            <div class="pm-card" style="height:50px"></div>
+            <div class="pm-btn"></div>
+          </div></div>
         </div>
         <div>
           <div class="meta-h">這個 Demo 走過的流程</div>
@@ -147,10 +180,21 @@
             <span class="chip chip-teal">堂數管理</span>
           </div>
           <p class="desc">
-            學員在 LINE 裡選課送出，教練一鍵核准，系統自動扣堂數。
-            課程包依到期日先進先出扣抵，到期前自動提醒。
-            教練只需要專心教課，其餘由系統處理。
+            學員 LINE 選課送出，教練一鍵核准，系統自動扣堂數。
+            課程包依到期日先進先出，到期前自動提醒。
           </p>
+          <div class="phone-mock"><div class="pm">
+            <div class="pm-hdr-t"></div>
+            <div class="pm-grid" style="gap:3px">
+              <div class="pm-bar"></div><div class="pm-bar"></div>
+              <div class="pm-bar"></div><div class="pm-bar"></div>
+              <div class="pm-bar"></div><div class="pm-bar"></div>
+            </div>
+            <div class="pm-row"><div class="pm-dot"></div><div class="pm-bar"></div></div>
+            <div class="pm-row"><div class="pm-dot"></div><div class="pm-bar"></div></div>
+            <div class="pm-row"><div class="pm-dot"></div><div class="pm-bar"></div></div>
+            <div class="pm-btn"></div>
+          </div></div>
         </div>
         <div>
           <div class="meta-h">這個 Demo 走過的流程</div>
@@ -178,10 +222,19 @@
             <span class="chip chip-teal">營收拆帳</span>
           </div>
           <p class="desc">
-            顧客在 LINE 看價目表並預約；設計師在 LINE 打卡、鎖班、查自己的營收。
-            休假日曆自動擋掉預約，完工紀錄自動結算日月營收，
-            設計師與店家的拆帳系統直接算好。
+            顧客 LINE 看價目表並預約；設計師 LINE 打卡、鎖班、查營收。
+            休假自動擋預約，完工紀錄自動結算營收與拆帳。
           </p>
+          <div class="phone-mock"><div class="pm">
+            <div class="pm-hdr-t"></div>
+            <div class="pm-row"><div class="pm-bar"></div><div class="pm-badge pm-badge-ok"></div></div>
+            <div class="pm-row"><div class="pm-bar"></div><div class="pm-badge pm-badge-ok"></div></div>
+            <div class="pm-row"><div class="pm-bar"></div><div class="pm-badge pm-badge-ok"></div></div>
+            <div style="border-top:1px solid rgba(255,255,255,.06);margin:2px 0"></div>
+            <div class="pm-row"><div class="pm-bar"></div><div class="pm-badge pm-badge-ok"></div></div>
+            <div class="pm-row"><div class="pm-bar"></div><div class="pm-badge pm-badge-ok"></div></div>
+            <div class="pm-btn"></div>
+          </div></div>
         </div>
         <div>
           <div class="meta-h">這個 Demo 走過的流程</div>
@@ -209,10 +262,18 @@
             <span class="chip chip-teal">候補遞補</span>
           </div>
           <p class="desc">
-            兩千人規模的 LINE 群組一鍵報名。額滿自動排候補、
-            有人退出立刻自動遞補並通知，還能依需求自動分組。
-            主辦不用再手動數人頭與私訊確認。
+            兩千人 LINE 群組一鍵報名。額滿自動排候補、
+            有人退出立刻遞補並通知，截止後自動分組。
           </p>
+          <div class="phone-mock"><div class="pm">
+            <div class="pm-hdr"></div>
+            <div class="pm-row"><div class="pm-dot"></div><div class="pm-bar"></div><div class="pm-badge pm-badge-ok"></div></div>
+            <div class="pm-row"><div class="pm-dot"></div><div class="pm-bar"></div><div class="pm-badge pm-badge-ok"></div></div>
+            <div class="pm-row"><div class="pm-dot"></div><div class="pm-bar"></div><div class="pm-badge pm-badge-ok"></div></div>
+            <div class="pm-row"><div class="pm-dot"></div><div class="pm-bar"></div><div class="pm-badge pm-badge-wait"></div></div>
+            <div class="pm-row"><div class="pm-dot"></div><div class="pm-bar"></div><div class="pm-badge pm-badge-wait"></div></div>
+            <div class="pm-card" style="height:18px"></div>
+          </div></div>
         </div>
         <div>
           <div class="meta-h">這個 Demo 走過的流程</div>
@@ -240,10 +301,22 @@
             <span class="chip chip-teal">LIFF 結帳</span>
           </div>
           <p class="desc">
-            從商品瀏覽、加入購物車到結帳的完整流程，
-            包含 LINE Bot 對話與 LIFF 前台兩種入口。
-            這是電商與門市共用同一份商品與庫存資料的前台樣貌。
+            商品瀏覽、購物車到結帳的完整流程，
+            含 LINE Bot 與 LIFF 兩種入口。電商與門市共用同一份庫存。
           </p>
+          <div class="phone-mock"><div class="pm">
+            <div class="pm-hdr-t"></div>
+            <div class="pm-grid">
+              <div class="pm-card" style="height:48px"></div>
+              <div class="pm-card" style="height:48px"></div>
+              <div class="pm-card" style="height:48px"></div>
+              <div class="pm-card" style="height:48px"></div>
+            </div>
+            <div class="pm-row" style="margin-top:4px">
+              <div class="pm-bar"></div>
+              <div class="pm-dot" style="background:var(--orange)"></div>
+            </div>
+          </div></div>
         </div>
         <div>
           <div class="meta-h">這個 Demo 走過的流程</div>
