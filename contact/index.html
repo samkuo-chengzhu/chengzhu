@@ -55,6 +55,11 @@
       grid-template-columns: 1fr 1fr;
     }
     @media (max-width: 760px) { .visit { grid-template-columns: 1fr; gap: 22px; } }
+    .tea-band {
+      width: 100%; height: 260px; object-fit: cover;
+      border-radius: 8px; margin-bottom: 36px;
+    }
+    @media (max-width: 860px) { .tea-band { height: 170px; } }
   </style>
 </head>
 <body>
@@ -207,6 +212,7 @@
   <!-- 收尾 -->
   <section class="closing">
     <div class="container">
+      <img class="tea-band" src="/assets/img/tea.jpg" alt="深色桌面上冒著熱氣的玻璃杯茶" loading="lazy" width="1200" height="675">
       <p class="signoff">
         讀到這裡，謝謝。<br>
         歡迎來春日路聊聊，<br>

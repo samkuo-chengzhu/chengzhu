@@ -75,6 +75,12 @@
     @media (max-width: 860px) {
       .sol-mock { margin: 16px auto 0; }
     }
+    .band-img {
+      width: 100%; height: 300px;
+      object-fit: cover; object-position: center 40%;
+      border-radius: 10px; margin-top: 10px;
+    }
+    @media (max-width: 860px) { .band-img { height: 180px; } }
   </style>
 </head>
 <body>
@@ -316,6 +322,8 @@
           <p class="stack">儀表板 / 自動報表 / 異常預警 / OCR / 資料倉儲 / 定價引擎</p>
         </div>
       </div>
+
+      <img class="band-img" src="/assets/img/office-night.jpg" alt="夜間辦公桌上顯示營運圖表的雙螢幕" loading="lazy" width="1200" height="674">
 
     </div>
   </section>
