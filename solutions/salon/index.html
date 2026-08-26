@@ -22,6 +22,30 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chiron+Sung+HK:wght@400;500;600&family=Chiron+Hei+HK:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .hero-phone {
+      display: inline-block; margin-top: 28px;
+      width: 180px; border: 2px solid rgba(255,255,255,.12);
+      border-radius: 24px; background: #1c1f24;
+      padding: 28px 10px 16px; position: relative;
+    }
+    .hero-phone::before {
+      content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      width: 48px; height: 4px; background: rgba(255,255,255,.1); border-radius: 4px;
+    }
+    .hp { display: flex; flex-direction: column; gap: 6px; }
+    .hp-hdr { height: 22px; border-radius: 5px; }
+    .hp-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,.08); }
+    .hp-row { display: flex; gap: 5px; align-items: center; }
+    .hp-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+    .hp-badge { width: 18px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+    .hp-btn { height: 22px; border-radius: 5px; }
+    .hero-banner {
+      width: 100%; height: 260px; object-fit: cover;
+      border-radius: 8px; margin-top: 30px;
+    }
+    @media (max-width: 860px) { .hero-banner { height: 170px; } }
+  </style>
 </head>
 <body>
 
@@ -50,7 +74,7 @@
       </h1>
       <p class="lede" style="margin-top: 22px;">
         不用下載 App，也不用教客人操作。
-        預約、排班、營收、拆帳，全部在客人與設計師本來就每天在用的介面裡完成。
+        預約、排班、營收、拆帳全在 LINE 裡完成。
       </p>
       <div class="btn-row" style="margin-top: 28px;">
         <a class="btn btn-primary" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">
@@ -58,7 +82,20 @@
         </a>
         <a class="btn btn-ghost" href="/salon-demo/">先玩玩看 Demo</a>
       </div>
+      <div class="hero-phone">
+        <div class="hp">
+          <div class="hp-hdr" style="background:var(--teal);opacity:.6"></div>
+          <div class="hp-row"><div class="hp-bar" style="flex:1"></div><div class="hp-badge" style="background:var(--teal);opacity:.5"></div></div>
+          <div class="hp-row"><div class="hp-bar" style="flex:1"></div><div class="hp-badge" style="background:var(--teal);opacity:.5"></div></div>
+          <div class="hp-row"><div class="hp-bar" style="flex:1"></div><div class="hp-badge" style="background:var(--teal);opacity:.5"></div></div>
+          <div style="border-top:1px solid rgba(255,255,255,.06);margin:2px 0"></div>
+          <div class="hp-row"><div class="hp-dot" style="background:var(--teal);opacity:.3"></div><div class="hp-bar" style="flex:1"></div></div>
+          <div class="hp-row"><div class="hp-dot" style="background:var(--orange);opacity:.3"></div><div class="hp-bar" style="flex:1"></div></div>
+          <div class="hp-btn" style="background:var(--teal);opacity:.5"></div>
+        </div>
+      </div>
       <p class="kw" style="margin-top: 14px;">30 分鐘免費諮詢 · 不強迫推銷 · 不適合我們會直接說</p>
+      <img class="hero-banner" src="/assets/img/salon.jpg" alt="髮廊內的洗髮台與座位區" loading="lazy" width="1200" height="800">
     </div>
   </section>
 
@@ -66,24 +103,24 @@
   <section class="section-tight">
     <div class="container">
       <span class="eyebrow">The Problem</span>
-      <h2 class="h-section">每天花時間在這些事上，<br>卻覺得應該有更好的方法。</h2>
+      <h2 class="h-section">每天花時間在這些事上，<br>總覺得該有更好的方法。</h2>
 
       <div class="grid grid-2" style="margin-top: 32px;">
         <div class="pain">
           <h4>LINE 訊息接不完</h4>
-          <p>客人問「明天下午有空嗎」，你一則一則回，回到手軟。忙的時候漏掉一則，那個客人就跑了。</p>
+          <p>「明天下午有空嗎」一則一則回到手軟。漏一則，客人就跑了。</p>
         </div>
         <div class="pain">
           <h4>班表排到頭痛</h4>
-          <p>手寫或用試算表排班，設計師請假要重排、臨時鎖班要一個個通知，排到最後自己也搞混。</p>
+          <p>手寫或試算表排班，請假重排、鎖班通知，排到自己也搞混。</p>
         </div>
         <div class="pain">
           <h4>拆帳算到崩潰</h4>
-          <p>月底結算每位設計師的業績與拆帳比例，靠人工算，怕算錯也怕漏算，一算就是一整天。</p>
+          <p>月底人工算每個人的業績與拆帳，怕算錯，一算一整天。</p>
         </div>
         <div class="pain">
           <h4>別的系統客人不用</h4>
-          <p>試過其他預約系統，但客人要下載 App 或另開網頁，嫌麻煩就不用了，最後又回到 LINE 手動接。</p>
+          <p>別的系統要下載 App，客人嫌麻煩，最後又回 LINE 手動接。</p>
         </div>
       </div>
     </div>
@@ -95,7 +132,7 @@
       <span class="eyebrow">The Solution</span>
       <h2 class="h-section">不是叫客人換系統，<br>是讓他在 LINE 裡直接完成預約。</h2>
       <p class="lede">
-        你的客人本來就在用 LINE。我們不改變他的習慣，只是把中間那些人工環節拿掉。
+        客人本來就在用 LINE——不改習慣，只把人工環節拿掉。
       </p>
 
       <div style="margin-top: 30px;">
@@ -103,25 +140,25 @@
           <div>
             <h3>顧客端：價目表與 24 小時預約</h3>
             <p class="desc">
-              客人在 LINE 點「預約」或「服務價目」，直接開啟質感前台。
-              不需教學、不必下載，半夜也能訂明天的位子。
+              客人在 LINE 點「預約」就開啟前台，
+              不用教學，半夜也能訂位。
             </p>
           </div>
           <div class="items">
             <div class="item">
               <span class="tick">01</span>
               <h4>價目表直接看</h4>
-              <p>服務項目、價格與說明在 LINE 裡就看得完，不用再拍價目表傳給客人。</p>
+              <p>服務、價格、說明在 LINE 裡看得完。</p>
             </div>
             <div class="item">
               <span class="tick">02</span>
               <h4>選設計師與時段</h4>
-              <p>可預約的時段依實際班表即時生成，已被約走的自動不顯示，不會撞單。</p>
+              <p>時段依班表即時生成，約走的不顯示。</p>
             </div>
             <div class="item">
               <span class="tick">03</span>
               <h4>休假一眼看得出來</h4>
-              <p>行事曆上明確標示全日休與半日休，客人不會白跑一趟。</p>
+              <p>行事曆標示全日休與半日休，客人不會白跑。</p>
             </div>
           </div>
         </div>
@@ -130,25 +167,25 @@
           <div>
             <h3>設計師端：排班與休假，兩三下設定完</h3>
             <p class="desc">
-              設計師在自己的 LINE 裡鎖班、打卡、設休假，不用登入後台，
-              也不用在群組裡問「誰幫我記一下」。
+              設計師在 LINE 裡鎖班、打卡、設休假，
+              不用登入後台。
             </p>
           </div>
           <div class="items">
             <div class="item">
               <span class="tick">01</span>
               <h4>鎖班自動更新行事曆</h4>
-              <p>點一下鎖班，客人端的可預約時段立刻跟著變，不需要再手動同步。</p>
+              <p>點一下鎖班，客人端時段立刻跟著變。</p>
             </div>
             <div class="item">
               <span class="tick">02</span>
               <h4>休假設定直覺</h4>
-              <p>選日期就好，系統自動阻擋該時段的預約，全日或半日都可以。</p>
+              <p>選日期就好，系統自動擋掉預約。</p>
             </div>
             <div class="item">
               <span class="tick">03</span>
               <h4>自己的業績自己看</h4>
-              <p>設計師可隨時查自己的當日與當月業績，不用等月底問老闆。</p>
+              <p>隨時查自己的當日與當月業績。</p>
             </div>
           </div>
         </div>
@@ -157,25 +194,25 @@
           <div>
             <h3>老闆端：營收與拆帳自動結算</h3>
             <p class="desc">
-              完工登錄之後，日營收、月營收與每位設計師的拆帳自動算好。
-              月底不用再開試算表對一整天的帳。
+              完工登錄後，營收與拆帳自動算好，
+              月底不用再開試算表對帳。
             </p>
           </div>
           <div class="items">
             <div class="item">
               <span class="tick">01</span>
               <h4>即時營收儀表板</h4>
-              <p>點一下就看到當日與當月數字，不必等人彙整。</p>
+              <p>點一下就看到當日與當月數字。</p>
             </div>
             <div class="item">
               <span class="tick">02</span>
               <h4>拆帳自動計算</h4>
-              <p>依各自的拆帳比例自動結算，後台直接看得到明細，減少爭議。</p>
+              <p>依各自比例自動結算，後台看得到明細。</p>
             </div>
             <div class="item">
               <span class="tick">03</span>
               <h4>多分店一起管</h4>
-              <p>各分店的預約、班表與業績分開統計，也可以合併看總表。</p>
+              <p>各分店分開統計，也能合併看總表。</p>
             </div>
           </div>
         </div>
@@ -196,22 +233,22 @@
         <div class="card">
           <span class="no">01</span>
           <h3 class="h-card">免費諮詢</h3>
-          <p>聊聊你的店目前怎麼運作、哪些事情最花時間。</p>
+          <p>聊聊你的店哪裡最花時間。</p>
         </div>
         <div class="card">
           <span class="no">02</span>
           <h3 class="h-card">客製規劃</h3>
-          <p>依你的流程設計功能，不多做用不到的東西。</p>
+          <p>依你的流程設計，不多做用不到的。</p>
         </div>
         <div class="card">
           <span class="no">03</span>
           <h3 class="h-card">開發上線</h3>
-          <p>建置、測試、調整，確認沒問題再正式啟用。</p>
+          <p>建置、測試、調整，沒問題再啟用。</p>
         </div>
         <div class="card">
           <span class="no">04</span>
           <h3 class="h-card">持續維護</h3>
-          <p>上線後有問題隨時找我們，功能也可以慢慢加。</p>
+          <p>有問題隨時找我們，功能慢慢加。</p>
         </div>
       </div>
     </div>
@@ -223,8 +260,8 @@
       <span class="eyebrow">Scope</span>
       <h2 class="h-section">依範圍報價，<br>先聊需求再談數字。</h2>
       <p class="lede">
-        每間店的流程不一樣，套一組固定價格對雙方都不準。
-        下面是兩種常見的導入範圍，確認方向合適之後我們才給實際報價。不適合我們會直接說。
+        每間店流程不一樣，套固定價格不準。
+        以下兩種常見範圍，方向合適才報價。
       </p>
 
       <div class="grid grid-2" style="margin-top: 30px; max-width: 760px;">
@@ -255,7 +292,7 @@
         </div>
       </div>
       <p class="kw" style="margin-top: 14px;">
-        建置費含上線後一個月免費維護，之後可選月付維護方案。實際範圍與報價於免費諮詢後提供。
+        建置費含上線後一個月免費維護，之後可選月付方案。
       </p>
     </div>
   </section>
@@ -269,27 +306,27 @@
       <div style="margin-top: 26px;">
         <details class="faq">
           <summary>客人需要下載 App 嗎？</summary>
-          <div class="a">完全不用。所有操作都在 LINE 裡完成，客人只要會用 LINE 就會用，不用另外註冊帳號、不用下載任何東西。</div>
+          <div class="a">完全不用。所有操作都在 LINE 裡完成，不必註冊也不必下載。</div>
         </details>
         <details class="faq">
           <summary>我不懂技術，會不會很難操作？</summary>
-          <div class="a">設計師與老闆的操作全部在 LINE 裡面，打字、按按鈕就好。後台也會做得盡量簡單，我們會教到你會為止。</div>
+          <div class="a">操作都在 LINE 裡，打字、按按鈕就好。我們教到你會為止。</div>
         </details>
         <details class="faq">
           <summary>建置要多久？</summary>
-          <div class="a">基本方案大約 1–2 週，完整方案 2–4 週，看功能複雜度。過程中你可以隨時測試、提修改意見。</div>
+          <div class="a">基本方案約 1–2 週，完整方案 2–4 週。過程中隨時可測試。</div>
         </details>
         <details class="faq">
           <summary>上線之後壞了怎麼辦？</summary>
-          <div class="a">建置費包含上線後一個月的免費維護。之後可以選擇月付維護方案，有問題隨時聯絡我們處理。</div>
+          <div class="a">建置費含上線後一個月免費維護，之後可選月付方案。</div>
         </details>
         <details class="faq">
           <summary>可以先試用嗎？</summary>
-          <div class="a">可以先玩 <a href="/salon-demo/">互動 Demo</a>，那是可以直接操作的實際流程。想看更完整的運作，免費諮詢時我們可以用示範帳號展示。</div>
+          <div class="a">可以先玩 <a href="/salon-demo/">互動 Demo</a>，是能直接操作的實際流程。</div>
         </details>
         <details class="faq">
           <summary>跟其他預約系統有什麼不同？</summary>
-          <div class="a">最大的差別是「客人不用離開 LINE」。其他系統要求客人下載 App 或開網頁，流失率很高。另外我們是依你的流程客製，不是套通用模板。</div>
+          <div class="a">差別在「客人不用離開 LINE」。要下載 App 的系統流失率很高，而且我們客製，不套模板。</div>
         </details>
       </div>
     </div>
@@ -300,7 +337,7 @@
     <div class="container" style="text-align: center;">
       <h2 class="h-section">你的店值得一套<br>客人真的會用的預約系統。</h2>
       <p class="lede" style="margin: 0 auto;">
-        30 分鐘免費諮詢，聊聊你的需求。不適合我們會直接說。
+        30 分鐘免費諮詢。不適合我們會直接說。
       </p>
       <div class="btn-row" style="margin-top: 26px; justify-content: center;">
         <a class="btn btn-primary" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">

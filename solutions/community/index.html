@@ -22,6 +22,30 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chiron+Sung+HK:wght@400;500;600&family=Chiron+Hei+HK:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .hero-phone {
+      display: inline-block; margin-top: 28px;
+      width: 180px; border: 2px solid rgba(255,255,255,.12);
+      border-radius: 24px; background: #1c1f24;
+      padding: 28px 10px 16px; position: relative;
+    }
+    .hero-phone::before {
+      content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      width: 48px; height: 4px; background: rgba(255,255,255,.1); border-radius: 4px;
+    }
+    .hp { display: flex; flex-direction: column; gap: 6px; }
+    .hp-hdr { height: 22px; border-radius: 5px; }
+    .hp-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,.08); flex: 1; }
+    .hp-row { display: flex; gap: 5px; align-items: center; }
+    .hp-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+    .hp-badge { width: 18px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+    .hp-block { border-radius: 5px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); }
+    .hero-banner {
+      width: 100%; height: 260px; object-fit: cover;
+      border-radius: 8px; margin-top: 30px;
+    }
+    @media (max-width: 860px) { .hero-banner { height: 170px; } }
+  </style>
 </head>
 <body>
 
@@ -49,8 +73,8 @@
         群組接龍報名？<br>換成一鍵搞定。
       </h1>
       <p class="lede" style="margin-top: 22px;">
-        不用再數人頭，也不用再往上滑三十則訊息問「+1 是誰」。
-        報名、候補、分組、提醒全部自動處理，你只要專心把活動辦好。
+        不用再數人頭，也不用滑訊息問「+1 是誰」。
+        報名、候補、分組、提醒全自動。
       </p>
       <div class="btn-row" style="margin-top: 28px;">
         <a class="btn btn-primary" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">
@@ -58,7 +82,19 @@
         </a>
         <a class="btn btn-ghost" href="/group-demo/">先玩玩看 Demo</a>
       </div>
+      <div class="hero-phone">
+        <div class="hp">
+          <div class="hp-hdr" style="background:#06C755"></div>
+          <div class="hp-row"><div class="hp-dot" style="background:var(--teal);opacity:.3"></div><div class="hp-bar" style="flex:1"></div><div class="hp-badge" style="background:var(--teal);opacity:.5"></div></div>
+          <div class="hp-row"><div class="hp-dot" style="background:var(--teal);opacity:.3"></div><div class="hp-bar" style="flex:1"></div><div class="hp-badge" style="background:var(--teal);opacity:.5"></div></div>
+          <div class="hp-row"><div class="hp-dot" style="background:var(--teal);opacity:.3"></div><div class="hp-bar" style="flex:1"></div><div class="hp-badge" style="background:var(--teal);opacity:.5"></div></div>
+          <div class="hp-row"><div class="hp-dot" style="background:var(--orange);opacity:.3"></div><div class="hp-bar" style="flex:1"></div><div class="hp-badge" style="background:var(--orange);opacity:.4"></div></div>
+          <div class="hp-row"><div class="hp-dot" style="background:var(--orange);opacity:.3"></div><div class="hp-bar" style="flex:1"></div><div class="hp-badge" style="background:var(--orange);opacity:.4"></div></div>
+          <div class="hp-block" style="height:18px"></div>
+        </div>
+      </div>
       <p class="kw" style="margin-top: 14px;">30 分鐘免費諮詢 · 不強迫推銷 · 無額外隱藏費用</p>
+      <img class="hero-banner" src="/assets/img/golf-group.jpg" alt="一群球友在球場上同行" loading="lazy" width="1200" height="739">
     </div>
   </section>
 
@@ -66,7 +102,7 @@
   <section class="section-tight">
     <div class="container">
       <span class="eyebrow">Who It's For</span>
-      <h2 class="h-section">只要你的社群需要<br>定期揪團報名。</h2>
+      <h2 class="h-section">只要你的社群<br>要定期揪團。</h2>
 
       <div class="grid grid-4" style="margin-top: 30px;">
         <div class="who"><div class="t">高爾夫球敘</div><div class="s">每月固定開團、百人報名</div></div>
@@ -81,24 +117,24 @@
   <section class="section-tight">
     <div class="container">
       <span class="eyebrow">The Problem</span>
-      <h2 class="h-section">每次開團報名，<br>光整理名單就累了半天。</h2>
+      <h2 class="h-section">每次開團，<br>光整理名單就累半天。</h2>
 
       <div class="grid grid-2" style="margin-top: 32px;">
         <div class="pain">
           <h4>群組接龍數到眼花</h4>
-          <p>「+1」「+2」「幫我朋友報」「我取消」——訊息一直洗，往上滑半天還是不確定到底幾個人。</p>
+          <p>「+1」「+2」「幫我朋友報」「我取消」——滑半天還是不確定幾個人。</p>
         </div>
         <div class="pain">
           <h4>額滿候補搞不清楚</h4>
-          <p>名額滿了還有人要報，你手動記候補順序。有人取消要一個個通知遞補，漏掉就被抱怨。</p>
+          <p>額滿還有人要報，你手動記順序、一個個通知遞補，漏掉就被抱怨。</p>
         </div>
         <div class="pain">
           <h4>分組排不完</h4>
-          <p>「我要跟某某同組」「幫我換到 B 組」——需求一堆，你開試算表排到半夜。</p>
+          <p>「我要跟某某同組」「換到 B 組」——你開試算表排到半夜。</p>
         </div>
         <div class="pain">
           <h4>代報代取消一團亂</h4>
-          <p>有人幫朋友報、有人幫家人取消，誰報的、誰取消的，群組訊息翻不回去。</p>
+          <p>有人幫朋友報、幫家人取消，誰做的，訊息翻不回去。</p>
         </div>
       </div>
     </div>
@@ -108,9 +144,9 @@
   <section class="section-tight">
     <div class="container">
       <span class="eyebrow">The Solution</span>
-      <h2 class="h-section">把 Bot 放進群組，<br>報名這件事就不用再管了。</h2>
+      <h2 class="h-section">把 Bot 放進群組，<br>報名就不用再管了。</h2>
       <p class="lede">
-        成員不用加好友、不用離開群組、不用學新東西。按一下按鈕就完成。
+        不用加好友、不用離開群組，按一下就完成。
       </p>
 
       <div style="margin-top: 30px;">
@@ -118,52 +154,52 @@
           <div>
             <h3>一鍵報名，告別群組接龍</h3>
             <p class="desc">
-              主辦發起活動，群組裡出現一張報名卡片。
-              成員按按鈕就好，不用打字，也不怕被後面的對話洗掉。
+              主辦發起活動，群組裡出現報名卡片，
+              成員按按鈕就好。
             </p>
           </div>
           <div class="items">
             <div class="item">
               <span class="tick">01</span>
               <h4>不洗版的卡片介面</h4>
-              <p>直式卡片一目了然地列出時段與名額，點按鈕直接報名成功。</p>
+              <p>卡片列出時段與名額，點按鈕就報名。</p>
             </div>
             <div class="item">
               <span class="tick">02</span>
               <h4>即時名單查詢</h4>
-              <p>一鍵呼叫目前名單，誰報了、幾個人一清二楚，數字隨時是正確的。</p>
+              <p>一鍵呼叫名單，幾個人一清二楚。</p>
             </div>
             <div class="item">
               <span class="tick">03</span>
-              <h4>代報與代取消有紀錄</h4>
-              <p>幫朋友報名或取消都留下操作者，事後查得到是誰處理的。</p>
+              <h4>代報代取消有紀錄</h4>
+              <p>代報、代取消都留下操作者。</p>
             </div>
           </div>
         </div>
 
         <div class="feat">
           <div>
-            <h3>額滿自動候補，有人退出自動遞補</h3>
+            <h3>額滿自動候補，退出自動遞補</h3>
             <p class="desc">
-              候補這件事最耗主辦心力，也最容易出錯。
-              交給系統排序與通知，順位不會亂，也不會漏掉誰。
+              候補最耗心力也最容易出錯，
+              交給系統排序與通知。
             </p>
           </div>
           <div class="items">
             <div class="item">
               <span class="tick">01</span>
               <h4>依序自動排候補</h4>
-              <p>額滿後報名的人自動進入候補序列，順位公開透明。</p>
+              <p>額滿後自動進候補，順位公開透明。</p>
             </div>
             <div class="item">
               <span class="tick">02</span>
               <h4>取消即刻遞補</h4>
-              <p>有人退出時，候補第一位自動遞補並收到通知，主辦不用介入。</p>
+              <p>有人退出，候補第一位自動遞補。</p>
             </div>
             <div class="item">
               <span class="tick">03</span>
               <h4>截止前自動提醒</h4>
-              <p>報名截止前推播提醒，減少最後一刻才湧入的狀況。</p>
+              <p>截止前推播提醒，減少最後一刻湧入。</p>
             </div>
           </div>
         </div>
@@ -172,25 +208,25 @@
           <div>
             <h3>同組需求與自動分組</h3>
             <p class="desc">
-              「我要跟某某同車、同組」這種需求，
-              主辦再也不用手寫試算表記到半夜。
+              「我要跟某某同組」這種需求，
+              不用再手寫到半夜。
             </p>
           </div>
           <div class="items">
             <div class="item">
               <span class="tick">01</span>
-              <h4>報名時就填同組對象</h4>
-              <p>成員在報名卡片上直接指定想同組的人，資料進系統不是進聊天紀錄。</p>
+              <h4>報名時填同組對象</h4>
+              <p>成員在卡片上指定同組對象，資料進系統不是聊天紀錄。</p>
             </div>
             <div class="item">
               <span class="tick">02</span>
               <h4>依規則自動分組</h4>
-              <p>截止後依人數與同組需求自動編組，主辦再微調就好。</p>
+              <p>依人數與同組需求自動編組。</p>
             </div>
             <div class="item">
               <span class="tick">03</span>
               <h4>產出可對帳的名單</h4>
-              <p>最終名單可直接匯出，收費與現場點名都用同一份。</p>
+              <p>名單可直接匯出，收費與點名同一份。</p>
             </div>
           </div>
         </div>
@@ -211,22 +247,22 @@
         <div class="card">
           <span class="no">01</span>
           <h3 class="h-card">免費諮詢</h3>
-          <p>聊聊你的社群怎麼開團、目前最花時間的是哪一段。</p>
+          <p>聊聊你開團哪裡最花時間。</p>
         </div>
         <div class="card">
           <span class="no">02</span>
           <h3 class="h-card">客製規劃</h3>
-          <p>依你的報名規則與分組邏輯設計，不多做用不到的東西。</p>
+          <p>依你的報名規則與分組邏輯設計。</p>
         </div>
         <div class="card">
           <span class="no">03</span>
           <h3 class="h-card">開發上線</h3>
-          <p>建置、測試、調整，先在小規模的一團跑過再全面啟用。</p>
+          <p>建置、測試、調整，先用小團跑過。</p>
         </div>
         <div class="card">
           <span class="no">04</span>
           <h3 class="h-card">持續維護</h3>
-          <p>上線後有問題隨時找我們，功能也可以慢慢加。</p>
+          <p>有問題隨時找我們，功能慢慢加。</p>
         </div>
       </div>
     </div>
@@ -238,8 +274,8 @@
       <span class="eyebrow">Scope</span>
       <h2 class="h-section">依範圍報價，<br>先聊需求再談數字。</h2>
       <p class="lede">
-        每個社群的報名規則與分組邏輯都不一樣，套一組固定價格對雙方都不準。
-        下面是兩種常見的導入範圍，確認方向合適之後我們才給實際報價。不適合我們會直接說。
+        每個社群的報名與分組邏輯不同，套固定價格不準。
+        以下兩種常見範圍，方向合適才報價。
       </p>
 
       <div class="grid grid-2" style="margin-top: 30px; max-width: 760px;">
@@ -270,7 +306,7 @@
         </div>
       </div>
       <p class="kw" style="margin-top: 14px;">
-        建置費含上線後一個月免費維護，之後可選月付維護方案。實際範圍與報價於免費諮詢後提供。
+        建置費含上線後一個月免費維護，之後可選月付方案。
       </p>
     </div>
   </section>
@@ -284,27 +320,27 @@
       <div style="margin-top: 26px;">
         <details class="faq">
           <summary>成員需要加 Bot 好友嗎？</summary>
-          <div class="a">不用。Bot 放在群組裡就能運作，成員直接在群組內按報名按鈕，不需另外加好友或註冊。</div>
+          <div class="a">不用。Bot 放在群組裡就能運作，成員直接按報名按鈕。</div>
         </details>
         <details class="faq">
           <summary>我們的群組有上千人，撐得住嗎？</summary>
-          <div class="a">可以。這套系統實際運行的場景就是兩千人規模的球敘群組，報名尖峰同時湧入也不會亂序。</div>
+          <div class="a">可以。這套系統實際跑的就是兩千人的球敘群組，尖峰湧入不會亂序。</div>
         </details>
         <details class="faq">
           <summary>候補順序會不會出錯？</summary>
-          <div class="a">候補依報名時間自動排序並公開顯示順位，遞補由系統執行並通知，不經人工，所以不會有「誰先誰後」的爭議。</div>
+          <div class="a">候補依報名時間排序、公開順位，遞補由系統執行，沒有「誰先誰後」的爭議。</div>
         </details>
         <details class="faq">
           <summary>可以收費嗎？</summary>
-          <div class="a">目前的做法是產出可對帳的名單，配合你既有的收費方式。若需要線上金流，可在諮詢時一起討論。</div>
+          <div class="a">目前產出可對帳的名單，配合你既有的收費方式。線上金流可另談。</div>
         </details>
         <details class="faq">
           <summary>可以先試用嗎？</summary>
-          <div class="a">可以先玩 <a href="/group-demo/">互動 Demo</a>，含報名、額滿候補與自動遞補的完整流程。</div>
+          <div class="a">可以先玩 <a href="/group-demo/">互動 Demo</a>，含報名、候補與遞補全流程。</div>
         </details>
         <details class="faq">
           <summary>建置要多久？</summary>
-          <div class="a">基本方案大約 1–2 週，完整方案 2–4 週，看報名規則與分組邏輯的複雜度。</div>
+          <div class="a">基本方案約 1–2 週，完整方案 2–4 週。</div>
         </details>
       </div>
     </div>
@@ -315,7 +351,7 @@
     <div class="container" style="text-align: center;">
       <h2 class="h-section">下一次開團，<br>不要再從數人頭開始。</h2>
       <p class="lede" style="margin: 0 auto;">
-        30 分鐘免費諮詢，聊聊你的社群怎麼運作。不適合我們會直接說。
+        30 分鐘免費諮詢。不適合我們會直接說。
       </p>
       <div class="btn-row" style="margin-top: 26px; justify-content: center;">
         <a class="btn btn-primary" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">

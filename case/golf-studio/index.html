@@ -23,6 +23,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Chiron+Sung+HK:wght@400;500;600&family=Chiron+Hei+HK:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
   <style>
+    .hero-banner {
+      width: 100%; height: 280px; object-fit: cover;
+      border-radius: 8px; margin-top: 32px;
+    }
+    @media (max-width: 860px) {
+      .hero-banner { height: 180px; }
+    }
     .stage-flow {
       display: grid; gap: 1px; background: var(--line);
       border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
@@ -87,9 +94,8 @@
         從分散作業，<br>到一套完整的營運系統。
       </h1>
       <p class="lede" style="margin-top: 22px;">
-        一間同時做球具訂製、工坊維修、教學課程與零售的高爾夫據點。
-        我們把會員、Fitting、派工、庫存、教學與預約整合成一條資料流——
-        前台成交到後台管理，不再需要任何人重複輸入。
+        會員、Fitting、派工、庫存、教學與預約整合成一條資料流——
+        前台到後台不再重複輸入。
       </p>
 
       <div class="stats" style="margin-top: 40px;">
@@ -98,6 +104,8 @@
         <div class="stat"><span class="v num">7</span><span class="l">人工坊團隊每天使用</span></div>
         <div class="stat"><span class="v num">5</span><span class="l">種角色權限分層</span></div>
       </div>
+
+      <img class="hero-banner" src="/assets/img/golf-course.jpg" alt="高爾夫球場全景" loading="lazy" width="1200" height="800">
     </div>
   </section>
 
@@ -108,12 +116,8 @@
       <h2 class="h-section">資訊分散，<br>管理者看不到完整的營運畫面。</h2>
       <div class="prose">
         <p>
-          導入前，會員資料、課程安排、球具料件與工坊進度各自存在不同的工具裡：
-          有的在紙本、有的在試算表、有的只在某個人的腦袋和 LINE 對話紀錄裡。
-        </p>
-        <p>
-          結果是前線每天重複輸入同一筆資料，客人問「我的球桿好了沒」要有人走去工坊看一眼，
-          而主管要等到月底才拼得出一份不太確定的營運數字。
+          導入前，會員資料、球具料件與工坊進度分散在紙本、試算表和 LINE 對話裡。
+          前線每天重複輸入，客人問進度要走去工坊看，主管月底才拼得出營運數字。
         </p>
       </div>
       <div class="quote" style="margin-top: 28px; max-width: 62ch;">
@@ -129,9 +133,10 @@
       <span class="eyebrow">Scope</span>
       <h2 class="h-section">系統涵蓋的六個模組</h2>
       <p class="lede">
-        不是六套工具，是六個共用同一份資料的模組。
-        會員在教學端消費，庫存與消費紀錄同時更新。
+        六個共用同一份資料的模組，不是六套工具。
       </p>
+
+      <img class="hero-banner" src="/assets/img/workshop.jpg" alt="工坊工作檯上的工具與器材" loading="lazy" width="1200" height="800">
 
       <div class="grid grid-3" style="margin-top: 32px;">
         <div class="mod">
@@ -198,9 +203,8 @@
       <span class="eyebrow eyebrow-light">Core Flow</span>
       <h2 class="h-section">工單五階段：<br>完成動作才能前進。</h2>
       <p class="lede">
-        這是整套系統的核心。過去工單狀態靠口頭與記憶，
-        現在每個階段都有明確的完成條件——沒做到就不能跳下一步。
-        這個設計消滅了「以為別人做了」造成的漏單。
+        每個階段都有完成條件——沒做到不能跳下一步，
+        消滅「以為別人做了」造成的漏單。
       </p>
 
       <div class="stage-flow">
@@ -237,9 +241,8 @@
       </div>
 
       <p class="lede" style="margin-top: 26px;">
-        訂貨通知會記錄是誰、什麼時候通知的；
-        尾款沒付清系統不讓交付；沒指派技師就進不了組裝。
-        規則寫進流程，就不需要有人在旁邊盯。
+        尾款沒付清不讓交付、沒指派技師進不了組裝。
+        規則寫進流程，不需要有人在旁邊盯。
       </p>
     </div>
   </section>
@@ -254,12 +257,12 @@
         <div class="card">
           <span class="no">01</span>
           <h3 class="h-card">服務一致</h3>
-          <p>教練、櫃台與工坊技師都取得同一份最新的會員與工單資訊。客人問進度，任何人都答得出來。</p>
+          <p>教練、櫃台與技師看同一份資料。客人問進度，任何人都答得出來。</p>
         </div>
         <div class="card">
           <span class="no">02</span>
           <h3 class="h-card">流程可追蹤</h3>
-          <p>從接單到交付的每個節點都留下狀態、時間與經手人。出問題時查得到卡在哪一段。</p>
+          <p>每個節點留下狀態、時間與經手人。出問題查得到卡在哪。</p>
         </div>
         <div class="card">
           <span class="no">03</span>
@@ -277,14 +280,8 @@
       <h2 class="h-section">還沒做完的部分</h2>
       <div class="prose">
         <p>
-          這套系統仍在持續開發。目前門市 POS 結帳尚未導入，
-          消費紀錄以手動補登作為過渡；擊球數據的儀器串接、
-          整體財務分析與自動化的會員分級也還在規劃中。
-        </p>
-        <p>
-          我們選擇把這件事寫出來，是因為分批交付本來就是我們的做法——
-          每一批上線的都是能真的拿來用的功能，而不是等全部做完才一次見光。
-          會列在這裡的，都是已經上正式環境、團隊每天在用的部分。
+          門市 POS、擊球數據儀器串接、財務分析與自動會員分級仍在開發中。
+          分批交付是我們的做法——列在這裡的都已上線、團隊每天在用。
         </p>
       </div>
     </div>

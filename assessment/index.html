@@ -104,11 +104,10 @@
         五分鐘，找出<br>流程斷在哪裡。
       </h1>
       <p class="lede" style="margin-top: 22px;">
-        勾選符合你們現況的項目就好。
-        勾完直接用 LINE 傳給我們，我們會回覆最值得優先改善的環節——
-        包括「這個不用做系統」的情況。
+        勾選符合現況的項目，用 LINE 傳過來。
+        我們會回覆該先改的環節——包括「不用做系統」。
       </p>
-      <p class="kw" style="margin-top: 14px;">不需要填表 · 不需要留信箱 · 不強迫推銷</p>
+      <p class="kw" style="margin-top: 14px;">不填表 · 不留信箱 · 不推銷</p>
     </div>
   </section>
 
@@ -116,8 +115,8 @@
     <div class="container">
       <div style="max-width: 760px;">
         <span class="eyebrow">Step 01 · 現況盤點</span>
-        <h2 class="h-section">以下有哪些狀況正在發生？</h2>
-        <p class="lede">可複選。勾越多不代表越糟，只是代表可以改善的地方越多。</p>
+        <h2 class="h-section">哪些狀況正在發生？</h2>
+        <p class="lede">可複選。勾越多不是越糟，只是能改的地方越多。</p>
 
         <div class="checks">
           <label class="check">
@@ -164,7 +163,7 @@
             <span>已勾選 <span class="n" id="count">0</span> / 6</span>
           </div>
           <div class="result-body">
-            <p id="preview"><span class="placeholder">先勾選上方的項目，這裡會即時產生要傳送的內容。</span></p>
+            <p id="preview"><span class="placeholder">勾選後這裡會產生要傳送的內容。</span></p>
           </div>
           <div class="result-foot">
             <a class="btn btn-primary" id="sendBtn" aria-disabled="true"
@@ -176,9 +175,8 @@
         </div>
 
         <p class="privacy">
-          按下按鈕會開啟 LINE 並把上面的內容填好，你確認後再送出——
-          我們不會在這個頁面收集你的姓名、電話或信箱，也沒有任何表單資料庫。
-          你是誰由你的 LINE 帳號帶過來就好。
+          按下按鈕會開啟 LINE 並填好內容，你確認後再送出。
+          這個頁面不收集姓名、電話或信箱。
         </p>
       </div>
     </div>
@@ -190,28 +188,28 @@
       <span class="eyebrow eyebrow-light">What You Get</span>
       <h2 class="h-section">一張清楚的優先順序地圖</h2>
       <p class="lede">
-        我們會用你勾的這幾項，回覆一份初步判斷。這不是報價單，是一份判斷依據。
+        依你勾的項目回覆初步判斷——不是報價單，是判斷依據。
       </p>
       <div class="grid grid-4" style="margin-top: 32px;">
         <div class="card">
           <span class="no">01</span>
           <h3 class="h-card">目前的資料斷點</h3>
-          <p>指出資料在哪幾個環節斷掉、為什麼需要人工補。</p>
+          <p>資料在哪斷掉、為什麼要人工補。</p>
         </div>
         <div class="card">
           <span class="no">02</span>
           <h3 class="h-card">改善優先序</h3>
-          <p>短中長期分別該處理什麼，以及為什麼是這個順序。</p>
+          <p>短中長期各該做什麼、為什麼這樣排。</p>
         </div>
         <div class="card">
           <span class="no">03</span>
           <h3 class="h-card">適合的整合方向</h3>
-          <p>該串既有系統、該補一段流程，還是根本不用做系統。</p>
+          <p>該串既有系統、補流程，還是不用做。</p>
         </div>
         <div class="card">
           <span class="no">04</span>
           <h3 class="h-card">初步範圍與下一步</h3>
-          <p>如果決定要做，第一批大概涵蓋什麼、需要你準備什麼。</p>
+          <p>第一批涵蓋什麼、要準備什麼。</p>
         </div>
       </div>
     </div>
@@ -220,10 +218,9 @@
   <!-- 不確定 -->
   <section class="section-tight">
     <div class="container" style="text-align: center;">
-      <h2 class="h-section">不確定自己算不算有問題？</h2>
+      <h2 class="h-section">不確定算不算有問題？</h2>
       <p class="lede" style="margin: 0 auto;">
-        那就直接說一句「我不太確定從哪裡開始」也可以。
-        多數人第一次找我們的時候都是這樣。
+        說一句「我不太確定從哪裡開始」就好，多數人都這樣。
       </p>
       <div class="btn-row" style="margin-top: 26px; justify-content: center;">
         <a class="btn btn-primary" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">
@@ -273,7 +270,7 @@
     count.textContent = picked.length;
 
     if (!picked.length) {
-      preview.innerHTML = '<span class="placeholder">先勾選上方的項目，這裡會即時產生要傳送的內容。</span>';
+      preview.innerHTML = '<span class="placeholder">勾選後這裡會產生要傳送的內容。</span>';
       btn.setAttribute('aria-disabled', 'true');
       btn.setAttribute('href', 'https://line.me/R/ti/p/' + LINE_ID);
       return;

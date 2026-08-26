@@ -22,6 +22,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chiron+Sung+HK:wght@400;500;600&family=Chiron+Hei+HK:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .case-img {
+      grid-column: 1 / -1;
+      width: 100%; height: 220px;
+      object-fit: cover; border-radius: 8px;
+      margin-bottom: -8px;
+    }
+    @media (max-width: 860px) {
+      .case-img { height: 160px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -61,6 +72,7 @@
 
       <!-- 旗艦 -->
       <div class="case-row">
+        <img class="case-img" src="/assets/img/golf-clubs.jpg" alt="高爾夫球桿與工坊設備" loading="lazy" width="1200" height="800">
         <div>
           <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.5,2h1v15.5h-1ZM8.5,3h7l-3,2,3,2h-7ZM5.5,20a2.5,2.5,0,1,1,5,0,2.5,2.5,0,1,1-5,0Zm1,0a1.5,1.5,0,1,0,3,0,1.5,1.5,0,1,0-3,0Z"/></svg>
           <div class="chip-row">
@@ -69,9 +81,8 @@
           </div>
           <h2>高爾夫工坊與教學中心</h2>
           <p class="desc">
-            從分散作業到一套完整的營運系統。
             會員、球具 Fitting、工坊派工、庫存、教學與預約，
-            全部收進同一條資料流——前台成交到後台管理不再需要重複輸入。
+            收進同一條資料流——前台成交到後台管理不再重複輸入。
           </p>
           <div class="btn-row" style="margin-top: 18px;">
             <a class="btn btn-ghost" href="/case/golf-studio/">看完整案例 →</a>
@@ -84,9 +95,8 @@
             <div class="s"><span class="v num">7</span><span class="l">人工坊團隊每天使用</span></div>
           </div>
           <p class="desc">
-            工單走完整的五階段流程，完成動作才能前進；缺料自動進待訂貨清單；
-            庫存靠掃碼收發盤，每筆都有異動帳。教學端則涵蓋教練、堂數包、
-            預約核准、完課扣堂與月結拆帳。
+            工單五階段流程管控；缺料自動進待訂貨清單；
+            庫存掃碼收發盤。教學端涵蓋教練堂數包、預約核准與月結拆帳。
           </p>
           <p class="stack">Firebase Functions Gen 2 / Firestore / LIFF / Next.js / Rich Menu / 掃碼庫存</p>
         </div>
@@ -94,14 +104,14 @@
 
       <!-- 02 -->
       <div class="case-row">
+        <img class="case-img" src="/assets/img/retail-store.jpg" alt="家電門市貨架與走道" loading="lazy" width="1200" height="800">
         <div>
           <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.5,17v1.66144l4.68555,1.8742a.50006.50006,0,0,1-.3711.92872L12,19.53857,7.18555,21.46436a.50006.50006,0,0,1-.3711-.92872L11.5,18.66144V17ZM3,3.5H21a.5.5,0,0,0,0-1H3a.5.5,0,0,0,0,1Zm5.35352,7.35352,2.56884-2.56885L12.584,10.77734a.5.5,0,0,0,.3667.22022C12.96729,10.999,12.98389,11,13,11a.49932.49932,0,0,0,.35352-.14648l3-3a.5.5,0,0,0-.707-.707L13.07812,9.71533,11.416,7.22266a.5.5,0,0,0-.3667-.22022.5104.5104,0,0,0-.40284.144l-3,3a.5.5,0,0,0,.707.707ZM20.5,13V5h-1v8A1.50164,1.50164,0,0,1,18,14.5H6A1.50164,1.50164,0,0,1,4.5,13V5h-1v8A2.50294,2.50294,0,0,0,6,15.5H18A2.50263,2.50263,0,0,0,20.5,13Z"/></svg>
           <div class="chip-row"><span class="chip chip-quiet">連鎖零售</span></div>
           <h2>連鎖電器品牌<br>門市回報自動化</h2>
           <p class="desc">
-            各門市店員每天拍照回傳 LINE，系統自動依店名歸檔到雲端資料夾，
-            總部每週收到自動產出的統計報表與 email。
-            從「人工收圖整理」變成「傳完就結束」。
+            門市店員每天拍照傳 LINE，系統自動依店名歸檔雲端，
+            總部每週收到自動產出的統計報表。「傳完就結束」。
           </p>
         </div>
         <div>
@@ -111,9 +121,8 @@
             <div class="s"><span class="v">自動</span><span class="l">週報 + 月報 + Email</span></div>
           </div>
           <p class="desc">
-            導入前，總部要有人每天從群組把照片一張張抓下來、依門市分類、
-            月底再彙整成報表。導入後這段流程完全消失，店員的動作也沒有增加——
-            他們本來就在傳照片。
+            導入前總部要有人每天從群組抓照片、分類、彙整報表。
+            導入後這段流程消失，店員動作也沒增加——他們本來就在傳照片。
           </p>
           <p class="stack">FastAPI / 雲端儲存 API / Firebase / 排程報表 / Email 自動寄送</p>
         </div>
@@ -121,14 +130,14 @@
 
       <!-- 03 -->
       <div class="case-row">
+        <img class="case-img" src="/assets/img/office-b2b.jpg" alt="業務團隊在辦公室討論" loading="lazy" width="1200" height="800">
         <div>
           <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.5,17v1.66144l4.68555,1.8742a.50006.50006,0,0,1-.3711.92872L12,19.53857,7.18555,21.46436a.50006.50006,0,0,1-.3711-.92872L11.5,18.66144V17Zm9-14a.49971.49971,0,0,0-.5-.5H3a.5.5,0,0,0,0,1H21A.49971.49971,0,0,0,21.5,3Zm-1,10V5h-1v8A1.50164,1.50164,0,0,1,18,14.5H6A1.50164,1.50164,0,0,1,4.5,13V5h-1v8A2.50263,2.50263,0,0,0,6,15.5H18A2.50263,2.50263,0,0,0,20.5,13Zm-8-1.5H10a.5.5,0,0,0,0,1h1.5V13a.5.5,0,0,0,1,0v-.5a2,2,0,0,0,0-4h-1a1,1,0,0,1,0-2H14a.5.5,0,0,0,0-1H12.5V5h-1v.5a2,2,0,0,0,0,4h1a1,1,0,0,1,0,2Z"/></svg>
           <div class="chip-row"><span class="chip chip-quiet">B2B 採購</span></div>
           <h2>企業採購查價平台</h2>
           <p class="desc">
-            業務在 LINE 群組說「預算五百到七百、要三百個」，
-            系統自動搜尋商品、計算階梯報價、回傳商品卡片，
-            還能直接在 LINE 裡下單、追蹤與處理異常。
+            業務在 LINE 群組說「預算多少、要幾個」，
+            系統自動搜尋、計算階梯報價、回傳商品卡片，可直接下單與追蹤。
           </p>
         </div>
         <div>
@@ -138,9 +147,8 @@
             <div class="s"><span class="v">AI</span><span class="l">自然語言查價下單</span></div>
           </div>
           <p class="desc">
-            定價邏輯是寫死的規則，AI 只負責理解業務講的話，所以不會報錯價。
-            同義詞會自動修正，業務不用記正確品名。
-            下單訊息可自動解析成結構化訂單，省掉手抄轉錄。
+            定價邏輯寫死，AI 只負責理解講的話，不會報錯價。
+            同義詞自動修正，下單訊息自動解析成結構化訂單。
           </p>
           <p class="stack">Gemini / Cloud Functions / Flex Message / 階梯定價引擎 / 匯出報表</p>
         </div>
@@ -148,14 +156,14 @@
 
       <!-- 04 -->
       <div class="case-row">
+        <img class="case-img" src="/assets/img/salon.jpg" alt="髮廊內的洗髮台與座位區" loading="lazy" width="1200" height="800">
         <div>
           <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2.64648,5.35352a.5.5,0,0,1,.707-.707L5,6.293,8.64648,2.64648a.5.5,0,0,1,.707.707l-4,4a.49984.49984,0,0,1-.707,0ZM12,5.5h9a.5.5,0,0,0,0-1H12a.5.5,0,0,0,0,1ZM2.64648,12.35352l2,2a.49984.49984,0,0,0,.707,0l4-4a.5.5,0,0,0-.707-.707L5,13.293,3.35352,11.64648a.5.5,0,0,0-.707.707ZM12,12.5h9a.5.5,0,0,0,0-1H12a.5.5,0,0,0,0,1ZM2.64648,19.35352l2,2a.49984.49984,0,0,0,.707,0l4-4a.5.5,0,0,0-.707-.707L5,20.293,3.35352,18.64648a.5.5,0,0,0-.707.707ZM12,19.5h9a.5.5,0,0,0,0-1H12a.5.5,0,0,0,0,1Z"/></svg>
           <div class="chip-row"><span class="chip chip-quiet">美業</span></div>
           <h2>連鎖髮廊預約系統</h2>
           <p class="desc">
-            顧客在 LINE 看價目表、點連結預約；
-            設計師在 LINE 打卡、鎖班、查營收。
-            休假日曆自動阻擋預約，完工紀錄自動結算日月營收與拆帳。
+            顧客在 LINE 看價目、預約；設計師在 LINE 打卡、鎖班、查營收。
+            休假自動阻擋預約，完工紀錄自動結算拆帳。
           </p>
         </div>
         <div>
@@ -165,8 +173,8 @@
             <div class="s"><span class="v num">0</span><span class="l">額外 App 需下載</span></div>
           </div>
           <p class="desc">
-            導入前月底要花一整天對帳；導入後系統自動算好，老闆只要看數字。
-            設計師也能自己在 LINE 裡管班表與請假，店長不再是全店的客服。
+            導入前月底花一整天對帳；導入後系統自動結算，老闆只看數字。
+            設計師自己管班表與請假，店長不再當全店客服。
           </p>
           <p class="stack">LIFF / Firestore / Rich Menu 雙層選單 / 行事曆串接 / 拆帳結算</p>
         </div>
@@ -174,14 +182,14 @@
 
       <!-- 05 -->
       <div class="case-row">
+        <img class="case-img" src="/assets/img/golf-coach.jpg" alt="高爾夫教練指導學員揮桿" loading="lazy" width="1200" height="800">
         <div>
           <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2.5,18A3.50424,3.50424,0,0,0,6,21.5H18A3.50424,3.50424,0,0,0,21.5,18V8A3.50424,3.50424,0,0,0,18,4.5H16.5V3a.5.5,0,0,0-1,0V4.5h-7V3a.5.5,0,0,0-1,0V4.5H6A3.50424,3.50424,0,0,0,2.5,8Zm1-10A2.50231,2.50231,0,0,1,6,5.5H7.5V7a.5.5,0,0,0,1,0V5.5h7V7a.5.5,0,0,0,1,0V5.5H18A2.50231,2.50231,0,0,1,20.5,8v2.5H3.5Zm0,3.5h17V18A2.50231,2.50231,0,0,1,18,20.5H6A2.50231,2.50231,0,0,1,3.5,18ZM6,14a1,1,0,1,1,1,1A1,1,0,0,1,6,14Zm0,4a1,1,0,1,1,1,1A1,1,0,0,1,6,18Zm3.5-4a.49971.49971,0,0,1,.5-.5h8a.5.5,0,0,1,0,1H10A.49971.49971,0,0,1,9.5,14Zm0,4a.49971.49971,0,0,1,.5-.5h8a.5.5,0,0,1,0,1H10A.49971.49971,0,0,1,9.5,18Z"/></svg>
           <div class="chip-row"><span class="chip chip-quiet">一對一教學</span></div>
           <h2>高爾夫教練管理系統</h2>
           <p class="desc">
-            學員用 LIFF 預約課程，教練在 LINE 一鍵核准，
-            系統自動扣堂數、前一晚推播明日行程、
-            課程包到期前 30 天自動提醒。
+            學員用 LIFF 預約，教練在 LINE 一鍵核准；
+            系統自動扣堂數、推播明日行程、到期前 30 天提醒。
           </p>
         </div>
         <div>
@@ -191,9 +199,8 @@
             <div class="s"><span class="v">自動</span><span class="l">提醒與到期警告</span></div>
           </div>
           <p class="desc">
-            堂數扣抵用交易確保不會重複扣或漏扣。
-            學員手上有多個課程包時依到期日先進先出，
-            避免快到期的放到過期產生爭議。
+            堂數扣抵用交易確保不重複扣或漏扣。
+            多課程包依到期日先進先出，避免過期爭議。
           </p>
           <p class="stack">TypeScript / Cloud Run / Cloud Scheduler / Firestore Transaction / LIFF</p>
         </div>
@@ -201,13 +208,13 @@
 
       <!-- 06 -->
       <div class="case-row">
+        <img class="case-img" src="/assets/img/golf-group.jpg" alt="一群球友在球場上同行" loading="lazy" width="1200" height="739">
         <div>
           <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5,7V5A2.50231,2.50231,0,0,0,19,2.5H17A2.50231,2.50231,0,0,0,14.5,5V7A2.50231,2.50231,0,0,0,17,9.5h2A2.50231,2.50231,0,0,0,21.5,7Zm-1,0A1.50164,1.50164,0,0,1,19,8.5H17A1.50164,1.50164,0,0,1,15.5,7V5A1.50164,1.50164,0,0,1,17,3.5h2A1.50164,1.50164,0,0,1,20.5,5ZM17,21.5A2.50231,2.50231,0,0,0,19.5,19V17A2.50231,2.50231,0,0,0,17,14.5H15A2.50231,2.50231,0,0,0,12.5,17v2A2.50231,2.50231,0,0,0,15,21.5ZM13.5,19V17A1.50164,1.50164,0,0,1,15,15.5h2A1.50164,1.50164,0,0,1,18.5,17v2A1.50164,1.50164,0,0,1,17,20.5H15A1.50164,1.50164,0,0,1,13.5,19ZM2.5,7A2.50231,2.50231,0,0,0,5,9.5H7a2.473,2.473,0,0,0,1.06146-.24518l4.10474,4.92584a4.01494,4.01494,0,0,1,.79748-.60473L8.86133,8.653A2.47969,2.47969,0,0,0,9.5,7V6.5H13v-1H9.5V5A2.50231,2.50231,0,0,0,7,2.5H5A2.50231,2.50231,0,0,0,2.5,5Zm1-2A1.50164,1.50164,0,0,1,5,3.5H7A1.50164,1.50164,0,0,1,8.5,5V7A1.50164,1.50164,0,0,1,7,8.5H5A1.50164,1.50164,0,0,1,3.5,7Z"/></svg>
           <div class="chip-row"><span class="chip chip-quiet">社群營運</span></div>
           <h2>大型球敘社群報名系統</h2>
           <p class="desc">
-            兩千人規模的 LINE 群組一鍵報名。
-            額滿自動排候補、有人退出自動遞補並通知，
+            兩千人 LINE 群組一鍵報名。額滿自動候補、退出自動遞補通知，
             截止後依同組需求自動分組。
           </p>
         </div>
@@ -218,9 +225,8 @@
             <div class="s"><span class="v">自動</span><span class="l">同組需求分組</span></div>
           </div>
           <p class="desc">
-            導入前主辦要在群組裡數「+1」、手記候補順序、私訊通知遞補。
-            導入後這些全部由系統處理，順位公開透明，
-            也不會再有「誰先誰後」的爭議。
+            導入前主辦要數「+1」、手記候補、私訊遞補。
+            導入後全由系統處理，順位公開透明，不再有先後爭議。
           </p>
           <p class="stack">LINE Messaging API / Flex Message / 候補佇列 / 排程提醒 / 名單匯出</p>
         </div>
@@ -236,14 +242,12 @@
       <h2 class="h-section">為什麼這裡沒有客戶名字？</h2>
       <div class="prose">
         <p style="color: var(--slate-soft); line-height: 1.95;">
-          因為我們答應過不寫。這些系統裡有客戶的營收、庫存、會員與定價資料，
-          有些還是他們的競爭優勢所在。把名字拿出來當行銷素材，
-          對正在合作的人不公平。
+          因為我們答應過不寫。系統裡有客戶的營收、庫存與定價資料，
+          把名字當行銷素材，對正在合作的人不公平。
         </p>
         <p style="color: var(--slate-soft); line-height: 1.95; margin-top: 14px;">
-          代價是你得多花一點力氣判斷我們的真假。
           所以我們把能給的都給了——具體的數字、實際的技術棧，
-          以及五個可以直接點開操作的 Demo。
+          以及五個可以直接點的 Demo。
         </p>
       </div>
       <div class="btn-row" style="margin-top: 26px;">

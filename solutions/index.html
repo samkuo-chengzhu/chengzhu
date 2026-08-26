@@ -61,6 +61,20 @@
     @media (max-width: 860px) {
       .sol { grid-template-columns: 1fr; gap: 22px; padding: 42px 0; }
     }
+    .sol-mock {
+      margin: 20px 0 0; padding: 14px; border-radius: 10px;
+      background: #1c1f24; border: 1px solid rgba(255,255,255,.08);
+      display: flex; flex-direction: column; gap: 5px; max-width: 200px;
+    }
+    .sm-hdr { height: 14px; border-radius: 4px; }
+    .sm-bar { height: 5px; border-radius: 2px; background: rgba(255,255,255,.08); flex: 1; }
+    .sm-row { display: flex; gap: 4px; align-items: center; }
+    .sm-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .sm-block { border-radius: 4px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); }
+    .sm-badge { width: 14px; height: 7px; border-radius: 2px; flex-shrink: 0; }
+    @media (max-width: 860px) {
+      .sol-mock { margin: 16px auto 0; }
+    }
   </style>
 </head>
 <body>
@@ -89,9 +103,8 @@
         不是再多一套工具，<br>而是一套能一起運作的系統。
       </h1>
       <p class="lede" style="margin-top: 22px;">
-        從顧客接觸、內部作業到管理決策，橙築以企業流程為核心，
-        選擇合適的技術並負責把它們接起來。
-        以下每一項底下列的都是實際交付過的功能，不是規格表。
+        橙築以企業流程為核心，選擇合適的技術並負責接起來。
+        以下每一項列的都是實際交付過的功能，不是規格表。
       </p>
     </div>
   </section>
@@ -106,18 +119,26 @@
           <span class="no">01</span>
           <h2>企業網站與會員平台</h2>
           <p class="desc">
-            網站的工作不是好看，是把對的人帶進來、把詢問變成可追蹤的資料。
-            品牌官網、內容管理、會員分級與多語系，讓網站成為可衡量的營運入口，
-            而不是一年更新一次的型錄。
+            網站的工作不是好看，是把詢問變成可追蹤的資料。
+            品牌官網、會員分級與多語系，讓網站成為可衡量的營運入口。
           </p>
+          <div class="sol-mock">
+            <div class="sm-hdr" style="background:var(--teal);opacity:.5"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+              <div class="sm-block" style="height:36px"></div>
+              <div class="sm-block" style="height:36px"></div>
+            </div>
+            <div class="sm-bar" style="width:60%"></div>
+            <div class="sm-bar" style="width:80%"></div>
+          </div>
         </div>
         <div>
           <div class="did-h">我們實際做過</div>
           <ul class="did">
-            <li>B2B 企業採購平台前台：商品展示、查價、下單與售後追蹤</li>
-            <li>會員平台：註冊綁定、分級權益、消費紀錄與活動通知</li>
-            <li>品牌展示站與商品型錄，含 SEO 結構與社群分享卡片</li>
-            <li>詢問表單直接收進後台與 LINE 通知，不停在信箱</li>
+            <li>B2B 採購平台前台：展示、查價、下單、售後追蹤</li>
+            <li>會員平台：綁定、分級權益、消費紀錄、活動通知</li>
+            <li>品牌站與商品型錄，含 SEO 結構與分享卡片</li>
+            <li>詢問表單直送後台與 LINE，不停在信箱</li>
           </ul>
           <p class="try">可以先玩：<a href="/shop/">選物商城 Demo</a> — 完整的瀏覽、購物車與結帳流程</p>
           <p class="stack">內容架構 / UIUX / SEO / CMS / 會員分級 / Firebase Auth</p>
@@ -131,20 +152,32 @@
           <span class="no">02</span>
           <h2>ERP 與流程中台</h2>
           <p class="desc">
-            把採購、庫存、工單、對帳與報表收進同一套可追蹤的工作流程。
-            重點不是功能多，是每一個狀態都有人負責、有時間戳、
-            而且下一步該做什麼是系統說了算，不靠記憶與口頭交代。
+            採購、庫存、工單、對帳收進同一套工作流程。
+            每個狀態有人負責、有時間戳，下一步系統說了算。
           </p>
+          <div class="sol-mock">
+            <div class="sm-row">
+              <div class="sm-bar"></div><div class="sm-bar"></div><div class="sm-bar"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px">
+              <div class="sm-block" style="height:24px"></div>
+              <div class="sm-block" style="height:24px"></div>
+              <div class="sm-block" style="height:24px"></div>
+              <div class="sm-block" style="height:24px"></div>
+              <div></div>
+              <div class="sm-block" style="height:24px"></div>
+            </div>
+          </div>
         </div>
         <div>
           <div class="did-h">我們實際做過</div>
           <ul class="did">
-            <li>工單全流程：已成立 → 待料 → 組裝中 → 可取桿 → 已交付，完成動作才能前進</li>
-            <li>掃碼收貨、出貨與盤點，每一筆都留異動帳與條碼紀錄</li>
-            <li>1,858 筆料件的即時庫存，含雙價、廠商與門市有無庫存標記</li>
-            <li>缺料自動進待訂貨清單，通知訂貨與到貨都記錄人與時間</li>
-            <li>指派技師與工時區段，沒指派不能進入下一階段</li>
-            <li>電商與門市共用同一份商品與庫存資料，不用兩邊各記一次</li>
+            <li>工單全流程：已成立 → 待料 → 組裝中 → 可取桿 → 已交付</li>
+            <li>掃碼收貨、出貨與盤點，每筆留異動帳與條碼紀錄</li>
+            <li>1,858 筆料件即時庫存，含雙價、廠商與門市標記</li>
+            <li>缺料自動進待訂貨清單，訂貨到貨都記人與時間</li>
+            <li>指派技師與工時區段，沒指派不能進下一階段</li>
+            <li>電商與門市共用同一份商品與庫存</li>
           </ul>
           <p class="stack">進銷存 / 掃碼盤點 / 工單看板 / 多倉 / PostgreSQL / Firestore</p>
         </div>
@@ -157,18 +190,24 @@
           <span class="no">03</span>
           <h2>CRM 與會員經營</h2>
           <p class="desc">
-            從第一次詢問到成交後服務，完整累積每一位客戶的互動、消費與偏好。
-            資料不是為了做報表而存在，是為了讓下一次接觸的人
-            知道這位客戶上次談到哪裡。
+            從詢問到成交後服務，累積每位客戶的互動、消費與偏好——
+            讓下一次接觸的人知道上次談到哪裡。
           </p>
+          <div class="sol-mock">
+            <div class="sm-row"><div class="sm-dot" style="background:var(--teal);opacity:.4"></div><div class="sm-bar"></div></div>
+            <div class="sm-bar" style="width:70%"></div>
+            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
+            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
+            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--orange);opacity:.3"></div></div>
+          </div>
         </div>
         <div>
           <div class="did-h">我們實際做過</div>
           <ul class="did">
-            <li>對話式會員綁定：在 LINE 裡完成，不用另外下載或註冊</li>
+            <li>對話式會員綁定，在 LINE 完成，不用下載註冊</li>
             <li>會員卡、消費紀錄與年度消費自動累計</li>
-            <li>等級與標籤分群，供後續分眾推播使用</li>
-            <li>客戶偏好與量身資料留存，回訪時直接調得出來</li>
+            <li>等級與標籤分群，供分眾推播使用</li>
+            <li>客戶偏好與量身資料留存，回訪直接調出</li>
             <li>跨據點共用同一份會員資料與權益</li>
           </ul>
           <p class="try">可以先玩：<a href="/coach-demo/">教練預約 Demo</a> — 含堂數與會員紀錄管理</p>
@@ -183,18 +222,24 @@
           <span class="no">04</span>
           <h2>POS 與門市營運</h2>
           <p class="desc">
-            前台掃碼成交之後，庫存、會員、業績與帳務同一秒更新。
-            門市不該是「白天做生意、晚上再對一次帳」，
-            那些重複輸入本來就該由系統處理掉。
+            掃碼成交，庫存、會員、業績同一秒更新。
+            門市不該「白天做生意、晚上再對帳」。
           </p>
+          <div class="sol-mock">
+            <div class="sm-row"><div class="sm-bar" style="flex:2"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
+            <div class="sm-row"><div class="sm-bar" style="flex:2"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
+            <div class="sm-row"><div class="sm-bar" style="flex:2"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
+            <div style="border-top:1px solid rgba(255,255,255,.06);margin:2px 0"></div>
+            <div class="sm-hdr" style="background:var(--orange);opacity:.4"></div>
+          </div>
         </div>
         <div>
           <div class="did-h">我們實際做過</div>
           <ul class="did">
             <li>門市平板 POS 刷條碼結帳，庫存即時扣減</li>
             <li>營收自動結算到日、到月，不用手動彙整</li>
-            <li>設計師與門市的業績拆帳自動計算，後台直接看得到帳</li>
-            <li>線下付款流程：匯款與店內付款，宅配或店取</li>
+            <li>設計師與門市業績拆帳自動計算，後台看得到帳</li>
+            <li>線下付款：匯款與店內付款，宅配或店取</li>
             <li>電商與門市庫存同一份，避免超賣</li>
           </ul>
           <p class="try">可以先玩：<a href="/salon-demo/">髮廊 Demo</a> — 營收拆帳與儀表板</p>
@@ -209,20 +254,26 @@
           <span class="no">05</span>
           <h2>LINE Bot 服務流程</h2>
           <p class="desc">
-            預約、通知、查價、客服與售後，全部發生在客戶本來就每天在用的介面裡。
-            不用說服任何人下載新的 App，也不用教長輩怎麼登入——
-            這是導入成本最低的一條路，也是橙築累積最深的一塊。
+            預約、通知、查價、客服，全在客戶每天在用的介面裡。
+            不用下載 App、不用教登入——導入成本最低的一條路。
           </p>
+          <div class="sol-mock">
+            <div class="sm-hdr" style="background:#06C755"></div>
+            <div class="sm-bar" style="width:55%;height:8px;border-radius:5px;margin-left:auto"></div>
+            <div class="sm-bar" style="width:70%;height:12px;border-radius:5px"></div>
+            <div class="sm-bar" style="width:45%;height:8px;border-radius:5px;margin-left:auto"></div>
+            <div class="sm-block" style="height:28px"></div>
+          </div>
         </div>
         <div>
           <div class="did-h">我們實際做過</div>
           <ul class="did">
-            <li>Rich Menu 全對話式操作，六格功能不需離開 LINE</li>
-            <li>LIFF 頁面：預約、選課、報名、商品瀏覽與結帳</li>
-            <li>自然語言查價與下單，業務在群組講一句話就能報價</li>
-            <li>大型群組一鍵報名、候補自動遞補與自動分組</li>
-            <li>排程推播：明日行程、到期提醒、庫存警示、內部通知群</li>
-            <li>拍照上傳自動歸檔，以及發票影像辨識與防重複登記</li>
+            <li>Rich Menu 六格功能，全程不離開 LINE</li>
+            <li>LIFF 頁面：預約、選課、報名、瀏覽與結帳</li>
+            <li>自然語言查價下單，群組講一句話就能報價</li>
+            <li>大型群組一鍵報名、候補遞補與自動分組</li>
+            <li>排程推播：明日行程、到期提醒、庫存警示</li>
+            <li>拍照上傳自動歸檔、發票辨識與防重複登記</li>
           </ul>
           <p class="try">五個 Demo 全部都是 LINE 場景：<a href="/demos/">查看總覽</a></p>
           <p class="stack">官方帳號 / LIFF / Rich Menu / Flex Message / 推播 / Webhook</p>
@@ -236,20 +287,30 @@
           <span class="no">06</span>
           <h2>資料與營運儀表板</h2>
           <p class="desc">
-            把跨系統的資料收攏成看得懂的數字，以及該處理的任務。
-            我們的做法是先讓資料乾淨且只進一次，
-            再談自動化——順序反過來做出來的都是漂亮但沒人打開的報表。
+            跨系統資料收攏成看得懂的數字。
+            先讓資料乾淨且只進一次，再談自動化。
           </p>
+          <div class="sol-mock">
+            <div class="sm-row" style="height:32px;align-items:flex-end">
+              <div style="flex:1;height:50%;border-radius:2px 2px 0 0;background:var(--teal);opacity:.4"></div>
+              <div style="flex:1;height:80%;border-radius:2px 2px 0 0;background:var(--teal);opacity:.5"></div>
+              <div style="flex:1;height:60%;border-radius:2px 2px 0 0;background:var(--teal);opacity:.4"></div>
+              <div style="flex:1;height:100%;border-radius:2px 2px 0 0;background:var(--teal);opacity:.6"></div>
+              <div style="flex:1;height:70%;border-radius:2px 2px 0 0;background:var(--orange);opacity:.4"></div>
+            </div>
+            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
+            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--orange);opacity:.3"></div></div>
+          </div>
         </div>
         <div>
           <div class="did-h">我們實際做過</div>
           <ul class="did">
-            <li>營運總覽儀表板：營收、工單進度、會員活躍與庫存狀態</li>
-            <li>週報與月報自動產出並寄送，取代人工彙整</li>
+            <li>營運總覽：營收、工單進度、會員活躍與庫存</li>
+            <li>週報月報自動產出並寄送，取代人工彙整</li>
             <li>教練與門市月結報表，含拆帳與場地收入</li>
-            <li>影像辨識自動讀取單據資料，減少人工key單</li>
-            <li>每日自動抓取外部價格資料進資料倉儲，供比價與定價參考</li>
-            <li>階梯定價引擎：依客戶分級自動套用不同報價</li>
+            <li>影像辨識自動讀單據，減少人工 key 單</li>
+            <li>每日自動抓外部價格進資料倉儲，供比價參考</li>
+            <li>階梯定價引擎：依客戶分級自動套用報價</li>
           </ul>
           <p class="try">可以先玩：<a href="/pricing-demo/">智能查價 Demo</a> — 自然語言查價與階梯定價</p>
           <p class="stack">儀表板 / 自動報表 / 異常預警 / OCR / 資料倉儲 / 定價引擎</p>
@@ -265,8 +326,7 @@
       <span class="eyebrow">By Industry</span>
       <h2 class="h-section">已經打包好的四個方案</h2>
       <p class="lede">
-        這四個產業我們做過夠多次，流程與功能已經收斂成可直接談的方案，
-        導入不必從一張白紙開始。
+        做過夠多次，流程與功能已收斂成可直接談的方案。
       </p>
 
       <div class="grid grid-4" style="margin-top: 32px;">
@@ -304,8 +364,7 @@
       <span class="eyebrow eyebrow-light">How We Work</span>
       <h2 class="h-section">從流程診斷到持續優化</h2>
       <p class="lede">
-        先釐清問題，再決定工具。每個階段都有明確產出，
-        讓決策、設計與開發對齊同一個營運目標。
+        先釐清問題，再決定工具。每個階段都有明確產出。
       </p>
       <div class="grid grid-4" style="margin-top: 34px;">
         <div class="card">
@@ -338,8 +397,7 @@
       <span class="eyebrow">Start With Clarity</span>
       <h2 class="h-section">先找出最值得優化的那一段</h2>
       <p class="lede" style="margin: 0 auto;">
-        不確定該從哪裡開始也沒關係。用 LINE 說一下目前最卡的情境，
-        我們會先幫你判斷值不值得做系統。
+        用 LINE 說一下最卡的情境，我們先幫你判斷值不值得做系統。
       </p>
       <div class="btn-row" style="margin-top: 26px; justify-content: center;">
         <a class="btn btn-primary" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">
