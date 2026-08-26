@@ -39,6 +39,11 @@
     .hp-row { display: flex; gap: 5px; align-items: center; }
     .hp-block { border-radius: 5px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); }
     .hp-btn { height: 22px; border-radius: 5px; }
+    .hero-banner {
+      width: 100%; height: 260px; object-fit: cover;
+      border-radius: 8px; margin-top: 30px;
+    }
+    @media (max-width: 860px) { .hero-banner { height: 170px; } }
   </style>
 </head>
 <body>
@@ -88,6 +93,8 @@
           <div class="hp-btn" style="background:var(--teal);opacity:.5"></div>
         </div>
       </div>
+
+      <img class="hero-banner" src="/assets/img/office-b2b.jpg" alt="業務團隊在辦公室討論" loading="lazy" width="1200" height="800">
 
       <div class="stats" style="margin-top: 42px;">
         <div class="stat"><span class="v num">2,000+</span><span class="l">商品即時查價</span></div>
