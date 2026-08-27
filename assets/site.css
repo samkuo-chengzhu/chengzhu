@@ -92,8 +92,10 @@ header, main, footer { position: relative; z-index: 1; }
 .nav-brand {
   font-family: var(--serif); font-size: 1.16rem; font-weight: 600;
   letter-spacing: .02em; white-space: nowrap;
+  display: flex; align-items: center;
 }
 .nav-brand .dot { color: var(--orange); }
+.nav-logo { height: 30px; width: auto; display: block; margin-right: 11px; }
 .nav-links { display: flex; gap: 26px; margin-left: auto; align-items: center; }
 .nav-links a {
   font-size: .9rem; color: var(--ink-mid);
@@ -338,6 +340,7 @@ footer { border-top: 1px solid var(--line); background: var(--paper-2); }
 }
 .footer-brand { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; }
 .footer-brand .dot { color: var(--orange); }
+.footer-logo { height: 46px; width: auto; display: block; margin-bottom: 12px; }
 .footer-brand .sub {
   display: block; margin-top: 5px; font-family: var(--mono);
   font-size: .66rem; letter-spacing: .16em; color: var(--ink-soft);
