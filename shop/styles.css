@@ -198,3 +198,85 @@ h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.01em; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--ink-200); border-radius: 8px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--ink-300); }
+
+/* ══════════════════════════════════════════════════════════
+   響應式（本 Demo 原本只有桌機版面）
+
+   版面寫在 JSX 行內樣式，一般選擇器無法覆寫，因此以 [style*=]
+   比對 React 序列化後的行內值，搭配 !important 收斂欄數。
+   改動全部收在本檔，未動任何 JSX。
+
+   註：軌道用 minmax(0, 1fr) 而非 1fr —— 1fr 的自動最小尺寸會被
+   子元素的 min-content 撐住，導致軌道縮不進容器寬度。
+   ══════════════════════════════════════════════════════════ */
+
+/* ── 平板以下（≤ 1024px）────────────────────────────── */
+@media (max-width: 1024px) {
+  /* 內容版面（hero、左右並排等）收斂為單欄 */
+  [style*="grid-template-columns"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 24px !important;
+  }
+  [style*="grid-template-columns"] > * { min-width: 0; }
+
+  /* 商品／分類格保留多欄 */
+  [style*="repeat(4, 1fr)"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+  [style*="repeat(3, 1fr)"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  /* 固定寬度改為流動 */
+  [style*="width: 360px"],
+  [style*="width: 320px"] { width: 100% !important; max-width: 100% !important; }
+
+  /* 過大的間距與留白 */
+  [style*="gap: 80px"] { gap: 36px !important; }
+  [style*="gap: 40px"] { gap: 20px !important; }
+  [style*="padding: 112px 24px 96px"] { padding: 64px 20px 56px !important; }
+
+  /* 頁首折行，導覽列改為可橫向捲動 */
+  header > div { flex-wrap: wrap !important; gap: 14px !important; }
+  header nav {
+    order: 3;
+    flex: 1 0 100% !important;
+    gap: 22px !important;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  header nav::-webkit-scrollbar { display: none; }
+  header nav button { flex: 0 0 auto; white-space: nowrap; }
+}
+
+/* ── 手機（≤ 760px）─────────────────────────────────── */
+@media (max-width: 760px) {
+  html, body { overflow-x: hidden; }
+  img, svg, video { max-width: 100%; }
+
+  [style*="repeat(4, 1fr)"],
+  [style*="repeat(3, 1fr)"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  [style*="padding: 112px 24px 96px"] { padding: 48px 18px 44px !important; }
+  [style*="padding: 36px"] { padding: 22px !important; }
+  [style*="padding: 32px 24px"] { padding: 22px 18px !important; }
+
+  /* 寬字距標籤不要把容器撐開 */
+  .cz-eyebrow { letter-spacing: 0.12em; overflow-wrap: anywhere; }
+
+  /* 頂部公告列：只留左側說明 */
+  [style*="padding: 9px 24px"] { flex-wrap: wrap !important; gap: 6px !important; }
+  [style*="padding: 9px 24px"] > div:last-child { display: none !important; }
+}
+
+/* ── 小螢幕（≤ 560px）──────────────────────────────── */
+@media (max-width: 560px) {
+  /* 搜尋框在 Demo 中無實際作用，小螢幕收起以讓出空間 */
+  header [style*="width: 240px"] { display: none !important; }
+}
