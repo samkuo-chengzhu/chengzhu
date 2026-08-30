@@ -1,0 +1,87 @@
+/* 橙築品牌字體 V1 — 理性主體，少量人味 */
+.home-v3,
+.case-v2,
+.solutions-v2,
+.contact-v2,
+.assessment-v2 {
+  --brand-sans: "IBM Plex Sans TC", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --brand-human: "LXGW WenKai TC", "BiauKai", "DFKai-SB", cursive;
+  --brand-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  --serif: var(--brand-sans);
+  --sans: var(--brand-sans);
+  --mono: var(--brand-mono);
+  font-family: var(--brand-sans);
+  font-synthesis: none;
+}
+
+.home-v3 h1, .home-v3 h2, .home-v3 h3,
+.case-v2 h1, .case-v2 h2, .case-v2 h3,
+.solutions-v2 h1, .solutions-v2 h2, .solutions-v2 h3,
+.contact-v2 h1, .contact-v2 h2, .contact-v2 h3,
+.assessment-v2 h1, .assessment-v2 h2, .assessment-v2 h3 {
+  font-family: var(--brand-sans);
+  font-weight: 600;
+  letter-spacing: -.018em;
+}
+
+/* 首屏改用較克制的字級，避免「大標題＋襯線字」的制式生成感。 */
+.home-v3 .hero-copy h1 { max-width: 620px; font-size: clamp(3rem, 4.8vw, 3.72rem); line-height: 1.2; }
+.case-v2 .case-hero h1 { font-size: clamp(3rem, 5.35vw, 4.28rem); line-height: 1.22; }
+.solutions-v2 .solutions-hero h1 { font-size: clamp(3rem, 5.05vw, 3.92rem); line-height: 1.21; }
+.contact-v2 .contact-hero h1 { font-size: clamp(3.05rem, 5.15vw, 4.08rem); line-height: 1.2; }
+.assessment-v2 .assessment-hero h1 { font-size: clamp(3rem, 5.15vw, 4.12rem); line-height: 1.21; }
+
+/* 索引與功能標籤保留精準、務實的工作感。 */
+.home-v3 .kicker, .home-v3 .section-no,
+.case-v2 .case-kicker, .case-v2 .case-index,
+.solutions-v2 .solutions-kicker,
+.contact-v2 .contact-kicker,
+.assessment-v2 .assessment-kicker,
+.home-v3 .problem-list span,
+.home-v3 .approach-steps span,
+.contact-v2 .starter-list span,
+.assessment-v2 .response-list article > span {
+  font-family: var(--brand-mono);
+  letter-spacing: .08em;
+}
+
+/* 人味只放在真實對話、觀察與照片說明，不讓全站變成書法風。 */
+.home-v3 .hero-photo figcaption,
+.solutions-v2 .solutions-hero figcaption,
+.contact-v2 .contact-hero figcaption,
+.home-v3 .problem-list p,
+.contact-v2 .starter-list p {
+  font-family: var(--brand-human);
+  font-weight: 400;
+  letter-spacing: .015em;
+}
+
+.home-v3 .problem-list p,
+.contact-v2 .starter-list p { line-height: 1.75; }
+
+.home-v3 .practice-note span,
+.home-v3 .footer-brand,
+.case-v2 .case-footer .footer-brand,
+.solutions-v2 .solutions-footer .footer-brand,
+.contact-v2 .contact-footer .footer-brand,
+.assessment-v2 .assessment-footer .footer-brand,
+.contact-v2 .visit-layout address strong {
+  font-family: var(--brand-sans);
+  font-weight: 500;
+}
+
+@media (max-width: 760px) {
+  .home-v3 .hero-copy h1 { font-size: clamp(2.5rem, 11.2vw, 3.12rem); }
+  .case-v2 .case-hero h1,
+  .solutions-v2 .solutions-hero h1,
+  .contact-v2 .contact-hero h1,
+  .assessment-v2 .assessment-hero h1 { font-size: clamp(2.55rem, 11.2vw, 3.18rem); }
+}
+
+@media (max-width: 430px) {
+  .home-v3 .hero-copy h1,
+  .case-v2 .case-hero h1,
+  .solutions-v2 .solutions-hero h1,
+  .contact-v2 .contact-hero h1,
+  .assessment-v2 .assessment-hero h1 { font-size: 2.58rem; }
+}
