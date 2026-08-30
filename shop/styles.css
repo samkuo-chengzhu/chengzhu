@@ -51,8 +51,8 @@
   --section-pad-y: 96px;
 
   /* Type */
-  --font-sans: "Chiron Hei HK", "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  --font-display: "Chiron Sung HK", "Noto Serif TC", "PingFang TC", "Songti TC", Georgia, serif;
+  --font-sans: "IBM Plex Sans TC", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-display: "IBM Plex Sans TC", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 }
 
