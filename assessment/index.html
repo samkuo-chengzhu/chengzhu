@@ -3,300 +3,123 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>免費數位健檢 — 橙築國際 ChengZhu</title>
-  <meta name="description" content="勾選符合現況的項目，五分鐘找出企業數位流程的斷點。結果直接用 LINE 傳給我們，我們協助判斷最先值得改善的環節。不需要填表、不需要留信箱。">
+  <title>免費數位健檢 — 找出最值得先改善的地方</title>
+  <meta name="description" content="五分鐘整理目前的營運狀況，找出最值得先改善的地方。不留信箱、不會自動送出，也不一定需要做系統。">
   <link rel="canonical" href="https://chengzhu.co/assessment/">
-  <meta property="og:title" content="免費數位健檢 — 橙築國際 ChengZhu">
-  <meta property="og:description" content="五分鐘，找出企業數位流程的斷點。">
+  <meta property="og:title" content="免費數位健檢 — 找出最值得先改善的地方">
+  <meta property="og:description" content="勾選目前發生的狀況，我們陪你整理改善優先順序。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://chengzhu.co/assessment/">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:image" content="https://chengzhu.co/assets/og/assessment.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="免費數位健檢 — 橙築國際 ChengZhu">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://chengzhu.co/assets/og/assessment.jpg">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chiron+Sung+HK:wght@400;500;600&family=Chiron+Hei+HK:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css?v=20260827">
-  <style>
-    .checks { display: grid; gap: 10px; margin: 28px 0 0; }
-    .check {
-      display: flex; gap: 14px; align-items: flex-start;
-      background: var(--paper-2); border: 1px solid var(--line-soft);
-      border-radius: 3px; padding: 16px 18px; cursor: pointer;
-      transition: border-color .18s ease, background .18s ease;
-    }
-    .check:hover { border-color: var(--orange); }
-    .check input {
-      appearance: none; -webkit-appearance: none;
-      width: 20px; height: 20px; flex: none; margin-top: 2px;
-      border: 1.5px solid var(--line); border-radius: 3px;
-      background: var(--paper); cursor: pointer; position: relative;
-      transition: background .15s ease, border-color .15s ease;
-    }
-    .check input:checked { background: var(--orange); border-color: var(--orange); }
-    .check input:checked::after {
-      content: ""; position: absolute; left: 6px; top: 2px;
-      width: 5px; height: 10px; border: solid #fff;
-      border-width: 0 2px 2px 0; transform: rotate(45deg);
-    }
-    .check input:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
-    .check:has(input:checked) { border-color: var(--orange); background: var(--orange-bg); }
-    .check .t { font-size: .96rem; line-height: 1.7; }
-    .check .s { display: block; font-size: .84rem; color: var(--ink-mid); margin-top: 3px; }
-
-    .result {
-      margin: 32px 0 0; border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
-    }
-    .result-head {
-      background: var(--paper-3); padding: 13px 20px;
-      font-family: var(--mono); font-size: .68rem; letter-spacing: .13em;
-      text-transform: uppercase; color: var(--ink-mid);
-      border-bottom: 1px solid var(--line);
-      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-    }
-    .result-head .n { color: var(--orange); font-weight: 600; }
-    .result-body { background: var(--paper-2); padding: 20px; }
-    #preview {
-      font-family: var(--mono); font-size: .82rem; line-height: 1.9;
-      color: var(--ink); white-space: pre-wrap; word-break: break-word; margin: 0;
-    }
-    #preview .placeholder { color: var(--ink-soft); }
-    .result-foot {
-      background: var(--paper-2); padding: 0 20px 20px;
-      display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
-    }
-    .btn[aria-disabled="true"] {
-      opacity: .45; pointer-events: none;
-    }
-    .privacy {
-      margin: 14px 0 0; font-size: .84rem; color: var(--ink-soft); line-height: 1.8; max-width: 62ch;
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/assessment-v2.css?v=20260830">
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png">
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 </head>
-<body>
-
-<header class="nav">
+<body class="assessment-v2">
+<header class="nav assessment-nav">
   <div class="nav-inner">
-    <a href="/" class="nav-brand"><img class="nav-logo" src="/assets/img/logo.png" alt="" width="227" height="144" style="height:30px;width:auto">橙築<span class="dot">.</span></a>
-    <nav class="nav-links">
-      <a href="/solutions/">解決方案</a>
-      <a href="/industries/">產業方案</a>
-      <a href="/demos/">互動 Demo</a>
-      <a href="/case/">案例</a>
-      <a href="/contact/">聯絡</a>
-      <a class="nav-cta" href="/assessment/">免費數位健檢</a>
+    <a href="/" class="nav-brand" aria-label="橙築國際首頁"><img class="nav-logo" src="/assets/img/logo.png" alt="" width="227" height="144">橙築<span class="dot">.</span></a>
+    <nav class="nav-links" aria-label="主要導覽">
+      <a href="/#services">我們的服務</a><a href="/solutions/">解決方案</a><a href="/demos/">互動 Demo</a><a href="/case/">案例</a><a class="nav-secondary" href="/contact/">聯絡</a><a class="nav-cta" href="/assessment/" aria-current="page">免費數位健檢</a>
     </nav>
   </div>
 </header>
 
 <main>
-
-  <section class="page-head hero-art">
-    <div class="container">
-      <div class="crumb"><a href="/">首頁</a> / 數位健檢</div>
-      <span class="eyebrow">Digital Checkup</span>
-      <h1 class="h-display" style="font-size: clamp(1.9rem, 4.4vw, 2.8rem);">
-        五分鐘，找出<br>流程斷在哪裡。
-      </h1>
-      <p class="lede" style="margin-top: 22px;">
-        勾選符合現況的項目，用 LINE 傳過來。
-        我們會回覆該先改的環節——包括「不用做系統」。
-      </p>
-      <p class="kw" style="margin-top: 14px;">不填表 · 不留信箱 · 不推銷</p>
+  <section class="assessment-hero">
+    <div class="assessment-wrap hero-layout">
+      <div>
+        <span class="assessment-kicker">五分鐘現況整理</span>
+        <h1>先不用決定<br>要做什麼。<br><em>先找出改善重點。</em></h1>
+        <p>勾選目前正在發生的狀況，頁面會幫你整理成一段訊息。你確認之後，再決定要不要用 LINE 傳給我們。</p>
+      </div>
+      <aside>
+        <span>放心填寫</span>
+        <ul><li>不需要姓名或 Email</li><li>不會在背景收集資料</li><li>按下 LINE 後仍由你確認送出</li><li>答案可能是「暫時不用做系統」</li></ul>
+      </aside>
     </div>
   </section>
 
-  <section class="section-tight">
-    <div class="container">
-      <div style="max-width: 760px;">
-        <span class="eyebrow">Step 01 · 現況盤點</span>
-        <h2 class="h-section">哪些狀況正在發生？</h2>
-        <p class="lede">可複選。勾越多不是越糟，只是能改的地方越多。</p>
+  <section class="checkup-section">
+    <div class="assessment-wrap checkup-wrap">
+      <header><span class="assessment-kicker">01 · 目前哪些狀況正在發生？</span><h2>有符合的就勾選，<br>沒有標準答案。</h2><p>勾得多不代表做得差，只表示目前有更多地方可以一起整理。</p></header>
 
-        <div class="checks">
-          <label class="check">
-            <input type="checkbox" data-item="客戶資料散落在多個工具或人員手上">
-            <span class="t">客戶資料散落在多個工具或人員手上
-              <span class="s">同一位客戶的資料，業務、客服、老闆各存一份，而且不一樣。</span>
-            </span>
-          </label>
-          <label class="check">
-            <input type="checkbox" data-item="訂單、庫存或專案狀態需要人工彙整">
-            <span class="t">訂單、庫存或專案狀態需要人工彙整
-              <span class="s">要知道現在的狀況，得先有人把幾個地方的資料抄到一起。</span>
-            </span>
-          </label>
-          <label class="check">
-            <input type="checkbox" data-item="網站有流量，但追蹤不到商機與成交">
-            <span class="t">網站有流量，但追蹤不到商機與成交
-              <span class="s">知道有人來，但不知道哪些人變成客戶、從哪一頁來的。</span>
-            </span>
-          </label>
-          <label class="check">
-            <input type="checkbox" data-item="LINE、Email 與客服紀錄沒有回到系統">
-            <span class="t">LINE、Email 與客服紀錄沒有回到系統
-              <span class="s">最重要的對話都在 LINE 裡，但系統裡什麼都看不到。</span>
-            </span>
-          </label>
-          <label class="check">
-            <input type="checkbox" data-item="主管缺少即時且可信的營運儀表板">
-            <span class="t">主管缺少即時且可信的營運儀表板
-              <span class="s">要看數字得等人做報表，做完通常也來不及拿來決策。</span>
-            </span>
-          </label>
-          <label class="check">
-            <input type="checkbox" data-item="團隊每天有大量重複輸入與通知工作">
-            <span class="t">團隊每天有大量重複輸入與通知工作
-              <span class="s">同一筆資料要在不同地方輸入兩三次，通知靠人記得發。</span>
-            </span>
-          </label>
+      <div class="checks">
+        <label class="check"><input type="checkbox" data-item="客戶資料散落在多個工具或人員手上"><span class="t">客戶資料散落在不同工具或人員手上<span class="s">同一位客戶的資料，業務、客服與管理者各存一份。</span></span></label>
+        <label class="check"><input type="checkbox" data-item="訂單、庫存或專案狀態需要人工彙整"><span class="t">訂單、庫存或進度需要人工彙整<span class="s">要知道現在的狀況，得先把幾個地方的資料抄在一起。</span></span></label>
+        <label class="check"><input type="checkbox" data-item="網站有流量，但追蹤不到商機與成交"><span class="t">網站有人看，卻不知道後來有沒有成交<span class="s">知道有人來，但不知道哪些詢問最後變成客戶。</span></span></label>
+        <label class="check"><input type="checkbox" data-item="LINE、Email 與客服紀錄沒有回到系統"><span class="t">重要對話都留在 LINE 或 Email 裡<span class="s">現場知道發生什麼事，但其他人與系統都看不到。</span></span></label>
+        <label class="check"><input type="checkbox" data-item="主管缺少即時且可信的營運資訊"><span class="t">管理者看到數字時，事情已經過去了<span class="s">每次都要等人整理報表，完成時已經很難拿來決策。</span></span></label>
+        <label class="check"><input type="checkbox" data-item="團隊每天有大量重複輸入與通知工作"><span class="t">團隊每天重複輸入，也靠人記得通知<span class="s">同一筆資料要輸入好幾次，下一步很容易漏掉。</span></span></label>
+      </div>
+
+      <section class="result" aria-live="polite">
+        <div class="result-head"><span>02 · 整理完成後</span><span>已勾選 <strong id="count">0</strong> / 6</span></div>
+        <div class="result-body"><p id="preview"><span class="placeholder">勾選後，這裡會整理出一段準備傳送的內容。</span></p></div>
+        <div class="result-foot">
+          <a class="assessment-button" id="sendBtn" aria-disabled="true" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">用 LINE 傳給橙築 →</a>
+          <a class="alternate-link" href="/contact/">改用電話或 Email</a>
         </div>
+      </section>
+      <p class="privacy-note">頁面只在你的瀏覽器裡整理文字；沒有按下並確認傳送，就不會送出任何內容。</p>
+    </div>
+  </section>
 
-        <div class="result">
-          <div class="result-head">
-            <span>Step 02 · 傳給我們</span>
-            <span>已勾選 <span class="n" id="count">0</span> / 6</span>
-          </div>
-          <div class="result-body">
-            <p id="preview"><span class="placeholder">勾選後這裡會產生要傳送的內容。</span></p>
-          </div>
-          <div class="result-foot">
-            <a class="btn btn-primary" id="sendBtn" aria-disabled="true"
-               href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">
-              用 LINE 傳送這份結果 →
-            </a>
-            <a class="btn btn-ghost" href="/contact/">改用電話或 Email</a>
-          </div>
-        </div>
-
-        <p class="privacy">
-          按下按鈕會開啟 LINE 並填好內容，你確認後再送出。
-          這個頁面不收集姓名、電話或信箱。
-        </p>
+  <section class="response-section">
+    <div class="assessment-wrap response-layout">
+      <header><span class="assessment-kicker">傳送後會得到什麼？</span><h2>不是立刻報價，<br>而是先整理判斷依據。</h2></header>
+      <div class="response-list">
+        <article><span>01</span><h3>哪個環節最值得先處理</h3><p>從影響最大、最常出錯或最浪費時間的地方開始。</p></article>
+        <article><span>02</span><h3>可以保留什麼、調整什麼</h3><p>不會為了做新系統，把原本好用的東西全部推倒。</p></article>
+        <article><span>03</span><h3>合理的第一步是什麼</h3><p>可能是串接、整理流程，也可能只是先改一個小地方。</p></article>
       </div>
     </div>
   </section>
 
-  <!-- 你會得到什麼 -->
-  <section class="slab">
-    <div class="container">
-      <span class="eyebrow eyebrow-light">What You Get</span>
-      <h2 class="h-section">一張清楚的優先順序地圖</h2>
-      <p class="lede">
-        依你勾的項目回覆初步判斷——不是報價單，是判斷依據。
-      </p>
-      <div class="grid grid-4" style="margin-top: 32px;">
-        <div class="card">
-          <span class="no">01</span>
-          <h3 class="h-card">目前的資料斷點</h3>
-          <p>資料在哪斷掉、為什麼要人工補。</p>
-        </div>
-        <div class="card">
-          <span class="no">02</span>
-          <h3 class="h-card">改善優先序</h3>
-          <p>短中長期各該做什麼、為什麼這樣排。</p>
-        </div>
-        <div class="card">
-          <span class="no">03</span>
-          <h3 class="h-card">適合的整合方向</h3>
-          <p>該串既有系統、補流程，還是不用做。</p>
-        </div>
-        <div class="card">
-          <span class="no">04</span>
-          <h3 class="h-card">初步範圍與下一步</h3>
-          <p>第一批涵蓋什麼、要準備什麼。</p>
-        </div>
-      </div>
-    </div>
+  <section class="assessment-contact">
+    <div class="assessment-wrap"><h2>還是不確定怎麼勾？</h2><p>直接傳一句「我不知道從哪裡開始」也可以，多數人都是這樣開始的。</p><a class="assessment-button" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">加 LINE 聊聊 →</a></div>
   </section>
-
-  <!-- 不確定 -->
-  <section class="section-tight">
-    <div class="container" style="text-align: center;">
-      <h2 class="h-section">不確定算不算有問題？</h2>
-      <p class="lede" style="margin: 0 auto;">
-        說一句「我不太確定從哪裡開始」就好，多數人都這樣。
-      </p>
-      <div class="btn-row" style="margin-top: 26px; justify-content: center;">
-        <a class="btn btn-primary" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">
-          直接加 LINE 聊 →
-        </a>
-        <a class="btn btn-ghost" href="/demos/">先看看 Demo</a>
-      </div>
-    </div>
-  </section>
-
 </main>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <img class="footer-logo" src="/assets/img/logo.png" alt="" width="227" height="144" style="height:46px;width:auto">
-      橙築<span class="dot">.</span> 國際
-      <span class="sub">CHENGZHU INTERNATIONAL</span>
-    </div>
-    <div class="footer-cols">
-      <a href="/solutions/">解決方案</a>
-      <a href="/industries/">產業方案</a>
-      <a href="/demos/">互動 Demo</a>
-      <a href="/case/">案例</a>
-      <a href="/assessment/">數位健檢</a>
-      <a href="/contact/">聯絡</a>
-      <a href="/appliances/">KINYO 家電</a>
-    </div>
-  </div>
-  <div class="footer-copy">
-    <span>&copy; 2026 ChengZhu International · 橙築國際</span>
-    <span>桃園市桃園區春日路 818 號 1F</span>
-    <span>03-370-8108</span>
-  </div>
+<footer class="assessment-footer">
+  <div class="footer-inner"><div class="footer-brand"><img class="footer-logo" src="/assets/img/logo.png" alt="" width="227" height="144">橙築國際<span class="sub">CHENGZHU INTERNATIONAL</span></div><div class="footer-cols"><a href="/#services">我們的服務</a><a href="/solutions/">解決方案</a><a href="/demos/">互動 Demo</a><a href="/case/">案例</a><a href="/contact/">聯絡</a></div></div>
+  <div class="footer-copy"><span>&copy; 2026 ChengZhu International · 橙築國際</span><span>03-370-8108</span></div>
 </footer>
 
 <script>
 (function () {
   var LINE_ID = '@165aegfe';
-  var boxes   = Array.prototype.slice.call(document.querySelectorAll('.check input'));
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.check input'));
   var preview = document.getElementById('preview');
-  var count   = document.getElementById('count');
-  var btn     = document.getElementById('sendBtn');
+  var count = document.getElementById('count');
+  var btn = document.getElementById('sendBtn');
 
   function build() {
-    var picked = boxes.filter(function (b) { return b.checked; })
-                      .map(function (b) { return b.dataset.item; });
+    var picked = boxes.filter(function (box) { return box.checked; }).map(function (box) { return box.dataset.item; });
     count.textContent = picked.length;
-
     if (!picked.length) {
-      preview.innerHTML = '<span class="placeholder">勾選後這裡會產生要傳送的內容。</span>';
+      preview.innerHTML = '<span class="placeholder">勾選後，這裡會整理出一段準備傳送的內容。</span>';
       btn.setAttribute('aria-disabled', 'true');
       btn.setAttribute('href', 'https://line.me/R/ti/p/' + LINE_ID);
       return;
     }
-
     var lines = ['【數位健檢結果】', '目前遇到的狀況：'];
-    picked.forEach(function (item, i) { lines.push((i + 1) + '. ' + item); });
+    picked.forEach(function (item, index) { lines.push((index + 1) + '. ' + item); });
     lines.push('', '想請橙築協助判斷該從哪裡開始改善。');
-
     var text = lines.join('\n');
     preview.textContent = text;
     btn.removeAttribute('aria-disabled');
-    // LINE 官方 scheme 的 ID 段使用原始 @，只有訊息內容需要編碼
-    btn.setAttribute('href',
-      'https://line.me/R/oaMessage/' + LINE_ID + '/?' + encodeURIComponent(text));
+    btn.setAttribute('href', 'https://line.me/R/oaMessage/' + LINE_ID + '/?' + encodeURIComponent(text));
   }
-
-  boxes.forEach(function (b) { b.addEventListener('change', build); });
+  boxes.forEach(function (box) { box.addEventListener('change', build); });
   build();
 })();
 </script>
-
 </body>
 </html>

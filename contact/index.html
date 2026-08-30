@@ -3,255 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>聯絡諮詢 — 橙築國際 ChengZhu</title>
-  <meta name="description" content="桃園市桃園區春日路 818 號 1F。LINE 官方帳號 @165aegfe、03-370-8108、0975-691-485。初次諮詢免費，不適合我們會直接說。">
+  <title>聯絡橙築 — 先說最卡的那件事</title>
+  <meta name="description" content="不用先準備需求書。告訴橙築目前最浪費時間、最容易出錯或最想改善的地方，我們會陪你把問題整理清楚。LINE、電話與 Email 都可以。">
   <link rel="canonical" href="https://chengzhu.co/contact/">
-  <meta property="og:title" content="聯絡諮詢 — 橙築國際 ChengZhu">
-  <meta property="og:description" content="告訴我們你想先解決哪一個營運問題。初次諮詢免費。">
+  <meta property="og:title" content="聯絡橙築 — 先說最卡的那件事">
+  <meta property="og:description" content="不用先準備需求書。從現在最卡的一件事開始聊。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://chengzhu.co/contact/">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:image" content="https://chengzhu.co/assets/og/contact.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="聯絡諮詢 — 橙築國際 ChengZhu">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://chengzhu.co/assets/og/contact.jpg">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chiron+Sung+HK:wght@400;500;600&family=Chiron+Hei+HK:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css?v=20260827">
-  <style>
-    .ways { display: grid; gap: 14px; margin: 30px 0 0; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-    .way {
-      background: var(--paper-2); border: 1px solid var(--line-soft);
-      border-radius: 3px; padding: 22px 22px 20px; display: flex; flex-direction: column;
-    }
-    .way.primary { border-color: var(--orange); }
-    .way .k {
-      font-family: var(--mono); font-size: .68rem; letter-spacing: .13em;
-      text-transform: uppercase; color: var(--ink-soft); margin-bottom: 9px;
-    }
-    .way.primary .k { color: var(--orange); }
-    .way h3 { font-family: var(--serif); font-size: 1.14rem; font-weight: 600; margin-bottom: 8px; }
-    .way p { font-size: .89rem; color: var(--ink-mid); line-height: 1.8; margin-bottom: 16px; }
-    .way .v {
-      font-family: var(--mono); font-size: 1.02rem; font-weight: 500;
-      margin-bottom: 4px; word-break: break-all;
-    }
-    .way .v a:hover { color: var(--orange); }
-    .way .hint { font-size: .8rem; color: var(--ink-soft); margin-top: auto; padding-top: 12px; }
-
-    .topics { list-style: none; display: grid; gap: 10px; margin: 24px 0 0; }
-    .topics li {
-      font-size: .95rem; line-height: 1.75; padding-left: 24px; position: relative;
-    }
-    .topics li::before {
-      content: "—"; position: absolute; left: 0; color: var(--teal); font-family: var(--mono);
-    }
-    .visit {
-      display: grid; gap: 30px; margin-top: 32px;
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 760px) { .visit { grid-template-columns: 1fr; gap: 22px; } }
-    .tea-band {
-      width: 100%; height: 260px; object-fit: cover;
-      border-radius: 8px; margin-bottom: 36px;
-    }
-    @media (max-width: 860px) { .tea-band { height: 170px; } }
-  </style>
+  <link rel="stylesheet" href="/assets/contact-v2.css?v=20260830">
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png">
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 </head>
-<body>
-
-<header class="nav">
+<body class="contact-v2">
+<header class="nav contact-nav">
   <div class="nav-inner">
-    <a href="/" class="nav-brand"><img class="nav-logo" src="/assets/img/logo.png" alt="" width="227" height="144" style="height:30px;width:auto">橙築<span class="dot">.</span></a>
-    <nav class="nav-links">
-      <a href="/solutions/">解決方案</a>
-      <a href="/industries/">產業方案</a>
-      <a href="/demos/">互動 Demo</a>
-      <a href="/case/">案例</a>
-      <a href="/contact/">聯絡</a>
-      <a class="nav-cta" href="/assessment/">免費數位健檢</a>
+    <a href="/" class="nav-brand" aria-label="橙築國際首頁"><img class="nav-logo" src="/assets/img/logo.png" alt="" width="227" height="144">橙築<span class="dot">.</span></a>
+    <nav class="nav-links" aria-label="主要導覽">
+      <a href="/#services">我們的服務</a><a href="/solutions/">解決方案</a><a href="/demos/">互動 Demo</a><a href="/case/">案例</a><a class="nav-secondary" href="/contact/" aria-current="page">聯絡</a><a class="nav-cta" href="/assessment/">免費數位健檢</a>
     </nav>
   </div>
 </header>
 
 <main>
-
-  <section class="page-head hero-art">
-    <div class="container">
-      <div class="crumb"><a href="/">首頁</a> / 聯絡</div>
-      <span class="eyebrow">Contact</span>
-      <h1 class="h-display" style="font-size: clamp(1.9rem, 4.4vw, 2.8rem);">
-        想先解決哪一個<br>營運問題？
-      </h1>
-      <p class="lede" style="margin-top: 22px;">
-        官網、系統串接，或最卡的那段流程——先說一句。
-        初次諮詢免費，不適合我們會直說。
-      </p>
+  <section class="contact-hero">
+    <div class="contact-wrap hero-layout">
+      <div>
+        <span class="contact-kicker">從一場對話開始</span>
+        <h1>先說最卡的<br>那一件事就好。</h1>
+        <p>不用先整理需求書，也不用決定要做網站還是系統。告訴我們現在最浪費時間、最容易出錯，或最想改善的地方，我們會陪你把問題整理清楚。</p>
+        <a class="contact-button" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">加 LINE 開始聊 →</a>
+        <small>官方帳號 @165aegfe　·　通常於工作日當天回覆</small>
+      </div>
+      <figure><img src="/assets/img/contact-conversation-v3.jpg" alt="在一杯熱茶旁展開服務對話" width="1536" height="1024"><figcaption>不急著談功能，先把現況說清楚。</figcaption></figure>
     </div>
   </section>
 
-  <!-- 三種聯絡方式 -->
-  <section class="section-tight">
-    <div class="container">
-      <span class="eyebrow">Get In Touch</span>
-      <h2 class="h-section">選你方便的方式。</h2>
+  <section class="starter-section">
+    <div class="contact-wrap starter-layout">
+      <header><span class="contact-kicker">不知道怎麼開始？</span><h2>你可以直接<br>這樣告訴我們。</h2></header>
+      <div class="starter-list">
+        <article><span>01</span><p>「現在同一份資料，要在三個地方重複輸入。」</p></article>
+        <article><span>02</span><p>「客戶一直問相同問題，但現場沒時間一個個回。」</p></article>
+        <article><span>03</span><p>「我們想數位化，可是不知道第一步該做什麼。」</p></article>
+      </div>
+    </div>
+  </section>
 
-      <div class="ways">
-        <div class="way primary">
-          <div class="k">最快</div>
+  <section class="contact-methods">
+    <div class="contact-wrap">
+      <header class="methods-heading"><span>選你方便的方式</span><h2>一段訊息、一通電話，<br>都可以是開始。</h2></header>
+      <div class="methods-grid">
+        <article class="method primary">
+          <span>建議從這裡開始</span>
           <h3>LINE 官方帳號</h3>
-          <p>直接傳訊息就好，多數人從這裡開始。</p>
-          <div class="v"><a href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">@165aegfe</a></div>
-          <a class="btn btn-primary" style="margin-top: 14px;" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">
-            加 LINE 開始對話 →
-          </a>
-          <p class="hint">通常當天回覆。</p>
-        </div>
-
-        <div class="way">
-          <div class="k">想直接講</div>
+          <p>先留一句現在的狀況，我們會接著問真正需要釐清的問題。</p>
+          <a href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">@165aegfe　開始對話 →</a>
+        </article>
+        <article class="method">
+          <span>想直接說明</span>
           <h3>電話</h3>
-          <p>複雜流程用講的比較快，工作日白天都在。</p>
-          <div class="v"><a href="tel:0975691485">0975-691-485</a></div>
-          <div class="v"><a href="tel:0333708108">03-370-8108</a></div>
-          <p class="hint">行動電話 / 公司電話</p>
-        </div>
-
-        <div class="way">
-          <div class="k">有附件</div>
+          <p>流程比較複雜，用講的通常更快。</p>
+          <a href="tel:0975691485">0975-691-485</a>
+          <a href="tel:0333708108">03-370-8108</a>
+        </article>
+        <article class="method">
+          <span>已有附件或文件</span>
           <h3>電子郵件</h3>
-          <p>附流程圖、規格書或報價需求都方便。</p>
-          <div class="v"><a href="mailto:cat@cz-777.com">cat@cz-777.com</a></div>
-          <p class="hint">一到兩個工作日回覆。</p>
-        </div>
+          <p>可以附上流程圖、現有資料或希望改善的內容。</p>
+          <a href="mailto:cat@cz-777.com">cat@cz-777.com</a>
+        </article>
       </div>
-
-      <div class="btn-row" style="margin-top: 26px;">
-        <a class="btn btn-ghost" href="/assessment/">不知道從哪講起？先做數位健檢 →</a>
-      </div>
+      <a class="assessment-link" href="/assessment/">還不知道怎麼說？先做五分鐘數位健檢 →</a>
     </div>
   </section>
 
-  <!-- 適合討論什麼 -->
-  <section class="section-tight">
-    <div class="container">
-      <div class="visit">
-        <div>
-          <span class="eyebrow">Let's Talk</span>
-          <h2 class="h-section">適合討論的事</h2>
-          <ul class="topics">
-            <li>官網、會員平台與內容架構</li>
-            <li>ERP、CRM、POS 整合串接</li>
-            <li>LINE 官方帳號與流程自動化</li>
-            <li>營運數字與儀表板</li>
-            <li>既有系統接不起來，想評估可行性</li>
-            <li>不確定該不該做系統，想聽看法</li>
-          </ul>
-        </div>
-
-        <div>
-          <span class="eyebrow">Visit Us</span>
-          <h2 class="h-section">也歡迎直接來</h2>
-          <p style="font-size: .97rem; color: var(--ink-mid); line-height: 1.9;">
-            桃園春日路有實體據點。想確認「這東西真的在運作嗎」，
-            當面看比簡報清楚。
-          </p>
-          <div class="contact-list" style="margin-top: 20px; grid-template-columns: 1fr;">
-            <div class="contact-item">
-              <div class="label">公司地址</div>
-              <div class="value">
-                <a href="https://maps.google.com/?q=桃園市桃園區春日路818號" target="_blank" rel="noopener">
-                  桃園市桃園區春日路 818 號 1F ↗
-                </a>
-              </div>
-              <div class="sub">來訪前先用 LINE 或電話約個時間</div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <section class="visit-section">
+    <div class="contact-wrap visit-layout">
+      <div><span class="contact-kicker">也歡迎當面聊</span><h2>桃園春日路，<br>茶會先準備好。</h2><p>如果你想把現場資料帶來一起看，來訪前先用 LINE 或電話約時間即可。</p></div>
+      <address>
+        <span>橙築國際</span>
+        <strong>桃園市桃園區春日路 818 號 1F</strong>
+        <a href="https://maps.google.com/?q=桃園市桃園區春日路818號" target="_blank" rel="noopener">在 Google 地圖開啟 ↗</a>
+      </address>
     </div>
   </section>
-
-  <!-- 集團其他事業 -->
-  <section class="section-tight">
-    <div class="container">
-      <span class="eyebrow">Other Business Lines</span>
-      <h2 class="h-section">要找的是別條線？</h2>
-      <p class="lede">
-        橙築同時經營室內設計、外匯汽車與家電經銷。找對窗口比較快。
-      </p>
-      <div class="grid grid-4" style="margin-top: 30px;">
-        <a class="card" href="/solutions/">
-          <h3 class="h-card">橙築國際</h3>
-          <p>企業系統整合與 AI 工作流程設計——就是本站。</p>
-          <span class="more">看解決方案 →</span>
-        </a>
-        <a class="card" href="https://cz-777.com" target="_blank" rel="noopener">
-          <h3 class="h-card">橙築室內設計</h3>
-          <p>住宅、商空與軟裝規劃。</p>
-          <span class="more">cz-777.com ↗</span>
-        </a>
-        <a class="card" href="/appliances/">
-          <h3 class="h-card">KINYO 家電</h3>
-          <p>企業禮贈品、三聯式發票。</p>
-          <span class="more">了解更多 →</span>
-        </a>
-        <div class="card">
-          <h3 class="h-card">橙築國際車業</h3>
-          <p>外匯車代辦、鑑定與交車；已驗證車商另有批發通路。</p>
-          <span class="more"><a href="https://chengzhuiv.com" target="_blank" rel="noopener">chengzhuiv.com ↗</a></span>
-          <span class="more" style="margin-top: 6px;"><a href="https://cars.chengzhu.co" target="_blank" rel="noopener">cars.chengzhu.co ↗</a></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 收尾 -->
-  <section class="closing">
-    <div class="container">
-      <img class="tea-band" src="/assets/img/tea.jpg" alt="深色桌面上冒著熱氣的玻璃杯茶" loading="lazy" width="1200" height="675">
-      <p class="signoff">
-        讀到這裡，謝謝。<br>
-        歡迎來春日路聊聊，<br>
-        茶一直是熱的。
-      </p>
-      <p class="signature">橙築國際</p>
-    </div>
-  </section>
-
 </main>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <img class="footer-logo" src="/assets/img/logo.png" alt="" width="227" height="144" style="height:46px;width:auto">
-      橙築<span class="dot">.</span> 國際
-      <span class="sub">CHENGZHU INTERNATIONAL</span>
-    </div>
-    <div class="footer-cols">
-      <a href="/solutions/">解決方案</a>
-      <a href="/industries/">產業方案</a>
-      <a href="/demos/">互動 Demo</a>
-      <a href="/case/">案例</a>
-      <a href="/assessment/">數位健檢</a>
-      <a href="/contact/">聯絡</a>
-      <a href="/appliances/">KINYO 家電</a>
-    </div>
-  </div>
-  <div class="footer-copy">
-    <span>&copy; 2026 ChengZhu International · 橙築國際</span>
-    <span>桃園市桃園區春日路 818 號 1F</span>
-    <span>03-370-8108</span>
-  </div>
+<footer class="contact-footer">
+  <div class="footer-inner"><div class="footer-brand"><img class="footer-logo" src="/assets/img/logo.png" alt="" width="227" height="144">橙築國際<span class="sub">CHENGZHU INTERNATIONAL</span></div><div class="footer-cols"><a href="/#services">我們的服務</a><a href="/solutions/">解決方案</a><a href="/demos/">互動 Demo</a><a href="/case/">案例</a><a href="/contact/">聯絡</a></div></div>
+  <div class="footer-copy"><span>&copy; 2026 ChengZhu International · 橙築國際</span><span>03-370-8108</span></div>
 </footer>
-
 </body>
 </html>

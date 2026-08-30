@@ -3,451 +3,123 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>解決方案 — 橙築國際 ChengZhu</title>
-  <meta name="description" content="企業網站與會員平台、ERP 流程中台、CRM 會員經營、POS 門市營運、LINE Bot 服務流程、資料與營運儀表板。橙築以企業流程為核心完成整合。">
+  <title>我們的服務 — 橙築國際 ChengZhu</title>
+  <meta name="description" content="橙築從現場問題出發，客製網站與 LINE 服務體驗、日常營運系統，以及資料整合與自動化。你不必先決定工具，只要先說想讓哪件事變簡單。">
   <link rel="canonical" href="https://chengzhu.co/solutions/">
-  <meta property="og:title" content="解決方案 — 橙築國際 ChengZhu">
-  <meta property="og:description" content="不是再多一套工具，而是一套能一起運作的系統。">
+  <meta property="og:title" content="我們的服務 — 橙築國際 ChengZhu">
+  <meta property="og:description" content="不用先挑系統。先從客戶體驗、日常營運或資料整合中，找出最值得變簡單的那一段。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://chengzhu.co/solutions/">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:image" content="https://chengzhu.co/assets/og/solutions.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="解決方案 — 橙築國際 ChengZhu">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://chengzhu.co/assets/og/solutions.jpg">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chiron+Sung+HK:wght@400;500;600&family=Chiron+Hei+HK:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site.css?v=20260827">
-  <style>
-    .sol {
-      display: grid; gap: 40px; padding: 56px 0;
-      border-top: 1px solid var(--line-soft);
-      grid-template-columns: minmax(260px, .85fr) 1.15fr;
-      scroll-margin-top: 84px;
-    }
-    .sol:first-of-type { border-top: 0; }
-    .sol .no {
-      font-family: var(--mono); font-size: .78rem; font-weight: 600;
-      letter-spacing: .12em; color: var(--orange); display: block; margin-bottom: 12px;
-    }
-    .sol h2 { font-size: 1.42rem; line-height: 1.45; margin-bottom: 14px; }
-    .sol .desc { font-size: .97rem; color: var(--ink-mid); line-height: 1.9; }
-    .sol .did {
-      list-style: none; display: grid; gap: 9px; margin: 0 0 20px;
-    }
-    .sol .did li {
-      font-size: .93rem; color: var(--ink); line-height: 1.75;
-      padding-left: 22px; position: relative;
-    }
-    .sol .did li::before {
-      content: "—"; position: absolute; left: 0; color: var(--teal);
-      font-family: var(--mono);
-    }
-    .sol .did-h {
-      font-family: var(--mono); font-size: .68rem; letter-spacing: .13em;
-      text-transform: uppercase; color: var(--ink-soft); margin-bottom: 12px;
-    }
-    .sol .stack {
-      font-family: var(--mono); font-size: .74rem; color: var(--ink-soft);
-      line-height: 1.85; padding-top: 15px; border-top: 1px solid var(--line-soft);
-    }
-    .sol .try { margin-top: 15px; font-size: .89rem; font-weight: 500; }
-    .sol .try a { color: var(--orange); }
-    .sol .try a:hover { text-decoration: underline; text-underline-offset: 3px; }
-    @media (max-width: 860px) {
-      .sol { grid-template-columns: 1fr; gap: 22px; padding: 42px 0; }
-    }
-    .sol-mock {
-      margin: 20px 0 0; padding: 14px; border-radius: 10px;
-      background: #1c1f24; border: 1px solid rgba(255,255,255,.08);
-      display: flex; flex-direction: column; gap: 5px; max-width: 200px;
-    }
-    .sm-hdr { height: 14px; border-radius: 4px; }
-    .sm-bar { height: 5px; border-radius: 2px; background: rgba(255,255,255,.08); flex: 1; }
-    .sm-row { display: flex; gap: 4px; align-items: center; }
-    .sm-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .sm-block { border-radius: 4px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); }
-    .sm-badge { width: 14px; height: 7px; border-radius: 2px; flex-shrink: 0; }
-    @media (max-width: 860px) {
-      .sol-mock { margin: 16px auto 0; }
-    }
-    .band-img {
-      width: 100%; height: 300px;
-      object-fit: cover; object-position: center 40%;
-      border-radius: 10px; margin-top: 10px;
-    }
-    @media (max-width: 860px) { .band-img { height: 180px; } }
-  </style>
+  <link rel="stylesheet" href="/assets/solutions-v2.css?v=20260830">
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png">
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 </head>
-<body>
-
-<header class="nav">
+<body class="solutions-v2">
+<header class="nav solutions-nav">
   <div class="nav-inner">
-    <a href="/" class="nav-brand"><img class="nav-logo" src="/assets/img/logo.png" alt="" width="227" height="144" style="height:30px;width:auto">橙築<span class="dot">.</span></a>
-    <nav class="nav-links">
-      <a href="/solutions/">解決方案</a>
-      <a href="/industries/">產業方案</a>
-      <a href="/demos/">互動 Demo</a>
-      <a href="/case/">案例</a>
-      <a href="/contact/">聯絡</a>
-      <a class="nav-cta" href="/assessment/">免費數位健檢</a>
+    <a href="/" class="nav-brand" aria-label="橙築國際首頁"><img class="nav-logo" src="/assets/img/logo.png" alt="" width="227" height="144">橙築<span class="dot">.</span></a>
+    <nav class="nav-links" aria-label="主要導覽">
+      <a href="/#services">我們的服務</a><a href="/solutions/" aria-current="page">解決方案</a><a href="/demos/">互動 Demo</a><a href="/case/">案例</a><a class="nav-secondary" href="/contact/">聯絡</a><a class="nav-cta" href="/assessment/">免費數位健檢</a>
     </nav>
   </div>
 </header>
 
 <main>
-
-  <section class="page-head hero-art">
-    <div class="container">
-      <div class="crumb"><a href="/">首頁</a> / 解決方案</div>
-      <span class="eyebrow">Solutions</span>
-      <h1 class="h-display" style="font-size: clamp(1.9rem, 4.4vw, 2.8rem);">
-        不是再多一套工具，<br>而是一套能一起運作的系統。
-      </h1>
-      <p class="lede" style="margin-top: 22px;">
-        橙築以企業流程為核心，選擇合適的技術並負責接起來。
-        以下每一項列的都是實際交付過的功能，不是規格表。
-      </p>
+  <section class="solutions-hero">
+    <div class="solutions-wrap hero-layout">
+      <div>
+        <span class="solutions-kicker">橙築的服務方式</span>
+        <h1>不用先挑系統。<br>先說你想讓<br><em>哪件事變簡單。</em></h1>
+        <p>網站、LINE、後台與資料串接只是工具。我們真正處理的，是客戶怎麼找到你、現場怎麼把事情做完，以及管理者怎麼看見下一步。</p>
+        <a class="solutions-button" href="#outcomes">從三種服務成果開始 →</a>
+      </div>
+      <figure><img src="/assets/img/hero-collaboration-v3.jpg" alt="三位工作夥伴在桌邊一起梳理服務流程" width="1024" height="1536"><figcaption>先理解工作方式，再決定工具。</figcaption></figure>
     </div>
   </section>
 
-  <section class="section-tight">
-    <div class="container">
+  <section class="outcomes-section" id="outcomes">
+    <div class="solutions-wrap">
+      <header class="outcomes-heading"><span>三種服務成果</span><h2>可以先從一段開始，<br>不用一次全部重來。</h2></header>
 
-      <!-- 01 -->
-      <div class="sol" id="web">
-        <div>
-          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12,1.5A10.5,10.5,0,1,0,22.5,12,10.51211,10.51211,0,0,0,12,1.5Zm0,1c1.67426,0,3.16962,2.04968,3.9433,5H8.0567C8.83038,4.54968,10.32574,2.5,12,2.5Zm4.16772,6A18.40726,18.40726,0,0,1,16.5,12a18.40726,18.40726,0,0,1-.33228,3.5H7.83234a18.59609,18.59609,0,0,1,0-7ZM9.20947,2.91974A10.59442,10.59442,0,0,0,7.0191,7.5H3.63647A9.545,9.545,0,0,1,9.20947,2.91974ZM2.5,12a9.4374,9.4374,0,0,1,.67651-3.5H6.80817a20.02948,20.02948,0,0,0,0,7H3.17651A9.4374,9.4374,0,0,1,2.5,12Zm1.13647,4.5H7.0191a10.59442,10.59442,0,0,0,2.19037,4.58026A9.545,9.545,0,0,1,3.63647,16.5ZM12,21.5c-1.67426,0-3.16962-2.04968-3.9433-5h7.8866C15.16962,19.45032,13.67426,21.5,12,21.5Zm2.79053-.41974A10.59442,10.59442,0,0,0,16.9809,16.5h3.38263A9.545,9.545,0,0,1,14.79053,21.08026ZM21.5,12a9.4374,9.4374,0,0,1-.67651,3.5H17.19183A19.79051,19.79051,0,0,0,17.5,12a19.79051,19.79051,0,0,0-.30817-3.5h3.63166A9.4374,9.4374,0,0,1,21.5,12ZM16.9809,7.5a10.59442,10.59442,0,0,0-2.19037-4.58026A9.545,9.545,0,0,1,20.36353,7.5Z"/></svg>
-          <span class="no">01</span>
-          <h2>企業網站與會員平台</h2>
-          <p class="desc">
-            網站的工作不是好看，是把詢問變成可追蹤的資料。
-            品牌官網、會員分級與多語系，讓網站成為可衡量的營運入口。
-          </p>
-          <div class="sol-mock">
-            <div class="sm-hdr" style="background:var(--teal);opacity:.5"></div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
-              <div class="sm-block" style="height:36px"></div>
-              <div class="sm-block" style="height:36px"></div>
-            </div>
-            <div class="sm-bar" style="width:60%"></div>
-            <div class="sm-bar" style="width:80%"></div>
-          </div>
+      <article class="outcome">
+        <figure><img src="/assets/img/salon.jpg" alt="顧客預約服務的現場" width="1200" height="800" loading="lazy"></figure>
+        <div class="outcome-copy">
+          <span class="outcome-no">01 · 客戶體驗</span>
+          <h3>讓客戶看得懂，<br>也知道下一步。</h3>
+          <p>把品牌網站、服務入口、預約、查價與 LINE 體驗整理成清楚的路徑。不是只做漂亮頁面，而是讓訪客更容易採取行動。</p>
+          <ul><li>網站重新設計與內容梳理</li><li>預約、查價、報名與會員入口</li><li>LINE 官方帳號與服務流程</li></ul>
+          <small>適合：詢問很多卻難成交、預約來回確認、網站資訊難理解</small>
         </div>
-        <div>
-          <div class="did-h">我們實際做過</div>
-          <ul class="did">
-            <li>B2B 採購平台前台：展示、查價、下單、售後追蹤</li>
-            <li>會員平台：綁定、分級權益、消費紀錄、活動通知</li>
-            <li>品牌站與商品型錄，含 SEO 結構與分享卡片</li>
-            <li>詢問表單直送後台與 LINE，不停在信箱</li>
-          </ul>
-          <p class="try">可以先玩：<a href="/shop/">選物商城 Demo</a> — 完整的瀏覽、購物車與結帳流程</p>
-          <p class="stack">內容架構 / UIUX / SEO / CMS / 會員分級 / Firebase Auth</p>
-        </div>
-      </div>
+      </article>
 
-      <!-- 02 -->
-      <div class="sol" id="erp">
-        <div>
-          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20,15.5h-.5V14A2.50263,2.50263,0,0,0,17,11.5H12.5v-3H13A2.50263,2.50263,0,0,0,15.5,6V4A2.50263,2.50263,0,0,0,13,1.5H11A2.50263,2.50263,0,0,0,8.5,4V6A2.50263,2.50263,0,0,0,11,8.5h.5v3H7A2.50263,2.50263,0,0,0,4.5,14v1.5H4A2.50263,2.50263,0,0,0,1.5,18v2A2.50263,2.50263,0,0,0,4,22.5H6A2.50263,2.50263,0,0,0,8.5,20V18A2.50263,2.50263,0,0,0,6,15.5H5.5V14A1.50164,1.50164,0,0,1,7,12.5H17A1.50164,1.50164,0,0,1,18.5,14v1.5H18A2.50263,2.50263,0,0,0,15.5,18v2A2.50263,2.50263,0,0,0,18,22.5h2A2.50263,2.50263,0,0,0,22.5,20V18A2.50263,2.50263,0,0,0,20,15.5Zm-14,1A1.50164,1.50164,0,0,1,7.5,18v2A1.50164,1.50164,0,0,1,6,21.5H4A1.50164,1.50164,0,0,1,2.5,20V18A1.50164,1.50164,0,0,1,4,16.5Zm5-9A1.50164,1.50164,0,0,1,9.5,6V4A1.50164,1.50164,0,0,1,11,2.5h2A1.50164,1.50164,0,0,1,14.5,4V6A1.50164,1.50164,0,0,1,13,7.5ZM21.5,20A1.50164,1.50164,0,0,1,20,21.5H18A1.50164,1.50164,0,0,1,16.5,20V18A1.50164,1.50164,0,0,1,18,16.5h2A1.50164,1.50164,0,0,1,21.5,18Z"/></svg>
-          <span class="no">02</span>
-          <h2>ERP 與流程中台</h2>
-          <p class="desc">
-            採購、庫存、工單、對帳收進同一套工作流程。
-            每個狀態有人負責、有時間戳，下一步系統說了算。
-          </p>
-          <div class="sol-mock">
-            <div class="sm-row">
-              <div class="sm-bar"></div><div class="sm-bar"></div><div class="sm-bar"></div>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px">
-              <div class="sm-block" style="height:24px"></div>
-              <div class="sm-block" style="height:24px"></div>
-              <div class="sm-block" style="height:24px"></div>
-              <div class="sm-block" style="height:24px"></div>
-              <div></div>
-              <div class="sm-block" style="height:24px"></div>
-            </div>
-          </div>
+      <article class="outcome reverse">
+        <figure><img src="/assets/img/workshop.jpg" alt="專業工坊的日常作業現場" width="1200" height="800" loading="lazy"></figure>
+        <div class="outcome-copy">
+          <span class="outcome-no">02 · 日常營運</span>
+          <h3>讓現場少重複、<br>也少漏掉。</h3>
+          <p>依照團隊真正的工作方式，整理訂單、工單、會員、庫存與交接。保留必要習慣，把重複輸入與容易出錯的地方拿掉。</p>
+          <ul><li>訂單、工單與進度管理</li><li>會員、課程、庫存與排班</li><li>內部後台與權限設計</li></ul>
+          <small>適合：資料靠人記、忙起來容易漏、月底需要重新整理</small>
         </div>
-        <div>
-          <div class="did-h">我們實際做過</div>
-          <ul class="did">
-            <li>工單全流程：已成立 → 待料 → 組裝中 → 可取桿 → 已交付</li>
-            <li>掃碼收貨、出貨與盤點，每筆留異動帳與條碼紀錄</li>
-            <li>1,858 筆料件即時庫存，含雙價、廠商與門市標記</li>
-            <li>缺料自動進待訂貨清單，訂貨到貨都記人與時間</li>
-            <li>指派技師與工時區段，沒指派不能進下一階段</li>
-            <li>電商與門市共用同一份商品與庫存</li>
-          </ul>
-          <p class="stack">進銷存 / 掃碼盤點 / 工單看板 / 多倉 / PostgreSQL / Firestore</p>
-        </div>
-      </div>
+      </article>
 
-      <!-- 03 -->
-      <div class="sol" id="crm">
-        <div>
-          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.5,15.55054V14A2.50231,2.50231,0,0,0,17,11.5H12.5V8.44946a3.5,3.5,0,1,0-1,0V11.5H7A2.50263,2.50263,0,0,0,4.5,14v1.55054a3.5,3.5,0,1,0,1,0V14A1.50164,1.50164,0,0,1,7,12.5H17A1.50164,1.50164,0,0,1,18.5,14v1.55054a3.5,3.5,0,1,0,1,0ZM7.5,19A2.5,2.5,0,1,1,5,16.5,2.50263,2.50263,0,0,1,7.5,19Zm2-14A2.5,2.5,0,1,1,12,7.5,2.50263,2.50263,0,0,1,9.5,5ZM19,21.5A2.5,2.5,0,1,1,21.5,19,2.50231,2.50231,0,0,1,19,21.5Z"/></svg>
-          <span class="no">03</span>
-          <h2>CRM 與會員經營</h2>
-          <p class="desc">
-            從詢問到成交後服務，累積每位客戶的互動、消費與偏好——
-            讓下一次接觸的人知道上次談到哪裡。
-          </p>
-          <div class="sol-mock">
-            <div class="sm-row"><div class="sm-dot" style="background:var(--teal);opacity:.4"></div><div class="sm-bar"></div></div>
-            <div class="sm-bar" style="width:70%"></div>
-            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
-            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
-            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--orange);opacity:.3"></div></div>
-          </div>
+      <article class="outcome">
+        <figure><img src="/assets/img/warehouse.jpg" alt="企業倉儲與資料作業現場" width="1200" height="800" loading="lazy"></figure>
+        <div class="outcome-copy">
+          <span class="outcome-no">03 · 資料整合</span>
+          <h3>讓資料接得起來，<br>管理者看得到。</h3>
+          <p>不必把原有工具全部丟掉。我們會整理資料從哪裡來、下一步要去哪裡，再串起自動通知、同步與管理報表。</p>
+          <ul><li>既有系統與資料來源串接</li><li>自動通知、歸檔與定期報表</li><li>異常提醒與管理資訊</li></ul>
+          <small>適合：同一份資料重複輸入、報表永遠慢一步、工具彼此不說話</small>
         </div>
-        <div>
-          <div class="did-h">我們實際做過</div>
-          <ul class="did">
-            <li>對話式會員綁定，在 LINE 完成，不用下載註冊</li>
-            <li>會員卡、消費紀錄與年度消費自動累計</li>
-            <li>等級與標籤分群，供分眾推播使用</li>
-            <li>客戶偏好與量身資料留存，回訪直接調出</li>
-            <li>跨據點共用同一份會員資料與權益</li>
-          </ul>
-          <p class="try">可以先玩：<a href="/coach-demo/">教練預約 Demo</a> — 含堂數與會員紀錄管理</p>
-          <p class="stack">名單 / 標籤 / 會員卡 / 消費紀錄 / 分眾推播 / Pipeline</p>
-        </div>
-      </div>
-
-      <!-- 04 -->
-      <div class="sol" id="pos">
-        <div>
-          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20,11.5H4A2.50231,2.50231,0,0,0,1.5,14v4A2.50231,2.50231,0,0,0,4,20.5H20A2.50231,2.50231,0,0,0,22.5,18V14A2.50231,2.50231,0,0,0,20,11.5ZM21.5,18A1.50164,1.50164,0,0,1,20,19.5H4A1.50164,1.50164,0,0,1,2.5,18V14A1.50164,1.50164,0,0,1,4,12.5H20A1.50164,1.50164,0,0,1,21.5,14ZM7,16a1,1,0,1,1-1-1A1,1,0,0,1,7,16Zm4,0a1,1,0,1,1-1-1A1,1,0,0,1,11,16ZM20.15527,5.13672A.50061.50061,0,0,0,19.67383,4.5H4.32617a.50061.50061,0,0,0-.48144.63672L5.23413,10H4.19452L2.88379,5.41211A1.49923,1.49923,0,0,1,4.32617,3.5H19.67383a1.49923,1.49923,0,0,1,1.44238,1.91211L19.80548,10H18.76587Z"/></svg>
-          <span class="no">04</span>
-          <h2>POS 與門市營運</h2>
-          <p class="desc">
-            掃碼成交，庫存、會員、業績同一秒更新。
-            門市不該「白天做生意、晚上再對帳」。
-          </p>
-          <div class="sol-mock">
-            <div class="sm-row"><div class="sm-bar" style="flex:2"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
-            <div class="sm-row"><div class="sm-bar" style="flex:2"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
-            <div class="sm-row"><div class="sm-bar" style="flex:2"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
-            <div style="border-top:1px solid rgba(255,255,255,.06);margin:2px 0"></div>
-            <div class="sm-hdr" style="background:var(--orange);opacity:.4"></div>
-          </div>
-        </div>
-        <div>
-          <div class="did-h">我們實際做過</div>
-          <ul class="did">
-            <li>門市平板 POS 刷條碼結帳，庫存即時扣減</li>
-            <li>營收自動結算到日、到月，不用手動彙整</li>
-            <li>設計師與門市業績拆帳自動計算，後台看得到帳</li>
-            <li>線下付款：匯款與店內付款，宅配或店取</li>
-            <li>電商與門市庫存同一份，避免超賣</li>
-          </ul>
-          <p class="try">可以先玩：<a href="/salon-demo/">髮廊 Demo</a> — 營收拆帳與儀表板</p>
-          <p class="stack">條碼結帳 / 即時庫存 / 拆帳 / 對帳 / 跨通路同步</p>
-        </div>
-      </div>
-
-      <!-- 05 -->
-      <div class="sol" id="line">
-        <div>
-          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2.5,19.20557A2.5337,2.5337,0,0,0,5,21.7666H19a2.5337,2.5337,0,0,0,2.5-2.561V10.939a2.56592,2.56592,0,0,0-.96-2.01708l-7-5.61084a2.44611,2.44611,0,0,0-3.08008,0l-7,5.61084A2.56592,2.56592,0,0,0,2.5,10.939Zm1-8.26661a1.5944,1.5944,0,0,1,.585-1.23681l7-5.61084a1.45336,1.45336,0,0,1,1.83008,0l7,5.61084A1.5944,1.5944,0,0,1,20.5,10.939v8.26661a1.53308,1.53308,0,0,1-1.5,1.561H5a1.53308,1.53308,0,0,1-1.5-1.561Zm2.20215,1.46241a.49981.49981,0,0,1,.5957-.80274l5.00781,3.71485a1.35588,1.35588,0,0,0,1.42383-.02393l4.97266-3.69092a.49981.49981,0,1,1,.5957.80274L13.29,16.11621a2.46178,2.46178,0,0,1-1.30176.37988,2.35617,2.35617,0,0,1-1.24316-.35595Z"/></svg>
-          <span class="no">05</span>
-          <h2>LINE Bot 服務流程</h2>
-          <p class="desc">
-            預約、通知、查價、客服，全在客戶每天在用的介面裡。
-            不用下載 App、不用教登入——導入成本最低的一條路。
-          </p>
-          <div class="sol-mock">
-            <div class="sm-hdr" style="background:#06C755"></div>
-            <div class="sm-bar" style="width:55%;height:8px;border-radius:5px;margin-left:auto"></div>
-            <div class="sm-bar" style="width:70%;height:12px;border-radius:5px"></div>
-            <div class="sm-bar" style="width:45%;height:8px;border-radius:5px;margin-left:auto"></div>
-            <div class="sm-block" style="height:28px"></div>
-          </div>
-        </div>
-        <div>
-          <div class="did-h">我們實際做過</div>
-          <ul class="did">
-            <li>Rich Menu 六格功能，全程不離開 LINE</li>
-            <li>LIFF 頁面：預約、選課、報名、瀏覽與結帳</li>
-            <li>自然語言查價下單，群組講一句話就能報價</li>
-            <li>大型群組一鍵報名、候補遞補與自動分組</li>
-            <li>排程推播：明日行程、到期提醒、庫存警示</li>
-            <li>拍照上傳自動歸檔、發票辨識與防重複登記</li>
-          </ul>
-          <p class="try">五個 Demo 全部都是 LINE 場景：<a href="/demos/">查看總覽</a></p>
-          <p class="stack">官方帳號 / LIFF / Rich Menu / Flex Message / 推播 / Webhook</p>
-        </div>
-      </div>
-
-      <!-- 06 -->
-      <div class="sol" id="data">
-        <div>
-          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.5,17v1.66144l4.68555,1.8742a.50006.50006,0,0,1-.3711.92872L12,19.53857,7.18555,21.46436a.50006.50006,0,0,1-.3711-.92872L11.5,18.66144V17ZM3,3.5H21a.5.5,0,0,0,0-1H3a.5.5,0,0,0,0,1Zm5.35352,7.35352,2.56884-2.56885L12.584,10.77734a.5.5,0,0,0,.3667.22022C12.96729,10.999,12.98389,11,13,11a.49932.49932,0,0,0,.35352-.14648l3-3a.5.5,0,0,0-.707-.707L13.07812,9.71533,11.416,7.22266a.5.5,0,0,0-.3667-.22022.5104.5104,0,0,0-.40284.144l-3,3a.5.5,0,0,0,.707.707ZM20.5,13V5h-1v8A1.50164,1.50164,0,0,1,18,14.5H6A1.50164,1.50164,0,0,1,4.5,13V5h-1v8A2.50294,2.50294,0,0,0,6,15.5H18A2.50263,2.50263,0,0,0,20.5,13Z"/></svg>
-          <span class="no">06</span>
-          <h2>資料與營運儀表板</h2>
-          <p class="desc">
-            跨系統資料收攏成看得懂的數字。
-            先讓資料乾淨且只進一次，再談自動化。
-          </p>
-          <div class="sol-mock">
-            <div class="sm-row" style="height:32px;align-items:flex-end">
-              <div style="flex:1;height:50%;border-radius:2px 2px 0 0;background:var(--teal);opacity:.4"></div>
-              <div style="flex:1;height:80%;border-radius:2px 2px 0 0;background:var(--teal);opacity:.5"></div>
-              <div style="flex:1;height:60%;border-radius:2px 2px 0 0;background:var(--teal);opacity:.4"></div>
-              <div style="flex:1;height:100%;border-radius:2px 2px 0 0;background:var(--teal);opacity:.6"></div>
-              <div style="flex:1;height:70%;border-radius:2px 2px 0 0;background:var(--orange);opacity:.4"></div>
-            </div>
-            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--teal);opacity:.4"></div></div>
-            <div class="sm-row"><div class="sm-bar"></div><div class="sm-badge" style="background:var(--orange);opacity:.3"></div></div>
-          </div>
-        </div>
-        <div>
-          <div class="did-h">我們實際做過</div>
-          <ul class="did">
-            <li>營運總覽：營收、工單進度、會員活躍與庫存</li>
-            <li>週報月報自動產出並寄送，取代人工彙整</li>
-            <li>教練與門市月結報表，含拆帳與場地收入</li>
-            <li>影像辨識自動讀單據，減少人工 key 單</li>
-            <li>每日自動抓外部價格進資料倉儲，供比價參考</li>
-            <li>階梯定價引擎：依客戶分級自動套用報價</li>
-          </ul>
-          <p class="try">可以先玩：<a href="/pricing-demo/">智能查價 Demo</a> — 自然語言查價與階梯定價</p>
-          <p class="stack">儀表板 / 自動報表 / 異常預警 / OCR / 資料倉儲 / 定價引擎</p>
-        </div>
-      </div>
-
-      <img class="band-img" src="/assets/img/office-night.jpg" alt="夜間辦公桌上顯示營運圖表的雙螢幕" loading="lazy" width="1200" height="674">
-
+      </article>
     </div>
   </section>
 
-  <!-- 依產業別 -->
-  <section class="section-tight">
-    <div class="container">
-      <span class="eyebrow">By Industry</span>
-      <h2 class="h-section">已經打包好的四個方案</h2>
-      <p class="lede">
-        做過夠多次，流程與功能已收斂成可直接談的方案。
-      </p>
-
-      <div class="grid grid-4" style="margin-top: 32px;">
-        <a class="card" href="/solutions/salon/">
-          <h3 class="h-card">美業方案</h3>
-          <p>髮廊、美甲、美睫、SPA。客人 LINE 預約、設計師管班、老闆看營收拆帳。</p>
-          <span class="kw">預約 / 排班 / 拆帳</span>
-          <span class="more">了解方案 →</span>
-        </a>
-        <a class="card" href="/solutions/coach/">
-          <h3 class="h-card">教練方案</h3>
-          <p>高爾夫、健身、瑜伽、才藝。LIFF 預約、一鍵核准、堂數自動扣、到期提醒。</p>
-          <span class="kw">預約 / 堂數 / 提醒</span>
-          <span class="more">了解方案 →</span>
-        </a>
-        <a class="card" href="/solutions/community/">
-          <h3 class="h-card">社群團報方案</h3>
-          <p>球敘、登山、車隊、球類社團。一鍵報名、候補自動遞補、同組管理。</p>
-          <span class="kw">報名 / 候補 / 分組</span>
-          <span class="more">了解方案 →</span>
-        </a>
-        <a class="card" href="/solutions/enterprise/">
-          <h3 class="h-card">企業自動化方案</h3>
-          <p>品牌公司、業務團隊、中型企業。查價報價、下單追蹤、簽核審批、報表匯出。</p>
-          <span class="kw">查價 / 下單 / 簽核</span>
-          <span class="more">了解方案 →</span>
-        </a>
+  <section class="compose-section">
+    <div class="solutions-wrap compose-layout">
+      <header><span class="solutions-kicker">客製，不等於從零亂做</span><h2>保留適合你的，<br>只補真正缺的。</h2><p>我們會先看你現在已經在用什麼，再判斷哪些應該保留、哪些值得串接、哪些其實可以拿掉。</p></header>
+      <div class="compose-points">
+        <article><span>保留</span><h3>團隊已經習慣、而且好用的做法。</h3></article>
+        <article><span>整理</span><h3>重複、斷裂或責任不清的流程。</h3></article>
+        <article><span>串接</span><h3>網站、LINE、後台與既有資料。</h3></article>
+        <article><span>陪跑</span><h3>上線導入、觀察使用與後續調整。</h3></article>
       </div>
     </div>
   </section>
 
-  <!-- 方法論 -->
-  <section class="slab">
-    <div class="container">
-      <span class="eyebrow eyebrow-light">How We Work</span>
-      <h2 class="h-section">從流程診斷到持續優化</h2>
-      <p class="lede">
-        先釐清問題，再決定工具。每個階段都有明確產出。
-      </p>
-      <div class="grid grid-4" style="margin-top: 34px;">
-        <div class="card">
-          <span class="no">01</span>
-          <h3 class="h-card">探索與盤點</h3>
-          <p>盤點現有工具、資料斷點與作業節點，找出最值得優先處理的環節。</p>
-        </div>
-        <div class="card">
-          <span class="no">02</span>
-          <h3 class="h-card">藍圖與原型</h3>
-          <p>把流程畫成可討論的藍圖與可點的原型，方向確認後才進入開發。</p>
-        </div>
-        <div class="card">
-          <span class="no">03</span>
-          <h3 class="h-card">整合與上線</h3>
-          <p>分批交付，每一批都是可以真的拿來用的狀態，不做半年才見光的系統。</p>
-        </div>
-        <div class="card">
-          <span class="no">04</span>
-          <h3 class="h-card">數據與迭代</h3>
-          <p>用實際運行的數字找出下一個該優化的環節，持續調整而不是交完就走。</p>
-        </div>
+  <section class="package-section">
+    <div class="solutions-wrap package-layout">
+      <header><span class="solutions-kicker">已整理好的常見情境</span><h2>如果你的產業剛好相近，<br>可以從這裡開始看。</h2></header>
+      <div class="package-list">
+        <a href="/solutions/salon/"><span>預約服務</span><h3>排班、預約、完工與拆帳</h3><b>了解情境 →</b></a>
+        <a href="/solutions/coach/"><span>教練與課程</span><h3>課程包、扣堂、提醒與行程</h3><b>了解情境 →</b></a>
+        <a href="/solutions/community/"><span>社群活動</span><h3>報名、候補、通知與名單管理</h3><b>了解情境 →</b></a>
+        <a href="/solutions/enterprise/"><span>企業內部</span><h3>採購、查價、流程與資料整合</h3><b>了解情境 →</b></a>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="section-tight">
-    <div class="container" style="text-align: center;">
-      <span class="eyebrow">Start With Clarity</span>
-      <h2 class="h-section">先找出最值得優化的那一段</h2>
-      <p class="lede" style="margin: 0 auto;">
-        用 LINE 說一下最卡的情境，我們先幫你判斷值不值得做系統。
-      </p>
-      <div class="btn-row" style="margin-top: 26px; justify-content: center;">
-        <a class="btn btn-primary" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">
-          用 LINE 聊聊需求 →
-        </a>
-        <a class="btn btn-ghost" href="/demos/">先看看 Demo</a>
-      </div>
+  <section class="solutions-contact">
+    <div class="solutions-wrap">
+      <span class="solutions-kicker">先從一段流程開始</span>
+      <h2>不用把需求整理成系統名稱，<br>告訴我們現在最卡的事就好。</h2>
+      <p>第一次討論會先理解現場、釐清優先順序，再決定適合的做法與範圍。</p>
+      <a class="solutions-button" href="https://line.me/R/ti/p/@165aegfe" target="_blank" rel="noopener">用 LINE 開始聊 →</a>
     </div>
   </section>
-
 </main>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <img class="footer-logo" src="/assets/img/logo.png" alt="" width="227" height="144" style="height:46px;width:auto">
-      橙築<span class="dot">.</span> 國際
-      <span class="sub">CHENGZHU INTERNATIONAL</span>
-    </div>
-    <div class="footer-cols">
-      <a href="/solutions/">解決方案</a>
-      <a href="/industries/">產業方案</a>
-      <a href="/demos/">互動 Demo</a>
-      <a href="/case/">案例</a>
-      <a href="/assessment/">數位健檢</a>
-      <a href="/contact/">聯絡</a>
-      <a href="/appliances/">KINYO 家電</a>
-      <a href="https://cz-777.com" target="_blank" rel="noopener">室內設計 ↗</a>
-      <a href="https://chengzhuiv.com" target="_blank" rel="noopener">外匯汽車 ↗</a>
-      <a href="https://cars.chengzhu.co" target="_blank" rel="noopener">車商批發 ↗</a>
-    </div>
-  </div>
-  <div class="footer-copy">
-    <span>&copy; 2026 ChengZhu International · 橙築國際</span>
-    <span>桃園市桃園區春日路 818 號 1F</span>
-    <span>03-370-8108</span>
-  </div>
+<footer class="solutions-footer">
+  <div class="footer-inner"><div class="footer-brand"><img class="footer-logo" src="/assets/img/logo.png" alt="" width="227" height="144">橙築國際<span class="sub">CHENGZHU INTERNATIONAL</span></div><div class="footer-cols"><a href="/#services">我們的服務</a><a href="/solutions/">解決方案</a><a href="/demos/">互動 Demo</a><a href="/case/">案例</a><a href="/contact/">聯絡</a></div></div>
+  <div class="footer-copy"><span>&copy; 2026 ChengZhu International · 橙築國際</span><span>03-370-8108</span></div>
 </footer>
-
 </body>
 </html>
