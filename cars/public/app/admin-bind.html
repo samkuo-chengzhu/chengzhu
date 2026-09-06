@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>管理員通知綁定｜橙築</title>
+<link rel="stylesheet" href="app.css">
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<style>
+  .wrap{padding:26px 20px}
+  .lead{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:10px;padding:13px 15px;font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+  .lead b{color:var(--gold-bright)}
+  .ok-box{text-align:center;padding:20px 10px}
+  .ok-box .em{font-size:50px}
+  .ok-box h2{font-size:19px;margin-top:10px;color:var(--gold-bright)}
+  .ok-box p{color:var(--muted);font-size:13px;margin-top:8px;line-height:1.7}
+  .note{color:var(--muted2);font-size:12px;margin-top:14px;line-height:1.65;text-align:center}
+  .unbindbtn{margin-top:24px;background:var(--surface2);color:var(--muted);border:1px solid var(--line);border-radius:11px;padding:12px 20px;font-weight:700;font-size:13.5px;font-family:var(--font);cursor:pointer}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">OB</div>
+      <div><b>管理員通知綁定</b><small>ORANGE BUILDING MOTOR</small></div>
+    </div>
+  </div>
+  <div id="body" class="wrap"><div class="note">載入中…</div></div>
+</div>
+
+<script>
+  const LIFF_ID = '2010475696-IrFQfA6v';
+  let TOKEN = null, CONFIGURED = true;
+
+  function authH() { return { Authorization: 'Bearer ' + TOKEN }; }
+
+  function viewNoLine() {
+    document.getElementById('body').innerHTML =
+      `<div class="lead">此頁需要在 <b>LINE</b> 內開啟才能自動取得您的 LINE 身分。</div>
+       <div class="note">請用手機 LINE 開啟這個連結：<br>
+       <a href="https://liff.line.me/${LIFF_ID}?p=admin-bind" style="color:var(--gold-bright);text-decoration:underline;word-break:break-all">在 LINE 開啟綁定頁</a></div>`;
+  }
+  function viewUnbound() {
+    const warn = CONFIGURED ? '' : `<div class="lead" style="border-left-color:var(--red);color:#ffb4b4">⚠️ 後台密碼（ADMIN_TOKEN）尚未設定，暫時無法綁定。</div>`;
+    document.getElementById('body').innerHTML =
+      `${warn}
+       <div class="lead">綁定後，<b>有新車商申請或下訂鎖車</b>時，我會直接在 LINE 通知您，並可在對話裡直接審核。<br>密碼只用於這次驗證，<b>不會留在聊天紀錄</b>。</div>
+       <div class="field"><label>後台密碼</label>
+         <input id="pw" type="password" placeholder="輸入密碼" autocomplete="current-password" onkeydown="if(event.key==='Enter')doBind()"></div>
+       <button class="submit-btn" onclick="doBind()" ${CONFIGURED ? '' : 'disabled'}>綁定通知</button>`;
+  }
+  function viewBound() {
+    document.getElementById('body').innerHTML =
+      `<div class="ok-box">
+         <div class="em">🔔</div>
+         <h2>已綁定通知</h2>
+         <p>有新車商申請或下訂鎖車時，<br>會在這裡直接通知您。</p>
+         <button class="unbindbtn" onclick="doUnbind()">解除綁定</button>
+       </div>`;
+  }
+
+  async function refresh() {
+    try {
+      const r = await fetch('/api/admin/bind-status', { headers: authH() });
+      const j = await r.json();
+      CONFIGURED = j.configured;
+      if (!j.inLine) { viewNoLine(); return; }
+      j.bound ? viewBound() : viewUnbound();
+    } catch (e) { document.getElementById('body').innerHTML = '<div class="note">載入失敗，請重新整理。</div>'; }
+  }
+  async function doBind() {
+    const pw = (document.getElementById('pw').value || '').trim();
+    if (!pw) return;
+    try {
+      const r = await fetch('/api/admin/bind', { method: 'POST', headers: { 'Content-Type': 'application/json', ...authH() }, body: JSON.stringify({ token: pw }) });
+      if (r.status === 403) { alert('密碼錯誤，請再試一次。'); return; }
+      if (!r.ok) { alert('綁定失敗，請稍後再試。'); return; }
+      viewBound();
+    } catch (e) { alert('綁定失敗，請稍後再試。'); }
+  }
+  async function doUnbind() {
+    if (!confirm('確定解除綁定？之後不會再收到通知。')) return;
+    try { await fetch('/api/admin/unbind', { method: 'POST', headers: authH() }); viewUnbound(); }
+    catch (e) { alert('解除失敗，請稍後再試。'); }
+  }
+  window.doBind = doBind; window.doUnbind = doUnbind;
+
+  async function boot() {
+    if (typeof liff === 'undefined') { viewNoLine(); return; }
+    try {
+      await liff.init({ liffId: LIFF_ID });
+      if (!liff.isInClient() && !liff.isLoggedIn()) { viewNoLine(); return; }
+      if (!liff.isLoggedIn()) { liff.login(); return; }
+      TOKEN = liff.getAccessToken();
+      if (!TOKEN) { viewNoLine(); return; }
+    } catch (e) { viewNoLine(); return; }
+    refresh();
+  }
+  boot();
+</script>
+</body>
+</html>
