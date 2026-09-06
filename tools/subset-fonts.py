@@ -21,9 +21,7 @@ import tempfile
 import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# 主站已收進 www/（cars/ 為另一個站，不納入本字集）
-SITE = os.path.join(ROOT, "www")
-OUT_DIR = os.path.join(SITE, "assets", "fonts")
+OUT_DIR = os.path.join(ROOT, "assets", "fonts")
 CACHE = os.path.join(tempfile.gettempdir(), "plex-tc-src")
 BASE_URL = "https://unpkg.com/@ibm/plex-sans-tc@1.1.1/fonts/complete/woff2/hinted"
 WEIGHTS = {"Regular": 400, "Medium": 500, "SemiBold": 600, "Bold": 700}
@@ -42,7 +40,7 @@ ALWAYS = (
 def collect_chars():
     chars = set(ALWAYS)
     files = [
-        f for f in glob.glob(os.path.join(SITE, "**", "*.html"), recursive=True)
+        f for f in glob.glob(os.path.join(ROOT, "**", "*.html"), recursive=True)
         if ".git" not in f.replace(os.sep, "/").split("/")
     ]
     for path in files:
