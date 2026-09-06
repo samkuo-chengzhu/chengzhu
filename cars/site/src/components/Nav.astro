@@ -1,0 +1,34 @@
+---
+import { NAV_LINKS, LINE_OA_URL, SITE } from '../consts';
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+---
+
+<header class="site-nav">
+  <div class="container">
+    <a class="brand" href="/" aria-label={SITE.name}>
+      <span class="logo">OB</span>
+      <span><b>{SITE.name}</b><small>{SITE.nameEn}</small></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="開啟選單" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="navLinks">
+      {NAV_LINKS.map((l) => (
+        <a href={l.href} class={isActive(l.href) ? 'active' : ''}>{l.label}</a>
+      ))}
+      <a class="btn btn-line nav-cta" href={LINE_OA_URL} target="_blank" rel="noopener">加入官方帳號</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('navLinks');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(!!open));
+  });
+  menu?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => menu.classList.remove('open'))
+  );
+</script>
