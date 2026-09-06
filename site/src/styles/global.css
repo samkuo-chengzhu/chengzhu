@@ -3,6 +3,41 @@
    品牌 tokens 沿用 public/app/app.css（深色奢華 + 金），但改成
    響應式網站版型（移除 460px 手機框，桌機 / 平板 / 手機通吃）。
    ============================================================ */
+/* ── 品牌字體（與 chengzhu.co 一致）──────────────────────
+   自架子集，字元集由 tools/subset-fonts.py 從建置產出 ＋ 公開車源 API
+   產生（4 個字重共約 231KB）。子集外的字會掉到 Noto Sans TC 等後備字型，
+   不會破版；新增車輛後重跑該腳本即可補上。
+   註：站內標題用 font-weight 800，而 IBM Plex Sans TC 最粗為 Bold(700)，
+   因此 Bold 的 font-weight 宣告為 700 800，讓 800 直接命中 Bold。 */
+@font-face {
+  font-family: "IBM Plex Sans TC";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/IBMPlexSansTC-Regular.subset.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Sans TC";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/IBMPlexSansTC-Medium.subset.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Sans TC";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/IBMPlexSansTC-SemiBold.subset.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Sans TC";
+  font-style: normal;
+  font-weight: 700 800;
+  font-display: swap;
+  src: url("/fonts/IBMPlexSansTC-Bold.subset.woff2") format("woff2");
+}
+
 :root {
   --bg: #0b0b0d;
   --surface: #141417;
@@ -17,7 +52,7 @@
   --red: #d8433f;
   --green: #3fae6b;
   --radius: 16px;
-  --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system, system-ui, sans-serif;
+  --font: "IBM Plex Sans TC", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system, system-ui, sans-serif;
 
   /* 網站新增：容器寬度與間距 */
   --maxw: 1200px;
