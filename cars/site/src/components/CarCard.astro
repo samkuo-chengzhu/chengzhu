@@ -1,0 +1,39 @@
+---
+import type { Car } from '../lib/cars';
+import { cover, km, carTitle } from '../lib/cars';
+import { STATUS } from '../lib/status';
+
+interface Props {
+  car: Car;
+}
+const { car } = Astro.props;
+const st = STATUS[car.status] ?? { label: car.status, color: '#777' };
+const img = cover(car);
+const n = car.photos?.length ?? 0;
+const sub = [
+  km(car.mileageKm),
+  car.regionSpec ? `${car.regionSpec}進口` : null,
+  car.fuel,
+  car.exteriorColor,
+].filter(Boolean).join(' · ');
+---
+
+<a class="ccard" href={`/cars/${car.id}`} data-status={car.status}>
+  <div class="ccard-img">
+    {img ? (
+      <img src={img} alt={carTitle(car)} loading="lazy" />
+    ) : (
+      <div class="ph"><span>實車照片陸續更新</span></div>
+    )}
+    <span class="ov-stat" style={`--st:${st.color}`}>● {st.label}</span>
+    {n > 0 && <span class="ov-cnt">{n} 張</span>}
+  </div>
+  <div class="ccard-body">
+    <h3>{carTitle(car)}</h3>
+    <p class="csub">{sub}</p>
+    <div class="ccard-foot">
+      <span class="ask">查看車況 · 詢問批發價</span>
+      <span class="arr">›</span>
+    </div>
+  </div>
+</a>

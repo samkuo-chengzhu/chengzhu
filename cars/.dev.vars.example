@@ -1,0 +1,6 @@
+# 複製成 .dev.vars（勿進版控）。LINE 整合在下一階段才需要真值。
+DEV_MODE=1
+LINE_CHANNEL_ACCESS_TOKEN=
+LINE_CHANNEL_SECRET=
+LIFF_CHANNEL_ID=
+ADMIN_TOKEN=dev-admin

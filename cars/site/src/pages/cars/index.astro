@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import CarCard from '../../components/CarCard.astro';
+import { getCars } from '../../lib/cars';
+import { STATUS, PIPELINE } from '../../lib/status';
+import { LINE_OA_URL } from '../../consts';
+
+const cars = await getCars();
+const counts: Record<string, number> = { all: cars.length };
+for (const s of PIPELINE) counts[s] = cars.filter((c) => c.status === s).length;
+const tabs = ['all', ...PIPELINE.filter((s) => counts[s] > 0)];
+const tabLabel = (s: string) => (s === 'all' ? '全部' : STATUS[s].label);
+---
+
+<Base
+  title="批發車源｜橙築國際汽車"
+  description="橙築國際汽車的日本・韓國進口車源，涵蓋預訂、船運、報關、車測到現車在庫各階段。車況透明、附原廠解碼與 Carfax 報告；批發底價僅向已驗證車商於 LINE 內顯示。"
+>
+  <section class="section catalog">
+    <div class="container">
+      <span class="eyebrow">日本・韓國進口直送</span>
+      <h1>批發車源</h1>
+      <p class="muted catalog-cnt">
+        共 {cars.length} 台 · 批發底價僅向已驗證車商於 LINE 內顯示
+      </p>
+
+      {cars.length > 0 && (
+        <div class="tabs" id="tabs">
+          {tabs.map((s) => (
+            <button class={`tab${s === 'all' ? ' active' : ''}`} data-tab={s}>
+              {tabLabel(s)}<span class="n">{counts[s]}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {cars.length === 0 ? (
+        <div class="empty card">
+          <p>目前車源更新中。</p>
+          <a class="btn btn-line" href={LINE_OA_URL} target="_blank" rel="noopener">加入官方帳號掌握最新到港</a>
+        </div>
+      ) : (
+        <div class="car-grid" id="grid">
+          {cars.map((car) => <CarCard car={car} />)}
+        </div>
+      )}
+    </div>
+  </section>
+</Base>
+
+<script>
+  const tabs = document.getElementById('tabs');
+  const grid = document.getElementById('grid');
+  tabs?.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.tab') as HTMLElement | null;
+    if (!btn) return;
+    const tab = btn.dataset.tab;
+    tabs.querySelectorAll('.tab').forEach((t) => t.classList.toggle('active', t === btn));
+    grid?.querySelectorAll<HTMLElement>('.ccard').forEach((card) => {
+      card.style.display = tab === 'all' || card.dataset.status === tab ? '' : 'none';
+    });
+  });
+</script>
