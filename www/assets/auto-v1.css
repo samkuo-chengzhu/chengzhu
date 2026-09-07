@@ -1,0 +1,124 @@
+/* ============================================================
+   橙築國際 — 車業分頁（/auto/）
+   沿用 site.css 的深墨底與橙築橙；車源卡片以 teal 標示狀態。
+   ============================================================ */
+
+.auto-v1 { background: var(--paper); color: var(--ink); }
+.auto-wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding-inline: clamp(18px, 4vw, 32px); }
+
+/* ── Hero ───────────────────────────────────────────── */
+.auto-hero {
+  padding-block: clamp(56px, 8vw, 96px) clamp(40px, 6vw, 64px);
+  border-bottom: 1px solid var(--line-soft);
+  background:
+    radial-gradient(70% 120% at 15% -10%, rgba(255, 122, 77, .10), transparent 60%),
+    linear-gradient(180deg, var(--paper-2), var(--paper));
+}
+.auto-hero .kicker {
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--orange);
+}
+.auto-hero h1 {
+  margin-top: 14px; font-size: clamp(2.1rem, 5vw, 3.3rem);
+  line-height: 1.18; letter-spacing: -.02em; font-weight: 600;
+}
+.auto-hero h1 em { font-style: normal; color: var(--orange); }
+.auto-hero .lede {
+  margin-top: 20px; max-width: 60ch; color: var(--ink-mid);
+  font-size: clamp(.98rem, 1.6vw, 1.08rem); line-height: 1.85;
+}
+
+/* ── 兩種對象 ────────────────────────────────────────── */
+.auto-paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 34px; }
+.auto-path {
+  display: block; padding: 24px 22px; border-radius: 12px;
+  background: var(--paper-2); border: 1px solid var(--line);
+  transition: border-color .18s, transform .18s;
+}
+.auto-path:hover { border-color: var(--orange); transform: translateY(-2px); }
+.auto-path span {
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--teal);
+}
+.auto-path h2 { margin-top: 8px; font-size: 1.18rem; font-weight: 600; }
+.auto-path p { margin-top: 8px; color: var(--ink-mid); font-size: .9rem; line-height: 1.75; }
+.auto-path b { display: inline-block; margin-top: 14px; color: var(--orange); font-size: .88rem; font-weight: 600; }
+
+/* ── 作業節點 ────────────────────────────────────────── */
+.auto-section { padding-block: clamp(48px, 7vw, 76px); border-top: 1px solid var(--line-soft); }
+.auto-head .no {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-soft);
+}
+.auto-head h2 { margin-top: 10px; font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 600; letter-spacing: -.01em; }
+.auto-head p { margin-top: 12px; max-width: 56ch; color: var(--ink-mid); line-height: 1.85; font-size: .95rem; }
+
+.auto-nodes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 30px; }
+.auto-node { padding: 20px 18px; border-radius: 10px; background: var(--paper-2); border: 1px solid var(--line-soft); }
+.auto-node i {
+  display: block; font-style: normal; font-family: var(--mono);
+  font-size: .68rem; letter-spacing: .1em; color: var(--teal);
+}
+.auto-node p { margin-top: 8px; color: var(--ink-mid); font-size: .88rem; line-height: 1.7; }
+
+/* ── 車源 ────────────────────────────────────────────── */
+.auto-stock-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; }
+.auto-stock-head .count { font-family: var(--mono); font-size: .8rem; color: var(--teal); }
+
+.auto-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px; margin-top: 26px;
+}
+.auto-card {
+  display: block; border-radius: 12px; overflow: hidden;
+  background: var(--paper-2); border: 1px solid var(--line);
+  transition: border-color .18s, transform .18s;
+}
+.auto-card:hover { border-color: var(--orange); transform: translateY(-3px); }
+.auto-card .shot { position: relative; aspect-ratio: 16 / 10; background: var(--slate); overflow: hidden; }
+.auto-card .shot img { width: 100%; height: 100%; object-fit: cover; }
+.auto-card .shot .ph {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  color: var(--ink-soft); font-size: .78rem;
+}
+.auto-card .stat {
+  position: absolute; top: 10px; left: 10px;
+  font-family: var(--mono); font-size: .64rem; letter-spacing: .06em;
+  padding: 4px 9px; border-radius: 6px;
+  background: var(--teal-bg); color: var(--teal); border: 1px solid rgba(79, 179, 199, .35);
+}
+.auto-card .body { padding: 14px 15px 16px; }
+.auto-card h3 { font-size: .98rem; font-weight: 600; line-height: 1.4; }
+.auto-card .meta { margin-top: 7px; color: var(--ink-soft); font-size: .78rem; }
+.auto-card .spec { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line-soft); color: var(--ink-mid); font-size: .78rem; }
+
+/* 後端尚未開放跨來源時的備援：整段收起，只留入口 */
+.auto-stock-fallback {
+  margin-top: 26px; padding: 26px 24px; border-radius: 12px;
+  background: var(--paper-2); border: 1px dashed var(--line);
+  color: var(--ink-mid); font-size: .92rem; line-height: 1.8;
+}
+.auto-stock-fallback b { display: inline-block; margin-top: 12px; color: var(--orange); font-weight: 600; }
+
+.auto-more { display: inline-block; margin-top: 26px; color: var(--orange); font-weight: 600; font-size: .92rem; }
+
+/* ── CTA ─────────────────────────────────────────────── */
+.auto-cta {
+  padding-block: clamp(48px, 7vw, 80px); border-top: 1px solid var(--line-soft);
+  background: radial-gradient(70% 140% at 50% 0%, rgba(255, 122, 77, .08), transparent 60%);
+}
+.auto-cta h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 600; }
+.auto-cta p { margin-top: 12px; color: var(--ink-mid); max-width: 52ch; line-height: 1.85; font-size: .95rem; }
+.auto-cta .row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+
+/* ── 響應式 ──────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .auto-paths { grid-template-columns: minmax(0, 1fr); }
+  .auto-nodes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .auto-nodes { grid-template-columns: minmax(0, 1fr); }
+  .auto-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .auto-card .body { padding: 11px 12px 13px; }
+  .auto-card h3 { font-size: .88rem; }
+}
